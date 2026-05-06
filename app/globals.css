@@ -1,0 +1,187 @@
+@import "tailwindcss";
+
+/* =========================
+   🌿 DESIGN TOKENS (Modern CSS Vars)
+========================= */
+:root {
+  /* Brand Palette */
+  --color-bg: #EBFADC;
+  --color-surface: rgba(255, 255, 255, 0.65);
+  --color-primary: #728C5A;
+  --color-primary-hover: #5F774A;
+  --color-dark: #102F15;
+  --color-accent: #EAF1B1;
+
+  /* Typography */
+  --color-text-main: #102F15;
+  --color-text-muted: #5D6B5F;
+  --font-heading: "Inter", sans-serif; /* Replace with your actual font */
+  --font-body: "Outfit", sans-serif;
+
+  /* Spacing System */
+  --space-xs: 0.5rem;   /* 8px */
+  --space-sm: 0.75rem;  /* 12px */
+  --space-md: 1rem;     /* 16px */
+  --space-lg: 1.5rem;   /* 24px */
+  --space-xl: 2rem;     /* 32px */
+
+  /* Borders & Elevation */
+  --radius-pill: 9999px;
+  --radius-card: 24px;
+  --border-glass: 1px solid rgba(255, 255, 255, 0.3);
+  --shadow-soft: 0 8px 32px rgba(16, 47, 21, 0.06);
+  --shadow-hover: 0 12px 40px rgba(16, 47, 21, 0.12);
+}
+
+/* =========================
+   🔄 RESET & BASE
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Standardizes font rendering across browsers */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  color: var(--color-text-main);
+  font-family: var(--font-body), system-ui, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* =========================
+   ✍️ TYPOGRAPHY
+========================= */
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  color: var(--color-dark);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+h1 { font-size: clamp(2.5rem, 8vw, 4rem); margin-bottom: var(--space-md); }
+h2 { font-size: clamp(1.8rem, 5vw, 2.5rem); margin-bottom: var(--space-sm); }
+
+p {
+  margin-bottom: var(--space-md);
+  color: var(--color-text-muted);
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-dark);
+}
+
+/* =========================
+   🔘 BUTTON SYSTEM
+========================= */
+.btn-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: 0.8rem 1.8rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid transparent;
+  user-select: none;
+}
+
+/* Primary Style */
+.btn-primary {
+  @extend .btn-base;
+  background: var(--color-dark);
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Secondary (Glass) Style */
+.btn-secondary {
+  @extend .btn-base;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: var(--border-glass);
+  color: var(--color-dark);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.6);
+  border-color: rgba(255, 255, 255, 0.8);
+  transform: translateY(-2px);
+}
+
+.btn-base:active {
+  transform: scale(0.96);
+}
+
+/* Icon Animation */
+.btn-icon {
+  display: flex;
+  width: 1.2rem;
+  height: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.btn-base:hover .btn-icon {
+  transform: translateX(3px) rotate(-15deg);
+}
+
+/* =========================
+   📦 COMMON CONTAINERS
+========================= */
+.glass-card {
+  background: var(--color-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: var(--border-glass);
+  border-radius: var(--radius-card);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Utility for section spacing */
+.section-padding {
+  padding: clamp(3rem, 10vh, 6rem) var(--space-md);
+}
+@layer base {
+  :root {
+    /* Ensure these match your video's specific colors */
+    --color-bg: #EBFADC;
+    --color-dark: #102F15;
+    --color-accent: #EAF1B1; /* The light lime-green color */
+  }
+}
+
+/* Add this utility to handle text color swap over the moving background */
+.group:hover .group-hover\:text-current-inverse {
+  color: white; /* For primary */
+}
+
+.btn-secondary:hover .group-hover\:text-current-inverse {
+  color: var(--color-dark); /* For secondary */
+}
+
+/* Smooth out the scaling origin so it expands from the center-right where the mouse usually is */
+.origin-center-right {
+  transform-origin: 80% 50%;
+}
