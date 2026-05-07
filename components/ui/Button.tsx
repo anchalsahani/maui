@@ -56,7 +56,7 @@ export default function Button({
         hover:text-[var(--color-primary)]
       `,
       fill: "hidden", 
-      text: "",
+      text: " ",
       iconContainer: `
         bg-transparent
         text-slate-500
@@ -94,7 +94,7 @@ export default function Button({
         />
       )}
 
-      <div className="relative z-10 grid w-full grid-cols-[24px_1fr_auto] items-center">
+      <div className="relative z-10 grid w-full grid-cols-[24px_1fr_auto] items-center gap-2">
         
         {/* The Left Padding Spacer */}
         <div className="w-6" />
@@ -106,9 +106,10 @@ export default function Button({
             font-semibold
             tracking-tight
             text-center
+            pr-2
             transition-colors
             duration-500
-            ${current.text}
+            ${current.text }
           `}
         >
           {children}

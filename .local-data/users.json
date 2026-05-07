@@ -1,0 +1,10 @@
+[
+  {
+    "id": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "name": "Anchal Sahani",
+    "email": "sahanianchal7@gmail.com",
+    "createdAt": "2026-05-07T19:30:46.473Z",
+    "passwordHash": "6d5af5df8e8441d8060e0b9f3176673e085b56585a1dca9a243fbc0929f0786efc32dad6577318f7ca5e65c2cc292add6a543db567ca85f2008bf2f9209bc07e",
+    "passwordSalt": "873d5b134eec462c149af9f160801bac"
+  }
+]
