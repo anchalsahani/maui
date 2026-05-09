@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 
-import PlaceholderWorkspace from "@/components/app/PlaceholderWorkspace";
+import MauiDashboard from "@/components/app/MauiDashboard";
+import Navbar from "@/components/layout/Navbar";
 import { getAuthenticatedUser } from "@/lib/auth/session";
 
 export default async function DashboardPage() {
@@ -10,11 +11,16 @@ export default async function DashboardPage() {
     redirect("/login");
   }
 
+  if (!user.onboardingCompleted || !user.survey) {
+    redirect("/onboarding");
+  }
+
   return (
-    <PlaceholderWorkspace
-      badge="Dashboard"
-      title={`Welcome back, ${user.name.split(" ")[0]}.`}
-      description="This is your main Maui home. From here, you'll branch into next task, sessions, emotions, rewards, burnout, and survival mode."
-    />
+    <>
+      <div className="relative z-50">
+        <Navbar />
+      </div>
+      <MauiDashboard userName={user.name} survey={user.survey} />
+    </>
   );
 }

@@ -1,4 +1,4 @@
-import type { LoginInput, SignupInput } from "./types";
+import type { LoginInput, OnboardingInput, SignupInput } from "./types";
 
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -58,3 +58,50 @@ export function validateLoginInput(input: LoginInput) {
   };
 }
 
+const allowedSurveyValues = {
+  focusWindow: ["short", "medium", "flexible"],
+  taskPace: ["tiny", "balanced", "deep"],
+  overwhelmTrigger: ["starting", "planning", "finishing", "switching"],
+  supportStyle: ["gentle", "direct", "encouraging"],
+  energyPattern: ["steady", "waves", "low"],
+} as const;
+
+export function validateOnboardingInput(input: OnboardingInput) {
+  const { focusWindow, taskPace, overwhelmTrigger, supportStyle, energyPattern } =
+    input;
+
+  const isValid =
+    allowedSurveyValues.focusWindow.includes(
+      focusWindow as (typeof allowedSurveyValues.focusWindow)[number]
+    ) &&
+    allowedSurveyValues.taskPace.includes(
+      taskPace as (typeof allowedSurveyValues.taskPace)[number]
+    ) &&
+    allowedSurveyValues.overwhelmTrigger.includes(
+      overwhelmTrigger as (typeof allowedSurveyValues.overwhelmTrigger)[number]
+    ) &&
+    allowedSurveyValues.supportStyle.includes(
+      supportStyle as (typeof allowedSurveyValues.supportStyle)[number]
+    ) &&
+    allowedSurveyValues.energyPattern.includes(
+      energyPattern as (typeof allowedSurveyValues.energyPattern)[number]
+    );
+
+  if (!isValid) {
+    return {
+      ok: false as const,
+      error: "Please complete all onboarding questions.",
+    };
+  }
+
+  return {
+    ok: true as const,
+    value: {
+      focusWindow,
+      taskPace,
+      overwhelmTrigger,
+      supportStyle,
+      energyPattern,
+    },
+  };
+}

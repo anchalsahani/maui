@@ -22,7 +22,7 @@ async function readUsers(): Promise<StoredUser[]> {
 
   try {
     const parsed = JSON.parse(raw) as StoredUser[];
-    return Array.isArray(parsed) ? parsed : [];
+    return Array.isArray(parsed) ? parsed.map(normalizeStoredUser) : [];
   } catch {
     return [];
   }
@@ -43,11 +43,25 @@ export async function findUserById(id: string) {
   return users.find((user) => user.id === id) ?? null;
 }
 
+export async function findUserByGoogleId(googleId: string) {
+  const users = await readUsers();
+  return users.find((user) => user.googleId === googleId) ?? null;
+}
+
 export async function createUser(user: StoredUser) {
   const users = await readUsers();
   users.push(user);
   await writeUsers(users);
   return user;
+}
+
+export async function updateUser(updatedUser: StoredUser) {
+  const users = await readUsers();
+  const nextUsers = users.map((user) =>
+    user.id === updatedUser.id ? updatedUser : user
+  );
+  await writeUsers(nextUsers);
+  return updatedUser;
 }
 
 export function toPublicUser(user: StoredUser): AuthUser {
@@ -56,6 +70,15 @@ export function toPublicUser(user: StoredUser): AuthUser {
     name: user.name,
     email: user.email,
     createdAt: user.createdAt,
+    onboardingCompleted: user.onboardingCompleted ?? false,
+    survey: user.survey ?? null,
   };
 }
 
+function normalizeStoredUser(user: StoredUser): StoredUser {
+  return {
+    ...user,
+    onboardingCompleted: user.onboardingCompleted ?? false,
+    survey: user.survey ?? null,
+  };
+}

@@ -26,7 +26,7 @@ export default function LoginPage() {
     });
 
     const data = (await response.json().catch(() => null)) as
-      | { error?: string }
+      | { error?: string; user?: { onboardingCompleted?: boolean; survey?: unknown } }
       | null;
 
     if (!response.ok) {
@@ -34,7 +34,10 @@ export default function LoginPage() {
       return;
     }
 
-    router.push("/dashboard");
+    const nextRoute =
+      data?.user?.onboardingCompleted && data.user.survey ? "/dashboard" : "/onboarding";
+
+    router.push(nextRoute);
     router.refresh();
   }
 

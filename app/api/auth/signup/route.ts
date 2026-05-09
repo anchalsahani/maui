@@ -41,8 +41,11 @@ export async function POST(request: Request) {
     name: validated.value.name,
     email: validated.value.email,
     createdAt: new Date().toISOString(),
+    onboardingCompleted: false,
+    survey: null,
     passwordHash,
     passwordSalt,
+    authProvider: "local",
   });
 
   const publicUser = toPublicUser(user);
@@ -51,4 +54,3 @@ export async function POST(request: Request) {
 
   return response;
 }
-

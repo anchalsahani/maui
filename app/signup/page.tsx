@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useTransition } from "react";
 import {
   ArrowRight,
@@ -38,9 +38,11 @@ const features = [
 
 export default function SignupPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const googleAuthError = searchParams.get("authError");
 
   async function handleSignup(formData: FormData) {
     setError("");
@@ -70,16 +72,11 @@ export default function SignupPage() {
       return;
     }
 
-    setSuccess("Signup successful. Taking you to the main page...");
+    setSuccess("Signup successful. Let's set up your Maui flow...");
     window.setTimeout(() => {
-      router.push("/");
+      router.push("/onboarding");
       router.refresh();
     }, 1200);
-  }
-
-  function handleGoogleClick() {
-    setError("Google sign up is not connected yet. Use email for now.");
-    setSuccess("");
   }
 
   return (
@@ -265,9 +262,12 @@ export default function SignupPage() {
                 </span>
               </label>
 
-              {error ? (
+              {error || googleAuthError ? (
                 <p className="rounded-2xl border border-[var(--color-error)]/25 bg-[var(--color-error)]/8 px-4 py-3 text-sm text-[var(--color-error)]">
-                  {error}
+                  {error ||
+                    (googleAuthError === "google_unavailable"
+                      ? "Google sign up is not configured yet."
+                      : "Google sign up could not be completed. Please try again.")}
                 </p>
               ) : null}
 
@@ -298,7 +298,9 @@ export default function SignupPage() {
 
                 <button
                   type="button"
-                  onClick={handleGoogleClick}
+                  onClick={() => {
+                    window.location.href = "/api/auth/google";
+                  }}
                   disabled={isPending}
                   className="flex h-10 min-w-0 items-center justify-center gap-2 rounded-full bg-[#171717] px-3.5 text-[12px] font-medium text-white transition-colors hover:bg-black disabled:cursor-not-allowed disabled:opacity-70"
                 >

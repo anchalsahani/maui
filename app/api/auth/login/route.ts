@@ -25,6 +25,13 @@ export async function POST(request: Request) {
 
   const user = await findUserByEmail(validated.value.email);
 
+  if (user && user.authProvider === "google" && !user.passwordHash) {
+    return NextResponse.json(
+      { error: "This account uses Google sign in. Continue with Google instead." },
+      { status: 401 }
+    );
+  }
+
   if (
     !user ||
     !verifyPassword({
@@ -45,4 +52,3 @@ export async function POST(request: Request) {
 
   return response;
 }
-
