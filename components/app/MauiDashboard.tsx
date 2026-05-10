@@ -2,11 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import {
-  ArrowRight,
-  Brain,
-  CheckCircle2,
   ChevronRight,
-  Circle,
   Clock3,
   Coffee,
   Gauge,
@@ -18,45 +14,27 @@ import {
 import type { ComponentType } from "react";
 import { useEffect, useMemo, useState } from "react";
 
+import ReadyFlowModal from "@/components/app/dashboard/ReadyFlowModal";
+import StuckFlowModal from "@/components/app/dashboard/StuckFlowModal";
+import TiredFlowModal from "@/components/app/dashboard/TiredFlowModal";
+import FocusTimer from "@/components/app/dashboard/FocusTimer";
+import {
+  completeFocusTimer,
+  pauseFocusTimer,
+  resetFocusTimer,
+  resumeFocusTimer,
+  startFocusTimer,
+} from "@/components/app/dashboard/focusTimerStore";
+import type {
+  EmotionState,
+  EntryMode,
+  PersistedDashboardState,
+  RewardState,
+  SessionState,
+  TaskItem,
+} from "@/components/app/dashboard/types";
 import type { UserSurvey } from "@/lib/auth/types";
 import FloatingModal from "@/components/ui/FloatingModal";
-
-type EntryMode = "ready" | "stuck" | "tired" | null;
-type SessionStatus = "idle" | "active" | "paused" | "completed";
-type EmotionState = "steady" | "stressed" | "tired" | "overwhelmed" | "hopeful";
-
-interface TaskItem {
-  id: string;
-  title: string;
-  urgency: number;
-  difficulty: number;
-  deadlineWeight: number;
-  focusMinutes: number;
-  steps: string[];
-}
-
-interface RewardState {
-  points: number;
-  streak: number;
-  sessionsCompleted: number;
-  microTasksCompleted: number;
-}
-
-interface SessionState {
-  status: SessionStatus;
-  title: string;
-  mode: "pomodoro" | "micro";
-  focusMinutes: number;
-  elapsedSeconds: number;
-}
-
-interface PersistedDashboardState {
-  tasks: TaskItem[];
-  reward: RewardState;
-  session: SessionState;
-  recentMoments: string[];
-  completedMicroSteps: string[];
-}
 
 const STORAGE_KEY = "maui-dashboard-state";
 
@@ -110,7 +88,7 @@ const idleSession: SessionState = {
   title: "",
   mode: "pomodoro",
   focusMinutes: 20,
-  elapsedSeconds: 0,
+  runId: 0,
 };
 
 function getSupportTone(survey: UserSurvey) {
@@ -159,14 +137,6 @@ function getInitialDashboardState(survey: UserSurvey): PersistedDashboardState {
 
 function getTaskScore(task: TaskItem) {
   return task.urgency + task.deadlineWeight - task.difficulty;
-}
-
-function formatTime(seconds: number) {
-  const minutes = Math.floor(seconds / 60)
-    .toString()
-    .padStart(2, "0");
-  const remainingSeconds = (seconds % 60).toString().padStart(2, "0");
-  return `${minutes}:${remainingSeconds}`;
 }
 
 function detectEmotion(input: string): {
@@ -286,7 +256,10 @@ function FlowCard({
           <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/50 bg-white/78 text-[var(--color-primary-deep)] shadow-[0_10px_24px_rgba(53,85,63,0.08)]">
             <Icon size={20} />
           </div>
-          <ChevronRight className="mt-1 text-[var(--color-text-secondary)] transition-transform duration-300 group-hover:translate-x-1" size={18} />
+          <ChevronRight
+            className="mt-1 text-[var(--color-text-secondary)] transition-transform duration-300 group-hover:translate-x-1"
+            size={18}
+          />
         </div>
         <h2 className="mt-5 text-[1.4rem] font-semibold tracking-[-0.05em] text-[var(--color-dark)]">
           {title}
@@ -372,15 +345,12 @@ export default function MauiDashboard({
   });
 
   useEffect(() => {
-    let frame = 0;
-    let timeout = 0;
-
     try {
       const raw = window.localStorage.getItem(STORAGE_KEY);
 
       if (raw) {
-        const parsed = JSON.parse(raw) as Partial<PersistedDashboardState>;
-        frame = window.requestAnimationFrame(() => {
+        window.setTimeout(() => {
+          const parsed = JSON.parse(raw) as Partial<PersistedDashboardState>;
           setTasks(parsed.tasks ?? initialState.tasks);
           setReward(parsed.reward ?? initialState.reward);
           setSession(parsed.session ?? initialState.session);
@@ -388,22 +358,13 @@ export default function MauiDashboard({
           setCompletedMicroSteps(
             parsed.completedMicroSteps ?? initialState.completedMicroSteps
           );
-        });
+        }, 0);
       }
     } catch {
       // Ignore invalid stored state and keep the fresh snapshot.
     } finally {
-      timeout = window.setTimeout(() => setIsRestoring(false), 220);
+      window.setTimeout(() => setIsRestoring(false), 220);
     }
-
-    return () => {
-      if (frame) {
-        window.cancelAnimationFrame(frame);
-      }
-      if (timeout) {
-        window.clearTimeout(timeout);
-      }
-    };
   }, [
     initialState.completedMicroSteps,
     initialState.recentMoments,
@@ -427,21 +388,6 @@ export default function MauiDashboard({
 
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(snapshot));
   }, [completedMicroSteps, isRestoring, recentMoments, reward, session, tasks]);
-
-  useEffect(() => {
-    if (session.status !== "active") {
-      return;
-    }
-
-    const timer = window.setInterval(() => {
-      setSession((current) => ({
-        ...current,
-        elapsedSeconds: current.elapsedSeconds + 1,
-      }));
-    }, 1000);
-
-    return () => window.clearInterval(timer);
-  }, [session.status]);
 
   const nextTask = useMemo(() => {
     return [...tasks].sort((a, b) => getTaskScore(b) - getTaskScore(a))[0] ?? null;
@@ -468,22 +414,32 @@ export default function MauiDashboard({
       return;
     }
 
+    const runId = session.runId + 1;
     setSession({
       status: "active",
       title: nextTask.title,
       mode: "pomodoro",
       focusMinutes: 20,
-      elapsedSeconds: 0,
+      runId,
     });
-
+    startFocusTimer(nextTask.title, 20, runId);
     recordMoment(`Started a 20-minute focus block for "${nextTask.title}".`);
   }
 
   function pauseOrResumeSession() {
-    setSession((current) => ({
-      ...current,
-      status: current.status === "active" ? "paused" : "active",
-    }));
+    setSession((current) => {
+      const nextStatus = current.status === "active" ? "paused" : "active";
+      if (nextStatus === "paused") {
+        pauseFocusTimer();
+      } else {
+        resumeFocusTimer();
+      }
+
+      return {
+        ...current,
+        status: nextStatus,
+      };
+    });
   }
 
   function completePomodoro() {
@@ -491,6 +447,7 @@ export default function MauiDashboard({
       return;
     }
 
+    completeFocusTimer();
     setReward((current) => ({
       ...current,
       points: current.points + 8,
@@ -498,15 +455,20 @@ export default function MauiDashboard({
       sessionsCompleted: current.sessionsCompleted + 1,
     }));
     setTasks((current) => current.filter((task) => task.id !== nextTask.id));
-    setSession({
-      ...idleSession,
+    setSession((current) => ({
+      ...current,
       status: "completed",
-    });
+    }));
     recordMoment(`Completed a focus block for "${nextTask.title}". +8 points.`);
   }
 
   function resetSession() {
-    setSession(idleSession);
+    const runId = session.runId + 1;
+    setSession({
+      ...idleSession,
+      runId,
+    });
+    resetFocusTimer(20, runId);
   }
 
   function toggleMicroStep(step: string) {
@@ -554,10 +516,6 @@ export default function MauiDashboard({
     recordMoment(`Emotion check-in analyzed as ${result.state}.`);
   }
 
-  const backgroundBlurClass = activeModal
-    ? "scale-[0.985] blur-[10px] brightness-[0.9]"
-    : "scale-100 blur-0 brightness-100";
-
   return (
     <div className="relative min-h-screen overflow-hidden bg-[var(--color-bg)]">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(207,232,213,0.78),transparent_30%),radial-gradient(circle_at_82%_18%,rgba(143,191,159,0.14),transparent_24%),linear-gradient(180deg,rgba(255,255,255,0.64),rgba(250,250,250,0.96))]" />
@@ -565,17 +523,14 @@ export default function MauiDashboard({
       <div className="pointer-events-none absolute right-[-10%] top-[-8%] h-[560px] w-[560px] rounded-full bg-[var(--color-primary)]/12 blur-[120px]" />
 
       <motion.main
-        animate={{
-          scale: activeModal ? 0.985 : 1,
-          filter: activeModal ? "blur(10px) brightness(0.92)" : "blur(0px) brightness(1)",
-        }}
-        transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-        className={`relative z-10 mx-auto w-full max-w-7xl px-5 pb-14 pt-28 sm:px-6 ${backgroundBlurClass}`}
+        animate={{ scale: activeModal ? 0.985 : 1, opacity: activeModal ? 0.9 : 1 }}
+        transition={{ duration: 0.24, ease: "easeOut" }}
+        className="relative z-10 mx-auto w-full max-w-7xl px-5 pb-14 pt-28 sm:px-6"
       >
         <motion.section
-          initial={{ opacity: 0, y: 28, filter: "blur(10px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 0.5, delay: 0, ease: "easeOut" }}
+          initial={{ opacity: 0, y: 28 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
           className="relative overflow-hidden rounded-[38px] border border-white/45 bg-[linear-gradient(135deg,rgba(255,255,255,0.88),rgba(242,250,244,0.82))] p-7 shadow-[0_36px_110px_rgba(53,85,63,0.12)] backdrop-blur-2xl sm:p-9"
         >
           <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-[radial-gradient(circle_at_top,rgba(207,232,213,0.95),transparent_68%)]" />
@@ -605,7 +560,7 @@ export default function MauiDashboard({
               <StatsCard label="Streak" value={reward.streak} icon={Sparkles} />
               <StatsCard
                 label="Session"
-                value={session.status === "active" ? formatTime(session.elapsedSeconds) : "Idle"}
+                value={session.status === "active" ? "Live" : "Idle"}
                 icon={Clock3}
               />
             </div>
@@ -614,8 +569,8 @@ export default function MauiDashboard({
 
         <div className="mt-8 grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
           <motion.section
-            initial={{ opacity: 0, y: 28, filter: "blur(10px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.08, ease: "easeOut" }}
             className="space-y-5"
           >
@@ -655,8 +610,8 @@ export default function MauiDashboard({
             )}
 
             <motion.div
-              initial={{ opacity: 0, y: 28, filter: "blur(10px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              initial={{ opacity: 0, y: 28 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.15, ease: "easeOut" }}
               className="rounded-[32px] border border-white/45 bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(247,250,248,0.8))] p-6 shadow-[0_24px_70px_rgba(53,85,63,0.1)] backdrop-blur-2xl sm:p-7"
             >
@@ -677,9 +632,9 @@ export default function MauiDashboard({
 
                 <div className="grid gap-3 sm:grid-cols-3 lg:w-[360px]">
                   {[
-                    { label: "Urgency", value: nextTask?.urgency ?? "—" },
-                    { label: "Difficulty", value: nextTask?.difficulty ?? "—" },
-                    { label: "Focus", value: nextTask ? `${nextTask.focusMinutes}m` : "—" },
+                    { label: "Urgency", value: nextTask?.urgency ?? "-" },
+                    { label: "Difficulty", value: nextTask?.difficulty ?? "-" },
+                    { label: "Focus", value: nextTask ? `${nextTask.focusMinutes}m` : "-" },
                   ].map((item) => (
                     <motion.div
                       key={item.label}
@@ -714,8 +669,8 @@ export default function MauiDashboard({
           </motion.section>
 
           <motion.aside
-            initial={{ opacity: 0, y: 28, filter: "blur(10px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.18, ease: "easeOut" }}
             className="space-y-6"
           >
@@ -725,19 +680,12 @@ export default function MauiDashboard({
                   <p className="text-sm font-medium uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
                     Session engine
                   </p>
-                  <p className="mt-3 text-[2.2rem] font-semibold tracking-[-0.06em] text-[var(--color-dark)]">
-                    {formatTime(session.elapsedSeconds)}
-                  </p>
+                  <FocusTimer compact />
                 </div>
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--color-accent)]/45 text-[var(--color-primary-deep)]">
                   <Gauge size={20} />
                 </div>
               </div>
-              <p className="mt-3 text-sm leading-6 text-[var(--color-text-secondary)]">
-                {session.status === "idle"
-                  ? "No active session yet. Open Ready, Stuck, or Tired to choose the right mode."
-                  : `${session.title} is currently ${session.status}.`}
-              </p>
               <button
                 type="button"
                 onClick={resetSession}
@@ -757,8 +705,8 @@ export default function MauiDashboard({
                     <motion.div
                       key={`${moment}-${index}`}
                       layout
-                      initial={{ opacity: 0, y: 10, filter: "blur(6px)" }}
-                      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -8 }}
                       className="rounded-[22px] border border-white/45 bg-white/74 px-4 py-3 text-sm leading-6 text-[var(--color-dark)]/84 shadow-[0_10px_28px_rgba(53,85,63,0.05)]"
                     >
@@ -779,89 +727,13 @@ export default function MauiDashboard({
         description="This mode keeps things simple: one task, one timer, and enough motion to get you into the work before hesitation grows."
         size="lg"
       >
-        <div className="grid gap-5 lg:grid-cols-[1.08fr_0.92fr]">
-          <motion.div
-            initial={{ opacity: 0, x: -12 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="rounded-[28px] border border-[var(--color-border)] bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(245,250,247,0.9))] p-5"
-          >
-            <p className="text-xs font-medium uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
-              Next task
-            </p>
-            <h3 className="mt-3 text-[1.5rem] font-semibold tracking-[-0.05em] text-[var(--color-dark)]">
-              {nextTask?.title ?? "No task available"}
-            </h3>
-            <p className="mt-3 text-sm leading-6 text-[var(--color-text-secondary)]">
-              {nextTask
-                ? "Start the 20-minute pomodoro and let the timer carry the first block for you."
-                : "There is no task ready yet. Add one gentle task and this flow will be ready."}
-            </p>
-
-            {nextTask ? (
-              <div className="mt-5 space-y-3">
-                {nextTask.steps.slice(0, 4).map((step, index) => (
-                  <motion.div
-                    key={step}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.08 * index }}
-                    className="flex items-start gap-3 rounded-[20px] bg-white/72 px-4 py-3"
-                  >
-                    <span className="mt-1.5 h-2 w-2 rounded-full bg-[var(--color-primary)]" />
-                    <p className="text-sm leading-6 text-[var(--color-dark)]/84">{step}</p>
-                  </motion.div>
-                ))}
-              </div>
-            ) : null}
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 12 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="rounded-[28px] border border-[var(--color-border)] bg-[linear-gradient(180deg,rgba(255,255,255,0.88),rgba(247,250,248,0.82))] p-5"
-          >
-            <p className="text-xs font-medium uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
-              Pomodoro
-            </p>
-            <div className="mt-4 rounded-[24px] bg-white/78 px-5 py-5 text-center shadow-[0_12px_34px_rgba(53,85,63,0.06)]">
-              <p className="text-[3rem] font-semibold tracking-[-0.08em] text-[var(--color-dark)]">
-                {formatTime(session.elapsedSeconds)}
-              </p>
-              <p className="mt-2 text-sm capitalize text-[var(--color-text-secondary)]">
-                {session.status === "idle" ? "Ready to start" : session.status}
-              </p>
-            </div>
-
-            <div className="mt-5 grid gap-3">
-              <button
-                type="button"
-                onClick={startPomodoro}
-                className="flex h-12 items-center justify-center gap-2 rounded-full bg-[var(--color-primary-deep)] text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--color-dark)] hover:shadow-[0_18px_36px_rgba(16,47,21,0.16)]"
-              >
-                Start 20 minutes
-                <ArrowRight size={16} />
-              </button>
-              <div className="grid grid-cols-2 gap-3">
-                <button
-                  type="button"
-                  onClick={pauseOrResumeSession}
-                  disabled={session.status === "idle" || session.status === "completed"}
-                  className="flex h-11 items-center justify-center rounded-full border border-[var(--color-border)] bg-white/82 text-sm font-medium text-[var(--color-dark)] transition-all duration-200 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50"
-                >
-                  {session.status === "active" ? "Pause" : "Resume"}
-                </button>
-                <button
-                  type="button"
-                  onClick={completePomodoro}
-                  disabled={session.status === "idle"}
-                  className="flex h-11 items-center justify-center rounded-full border border-[var(--color-primary)]/28 bg-[var(--color-accent)]/48 text-sm font-semibold text-[var(--color-primary-deep)] transition-all duration-200 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50"
-                >
-                  Complete +8
-                </button>
-              </div>
-            </div>
-          </motion.div>
-        </div>
+        <ReadyFlowModal
+          nextTask={nextTask}
+          session={session}
+          onStart={startPomodoro}
+          onPauseResume={pauseOrResumeSession}
+          onComplete={completePomodoro}
+        />
       </FloatingModal>
 
       <FloatingModal
@@ -871,117 +743,21 @@ export default function MauiDashboard({
         description="This mode turns the task into tiny visible steps. Every micro win counts, and Maui rewards momentum before perfection."
         size="xl"
       >
-        <div className="grid gap-5 lg:grid-cols-[1.05fr_0.95fr]">
-          <motion.div
-            initial={{ opacity: 0, x: -12 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="rounded-[28px] border border-[var(--color-border)] bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(245,250,247,0.9))] p-5"
-          >
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <p className="text-xs font-medium uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
-                  Broken-down task
-                </p>
-                <h3 className="mt-3 text-[1.5rem] font-semibold tracking-[-0.05em] text-[var(--color-dark)]">
-                  {nextTask?.title ?? "No task available"}
-                </h3>
-              </div>
-              <span className="rounded-full bg-white/82 px-3 py-1 text-xs font-medium text-[var(--color-primary-deep)]">
-                {completedCount}/{microSteps.length}
-              </span>
-            </div>
-
-            <div className="mt-5 space-y-3">
-              {microSteps.map((step, index) => {
-                const done = completedMicroSteps.includes(step);
-
-                return (
-                  <motion.button
-                    key={step}
-                    type="button"
-                    onClick={() => toggleMicroStep(step)}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.06 * index }}
-                    whileHover={{ x: 4 }}
-                    className={`flex w-full items-start gap-3 rounded-[22px] border px-4 py-4 text-left transition-all duration-200 ${
-                      done
-                        ? "border-[var(--color-primary)]/35 bg-[var(--color-accent)]/42"
-                        : "border-[var(--color-border)] bg-white/80 hover:border-[var(--color-primary)]/24 hover:bg-white"
-                    }`}
-                  >
-                    <span className="mt-0.5 text-[var(--color-primary-deep)]">
-                      {done ? <CheckCircle2 size={18} /> : <Circle size={18} />}
-                    </span>
-                    <div>
-                      <p className="text-sm font-medium text-[var(--color-dark)]">{step}</p>
-                      <p className="mt-1 text-xs text-[var(--color-text-secondary)]">
-                        {done ? "Completed. +1 point added." : "Tap when this step is done."}
-                      </p>
-                    </div>
-                  </motion.button>
-                );
-              })}
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 12 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="space-y-5"
-          >
-            <div className="rounded-[28px] border border-[var(--color-border)] bg-[linear-gradient(180deg,rgba(255,255,255,0.88),rgba(247,250,248,0.82))] p-5">
-              <p className="text-xs font-medium uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
-                Reward path
-              </p>
-              <div className="mt-4 grid grid-cols-2 gap-3">
-                <div className="rounded-[22px] bg-white/80 px-4 py-4 text-center">
-                  <p className="text-[1.7rem] font-semibold tracking-[-0.05em] text-[var(--color-dark)]">
-                    {reward.microTasksCompleted}
-                  </p>
-                  <p className="mt-1 text-xs uppercase tracking-[0.16em] text-[var(--color-text-secondary)]">
-                    Micro wins
-                  </p>
-                </div>
-                <div className="rounded-[22px] bg-white/80 px-4 py-4 text-center">
-                  <p className="text-[1.7rem] font-semibold tracking-[-0.05em] text-[var(--color-dark)]">
-                    {reward.points}
-                  </p>
-                  <p className="mt-1 text-xs uppercase tracking-[0.16em] text-[var(--color-text-secondary)]">
-                    Total points
-                  </p>
-                </div>
-              </div>
-              <p className="mt-4 text-sm leading-6 text-[var(--color-text-secondary)]">
-                Every completed micro step gives `+1`, and finishing the full broken-down task gives `+4`.
-              </p>
-            </div>
-
-            <div className="rounded-[28px] border border-[var(--color-border)] bg-[linear-gradient(180deg,rgba(255,255,255,0.88),rgba(247,250,248,0.82))] p-5">
-              <div className="flex flex-col gap-3 sm:flex-row">
-                <button
-                  type="button"
-                  onClick={finishBrokenDownTask}
-                  disabled={!allMicroStepsDone}
-                  className="flex h-12 flex-1 items-center justify-center rounded-full bg-[var(--color-primary-deep)] text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--color-dark)] disabled:cursor-not-allowed disabled:opacity-50"
-                >
-                  Finish task +4
-                </button>
-                <button
-                  type="button"
-                  onClick={() =>
-                    setCompletedMicroSteps((current) =>
-                      current.filter((step) => !microSteps.includes(step))
-                    )
-                  }
-                  className="flex h-12 flex-1 items-center justify-center rounded-full border border-[var(--color-border)] bg-white/82 text-sm font-medium text-[var(--color-dark)] transition-all duration-200 hover:-translate-y-0.5"
-                >
-                  Reset steps
-                </button>
-              </div>
-            </div>
-          </motion.div>
-        </div>
+        <StuckFlowModal
+          nextTask={nextTask}
+          microSteps={microSteps}
+          completedMicroSteps={completedMicroSteps}
+          completedCount={completedCount}
+          allMicroStepsDone={allMicroStepsDone}
+          reward={reward}
+          onToggleStep={toggleMicroStep}
+          onFinishTask={finishBrokenDownTask}
+          onResetSteps={() =>
+            setCompletedMicroSteps((current) =>
+              current.filter((step) => !microSteps.includes(step))
+            )
+          }
+        />
       </FloatingModal>
 
       <FloatingModal
@@ -991,71 +767,15 @@ export default function MauiDashboard({
         description="Use a short rant. Maui will detect emotional keywords, reflect the likely state, and guide you toward a gentler next step."
         size="lg"
       >
-        <div className="grid gap-5 lg:grid-cols-[1.05fr_0.95fr]">
-          <motion.div
-            initial={{ opacity: 0, x: -12 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="rounded-[28px] border border-[var(--color-border)] bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(245,250,247,0.9))] p-5"
-          >
-            <textarea
-              value={emotionInput}
-              onChange={(event) => setEmotionInput(event.target.value)}
-              className="input min-h-[220px] resize-none"
-              placeholder="Example: I feel overwhelmed, drained, and I keep avoiding the task because it feels too big..."
-            />
-
-            <button
-              type="button"
-              onClick={analyzeEmotion}
-              className="mt-4 flex h-12 w-full items-center justify-center gap-2 rounded-full bg-[var(--color-dark)] text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_18px_36px_rgba(16,47,21,0.16)]"
-            >
-              Analyze feelings
-              <Brain size={16} />
-            </button>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 12 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="rounded-[28px] border border-[var(--color-border)] bg-[linear-gradient(180deg,rgba(255,255,255,0.88),rgba(247,250,248,0.82))] p-5"
-          >
-            <div className="flex items-center justify-between gap-3">
-              <p className="text-[1.1rem] font-semibold text-[var(--color-dark)]">
-                {emotionMessage.title}
-              </p>
-              <span className="rounded-full bg-[var(--color-accent)]/55 px-3 py-1 text-xs font-medium capitalize text-[var(--color-primary-deep)]">
-                {emotionState}
-              </span>
-            </div>
-            <p className="mt-4 text-sm leading-6 text-[var(--color-text-secondary)]">
-              {emotionMessage.body}
-            </p>
-
-            <div className="mt-5">
-              <p className="text-xs uppercase tracking-[0.16em] text-[var(--color-text-secondary)]">
-                Keywords detected
-              </p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {emotionKeywords.length > 0 ? (
-                  emotionKeywords.map((keyword) => (
-                    <motion.span
-                      key={keyword}
-                      initial={{ opacity: 0, scale: 0.92 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      className="rounded-full border border-white/55 bg-white/82 px-3 py-1.5 text-xs text-[var(--color-dark)] shadow-[0_8px_20px_rgba(53,85,63,0.04)]"
-                    >
-                      {keyword}
-                    </motion.span>
-                  ))
-                ) : (
-                  <span className="rounded-full border border-white/55 bg-white/82 px-3 py-1.5 text-xs text-[var(--color-text-secondary)]">
-                    No strong keywords yet
-                  </span>
-                )}
-              </div>
-            </div>
-          </motion.div>
-        </div>
+        <TiredFlowModal
+          emotionInput={emotionInput}
+          emotionState={emotionState}
+          emotionKeywords={emotionKeywords}
+          emotionTitle={emotionMessage.title}
+          emotionBody={emotionMessage.body}
+          onEmotionChange={setEmotionInput}
+          onAnalyze={analyzeEmotion}
+        />
       </FloatingModal>
     </div>
   );

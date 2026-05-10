@@ -1,4 +1,5 @@
 import type { NextResponse } from "next/server";
+import "server-only";
 import { cookies } from "next/headers";
 
 import { createSessionToken, verifySessionToken } from "./crypto";
