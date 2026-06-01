@@ -43,7 +43,7 @@ export default function ProblemSection() {
           {/* BADGE */}
           <div className="glass-card mb-4 inline-flex rounded-full px-4 py-2">
             <span className="text-[12px] font-medium text-[var(--color-dark)]/70">
-              The problem
+              The problems
             </span>
           </div>
 
