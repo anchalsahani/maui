@@ -1,0 +1,626 @@
+[
+  {
+    "id": "efe0e064-c725-469d-9c9a-6abd226fabf2",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "broken_down_task",
+    "points": 4,
+    "title": "Html styles",
+    "createdAt": "2026-05-29T14:34:01.398Z"
+  },
+  {
+    "id": "b683586a-4a36-46e3-964b-c82d9bc6853f",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Copy and paste that example into a scratchpad or simple text editor without running it yet.",
+    "createdAt": "2026-05-29T14:33:59.492Z"
+  },
+  {
+    "id": "d3d8d8f0-1f34-4964-957f-0d2861eb5cd7",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Set a 5-minute timer and look for an example of 'Html styles' in the material.",
+    "createdAt": "2026-05-29T14:33:58.214Z"
+  },
+  {
+    "id": "53efb03f-92ae-4d56-8733-04f48dbd5e20",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Without overthinking, write down one keyword or a very short phrase from what you just read.",
+    "createdAt": "2026-05-29T14:33:56.856Z"
+  },
+  {
+    "id": "4e03c4ab-e1e5-4adb-9da6-bd1cd701bf9c",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Read just the first paragraph or the first two bullet points of that section.",
+    "createdAt": "2026-05-29T14:33:55.247Z"
+  },
+  {
+    "id": "742e8e8b-7649-4c37-9a0c-caff1a2f38a2",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Locate the first heading or sub-section related to HTML styling.",
+    "createdAt": "2026-05-29T14:33:53.826Z"
+  },
+  {
+    "id": "f9149a8f-529c-45dd-9a18-2d6d66efb9c7",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Open the specific Unit 1 study material for 'Html styles' (e.g., a PDF, web page, or IDE).",
+    "createdAt": "2026-05-29T14:33:47.647Z"
+  },
+  {
+    "id": "ae79f961-4020-4600-8d2d-297cc533b665",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "focus_session",
+    "points": 8,
+    "title": "Basic Text Markup",
+    "createdAt": "2026-05-28T21:20:13.900Z"
+  },
+  {
+    "id": "e7a38e78-7aed-4d7a-9f06-6e9783c93980",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "focus_session",
+    "points": 8,
+    "title": "Standard HTML Document Structure",
+    "createdAt": "2026-05-28T21:20:04.473Z"
+  },
+  {
+    "id": "1c92e932-330f-4b36-b8b1-3d4b2ebd5ec6",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "broken_down_task",
+    "points": 4,
+    "title": "HTML: Basic Syntax",
+    "createdAt": "2026-05-28T21:19:37.830Z"
+  },
+  {
+    "id": "4fc93756-2c2e-4184-8658-89bfb12e6b76",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Close the tab.",
+    "createdAt": "2026-05-28T21:19:35.300Z"
+  },
+  {
+    "id": "14e130a1-2055-4037-a912-4330d01054a3",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Read just the first three sentences under that heading.",
+    "createdAt": "2026-05-28T21:19:32.340Z"
+  },
+  {
+    "id": "f3629ec4-46ce-47d4-94c3-5ccffaf49d05",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Find the heading that says \"Basic HTML Structure\" or \"HTML Document Structure.\"",
+    "createdAt": "2026-05-28T21:19:29.744Z"
+  },
+  {
+    "id": "2462c4fa-9e0e-463f-991e-af529ec40e4c",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Click on the first clear, simple-looking search result (like W3Schools or MDN).",
+    "createdAt": "2026-05-28T21:19:26.210Z"
+  },
+  {
+    "id": "b85a0eba-046f-4b57-8056-7a14fed5af85",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Type \"HTML basic syntax for beginners\" into the search bar and press Enter.",
+    "createdAt": "2026-05-28T21:19:22.940Z"
+  },
+  {
+    "id": "fe029d14-c67b-4754-8b8b-4f2a0e71fde3",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Open your web browser.",
+    "createdAt": "2026-05-28T21:19:20.081Z"
+  },
+  {
+    "id": "be408054-a775-4634-8f03-0e205c9aff60",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "broken_down_task",
+    "points": 4,
+    "title": "Unit 1",
+    "createdAt": "2026-05-28T21:17:29.745Z"
+  },
+  {
+    "id": "6e9258cf-c2ae-4446-ae1c-226112f7fc47",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Take a quick 5-minute break away from your screen/book.",
+    "createdAt": "2026-05-28T21:17:27.659Z"
+  },
+  {
+    "id": "3fb32d43-564d-4de9-8e59-3880bfd8ab89",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "After the timer, write down one new thing you learned or found interesting in one short sentence.",
+    "createdAt": "2026-05-28T21:17:25.570Z"
+  },
+  {
+    "id": "33684ff0-6cba-47db-8b95-9dc8973665f6",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Set a 10-minute timer for a focused chunk on that first section, then just start reading.",
+    "createdAt": "2026-05-28T21:17:22.442Z"
+  },
+  {
+    "id": "fcba2c78-c238-4aaa-8764-b067dd18a128",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Read the very first heading or title of the first section in Unit 1.",
+    "createdAt": "2026-05-28T21:17:18.564Z"
+  },
+  {
+    "id": "2250a047-fb4a-4f7f-9607-b444018f3973",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Open the specific Unit 1 document or turn to the first page of Unit 1 in your book.",
+    "createdAt": "2026-05-28T21:17:16.113Z"
+  },
+  {
+    "id": "31346a2d-ced7-4775-be54-87f38fdb52a2",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Find your Unit 1 study materials (notebook, textbook, or file) and place them on your desk.",
+    "createdAt": "2026-05-28T21:17:09.976Z"
+  },
+  {
+    "id": "50bd86cb-0194-4ecf-aeef-b8b624287b07",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "broken_down_task",
+    "points": 4,
+    "title": "Html styles",
+    "createdAt": "2026-05-28T21:06:45.974Z"
+  },
+  {
+    "id": "60789789-70d3-4b9a-95d4-7486e86ff10e",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Take a 1-minute stretch break, no screens.",
+    "createdAt": "2026-05-28T21:06:44.599Z"
+  },
+  {
+    "id": "45fd76ad-e344-4e8e-b04b-ef7331442ee2",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Change the 'color' value to 'red' (e.g., <p style=\"color:red;\">This is a blue paragraph.</p>).",
+    "createdAt": "2026-05-28T21:06:43.534Z"
+  },
+  {
+    "id": "65aca234-a3d3-4422-bfe5-76bb0c2546eb",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Paste the copied line into a blank text editor or your code editor.",
+    "createdAt": "2026-05-28T21:06:42.169Z"
+  },
+  {
+    "id": "ef0230ed-e11b-4540-9a1c-7905460dc616",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Copy that exact line of code (e.g., <p style=\"color:blue;\">This is a blue paragraph.</p>).",
+    "createdAt": "2026-05-28T21:06:38.804Z"
+  },
+  {
+    "id": "d55436ac-2b4d-41d5-8efb-0c2538d18883",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Scroll down to find the first example of an HTML tag with an 'style' attribute (e.g., <p style=\"color:blue;\">).",
+    "createdAt": "2026-05-28T21:06:30.636Z"
+  },
+  {
+    "id": "6c4c06e2-5ec1-4124-8c92-8293379814ae",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Open your web browser and search for \"HTML inline style example w3schools\".",
+    "createdAt": "2026-05-28T21:06:24.519Z"
+  },
+  {
+    "id": "2fd38c20-7feb-4609-a210-6f29e36562c4",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "broken_down_task",
+    "points": 4,
+    "title": "Basic Text Markup",
+    "createdAt": "2026-05-28T21:05:44.414Z"
+  },
+  {
+    "id": "d6c0dd81-2903-480d-8949-1e257cda48ee",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Take a 2-minute stretch break, no screens.",
+    "createdAt": "2026-05-28T21:05:41.496Z"
+  },
+  {
+    "id": "4068a2d6-0dae-4dbc-acff-7cdb200f5979",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Open a blank text editor (like Notepad or VS Code) and type out one <p>Hello World</p> example.",
+    "createdAt": "2026-05-28T21:05:38.541Z"
+  },
+  {
+    "id": "3ca3a6cb-9bd2-4d63-92b0-ac1528e1966a",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Scroll down to find the first example of a paragraph tag (<p>).",
+    "createdAt": "2026-05-28T21:05:33.825Z"
+  },
+  {
+    "id": "113c73d1-9fab-4fe7-9704-90c62cc63d28",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Click on the first clear, simple tutorial result (e.g., W3Schools, MDN Web Docs).",
+    "createdAt": "2026-05-28T21:05:29.180Z"
+  },
+  {
+    "id": "ef77cae5-84ac-480e-a74b-cf36b931e9fe",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Type 'Basic Text Markup HTML tutorial' into the search bar and press Enter.",
+    "createdAt": "2026-05-28T21:05:25.313Z"
+  },
+  {
+    "id": "8573506b-9fd5-4ef9-98c7-ce9a806ec628",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Open your web browser to a new tab.",
+    "createdAt": "2026-05-28T21:05:18.895Z"
+  },
+  {
+    "id": "26a2d03b-454c-4a49-bd89-f4285164b377",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "broken_down_task",
+    "points": 4,
+    "title": "Standard HTML Document Structure",
+    "createdAt": "2026-05-28T21:04:33.354Z"
+  },
+  {
+    "id": "bc62c594-e56e-449c-9dd3-39f60c711557",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Take a 2 min breather.",
+    "createdAt": "2026-05-28T21:04:31.937Z"
+  },
+  {
+    "id": "7a501085-004b-4d4d-9f5f-a864f1ff87e3",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Explain Standard HTML Document Structure in 1 sentence.",
+    "createdAt": "2026-05-28T21:04:30.298Z"
+  },
+  {
+    "id": "658b6be5-2a7d-4740-a5c1-8d79458aedae",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Write a short summary.",
+    "createdAt": "2026-05-28T21:04:28.977Z"
+  },
+  {
+    "id": "d2954eb8-4a5c-4593-b36f-b04c6db562d1",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Read the topic completely and highlight the important points.",
+    "createdAt": "2026-05-28T21:04:26.509Z"
+  },
+  {
+    "id": "71a97fd1-2b23-4afb-a211-65746d24320d",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Open the topic Standard HTML Document Structure in your notes.",
+    "createdAt": "2026-05-28T21:04:24.514Z"
+  },
+  {
+    "id": "4ab8ab1c-ce62-4175-bd6b-f0d108a64e10",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "broken_down_task",
+    "points": 4,
+    "title": "HTML: Basic Syntax",
+    "createdAt": "2026-05-28T21:04:20.852Z"
+  },
+  {
+    "id": "c5dcf507-b527-459f-8bb1-e043682f2731",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Copy or type out just the definition of that single term/concept.",
+    "createdAt": "2026-05-28T21:04:17.744Z"
+  },
+  {
+    "id": "f1d2c031-4d67-4754-b455-3619e6fed12c",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Locate the definition of that one term or concept within your materials.",
+    "createdAt": "2026-05-28T21:04:15.034Z"
+  },
+  {
+    "id": "bfb19819-c65b-46e1-a61f-7a11b5b9ae3d",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Write down that one new term or concept on a piece of paper or in a blank document.",
+    "createdAt": "2026-05-28T21:04:11.559Z"
+  },
+  {
+    "id": "346531c5-0f3f-4e51-9eaa-23c2e23cb896",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Pick out one new term or concept from that first paragraph/heading.",
+    "createdAt": "2026-05-28T21:04:06.703Z"
+  },
+  {
+    "id": "ba6641cf-8dab-4e41-b25e-3132e1c5cc48",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Skim the first paragraph or heading in the 'HTML: Basic Syntax' section for 30 seconds.",
+    "createdAt": "2026-05-28T21:04:00.226Z"
+  },
+  {
+    "id": "3eb67a7a-7646-4ae8-b121-6b1d1df746c7",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Open your notes or browser to the 'HTML: Basic Syntax' section.",
+    "createdAt": "2026-05-28T21:03:52.906Z"
+  },
+  {
+    "id": "7cf2f8b6-113b-4ed9-9669-2912a5f34fec",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Explain HTML: Basic Syntax in 1 sentence.",
+    "createdAt": "2026-05-28T21:02:38.601Z"
+  },
+  {
+    "id": "fbbecdd5-3f3c-4152-afa8-4bd2f6576883",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Write a short summary.",
+    "createdAt": "2026-05-28T21:02:37.692Z"
+  },
+  {
+    "id": "d4c5ddc8-f249-4e4c-961a-4721c7b57dcc",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Read the topic completely and highlight the important points.",
+    "createdAt": "2026-05-28T21:02:36.563Z"
+  },
+  {
+    "id": "3fe5b979-d429-475f-9a5d-9d32995cfdc2",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Open the topic HTML: Basic Syntax in your notes.",
+    "createdAt": "2026-05-28T21:02:34.176Z"
+  },
+  {
+    "id": "6be4cdcf-9cae-40e9-a3f5-185ab7f6bf53",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Open the topic HTML: Basic Syntax in your notes.",
+    "createdAt": "2026-05-28T20:58:33.265Z"
+  },
+  {
+    "id": "78342a5f-054f-4398-bc7f-c4594d990184",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "broken_down_task",
+    "points": 4,
+    "title": "Unit 1",
+    "createdAt": "2026-05-28T20:58:30.425Z"
+  },
+  {
+    "id": "eacd910d-96f9-4d01-8401-70c500a200c5",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Take a 2 min breather.",
+    "createdAt": "2026-05-28T20:58:28.698Z"
+  },
+  {
+    "id": "09eff4e3-31b1-4be8-a437-c54c31807098",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Explain Unit 1 in 1 sentence.",
+    "createdAt": "2026-05-28T20:58:26.789Z"
+  },
+  {
+    "id": "5f16c7cd-562e-4e69-8eb1-7318a4a89e83",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Write a short summary.",
+    "createdAt": "2026-05-28T20:58:24.646Z"
+  },
+  {
+    "id": "f3b66c4c-b217-4994-b463-a624e1ddc173",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Read the topic completely and highlight the important points.",
+    "createdAt": "2026-05-28T20:58:21.918Z"
+  },
+  {
+    "id": "401f1788-f0d4-42f5-80e8-784fc25e2619",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Open the topic Unit 1 in your notes.",
+    "createdAt": "2026-05-28T20:58:16.077Z"
+  },
+  {
+    "id": "d72b2796-3957-46fe-89f0-3f533f9d4d48",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "focus_session",
+    "points": 8,
+    "title": "Unit 1",
+    "createdAt": "2026-05-28T11:38:32.566Z"
+  },
+  {
+    "id": "3ddb0e30-6af2-4344-b90e-ffc8ee4574e0",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "focus_session",
+    "points": 8,
+    "title": "Study and learning",
+    "createdAt": "2026-05-28T11:38:28.634Z"
+  },
+  {
+    "id": "80311e2e-5811-4217-bbc6-31300977ec29",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Explain and learning in 1 sentence.",
+    "createdAt": "2026-05-28T11:11:10.892Z"
+  },
+  {
+    "id": "5a501c94-b700-4131-8d25-4c7538143825",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Write a short summary.",
+    "createdAt": "2026-05-28T11:11:09.728Z"
+  },
+  {
+    "id": "6e9c7734-99fe-44fb-9722-7615d2d7af0a",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Read the topic completely and highlight the important points.",
+    "createdAt": "2026-05-28T11:11:08.395Z"
+  },
+  {
+    "id": "49b07ee8-e089-409b-b294-b25a5d4ac844",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Open the topic and learning in your notes.",
+    "createdAt": "2026-05-28T11:11:06.369Z"
+  },
+  {
+    "id": "b56005b0-5cc9-4a7b-8376-23f3b9060dc5",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "broken_down_task",
+    "points": 4,
+    "title": "Measuring Social Responsiveness and Managerial Ethics",
+    "createdAt": "2026-05-28T11:00:23.512Z"
+  },
+  {
+    "id": "2edc955e-9c2f-402b-967a-e95a789463fe",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Take a 2 min breather.",
+    "createdAt": "2026-05-28T11:00:21.404Z"
+  },
+  {
+    "id": "fca6300a-3ee6-4a09-94d3-84f541cedbd8",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Explain Measuring Social Responsiveness and Managerial Ethics in 1 sentence.",
+    "createdAt": "2026-05-28T11:00:13.091Z"
+  },
+  {
+    "id": "b07c1c5a-2681-43ae-ad43-ed8304b4f099",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Write a short summary.",
+    "createdAt": "2026-05-28T11:00:11.936Z"
+  },
+  {
+    "id": "6e8ca808-8214-4ac2-8aa7-a21eb3af21bc",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Read the topic completely and highlight the important points.",
+    "createdAt": "2026-05-28T11:00:09.657Z"
+  },
+  {
+    "id": "23b20bef-a068-43f9-8b0f-c94177f1f156",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Open the topic Measuring Social Responsiveness and Managerial Ethics in your notes.",
+    "createdAt": "2026-05-28T11:00:07.435Z"
+  },
+  {
+    "id": "86c0f647-0e86-402b-8e86-5cebe487b7da",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "focus_session",
+    "points": 8,
+    "title": "Social Stakeholders",
+    "createdAt": "2026-05-20T20:55:32.242Z"
+  },
+  {
+    "id": "bc6fb543-159e-40d4-bfce-2962a3c6a0ac",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "broken_down_task",
+    "points": 4,
+    "title": "Social Stakeholders",
+    "createdAt": "2026-05-20T20:51:59.907Z"
+  },
+  {
+    "id": "f5849c56-8595-4436-a4c9-be08fcbe9eb2",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Take a 2 min breather.",
+    "createdAt": "2026-05-20T20:51:59.831Z"
+  },
+  {
+    "id": "b19ad71f-9268-4ed8-acab-08784b799ec5",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Explain Social Stakeholders in 1 sentence.",
+    "createdAt": "2026-05-20T20:51:59.353Z"
+  },
+  {
+    "id": "2bebbf19-11d8-491a-95fa-07c1184b3e06",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Read the topic completely and highlight the important points.",
+    "createdAt": "2026-05-20T20:51:59.037Z"
+  }
+]

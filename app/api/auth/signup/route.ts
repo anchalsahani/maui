@@ -43,6 +43,7 @@ export async function POST(request: Request) {
     createdAt: new Date().toISOString(),
     onboardingCompleted: false,
     survey: null,
+    studyProfile: null,
     passwordHash,
     passwordSalt,
     authProvider: "local",

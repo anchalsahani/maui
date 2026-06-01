@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 
-import PlaceholderWorkspace from "@/components/app/PlaceholderWorkspace";
+import PlannerWorkspace from "@/components/app/planner/PlannerWorkspace";
+import Navbar from "@/components/layout/Navbar";
 import { getAuthenticatedUser } from "@/lib/auth/session";
 
 export default async function PlannerPage() {
@@ -10,11 +11,16 @@ export default async function PlannerPage() {
     redirect("/login");
   }
 
+  if (!user.onboardingCompleted || !user.survey) {
+    redirect("/onboarding");
+  }
+
   return (
-    <PlaceholderWorkspace
-      badge="Planner"
-      title="Auto planning without overwhelm."
-      description="This page will organize structure for the day, choose what matters first, and keep manual planning pressure low."
-    />
+    <>
+      <div className="relative z-50">
+        <Navbar />
+      </div>
+      <PlannerWorkspace survey={user.survey} studyProfile={user.studyProfile} />
+    </>
   );
 }

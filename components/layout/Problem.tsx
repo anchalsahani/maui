@@ -22,64 +22,75 @@ const problems = [
 
 export default function ProblemSection() {
   return (
-    <section className="relative overflow-hidden py-28">
+    <section className="relative bg-amber-50 overflow-hidden py-24">
       {/* BG GLOW */}
-      <div className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-[var(--color-primary)]/8 blur-[120px]" />
+      <div className="pointer-events-none absolute left-1/2 top-0 h-[380px] w-[380px] -translate-x-1/2 rounded-full bg-[var(--color-primary)]/8 blur-[120px]" />
 
       {/* GRID */}
       <div className="pointer-events-none absolute inset-0 opacity-[0.03]">
         <div className="h-full w-full bg-[linear-gradient(to_right,#00000010_1px,transparent_1px),linear-gradient(to_bottom,#00000010_1px,transparent_1px)] bg-[size:72px_72px]" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6">
+      <div className="relative z-10 mx-auto max-w-5xl px-6">
         {/* HEADER */}
         <motion.div
-          initial={{ opacity: 0, y: 18 }}
+          initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="mx-auto max-w-4xl text-center"
+          transition={{ duration: 0.6 }}
+          className="mx-auto max-w-3xl text-center"
         >
           {/* BADGE */}
-          <div className="glass-card mb-5 inline-flex rounded-full px-5 py-2">
-            <span className="text-[13px] font-medium text-[var(--color-dark)]/70">
+          <div className="glass-card mb-4 inline-flex rounded-full px-4 py-2">
+            <span className="text-[12px] font-medium text-[var(--color-dark)]/70">
               The problem
             </span>
           </div>
 
           {/* HEADING */}
-            <h4 className="text-[clamp(1.3rem,2vw,2rem)] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--color-dark)]">
-              Because{" "}
-              
-              <span className="relative inline-block text-[var(--color-primary-deep)]">
-                “just start”
-              </span>{" "}
-              
-              isn&apos;t that simple.
-            </h4>
+          <h4 className="text-[clamp(1.2rem,2vw,1.8rem)] font-semibold leading-[1.3] tracking-[-0.04em] text-[var(--color-dark)]">
+            Knowing what to do{" "}
+            <span className="relative inline-block text-[var(--color-mainstar)]">
+              isn&apos;t enough
+            </span>{" "}
+            <br></br>
+            {" "}
+            <span className="relative inline-block text-[var(--color-mainstar)]">
+              executive dysfuntion
+            </span>{" "}
+            can still keep you stuck.
+          </h4>
+
+          {/* SUBTEXT */}
+          <p className="mx-auto mt-4  max-w-full text-center text-[1.05rem] leading-relaxed text-[var(--color-dark)]">
+            ADHD creates {" "} <span className="relative inline-block text-[var(--color-mainstar)]">
+            invisible friction
+            </span>{" "} between <br></br> intention,
+            action, overwhelm, and emotional burnout.
+          </p>
         </motion.div>
 
         {/* ITEMS */}
-        <div className="mt-24 space-y-10">
+        <div className="mt-16 space-y-8">
           {problems.map((problem, index) => (
             <motion.div
               key={problem.title}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{
-                duration: 0.7,
+                duration: 0.6,
                 delay: index * 0.08,
               }}
-              className="grid items-center gap-8 lg:grid-cols-[320px_1fr]"
+              className="grid items-center gap-6 lg:grid-cols-[240px_1fr]"
             >
               {/* VISUAL CARD */}
-              <div className="relative overflow-hidden rounded-[28px] border border-[var(--color-border)] bg-[var(--color-surface)] p-5 shadow-[var(--shadow-soft)] backdrop-blur-2xl">
+              <div className="relative overflow-hidden rounded-[24px] border border-[var(--color-border)] bg-[var(--color-surface)] p-4 shadow-[var(--shadow-soft)] backdrop-blur-2xl">
                 <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary)]/[0.03] to-transparent" />
 
                 {/* GRID */}
                 {problem.visual === "grid" && (
-                  <div className="grid grid-cols-8 gap-2">
+                  <div className="grid grid-cols-8 gap-1.5">
                     {Array.from({ length: 40 }).map((_, i) => (
                       <motion.div
                         key={i}
@@ -87,7 +98,7 @@ export default function ProblemSection() {
                           i === 22
                             ? {
                                 opacity: [0.5, 1, 0.5],
-                                scale: [1, 1.08, 1],
+                                scale: [1, 1.06, 1],
                               }
                             : {}
                         }
@@ -96,9 +107,9 @@ export default function ProblemSection() {
                           repeat: Infinity,
                           ease: "easeInOut",
                         }}
-                        className={`h-8 rounded-lg ${
+                        className={`h-5 rounded-md ${
                           i === 22
-                            ? "bg-[var(--color-primary)] shadow-[0_0_20px_rgba(143,191,159,0.35)]"
+                            ? "bg-[var(--color-primary)] shadow-[0_0_16px_rgba(143,191,159,0.3)]"
                             : i === 19
                             ? "bg-[var(--color-primary)]/10"
                             : "bg-[var(--color-dark)]/[0.04]"
@@ -110,7 +121,7 @@ export default function ProblemSection() {
 
                 {/* BARS */}
                 {problem.visual === "bars" && (
-                  <div className="flex h-[170px] items-end gap-2">
+                  <div className="flex h-[110px] items-end gap-1.5">
                     {[22, 18, 74, 16, 10, 14, 13, 15, 12, 12, 78, 58].map(
                       (height, i) => (
                         <motion.div
@@ -120,14 +131,14 @@ export default function ProblemSection() {
                               ? {
                                   height: [
                                     `${height}%`,
-                                    `${height + 10}%`,
+                                    `${height + 8}%`,
                                     `${height}%`,
                                   ],
                                 }
                               : {}
                           }
                           transition={{
-                            duration: 2.2,
+                            duration: 2,
                             repeat: Infinity,
                             ease: "easeInOut",
                             delay: i * 0.08,
@@ -148,7 +159,7 @@ export default function ProblemSection() {
 
                 {/* LINES */}
                 {problem.visual === "lines" && (
-                  <div className="flex h-[170px] items-center justify-center gap-2">
+                  <div className="flex h-[110px] items-center justify-center gap-1.5">
                     {Array.from({ length: 16 }).map((_, i) => (
                       <motion.div
                         key={i}
@@ -162,9 +173,9 @@ export default function ProblemSection() {
                         transition={{
                           duration: 2,
                           repeat: Infinity,
-                          delay: i * 0.12,
+                          delay: i * 0.1,
                         }}
-                        className={`h-full w-2 rounded-full ${
+                        className={`h-full w-1.5 rounded-full ${
                           i > 5 && i < 14
                             ? "bg-[var(--color-primary)]/18"
                             : "bg-[var(--color-dark)]/[0.04]"
@@ -176,12 +187,12 @@ export default function ProblemSection() {
               </div>
 
               {/* TEXT */}
-              <div className="max-w-lg">
-                <h3 className="text-[2rem] font-bold leading-[1] tracking-[-0.05em] text-[var(--color-dark)]">
+              <div className="mx-auto max-w-md text-center">
+                <h3 className="text-[1.35rem] font-semibold leading-[1.1] tracking-[-0.04em] text-[var(--color-dark)]">
                   {problem.title}
                 </h3>
 
-                <p className="mt-4 text-[1rem] leading-relaxed text-[var(--color-text-secondary)]">
+                <p className="mt-3 text-[0.95rem] leading-relaxed text-[var(--color-text-secondary)]">
                   {problem.text}
                 </p>
               </div>

@@ -72,6 +72,21 @@ export function toPublicUser(user: StoredUser): AuthUser {
     createdAt: user.createdAt,
     onboardingCompleted: user.onboardingCompleted ?? false,
     survey: user.survey ?? null,
+    studyProfile: normalizeStudyProfile(user.studyProfile ?? null),
+  };
+}
+
+function normalizeStudyProfile(profile: StoredUser["studyProfile"]) {
+  if (!profile) {
+    return null;
+  }
+
+  return {
+    ...profile,
+    fixedCommitments: profile.fixedCommitments ?? "",
+    choresAndErrands: profile.choresAndErrands ?? "",
+    wellbeingAndFun: profile.wellbeingAndFun ?? "",
+    planningNotes: profile.planningNotes ?? "",
   };
 }
 
@@ -80,5 +95,6 @@ function normalizeStoredUser(user: StoredUser): StoredUser {
     ...user,
     onboardingCompleted: user.onboardingCompleted ?? false,
     survey: user.survey ?? null,
+    studyProfile: user.studyProfile ?? null,
   };
 }

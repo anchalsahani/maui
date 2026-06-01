@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState, useTransition } from "react";
+import { Suspense, useState, useTransition } from "react";
 import {
   ArrowRight,
   Bolt,
@@ -36,7 +36,7 @@ const features = [
   },
 ];
 
-export default function SignupPage() {
+function SignupContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
@@ -319,5 +319,19 @@ export default function SignupPage() {
         </section>
       </div>
     </main>
+  );
+}
+
+export default function SignupPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="flex min-h-screen items-center justify-center bg-[var(--color-bg)] px-4">
+          <div className="h-12 w-12 animate-spin rounded-full border-2 border-[var(--color-accent)] border-t-[var(--color-primary-deep)]" />
+        </main>
+      }
+    >
+      <SignupContent />
+    </Suspense>
   );
 }

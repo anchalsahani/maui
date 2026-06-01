@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 
-import PlaceholderWorkspace from "@/components/app/PlaceholderWorkspace";
+import BurnoutWorkspace from "@/components/app/burnout/BurnoutWorkspace";
+import Navbar from "@/components/layout/Navbar";
 import { getAuthenticatedUser } from "@/lib/auth/session";
 
 export default async function BurnoutPage() {
@@ -11,10 +12,11 @@ export default async function BurnoutPage() {
   }
 
   return (
-    <PlaceholderWorkspace
-      badge="Burnout"
-      title="Notice energy drop before it spirals."
-      description="This page will surface burnout signals, workload reduction, and adaptive suggestions when momentum starts breaking down."
-    />
+    <>
+      <div className="relative z-50">
+        <Navbar />
+      </div>
+      <BurnoutWorkspace survey={user.survey} />
+    </>
   );
 }

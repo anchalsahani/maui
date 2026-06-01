@@ -1,12 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Jolly+Lodger&family=Story+Script&display=swap");
 @import "tailwindcss";
 
 :root {
-  --color-bg: #fafafa;
+  --color-bg: #f5f5dc;
   --color-surface: rgba(255, 255, 255, 0.82);
   --color-surface-strong: #ffffff;
   --color-primary: #8fbf9f;
-  --color-primary-deep: #6f9d7d;
+  --color-primary-deep: #5a7663;
   --color-accent: #cfe8d5;
+  --color-mainstar: #395c43;
   --color-dark: #1a1a1a;
   --color-text-main: #1a1a1a;
   --color-text-secondary: #6b7280;
@@ -70,6 +72,13 @@ h6 {
 
 p {
   margin: 0;
+  font-family: var(--font-heading), sans-serif;
+}
+
+.first-name {
+  font-family: "Story Script", cursive;
+  font-weight: 400;
+  letter-spacing: 0;
 }
 
 ::selection {

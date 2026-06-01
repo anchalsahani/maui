@@ -20,7 +20,11 @@ export default async function DashboardPage() {
       <div className="relative z-50">
         <Navbar />
       </div>
-      <MauiDashboard userName={user.name} survey={user.survey} />
+      <MauiDashboard
+        userName={user.name}
+        survey={user.survey}
+        studyProfile={user.studyProfile}
+      />
     </>
   );
 }

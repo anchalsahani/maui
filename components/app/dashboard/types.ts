@@ -5,10 +5,18 @@ export type EmotionState = "steady" | "stressed" | "tired" | "overwhelmed" | "ho
 export interface TaskItem {
   id: string;
   title: string;
+  topicId?: string;
+  subject?: string;
+  category?: string;
+  status?: "todo" | "in_progress" | "done";
+  priority?: "low" | "medium" | "high";
   urgency: number;
   difficulty: number;
   deadlineWeight: number;
   focusMinutes: number;
+  progress?: number;
+  deadline?: string | null;
+  recurrence?: "none" | "revision_1_3_7" | "weekly";
   steps: string[];
 }
 
@@ -28,9 +36,13 @@ export interface SessionState {
 }
 
 export interface PersistedDashboardState {
+  dashboardRoadmapKey?: string;
   tasks: TaskItem[];
+  taskChecklist?: TaskItem[];
+  completedTaskIds?: string[];
   reward: RewardState;
   session: SessionState;
   recentMoments: string[];
   completedMicroSteps: string[];
+  emotionDraft?: string;
 }

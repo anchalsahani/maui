@@ -70,6 +70,7 @@ export async function GET(request: Request) {
         createdAt: new Date().toISOString(),
         onboardingCompleted: false,
         survey: null,
+        studyProfile: null,
         passwordHash: "",
         passwordSalt: "",
         authProvider: "google",

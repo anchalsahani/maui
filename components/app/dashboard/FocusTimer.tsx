@@ -1,13 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useEffect, useSyncExternalStore } from "react";
+import { useEffect, useRef } from "react";
 
-import {
-  getFocusTimerServerSnapshot,
-  getFocusTimerSnapshot,
-  subscribeFocusTimer,
-} from "./focusTimerStore";
+import { useFocusTimer } from "./useFocusTimer";
 
 function formatTime(seconds: number) {
   const minutes = Math.floor(seconds / 60)
@@ -24,28 +20,41 @@ export default function FocusTimer({
   onAutoComplete?: () => void;
   compact?: boolean;
 }) {
-  const snapshot = useSyncExternalStore(
-    subscribeFocusTimer,
-    getFocusTimerSnapshot,
-    getFocusTimerServerSnapshot
-  );
+  const snapshot = useFocusTimer();
+  const autoCompletedRunId = useRef<number | null>(null);
+  const previousStatus = useRef(snapshot.status);
 
   useEffect(() => {
+    const completedAfterActive =
+      previousStatus.current === "active" && snapshot.status === "completed";
+    const endedNaturally =
+      snapshot.endsAt !== null && Date.now() >= snapshot.endsAt;
+
     if (
       onAutoComplete &&
-      snapshot.status === "active" &&
-      snapshot.elapsedSeconds >= snapshot.focusMinutes * 60 &&
+      completedAfterActive &&
+      endedNaturally &&
+      autoCompletedRunId.current !== snapshot.runId &&
       snapshot.focusMinutes > 0
     ) {
+      autoCompletedRunId.current = snapshot.runId;
       onAutoComplete();
     }
-  }, [onAutoComplete, snapshot.elapsedSeconds, snapshot.focusMinutes, snapshot.status]);
+
+    previousStatus.current = snapshot.status;
+  }, [
+    onAutoComplete,
+    snapshot.endsAt,
+    snapshot.focusMinutes,
+    snapshot.runId,
+    snapshot.status,
+  ]);
 
   if (compact) {
     return (
       <div>
         <p className="text-[2.2rem] font-semibold tracking-[-0.06em] text-[var(--color-dark)]">
-          {formatTime(snapshot.elapsedSeconds)}
+          {formatTime(snapshot.remainingSeconds)}
         </p>
         <p className="mt-2 text-sm leading-6 text-[var(--color-text-secondary)]">
           {snapshot.status === "idle"
@@ -57,8 +66,8 @@ export default function FocusTimer({
   }
 
   const progress =
-    snapshot.focusMinutes > 0
-      ? Math.min(snapshot.elapsedSeconds / (snapshot.focusMinutes * 60), 1)
+    snapshot.totalSeconds > 0
+      ? Math.min(snapshot.elapsedSeconds / snapshot.totalSeconds, 1)
       : 0;
 
   return (
@@ -68,13 +77,13 @@ export default function FocusTimer({
       </p>
       <div className="mt-4 rounded-[24px] bg-white/78 px-5 py-5 text-center shadow-[0_12px_34px_rgba(53,85,63,0.06)]">
         <motion.p
-          key={snapshot.elapsedSeconds}
+          key={snapshot.remainingSeconds}
           initial={{ opacity: 0.65, y: 4 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.18, ease: "easeOut" }}
           className="text-[3rem] font-semibold tracking-[-0.08em] text-[var(--color-dark)]"
         >
-          {formatTime(snapshot.elapsedSeconds)}
+          {formatTime(snapshot.remainingSeconds)}
         </motion.p>
         <p className="mt-2 text-sm capitalize text-[var(--color-text-secondary)]">
           {snapshot.status === "idle" ? "Ready to start" : snapshot.status}

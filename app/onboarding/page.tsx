@@ -87,6 +87,33 @@ export default function OnboardingPage() {
       return;
     }
 
+    const form = document.querySelector<HTMLFormElement>("#study-profile-form");
+
+    if (form) {
+      const personalizationData = new FormData(form);
+      const studying = String(personalizationData.get("studying") ?? "").trim();
+      const manualSyllabus = String(personalizationData.get("manualSyllabus") ?? "").trim();
+      const syllabusFile = personalizationData.get("syllabusFile");
+
+      const hasUpload = syllabusFile instanceof File && syllabusFile.size > 0;
+
+      if (studying && (manualSyllabus || hasUpload)) {
+        const profileResponse = await fetch("/api/profile/personalization", {
+          method: "POST",
+          body: personalizationData,
+        });
+
+        const profileData = (await profileResponse.json().catch(() => null)) as
+          | { error?: string }
+          | null;
+
+        if (!profileResponse.ok) {
+          setError(profileData?.error ?? "Setup saved, but syllabus processing failed.");
+          return;
+        }
+      }
+    }
+
     router.push("/dashboard");
     router.refresh();
   }
@@ -163,6 +190,64 @@ export default function OnboardingPage() {
             </section>
           ))}
         </div>
+
+        <form
+          id="study-profile-form"
+          className="mt-5 rounded-[28px] border border-[var(--color-border)] bg-[linear-gradient(180deg,rgba(255,255,255,0.86),rgba(244,250,246,0.9))] p-5 shadow-[0_12px_35px_rgba(53,85,63,0.06)]"
+        >
+          <h2 className="text-[1.1rem] font-semibold text-[var(--color-dark)]">
+            What are you studying?
+          </h2>
+          <p className="mt-2 text-sm leading-6 text-[var(--color-text-secondary)]">
+            This helps Maui parse your syllabus and generate study tasks. You can
+            change it anytime from Personalization.
+          </p>
+
+          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+            <input
+              name="studying"
+              className="input"
+              placeholder="B.Tech CSE, UPSC, NEET, Class 12 PCM..."
+              disabled={isPending}
+            />
+            <select name="goal" className="input" defaultValue="exam" disabled={isPending}>
+              <option value="exam">Exam preparation</option>
+              <option value="course">Course completion</option>
+              <option value="skill">Skill building</option>
+              <option value="revision">Revision cycle</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div className="mt-3 grid gap-3 lg:grid-cols-2">
+            <textarea
+              name="manualSyllabus"
+              className="input min-h-32 resize-y"
+              placeholder="Paste subjects, modules, chapters, or topics here."
+              disabled={isPending}
+            />
+            <label className="flex min-h-32 cursor-pointer flex-col justify-center rounded-2xl border border-dashed border-[var(--color-primary)]/35 bg-white/62 px-4 py-4 text-sm text-[var(--color-text-secondary)]">
+              <span className="font-semibold text-[var(--color-dark)]">
+                Upload complete syllabus
+              </span>
+              <span className="mt-1">PDF, DOC, DOCX, or TXT</span>
+              <input
+                name="syllabusFile"
+                type="file"
+                accept=".pdf,.doc,.docx,.txt,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain"
+                className="mt-3 text-xs"
+                disabled={isPending}
+              />
+            </label>
+          </div>
+
+          <textarea
+            name="preferences"
+            className="input mt-3 min-h-20 resize-y"
+            placeholder="Optional: target date, daily study time, weak subjects, coaching schedule..."
+            disabled={isPending}
+          />
+        </form>
 
         {error ? (
           <p className="mt-6 rounded-2xl border border-[var(--color-error)]/25 bg-[var(--color-error)]/8 px-4 py-3 text-sm text-[var(--color-error)]">

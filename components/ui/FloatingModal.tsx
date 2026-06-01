@@ -46,6 +46,14 @@ export default function FloatingModal({
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", handleKeyDown);
     window.setTimeout(() => {
+      if (
+        document.activeElement &&
+        panelRef.current?.contains(document.activeElement) &&
+        document.activeElement !== panelRef.current
+      ) {
+        return;
+      }
+
       panelRef.current?.focus();
     }, 20);
 
