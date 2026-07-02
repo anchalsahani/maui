@@ -5,6 +5,7 @@ import { NextResponse } from "next/server";
 import {
   exchangeGoogleCodeForTokens,
   fetchGoogleUser,
+  getAppBaseUrl,
   getGoogleOAuthConfig,
   GOOGLE_OAUTH_STATE_COOKIE,
 } from "@/lib/auth/google";
@@ -24,10 +25,11 @@ export async function GET(request: Request) {
   const code = requestUrl.searchParams.get("code");
   const state = requestUrl.searchParams.get("state");
   const oauthError = requestUrl.searchParams.get("error");
-  const { redirectUri } = getGoogleOAuthConfig();
-  const dashboardUrl = new URL("/dashboard", redirectUri);
-  const personalizationUrl = new URL("/personalization", redirectUri);
-  const signupUrl = new URL("/signup", redirectUri);
+  const baseUrl = getAppBaseUrl(request);
+  getGoogleOAuthConfig(baseUrl);
+  const dashboardUrl = new URL("/dashboard", baseUrl);
+  const personalizationUrl = new URL("/personalization", baseUrl);
+  const signupUrl = new URL("/signup", baseUrl);
 
   const cookieHeader = request.headers.get("cookie") ?? "";
   const stateCookie = cookieHeader
@@ -52,7 +54,7 @@ export async function GET(request: Request) {
   }
 
   try {
-    const tokenResult = await exchangeGoogleCodeForTokens(code);
+    const tokenResult = await exchangeGoogleCodeForTokens(code, baseUrl);
     const googleUser = await fetchGoogleUser(tokenResult.access_token);
 
     let user =

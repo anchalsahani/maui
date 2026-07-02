@@ -2,8 +2,11 @@ import { randomUUID } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
+import { hasKvStore, kvGetJson, kvSetJson } from "@/lib/storage/kv";
+
 const DATA_DIR = path.join(process.cwd(), ".local-data");
 const REWARD_EVENTS_FILE = path.join(DATA_DIR, "reward-events.json");
+const REWARD_EVENTS_KEY = "maui:reward-events";
 
 export type RewardEventType = "focus_session" | "micro_step" | "broken_down_task";
 
@@ -27,6 +30,11 @@ async function ensureRewardStore() {
 }
 
 async function readRewardEvents(): Promise<RewardEvent[]> {
+  if (hasKvStore()) {
+    const events = await kvGetJson<RewardEvent[]>(REWARD_EVENTS_KEY);
+    return Array.isArray(events) ? events.filter(isRewardEvent) : [];
+  }
+
   await ensureRewardStore();
   const raw = await readFile(REWARD_EVENTS_FILE, "utf8");
 
@@ -39,6 +47,11 @@ async function readRewardEvents(): Promise<RewardEvent[]> {
 }
 
 async function writeRewardEvents(events: RewardEvent[]) {
+  if (hasKvStore()) {
+    await kvSetJson(REWARD_EVENTS_KEY, events);
+    return;
+  }
+
   await ensureRewardStore();
   await writeFile(REWARD_EVENTS_FILE, JSON.stringify(events, null, 2), "utf8");
 }

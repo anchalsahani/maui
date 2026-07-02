@@ -6,18 +6,37 @@ const GOOGLE_USERINFO_URL = "https://openidconnect.googleapis.com/v1/userinfo";
 
 export const GOOGLE_OAUTH_STATE_COOKIE = "maui_google_oauth_state";
 
-function getBaseUrl() {
-  return (
-    process.env.NEXT_PUBLIC_APP_URL ??
-    process.env.APP_URL ??
-    "http://localhost:3000"
-  );
+function normalizeBaseUrl(value: string) {
+  return value.replace(/\/+$/, "");
 }
 
-export function getGoogleOAuthConfig() {
+function isLocalhostUrl(value: string) {
+  try {
+    const hostname = new URL(value).hostname;
+    return hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1";
+  } catch {
+    return false;
+  }
+}
+
+export function getAppBaseUrl(request?: Request) {
+  const configuredUrl = process.env.NEXT_PUBLIC_APP_URL ?? process.env.APP_URL;
+  const requestOrigin = request ? new URL(request.url).origin : "";
+
+  if (
+    configuredUrl &&
+    !(requestOrigin && isLocalhostUrl(configuredUrl) && !isLocalhostUrl(requestOrigin))
+  ) {
+    return normalizeBaseUrl(configuredUrl);
+  }
+
+  return normalizeBaseUrl(requestOrigin || "http://localhost:3000");
+}
+
+export function getGoogleOAuthConfig(baseUrl = getAppBaseUrl()) {
   const clientId = process.env.GOOGLE_CLIENT_ID;
   const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
-  const redirectUri = `${getBaseUrl()}/api/auth/google/callback`;
+  const redirectUri = `${baseUrl}/api/auth/google/callback`;
 
   return {
     clientId,
@@ -31,8 +50,8 @@ export function createGoogleOAuthState() {
   return randomBytes(24).toString("hex");
 }
 
-export function buildGoogleAuthUrl(state: string) {
-  const { clientId, redirectUri } = getGoogleOAuthConfig();
+export function buildGoogleAuthUrl(state: string, baseUrl?: string) {
+  const { clientId, redirectUri } = getGoogleOAuthConfig(baseUrl);
 
   if (!clientId) {
     throw new Error("Google OAuth is not configured.");
@@ -52,8 +71,9 @@ export function buildGoogleAuthUrl(state: string) {
   return `${GOOGLE_AUTH_URL}?${params.toString()}`;
 }
 
-export async function exchangeGoogleCodeForTokens(code: string) {
-  const { clientId, clientSecret, redirectUri, configured } = getGoogleOAuthConfig();
+export async function exchangeGoogleCodeForTokens(code: string, baseUrl?: string) {
+  const { clientId, clientSecret, redirectUri, configured } =
+    getGoogleOAuthConfig(baseUrl);
 
   if (!configured || !clientId || !clientSecret) {
     throw new Error("Google OAuth is not configured.");

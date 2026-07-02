@@ -2,9 +2,11 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 import type { PersistedDashboardState } from "@/components/app/dashboard/types";
+import { hasKvStore, kvGetJson, kvSetJson } from "@/lib/storage/kv";
 
 const DATA_DIR = path.join(process.cwd(), ".local-data");
 const DASHBOARD_STATES_FILE = path.join(DATA_DIR, "dashboard-states.json");
+const DASHBOARD_STATES_KEY = "maui:dashboard-states";
 
 interface StoredDashboardState {
   userId: string;
@@ -23,6 +25,11 @@ async function ensureDashboardStore() {
 }
 
 async function readDashboardStates(): Promise<StoredDashboardState[]> {
+  if (hasKvStore()) {
+    const states = await kvGetJson<StoredDashboardState[]>(DASHBOARD_STATES_KEY);
+    return Array.isArray(states) ? states.filter(isStoredDashboardState) : [];
+  }
+
   await ensureDashboardStore();
   const raw = await readFile(DASHBOARD_STATES_FILE, "utf8");
 
@@ -35,6 +42,11 @@ async function readDashboardStates(): Promise<StoredDashboardState[]> {
 }
 
 async function writeDashboardStates(states: StoredDashboardState[]) {
+  if (hasKvStore()) {
+    await kvSetJson(DASHBOARD_STATES_KEY, states);
+    return;
+  }
+
   await ensureDashboardStore();
   await writeFile(DASHBOARD_STATES_FILE, JSON.stringify(states, null, 2), "utf8");
 }

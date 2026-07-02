@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
+import { ArrowRight } from "lucide-react";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -110,8 +111,31 @@ export default function LoginPage() {
               className="group flex h-[52px] w-full items-center justify-center gap-2 rounded-full bg-[var(--color-dark)] text-[15px] font-medium text-white transition-all duration-300 hover:translate-y-[-1px] hover:shadow-[0_10px_30px_rgba(16,47,21,0.16)] disabled:cursor-not-allowed disabled:opacity-70"
             >
               <span>{isPending ? "Logging in..." : "Login"}</span>
+              <ArrowRight size={16} className="transition-transform duration-200 group-hover:translate-x-1" />
             </button>
           </form>
+
+          <div className="mt-5 grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-3">
+            <div className="h-px bg-[var(--color-border)]" />
+            <span className="text-[11px] font-medium uppercase tracking-[0.18em] text-[var(--color-text-secondary)]">
+              or
+            </span>
+            <div className="h-px bg-[var(--color-border)]" />
+          </div>
+
+          <button
+            type="button"
+            onClick={() => {
+              window.location.href = "/api/auth/google";
+            }}
+            disabled={isPending}
+            className="mt-5 flex h-[52px] w-full items-center justify-center gap-3 rounded-full bg-[#171717] px-4 text-[15px] font-medium text-white transition-colors hover:bg-black disabled:cursor-not-allowed disabled:opacity-70"
+          >
+            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white text-[15px] font-semibold text-[#4285F4]">
+              G
+            </span>
+            <span>Continue with Google</span>
+          </button>
 
           <div className="mt-8 flex items-center gap-2 text-[14px] text-[var(--color-text-secondary)]">
             <span>Don&apos;t have an account?</span>

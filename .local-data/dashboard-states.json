@@ -1,1381 +1,7 @@
 [
   {
-    "userId": "b35429f0-bae3-4584-9089-b91c9807c96f",
-    "updatedAt": "2026-07-02T11:58:21.896Z",
-    "state": {
-      "dashboardRoadmapKey": "2026-06-17T11:24:26.092Z-title-wrap-v2",
-      "tasks": [
-        {
-          "id": "2e34be93-5b58-4d1f-a1ec-ed7b9f608b8f",
-          "title": "Time Sharing Systems",
-          "topicId": "6289b313-6f75-44c0-bcee-45916d81f9b9",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "high",
-          "urgency": 9,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-06-21",
-          "recurrence": "revision_1_3_7",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "b5f48d66-ce4c-4107-832b-496e69df2a6d",
-          "title": "Personal-computer systems",
-          "topicId": "5794500f-a3b9-4639-b348-876805793c4e",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "high",
-          "urgency": 9,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-06-22",
-          "recurrence": "revision_1_3_7",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "824294ec-cc7a-4cba-b85b-e53a604bba99",
-          "title": "Parallel systems",
-          "topicId": "9bdb813a-fb62-4c33-987a-0d921917bd18",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "medium",
-          "urgency": 6,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-06-23",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "20c020a6-313f-49b0-b755-89e74dac0c75",
-          "title": "Distributed Systems",
-          "topicId": "e3f8af83-9f96-45c9-89c7-4068c8b03735",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "medium",
-          "urgency": 6,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-06-24",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "317c23a2-eda6-48c4-ad8d-7a2930d63931",
-          "title": "Real-Time Systems",
-          "topicId": "0ba70445-a37a-457d-9261-c016be5c036b",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "medium",
-          "urgency": 6,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-06-25",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "e26732dd-930a-4030-bc72-21552735ca12",
-          "title": "OS – A Resource Manager.",
-          "topicId": "020b1983-c457-455f-a749-062da3d5fda0",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "medium",
-          "urgency": 6,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-06-26",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "fd013ef6-7962-4333-8a97-021ccd0ba443",
-          "title": "Processes: Introduction",
-          "topicId": "e2cc7775-c697-4b15-95a8-c30f671883cf",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "medium",
-          "urgency": 6,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-06-27",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "fd5d90d8-534a-46d7-893c-554470fd370e",
-          "title": "Process states",
-          "topicId": "12b82bd5-903c-4e50-86b0-1f123521fc45",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "medium",
-          "urgency": 6,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-06-28",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "7b613e8a-a278-43fd-940f-f44f3b048ec8",
-          "title": "process management",
-          "topicId": "503e60f5-8662-46c8-87b7-111b3c9b3a18",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "medium",
-          "urgency": 6,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-06-29",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "1beb12ec-6b35-48ec-ac58-f5e7ca06ce37",
-          "title": "Interrupts",
-          "topicId": "e4fd16f5-8e49-482b-b354-1ee728be4553",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "medium",
-          "urgency": 6,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-06-30",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "0cdd3001-d47c-4501-bd54-9c848797118f",
-          "title": "Interprocess Communication",
-          "topicId": "d46e2fed-30cc-4586-8c1b-834a7bf0b0e0",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "medium",
-          "urgency": 6,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-07-01",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "be67a0bf-91a5-4492-9a86-61eb2fbf0436",
-          "title": "Threads: Introduction",
-          "topicId": "cf4e11cf-2e09-4551-a928-71526b894788",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "medium",
-          "urgency": 6,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-07-02",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "45c8a26a-32fb-4afa-bc12-97be32894e00",
-          "title": "Thread states",
-          "topicId": "1e0fb741-9f3a-4d4f-b9eb-603c9ec288d0",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "medium",
-          "urgency": 6,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-07-03",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "8953d087-fe9d-4287-89d1-c403f3d5800e",
-          "title": "Thread Operation",
-          "topicId": "26aef16c-210f-4297-9be3-a05398539189",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "medium",
-          "urgency": 6,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-07-04",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "3e92dfe2-b6e4-4f2e-b048-48a90b7363b6",
-          "title": "Threading Models",
-          "topicId": "ae10f9b7-ab6f-44d9-968a-d5ee2bab4403",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "low",
-          "urgency": 4,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-07-05",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "2c9fe1f7-1c95-4b1a-a521-82fdcb0284ce",
-          "title": "Processor Scheduling: Scheduling levels",
-          "topicId": "e835d6a8-1b26-47d9-818e-ba4cd44d35cf",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "low",
-          "urgency": 4,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-07-06",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "b5c477a3-5f86-489f-b0a6-ef374df43b9c",
-          "title": "preemptive vs no preemptive scheduling",
-          "topicId": "951bb8b2-c995-4641-9f50-ad32b7507969",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "low",
-          "urgency": 4,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-07-07",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "edc51dec-763d-434a-968b-cbaa61c375fd",
-          "title": "priorities",
-          "topicId": "74d48d43-ac7c-481f-aee2-5a5a7c84d5e6",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "low",
-          "urgency": 4,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-07-08",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "423b9332-9b5f-41b1-8a13-57ee9311f2da",
-          "title": "scheduling objective",
-          "topicId": "455d7bd8-8dec-4d46-b880-4611b7ddc9f6",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "low",
-          "urgency": 4,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-07-09",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "b1fefb00-3877-497f-af6d-586047db9b0c",
-          "title": "scheduling criteria",
-          "topicId": "e4a1a55f-cc64-4703-a27f-577cc0bb4d44",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "low",
-          "urgency": 4,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-07-10",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "dc399ceb-469a-4410-855d-5f89d167cb02",
-          "title": "scheduling algorithms",
-          "topicId": "6d77be7c-509b-4e98-b1c4-2ed5e60dce36",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "low",
-          "urgency": 4,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-07-11",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "1931cdbd-7e5d-4ad4-92c4-cdcdb096fd32",
-          "title": "demand scheduling",
-          "topicId": "b14fb46a-2da2-4717-bc2c-d7dfca0862f1",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "low",
-          "urgency": 4,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-07-12",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "63fd92ff-a1ea-4559-bac6-62925f8ebd08",
-          "title": "real time scheduling.",
-          "topicId": "9bbd3b3e-d7c3-46ff-868d-6e8fa3656e92",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "low",
-          "urgency": 4,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-07-13",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        }
-      ],
-      "taskChecklist": [
-        {
-          "id": "541152c1-9997-4d38-9a66-1b79f89bc6a2",
-          "title": "Introduction: What is an Operating System",
-          "topicId": "042675d0-e34e-4b53-b144-9f94fef8d98c",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "high",
-          "urgency": 9,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-06-18",
-          "recurrence": "revision_1_3_7",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "3d3bc851-6b1b-4f93-adda-52250ce6fed8",
-          "title": "Simple Batch Systems",
-          "topicId": "033f5d54-e47b-4683-ab77-5a3e3b80d5f0",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "high",
-          "urgency": 9,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-06-19",
-          "recurrence": "revision_1_3_7",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "e5f0f4e7-a878-4a49-bf11-44dde1495d5a",
-          "title": "Multiprogrammed Batches systems",
-          "topicId": "12bfcbb6-9df3-4bc1-9562-de975a61e619",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "high",
-          "urgency": 9,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-06-20",
-          "recurrence": "revision_1_3_7",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "2e34be93-5b58-4d1f-a1ec-ed7b9f608b8f",
-          "title": "Time Sharing Systems",
-          "topicId": "6289b313-6f75-44c0-bcee-45916d81f9b9",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "high",
-          "urgency": 9,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-06-21",
-          "recurrence": "revision_1_3_7",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "b5f48d66-ce4c-4107-832b-496e69df2a6d",
-          "title": "Personal-computer systems",
-          "topicId": "5794500f-a3b9-4639-b348-876805793c4e",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "high",
-          "urgency": 9,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-06-22",
-          "recurrence": "revision_1_3_7",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "824294ec-cc7a-4cba-b85b-e53a604bba99",
-          "title": "Parallel systems",
-          "topicId": "9bdb813a-fb62-4c33-987a-0d921917bd18",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "medium",
-          "urgency": 6,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-06-23",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "20c020a6-313f-49b0-b755-89e74dac0c75",
-          "title": "Distributed Systems",
-          "topicId": "e3f8af83-9f96-45c9-89c7-4068c8b03735",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "medium",
-          "urgency": 6,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-06-24",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "317c23a2-eda6-48c4-ad8d-7a2930d63931",
-          "title": "Real-Time Systems",
-          "topicId": "0ba70445-a37a-457d-9261-c016be5c036b",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "medium",
-          "urgency": 6,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-06-25",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "e26732dd-930a-4030-bc72-21552735ca12",
-          "title": "OS – A Resource Manager.",
-          "topicId": "020b1983-c457-455f-a749-062da3d5fda0",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "medium",
-          "urgency": 6,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-06-26",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "fd013ef6-7962-4333-8a97-021ccd0ba443",
-          "title": "Processes: Introduction",
-          "topicId": "e2cc7775-c697-4b15-95a8-c30f671883cf",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "medium",
-          "urgency": 6,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-06-27",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "fd5d90d8-534a-46d7-893c-554470fd370e",
-          "title": "Process states",
-          "topicId": "12b82bd5-903c-4e50-86b0-1f123521fc45",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "medium",
-          "urgency": 6,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-06-28",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "7b613e8a-a278-43fd-940f-f44f3b048ec8",
-          "title": "process management",
-          "topicId": "503e60f5-8662-46c8-87b7-111b3c9b3a18",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "medium",
-          "urgency": 6,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-06-29",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "1beb12ec-6b35-48ec-ac58-f5e7ca06ce37",
-          "title": "Interrupts",
-          "topicId": "e4fd16f5-8e49-482b-b354-1ee728be4553",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "medium",
-          "urgency": 6,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-06-30",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "0cdd3001-d47c-4501-bd54-9c848797118f",
-          "title": "Interprocess Communication",
-          "topicId": "d46e2fed-30cc-4586-8c1b-834a7bf0b0e0",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "medium",
-          "urgency": 6,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-07-01",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "be67a0bf-91a5-4492-9a86-61eb2fbf0436",
-          "title": "Threads: Introduction",
-          "topicId": "cf4e11cf-2e09-4551-a928-71526b894788",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "medium",
-          "urgency": 6,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-07-02",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "45c8a26a-32fb-4afa-bc12-97be32894e00",
-          "title": "Thread states",
-          "topicId": "1e0fb741-9f3a-4d4f-b9eb-603c9ec288d0",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "medium",
-          "urgency": 6,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-07-03",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "8953d087-fe9d-4287-89d1-c403f3d5800e",
-          "title": "Thread Operation",
-          "topicId": "26aef16c-210f-4297-9be3-a05398539189",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "medium",
-          "urgency": 6,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-07-04",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "3e92dfe2-b6e4-4f2e-b048-48a90b7363b6",
-          "title": "Threading Models",
-          "topicId": "ae10f9b7-ab6f-44d9-968a-d5ee2bab4403",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "low",
-          "urgency": 4,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-07-05",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "2c9fe1f7-1c95-4b1a-a521-82fdcb0284ce",
-          "title": "Processor Scheduling: Scheduling levels",
-          "topicId": "e835d6a8-1b26-47d9-818e-ba4cd44d35cf",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "low",
-          "urgency": 4,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-07-06",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "b5c477a3-5f86-489f-b0a6-ef374df43b9c",
-          "title": "preemptive vs no preemptive scheduling",
-          "topicId": "951bb8b2-c995-4641-9f50-ad32b7507969",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "low",
-          "urgency": 4,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-07-07",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "edc51dec-763d-434a-968b-cbaa61c375fd",
-          "title": "priorities",
-          "topicId": "74d48d43-ac7c-481f-aee2-5a5a7c84d5e6",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "low",
-          "urgency": 4,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-07-08",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "423b9332-9b5f-41b1-8a13-57ee9311f2da",
-          "title": "scheduling objective",
-          "topicId": "455d7bd8-8dec-4d46-b880-4611b7ddc9f6",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "low",
-          "urgency": 4,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-07-09",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "b1fefb00-3877-497f-af6d-586047db9b0c",
-          "title": "scheduling criteria",
-          "topicId": "e4a1a55f-cc64-4703-a27f-577cc0bb4d44",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "low",
-          "urgency": 4,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-07-10",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "dc399ceb-469a-4410-855d-5f89d167cb02",
-          "title": "scheduling algorithms",
-          "topicId": "6d77be7c-509b-4e98-b1c4-2ed5e60dce36",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "low",
-          "urgency": 4,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-07-11",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "1931cdbd-7e5d-4ad4-92c4-cdcdb096fd32",
-          "title": "demand scheduling",
-          "topicId": "b14fb46a-2da2-4717-bc2c-d7dfca0862f1",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "low",
-          "urgency": 4,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-07-12",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "63fd92ff-a1ea-4559-bac6-62925f8ebd08",
-          "title": "real time scheduling.",
-          "topicId": "9bbd3b3e-d7c3-46ff-868d-6e8fa3656e92",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "low",
-          "urgency": 4,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-07-13",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        }
-      ],
-      "completedTaskIds": [
-        "541152c1-9997-4d38-9a66-1b79f89bc6a2",
-        "3d3bc851-6b1b-4f93-adda-52250ce6fed8",
-        "e5f0f4e7-a878-4a49-bf11-44dde1495d5a"
-      ],
-      "reward": {
-        "points": 33,
-        "streak": 0,
-        "sessionsCompleted": 0,
-        "microTasksCompleted": 21
-      },
-      "session": {
-        "status": "idle",
-        "title": "",
-        "mode": "pomodoro",
-        "focusMinutes": 20,
-        "runId": 0
-      },
-      "recentMoments": [
-        "Maui broke \"Time Sharing Systems\" into startable micro steps.",
-        "Completed micro step: Explain Time Sharing Systems in 1 sentence.",
-        "Completed micro step: Write a short summary.",
-        "Completed micro step: Read the topic completely and highlight the important points."
-      ],
-      "completedMicroSteps": [],
-      "emotionDraft": "i "
-    }
-  },
-  {
-    "userId": "e2e07a43-2b37-4b5a-b613-8acc886b5cf7",
-    "updatedAt": "2026-06-19T09:49:46.209Z",
-    "state": {
-      "dashboardRoadmapKey": "2026-06-17T13:19:41.717Z-title-wrap-v2",
-      "tasks": [
-        {
-          "id": "5df04e7d-03c6-47b5-ae9b-d28bd2f7bfdc",
-          "title": "Asymptotic notations for time and space complexity Methods for solving Recurrence relations Brief Review of Graphs Sets and disjoint sets union sorting and searching algorithms and their analysis in terms of space and time complexity.",
-          "topicId": "a453c885-53c7-4998-aad6-9af86ed4b45e",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "high",
-          "urgency": 9,
-          "difficulty": 7,
-          "deadlineWeight": 3,
-          "focusMinutes": 45,
-          "progress": 0,
-          "deadline": "2026-06-18",
-          "recurrence": "revision_1_3_7",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "b6d29d21-798b-46e4-8726-ca49da87ed0c",
-          "title": "binary search",
-          "topicId": "98d04b53-74ea-45c9-9b2e-cdb8d9478d42",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "high",
-          "urgency": 9,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-06-20",
-          "recurrence": "revision_1_3_7",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "e142e9bf-1ad9-4feb-a415-e72ef1ca3e76",
-          "title": "merge sort",
-          "topicId": "146461d3-f7b1-44ac-aa51-a57664c6ae1d",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "high",
-          "urgency": 9,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-06-21",
-          "recurrence": "revision_1_3_7",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "97af2b77-e873-41cc-a28d-63d35a2b8c4d",
-          "title": "Quick sort",
-          "topicId": "503c0125-62e6-4606-82a9-ed7feccb89a6",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "high",
-          "urgency": 9,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-06-22",
-          "recurrence": "revision_1_3_7",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "471662b0-0f92-4935-9015-ad1a23c9c846",
-          "title": "selection sort",
-          "topicId": "62765b70-9c76-4ac9-bc81-9778669f5fbd",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "medium",
-          "urgency": 6,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-06-23",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "54919989-b0bf-48a9-8676-006ac4f7a9b3",
-          "title": "Strassen’s matrix multiplication algorithms and analysis of algorithms for these problems.",
-          "topicId": "c1f10a2e-f232-48fc-a465-e61e0051faa3",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "medium",
-          "urgency": 6,
-          "difficulty": 5,
-          "deadlineWeight": 3,
-          "focusMinutes": 45,
-          "progress": 0,
-          "deadline": "2026-06-24",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        }
-      ],
-      "taskChecklist": [
-        {
-          "id": "5df04e7d-03c6-47b5-ae9b-d28bd2f7bfdc",
-          "title": "Asymptotic notations for time and space complexity Methods for solving Recurrence relations Brief Review of Graphs Sets and disjoint sets union sorting and searching algorithms and their analysis in terms of space and time complexity.",
-          "topicId": "a453c885-53c7-4998-aad6-9af86ed4b45e",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "high",
-          "urgency": 9,
-          "difficulty": 7,
-          "deadlineWeight": 3,
-          "focusMinutes": 45,
-          "progress": 0,
-          "deadline": "2026-06-18",
-          "recurrence": "revision_1_3_7",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "cffed53d-08d7-4aed-84fc-3386f3e9f189",
-          "title": "Divide and Conquer: General method",
-          "topicId": "87826b57-27f9-4e3a-92aa-0727344502bb",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "high",
-          "urgency": 9,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-06-19",
-          "recurrence": "revision_1_3_7",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "b6d29d21-798b-46e4-8726-ca49da87ed0c",
-          "title": "binary search",
-          "topicId": "98d04b53-74ea-45c9-9b2e-cdb8d9478d42",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "high",
-          "urgency": 9,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-06-20",
-          "recurrence": "revision_1_3_7",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "e142e9bf-1ad9-4feb-a415-e72ef1ca3e76",
-          "title": "merge sort",
-          "topicId": "146461d3-f7b1-44ac-aa51-a57664c6ae1d",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "high",
-          "urgency": 9,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-06-21",
-          "recurrence": "revision_1_3_7",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "97af2b77-e873-41cc-a28d-63d35a2b8c4d",
-          "title": "Quick sort",
-          "topicId": "503c0125-62e6-4606-82a9-ed7feccb89a6",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "high",
-          "urgency": 9,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-06-22",
-          "recurrence": "revision_1_3_7",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "471662b0-0f92-4935-9015-ad1a23c9c846",
-          "title": "selection sort",
-          "topicId": "62765b70-9c76-4ac9-bc81-9778669f5fbd",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "medium",
-          "urgency": 6,
-          "difficulty": 3,
-          "deadlineWeight": 3,
-          "focusMinutes": 25,
-          "progress": 0,
-          "deadline": "2026-06-23",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        },
-        {
-          "id": "54919989-b0bf-48a9-8676-006ac4f7a9b3",
-          "title": "Strassen’s matrix multiplication algorithms and analysis of algorithms for these problems.",
-          "topicId": "c1f10a2e-f232-48fc-a465-e61e0051faa3",
-          "subject": "Study and learning",
-          "category": "study",
-          "status": "todo",
-          "priority": "medium",
-          "urgency": 6,
-          "difficulty": 5,
-          "deadlineWeight": 3,
-          "focusMinutes": 45,
-          "progress": 0,
-          "deadline": "2026-06-24",
-          "recurrence": "weekly",
-          "steps": [
-            "Open Study and learning",
-            "Study one focused chunk",
-            "Write a tiny recall note"
-          ]
-        }
-      ],
-      "completedTaskIds": [
-        "cffed53d-08d7-4aed-84fc-3386f3e9f189"
-      ],
-      "reward": {
-        "points": 9,
-        "streak": 0,
-        "sessionsCompleted": 0,
-        "microTasksCompleted": 5
-      },
-      "session": {
-        "status": "idle",
-        "title": "",
-        "mode": "pomodoro",
-        "focusMinutes": 20,
-        "runId": 0
-      },
-      "recentMoments": [
-        "Finished the broken-down task \"Divide and Conquer: General method\".",
-        "Completed micro step: Take a 2-minute stretch break and then come back to the next sentence if you feel up to it.",
-        "Completed micro step: Without worrying about perfection, write down one word that comes to mind after reading it.",
-        "Completed micro step: Highlight or underline just that first sentence."
-      ],
-      "completedMicroSteps": [],
-      "emotionDraft": ""
-    }
-  },
-  {
     "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
-    "updatedAt": "2026-06-17T13:18:10.719Z",
+    "updatedAt": "2026-07-02T14:27:38.595Z",
     "state": {
       "dashboardRoadmapKey": "2026-06-05T10:48:06.779Z-title-wrap-v2",
       "tasks": [
@@ -3826,7 +2452,7 @@
       ],
       "reward": {
         "points": 195,
-        "streak": 1,
+        "streak": 0,
         "sessionsCompleted": 9,
         "microTasksCompleted": 75
       },
@@ -3845,6 +2471,1380 @@
       ],
       "completedMicroSteps": [],
       "emotionDraft": "hi i dont know how or when ill be able to do this i feel like im not enough for anything and i wont be able to do achieve anything in my life ever again im a loser and i wont be able to do anything and will end up dissappointing everyone"
+    }
+  },
+  {
+    "userId": "b35429f0-bae3-4584-9089-b91c9807c96f",
+    "updatedAt": "2026-07-02T14:12:55.142Z",
+    "state": {
+      "dashboardRoadmapKey": "2026-06-17T11:24:26.092Z-title-wrap-v2",
+      "tasks": [
+        {
+          "id": "2e34be93-5b58-4d1f-a1ec-ed7b9f608b8f",
+          "title": "Time Sharing Systems",
+          "topicId": "6289b313-6f75-44c0-bcee-45916d81f9b9",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "high",
+          "urgency": 9,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-06-21",
+          "recurrence": "revision_1_3_7",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "b5f48d66-ce4c-4107-832b-496e69df2a6d",
+          "title": "Personal-computer systems",
+          "topicId": "5794500f-a3b9-4639-b348-876805793c4e",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "high",
+          "urgency": 9,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-06-22",
+          "recurrence": "revision_1_3_7",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "824294ec-cc7a-4cba-b85b-e53a604bba99",
+          "title": "Parallel systems",
+          "topicId": "9bdb813a-fb62-4c33-987a-0d921917bd18",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "urgency": 6,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-06-23",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "20c020a6-313f-49b0-b755-89e74dac0c75",
+          "title": "Distributed Systems",
+          "topicId": "e3f8af83-9f96-45c9-89c7-4068c8b03735",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "urgency": 6,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-06-24",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "317c23a2-eda6-48c4-ad8d-7a2930d63931",
+          "title": "Real-Time Systems",
+          "topicId": "0ba70445-a37a-457d-9261-c016be5c036b",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "urgency": 6,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-06-25",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "e26732dd-930a-4030-bc72-21552735ca12",
+          "title": "OS – A Resource Manager.",
+          "topicId": "020b1983-c457-455f-a749-062da3d5fda0",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "urgency": 6,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-06-26",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "fd013ef6-7962-4333-8a97-021ccd0ba443",
+          "title": "Processes: Introduction",
+          "topicId": "e2cc7775-c697-4b15-95a8-c30f671883cf",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "urgency": 6,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-06-27",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "fd5d90d8-534a-46d7-893c-554470fd370e",
+          "title": "Process states",
+          "topicId": "12b82bd5-903c-4e50-86b0-1f123521fc45",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "urgency": 6,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-06-28",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "7b613e8a-a278-43fd-940f-f44f3b048ec8",
+          "title": "process management",
+          "topicId": "503e60f5-8662-46c8-87b7-111b3c9b3a18",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "urgency": 6,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-06-29",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "1beb12ec-6b35-48ec-ac58-f5e7ca06ce37",
+          "title": "Interrupts",
+          "topicId": "e4fd16f5-8e49-482b-b354-1ee728be4553",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "urgency": 6,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-06-30",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "0cdd3001-d47c-4501-bd54-9c848797118f",
+          "title": "Interprocess Communication",
+          "topicId": "d46e2fed-30cc-4586-8c1b-834a7bf0b0e0",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "urgency": 6,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-07-01",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "be67a0bf-91a5-4492-9a86-61eb2fbf0436",
+          "title": "Threads: Introduction",
+          "topicId": "cf4e11cf-2e09-4551-a928-71526b894788",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "urgency": 6,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-07-02",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "45c8a26a-32fb-4afa-bc12-97be32894e00",
+          "title": "Thread states",
+          "topicId": "1e0fb741-9f3a-4d4f-b9eb-603c9ec288d0",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "urgency": 6,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-07-03",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "8953d087-fe9d-4287-89d1-c403f3d5800e",
+          "title": "Thread Operation",
+          "topicId": "26aef16c-210f-4297-9be3-a05398539189",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "urgency": 6,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-07-04",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "3e92dfe2-b6e4-4f2e-b048-48a90b7363b6",
+          "title": "Threading Models",
+          "topicId": "ae10f9b7-ab6f-44d9-968a-d5ee2bab4403",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "low",
+          "urgency": 4,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-07-05",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "2c9fe1f7-1c95-4b1a-a521-82fdcb0284ce",
+          "title": "Processor Scheduling: Scheduling levels",
+          "topicId": "e835d6a8-1b26-47d9-818e-ba4cd44d35cf",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "low",
+          "urgency": 4,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-07-06",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "b5c477a3-5f86-489f-b0a6-ef374df43b9c",
+          "title": "preemptive vs no preemptive scheduling",
+          "topicId": "951bb8b2-c995-4641-9f50-ad32b7507969",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "low",
+          "urgency": 4,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-07-07",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "edc51dec-763d-434a-968b-cbaa61c375fd",
+          "title": "priorities",
+          "topicId": "74d48d43-ac7c-481f-aee2-5a5a7c84d5e6",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "low",
+          "urgency": 4,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-07-08",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "423b9332-9b5f-41b1-8a13-57ee9311f2da",
+          "title": "scheduling objective",
+          "topicId": "455d7bd8-8dec-4d46-b880-4611b7ddc9f6",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "low",
+          "urgency": 4,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-07-09",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "b1fefb00-3877-497f-af6d-586047db9b0c",
+          "title": "scheduling criteria",
+          "topicId": "e4a1a55f-cc64-4703-a27f-577cc0bb4d44",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "low",
+          "urgency": 4,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-07-10",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "dc399ceb-469a-4410-855d-5f89d167cb02",
+          "title": "scheduling algorithms",
+          "topicId": "6d77be7c-509b-4e98-b1c4-2ed5e60dce36",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "low",
+          "urgency": 4,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-07-11",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "1931cdbd-7e5d-4ad4-92c4-cdcdb096fd32",
+          "title": "demand scheduling",
+          "topicId": "b14fb46a-2da2-4717-bc2c-d7dfca0862f1",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "low",
+          "urgency": 4,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-07-12",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "63fd92ff-a1ea-4559-bac6-62925f8ebd08",
+          "title": "real time scheduling.",
+          "topicId": "9bbd3b3e-d7c3-46ff-868d-6e8fa3656e92",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "low",
+          "urgency": 4,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-07-13",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        }
+      ],
+      "taskChecklist": [
+        {
+          "id": "541152c1-9997-4d38-9a66-1b79f89bc6a2",
+          "title": "Introduction: What is an Operating System",
+          "topicId": "042675d0-e34e-4b53-b144-9f94fef8d98c",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "high",
+          "urgency": 9,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-06-18",
+          "recurrence": "revision_1_3_7",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "3d3bc851-6b1b-4f93-adda-52250ce6fed8",
+          "title": "Simple Batch Systems",
+          "topicId": "033f5d54-e47b-4683-ab77-5a3e3b80d5f0",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "high",
+          "urgency": 9,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-06-19",
+          "recurrence": "revision_1_3_7",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "e5f0f4e7-a878-4a49-bf11-44dde1495d5a",
+          "title": "Multiprogrammed Batches systems",
+          "topicId": "12bfcbb6-9df3-4bc1-9562-de975a61e619",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "high",
+          "urgency": 9,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-06-20",
+          "recurrence": "revision_1_3_7",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "2e34be93-5b58-4d1f-a1ec-ed7b9f608b8f",
+          "title": "Time Sharing Systems",
+          "topicId": "6289b313-6f75-44c0-bcee-45916d81f9b9",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "high",
+          "urgency": 9,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-06-21",
+          "recurrence": "revision_1_3_7",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "b5f48d66-ce4c-4107-832b-496e69df2a6d",
+          "title": "Personal-computer systems",
+          "topicId": "5794500f-a3b9-4639-b348-876805793c4e",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "high",
+          "urgency": 9,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-06-22",
+          "recurrence": "revision_1_3_7",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "824294ec-cc7a-4cba-b85b-e53a604bba99",
+          "title": "Parallel systems",
+          "topicId": "9bdb813a-fb62-4c33-987a-0d921917bd18",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "urgency": 6,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-06-23",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "20c020a6-313f-49b0-b755-89e74dac0c75",
+          "title": "Distributed Systems",
+          "topicId": "e3f8af83-9f96-45c9-89c7-4068c8b03735",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "urgency": 6,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-06-24",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "317c23a2-eda6-48c4-ad8d-7a2930d63931",
+          "title": "Real-Time Systems",
+          "topicId": "0ba70445-a37a-457d-9261-c016be5c036b",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "urgency": 6,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-06-25",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "e26732dd-930a-4030-bc72-21552735ca12",
+          "title": "OS – A Resource Manager.",
+          "topicId": "020b1983-c457-455f-a749-062da3d5fda0",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "urgency": 6,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-06-26",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "fd013ef6-7962-4333-8a97-021ccd0ba443",
+          "title": "Processes: Introduction",
+          "topicId": "e2cc7775-c697-4b15-95a8-c30f671883cf",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "urgency": 6,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-06-27",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "fd5d90d8-534a-46d7-893c-554470fd370e",
+          "title": "Process states",
+          "topicId": "12b82bd5-903c-4e50-86b0-1f123521fc45",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "urgency": 6,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-06-28",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "7b613e8a-a278-43fd-940f-f44f3b048ec8",
+          "title": "process management",
+          "topicId": "503e60f5-8662-46c8-87b7-111b3c9b3a18",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "urgency": 6,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-06-29",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "1beb12ec-6b35-48ec-ac58-f5e7ca06ce37",
+          "title": "Interrupts",
+          "topicId": "e4fd16f5-8e49-482b-b354-1ee728be4553",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "urgency": 6,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-06-30",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "0cdd3001-d47c-4501-bd54-9c848797118f",
+          "title": "Interprocess Communication",
+          "topicId": "d46e2fed-30cc-4586-8c1b-834a7bf0b0e0",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "urgency": 6,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-07-01",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "be67a0bf-91a5-4492-9a86-61eb2fbf0436",
+          "title": "Threads: Introduction",
+          "topicId": "cf4e11cf-2e09-4551-a928-71526b894788",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "urgency": 6,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-07-02",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "45c8a26a-32fb-4afa-bc12-97be32894e00",
+          "title": "Thread states",
+          "topicId": "1e0fb741-9f3a-4d4f-b9eb-603c9ec288d0",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "urgency": 6,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-07-03",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "8953d087-fe9d-4287-89d1-c403f3d5800e",
+          "title": "Thread Operation",
+          "topicId": "26aef16c-210f-4297-9be3-a05398539189",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "urgency": 6,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-07-04",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "3e92dfe2-b6e4-4f2e-b048-48a90b7363b6",
+          "title": "Threading Models",
+          "topicId": "ae10f9b7-ab6f-44d9-968a-d5ee2bab4403",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "low",
+          "urgency": 4,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-07-05",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "2c9fe1f7-1c95-4b1a-a521-82fdcb0284ce",
+          "title": "Processor Scheduling: Scheduling levels",
+          "topicId": "e835d6a8-1b26-47d9-818e-ba4cd44d35cf",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "low",
+          "urgency": 4,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-07-06",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "b5c477a3-5f86-489f-b0a6-ef374df43b9c",
+          "title": "preemptive vs no preemptive scheduling",
+          "topicId": "951bb8b2-c995-4641-9f50-ad32b7507969",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "low",
+          "urgency": 4,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-07-07",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "edc51dec-763d-434a-968b-cbaa61c375fd",
+          "title": "priorities",
+          "topicId": "74d48d43-ac7c-481f-aee2-5a5a7c84d5e6",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "low",
+          "urgency": 4,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-07-08",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "423b9332-9b5f-41b1-8a13-57ee9311f2da",
+          "title": "scheduling objective",
+          "topicId": "455d7bd8-8dec-4d46-b880-4611b7ddc9f6",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "low",
+          "urgency": 4,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-07-09",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "b1fefb00-3877-497f-af6d-586047db9b0c",
+          "title": "scheduling criteria",
+          "topicId": "e4a1a55f-cc64-4703-a27f-577cc0bb4d44",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "low",
+          "urgency": 4,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-07-10",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "dc399ceb-469a-4410-855d-5f89d167cb02",
+          "title": "scheduling algorithms",
+          "topicId": "6d77be7c-509b-4e98-b1c4-2ed5e60dce36",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "low",
+          "urgency": 4,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-07-11",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "1931cdbd-7e5d-4ad4-92c4-cdcdb096fd32",
+          "title": "demand scheduling",
+          "topicId": "b14fb46a-2da2-4717-bc2c-d7dfca0862f1",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "low",
+          "urgency": 4,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-07-12",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "63fd92ff-a1ea-4559-bac6-62925f8ebd08",
+          "title": "real time scheduling.",
+          "topicId": "9bbd3b3e-d7c3-46ff-868d-6e8fa3656e92",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "low",
+          "urgency": 4,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-07-13",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        }
+      ],
+      "completedTaskIds": [
+        "541152c1-9997-4d38-9a66-1b79f89bc6a2",
+        "3d3bc851-6b1b-4f93-adda-52250ce6fed8",
+        "e5f0f4e7-a878-4a49-bf11-44dde1495d5a"
+      ],
+      "reward": {
+        "points": 33,
+        "streak": 0,
+        "sessionsCompleted": 0,
+        "microTasksCompleted": 21
+      },
+      "session": {
+        "status": "idle",
+        "title": "",
+        "mode": "pomodoro",
+        "focusMinutes": 20,
+        "runId": 0
+      },
+      "recentMoments": [
+        "Maui broke \"Time Sharing Systems\" into startable micro steps.",
+        "Completed micro step: Explain Time Sharing Systems in 1 sentence.",
+        "Completed micro step: Write a short summary.",
+        "Completed micro step: Read the topic completely and highlight the important points."
+      ],
+      "completedMicroSteps": [],
+      "emotionDraft": "i "
+    }
+  },
+  {
+    "userId": "e2e07a43-2b37-4b5a-b613-8acc886b5cf7",
+    "updatedAt": "2026-06-19T09:49:46.209Z",
+    "state": {
+      "dashboardRoadmapKey": "2026-06-17T13:19:41.717Z-title-wrap-v2",
+      "tasks": [
+        {
+          "id": "5df04e7d-03c6-47b5-ae9b-d28bd2f7bfdc",
+          "title": "Asymptotic notations for time and space complexity Methods for solving Recurrence relations Brief Review of Graphs Sets and disjoint sets union sorting and searching algorithms and their analysis in terms of space and time complexity.",
+          "topicId": "a453c885-53c7-4998-aad6-9af86ed4b45e",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "high",
+          "urgency": 9,
+          "difficulty": 7,
+          "deadlineWeight": 3,
+          "focusMinutes": 45,
+          "progress": 0,
+          "deadline": "2026-06-18",
+          "recurrence": "revision_1_3_7",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "b6d29d21-798b-46e4-8726-ca49da87ed0c",
+          "title": "binary search",
+          "topicId": "98d04b53-74ea-45c9-9b2e-cdb8d9478d42",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "high",
+          "urgency": 9,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-06-20",
+          "recurrence": "revision_1_3_7",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "e142e9bf-1ad9-4feb-a415-e72ef1ca3e76",
+          "title": "merge sort",
+          "topicId": "146461d3-f7b1-44ac-aa51-a57664c6ae1d",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "high",
+          "urgency": 9,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-06-21",
+          "recurrence": "revision_1_3_7",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "97af2b77-e873-41cc-a28d-63d35a2b8c4d",
+          "title": "Quick sort",
+          "topicId": "503c0125-62e6-4606-82a9-ed7feccb89a6",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "high",
+          "urgency": 9,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-06-22",
+          "recurrence": "revision_1_3_7",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "471662b0-0f92-4935-9015-ad1a23c9c846",
+          "title": "selection sort",
+          "topicId": "62765b70-9c76-4ac9-bc81-9778669f5fbd",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "urgency": 6,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-06-23",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "54919989-b0bf-48a9-8676-006ac4f7a9b3",
+          "title": "Strassen’s matrix multiplication algorithms and analysis of algorithms for these problems.",
+          "topicId": "c1f10a2e-f232-48fc-a465-e61e0051faa3",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "urgency": 6,
+          "difficulty": 5,
+          "deadlineWeight": 3,
+          "focusMinutes": 45,
+          "progress": 0,
+          "deadline": "2026-06-24",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        }
+      ],
+      "taskChecklist": [
+        {
+          "id": "5df04e7d-03c6-47b5-ae9b-d28bd2f7bfdc",
+          "title": "Asymptotic notations for time and space complexity Methods for solving Recurrence relations Brief Review of Graphs Sets and disjoint sets union sorting and searching algorithms and their analysis in terms of space and time complexity.",
+          "topicId": "a453c885-53c7-4998-aad6-9af86ed4b45e",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "high",
+          "urgency": 9,
+          "difficulty": 7,
+          "deadlineWeight": 3,
+          "focusMinutes": 45,
+          "progress": 0,
+          "deadline": "2026-06-18",
+          "recurrence": "revision_1_3_7",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "cffed53d-08d7-4aed-84fc-3386f3e9f189",
+          "title": "Divide and Conquer: General method",
+          "topicId": "87826b57-27f9-4e3a-92aa-0727344502bb",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "high",
+          "urgency": 9,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-06-19",
+          "recurrence": "revision_1_3_7",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "b6d29d21-798b-46e4-8726-ca49da87ed0c",
+          "title": "binary search",
+          "topicId": "98d04b53-74ea-45c9-9b2e-cdb8d9478d42",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "high",
+          "urgency": 9,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-06-20",
+          "recurrence": "revision_1_3_7",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "e142e9bf-1ad9-4feb-a415-e72ef1ca3e76",
+          "title": "merge sort",
+          "topicId": "146461d3-f7b1-44ac-aa51-a57664c6ae1d",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "high",
+          "urgency": 9,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-06-21",
+          "recurrence": "revision_1_3_7",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "97af2b77-e873-41cc-a28d-63d35a2b8c4d",
+          "title": "Quick sort",
+          "topicId": "503c0125-62e6-4606-82a9-ed7feccb89a6",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "high",
+          "urgency": 9,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-06-22",
+          "recurrence": "revision_1_3_7",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "471662b0-0f92-4935-9015-ad1a23c9c846",
+          "title": "selection sort",
+          "topicId": "62765b70-9c76-4ac9-bc81-9778669f5fbd",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "urgency": 6,
+          "difficulty": 3,
+          "deadlineWeight": 3,
+          "focusMinutes": 25,
+          "progress": 0,
+          "deadline": "2026-06-23",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        },
+        {
+          "id": "54919989-b0bf-48a9-8676-006ac4f7a9b3",
+          "title": "Strassen’s matrix multiplication algorithms and analysis of algorithms for these problems.",
+          "topicId": "c1f10a2e-f232-48fc-a465-e61e0051faa3",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "urgency": 6,
+          "difficulty": 5,
+          "deadlineWeight": 3,
+          "focusMinutes": 45,
+          "progress": 0,
+          "deadline": "2026-06-24",
+          "recurrence": "weekly",
+          "steps": [
+            "Open Study and learning",
+            "Study one focused chunk",
+            "Write a tiny recall note"
+          ]
+        }
+      ],
+      "completedTaskIds": [
+        "cffed53d-08d7-4aed-84fc-3386f3e9f189"
+      ],
+      "reward": {
+        "points": 9,
+        "streak": 0,
+        "sessionsCompleted": 0,
+        "microTasksCompleted": 5
+      },
+      "session": {
+        "status": "idle",
+        "title": "",
+        "mode": "pomodoro",
+        "focusMinutes": 20,
+        "runId": 0
+      },
+      "recentMoments": [
+        "Finished the broken-down task \"Divide and Conquer: General method\".",
+        "Completed micro step: Take a 2-minute stretch break and then come back to the next sentence if you feel up to it.",
+        "Completed micro step: Without worrying about perfection, write down one word that comes to mind after reading it.",
+        "Completed micro step: Highlight or underline just that first sentence."
+      ],
+      "completedMicroSteps": [],
+      "emotionDraft": ""
     }
   }
 ]

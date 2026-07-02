@@ -1,10 +1,12 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
+import { hasKvStore, kvGetJson, kvSetJson } from "@/lib/storage/kv";
 import type { AuthUser, StoredUser } from "./types";
 
 const DATA_DIR = path.join(process.cwd(), ".local-data");
 const USERS_FILE = path.join(DATA_DIR, "users.json");
+const USERS_KEY = "maui:users";
 
 async function ensureStore() {
   await mkdir(DATA_DIR, { recursive: true });
@@ -17,6 +19,11 @@ async function ensureStore() {
 }
 
 async function readUsers(): Promise<StoredUser[]> {
+  if (hasKvStore()) {
+    const users = await kvGetJson<StoredUser[]>(USERS_KEY);
+    return Array.isArray(users) ? users.map(normalizeStoredUser) : [];
+  }
+
   await ensureStore();
   const raw = await readFile(USERS_FILE, "utf8");
 
@@ -29,6 +36,11 @@ async function readUsers(): Promise<StoredUser[]> {
 }
 
 async function writeUsers(users: StoredUser[]) {
+  if (hasKvStore()) {
+    await kvSetJson(USERS_KEY, users);
+    return;
+  }
+
   await ensureStore();
   await writeFile(USERS_FILE, JSON.stringify(users, null, 2), "utf8");
 }
