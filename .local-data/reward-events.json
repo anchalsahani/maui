@@ -1,5 +1,389 @@
 [
   {
+    "id": "0d204490-94b6-4971-bc8b-e60c704e6481",
+    "userId": "e2e07a43-2b37-4b5a-b613-8acc886b5cf7",
+    "type": "broken_down_task",
+    "points": 4,
+    "title": "Divide and Conquer: General method",
+    "createdAt": "2026-06-17T13:20:14.193Z"
+  },
+  {
+    "id": "6b70ba80-2ad4-4392-9e57-470db70fae95",
+    "userId": "e2e07a43-2b37-4b5a-b613-8acc886b5cf7",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Take a 2-minute stretch break and then come back to the next sentence if you feel up to it.",
+    "createdAt": "2026-06-17T13:20:11.675Z"
+  },
+  {
+    "id": "d329e46a-46b0-4244-b3bb-7360c39d2169",
+    "userId": "e2e07a43-2b37-4b5a-b613-8acc886b5cf7",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Without worrying about perfection, write down one word that comes to mind after reading it.",
+    "createdAt": "2026-06-17T13:20:10.640Z"
+  },
+  {
+    "id": "5be414f9-e5c9-4e56-9d64-82ce1b21be26",
+    "userId": "e2e07a43-2b37-4b5a-b613-8acc886b5cf7",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Highlight or underline just that first sentence.",
+    "createdAt": "2026-06-17T13:20:08.491Z"
+  },
+  {
+    "id": "6ec0801c-b749-4e86-a1c9-679775e897cf",
+    "userId": "e2e07a43-2b37-4b5a-b613-8acc886b5cf7",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Read the first sentence of the 'General method' explanation.",
+    "createdAt": "2026-06-17T13:20:06.107Z"
+  },
+  {
+    "id": "8d810854-3d7b-45c8-a1ef-796344344f8b",
+    "userId": "e2e07a43-2b37-4b5a-b613-8acc886b5cf7",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Open your notes or textbook to the 'Divide and Conquer' section.",
+    "createdAt": "2026-06-17T13:20:03.270Z"
+  },
+  {
+    "id": "01c245c0-135c-4798-8a0f-0c31e5fceb96",
+    "userId": "b35429f0-bae3-4584-9089-b91c9807c96f",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Explain Time Sharing Systems in 1 sentence.",
+    "createdAt": "2026-06-17T11:35:55.419Z"
+  },
+  {
+    "id": "d3e117c8-d4c0-429f-9e6a-73faf9b812f9",
+    "userId": "b35429f0-bae3-4584-9089-b91c9807c96f",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Write a short summary.",
+    "createdAt": "2026-06-17T11:35:54.289Z"
+  },
+  {
+    "id": "99930d30-ecac-4487-a07b-fe3a28d25d95",
+    "userId": "b35429f0-bae3-4584-9089-b91c9807c96f",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Read the topic completely and highlight the important points.",
+    "createdAt": "2026-06-17T11:35:51.763Z"
+  },
+  {
+    "id": "c8b4b7a4-2696-4dee-af6b-593b72965b87",
+    "userId": "b35429f0-bae3-4584-9089-b91c9807c96f",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Open the topic Time Sharing Systems in your notes.",
+    "createdAt": "2026-06-17T11:35:50.304Z"
+  },
+  {
+    "id": "bc4fcbb4-f220-4643-9cae-b91e7528eff8",
+    "userId": "b35429f0-bae3-4584-9089-b91c9807c96f",
+    "type": "broken_down_task",
+    "points": 4,
+    "title": "Multiprogrammed Batches systems",
+    "createdAt": "2026-06-17T11:35:48.512Z"
+  },
+  {
+    "id": "e9ee173d-9673-4df0-a5fa-d14e71f784c5",
+    "userId": "b35429f0-bae3-4584-9089-b91c9807c96f",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Take a 2 min breather.",
+    "createdAt": "2026-06-17T11:35:46.678Z"
+  },
+  {
+    "id": "7ba3231b-59ad-4f0b-a355-998c36cfb2e7",
+    "userId": "b35429f0-bae3-4584-9089-b91c9807c96f",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Explain Multiprogrammed Batches systems in 1 sentence.",
+    "createdAt": "2026-06-17T11:35:45.327Z"
+  },
+  {
+    "id": "d7992c76-9e27-4d34-afff-e7ba2e16ac86",
+    "userId": "b35429f0-bae3-4584-9089-b91c9807c96f",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Write a short summary.",
+    "createdAt": "2026-06-17T11:35:42.846Z"
+  },
+  {
+    "id": "f25abab5-df3d-4a0e-b46d-202fe0e4dcf4",
+    "userId": "b35429f0-bae3-4584-9089-b91c9807c96f",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Read the topic completely and highlight the important points.",
+    "createdAt": "2026-06-17T11:35:41.114Z"
+  },
+  {
+    "id": "b84eda1d-f6ff-48b4-91fa-50328994caa5",
+    "userId": "b35429f0-bae3-4584-9089-b91c9807c96f",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Open the topic Multiprogrammed Batches systems in your notes.",
+    "createdAt": "2026-06-17T11:35:37.170Z"
+  },
+  {
+    "id": "ff719b48-dc7a-4a17-a528-ccd03e81c6c5",
+    "userId": "b35429f0-bae3-4584-9089-b91c9807c96f",
+    "type": "broken_down_task",
+    "points": 4,
+    "title": "Simple Batch Systems",
+    "createdAt": "2026-06-17T11:35:35.389Z"
+  },
+  {
+    "id": "3b0b0508-4048-4a4f-ad10-418397d122d9",
+    "userId": "b35429f0-bae3-4584-9089-b91c9807c96f",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Take a 30-second stretch or look away from the screen.",
+    "createdAt": "2026-06-17T11:35:33.649Z"
+  },
+  {
+    "id": "ad94541b-1757-4892-be53-933cf0bda49a",
+    "userId": "b35429f0-bae3-4584-9089-b91c9807c96f",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Write down one keyword from that first sentence.",
+    "createdAt": "2026-06-17T11:35:32.414Z"
+  },
+  {
+    "id": "7ede2f89-d065-45b3-92bc-1e130898ff26",
+    "userId": "b35429f0-bae3-4584-9089-b91c9807c96f",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Locate a pen and a small piece of paper or open a new blank digital note.",
+    "createdAt": "2026-06-17T11:35:31.155Z"
+  },
+  {
+    "id": "818e529d-fb9b-4bed-a18d-933d20cda66b",
+    "userId": "b35429f0-bae3-4584-9089-b91c9807c96f",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Summarize that first sentence aloud or in a quick mental note.",
+    "createdAt": "2026-06-17T11:35:27.132Z"
+  },
+  {
+    "id": "bed1d068-94da-4410-9351-791b9e809ead",
+    "userId": "b35429f0-bae3-4584-9089-b91c9807c96f",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Read just the first sentence under the initial heading.",
+    "createdAt": "2026-06-17T11:35:24.126Z"
+  },
+  {
+    "id": "d7c4f97d-e2bd-4ef0-adf7-fe34b07e1e82",
+    "userId": "b35429f0-bae3-4584-9089-b91c9807c96f",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Open your study material for \"Simple Batch Systems\" to the first page.",
+    "createdAt": "2026-06-17T11:35:20.236Z"
+  },
+  {
+    "id": "c685d641-c1ab-4120-bdf1-af1ddf4eae18",
+    "userId": "b35429f0-bae3-4584-9089-b91c9807c96f",
+    "type": "broken_down_task",
+    "points": 4,
+    "title": "Introduction: What is an Operating System",
+    "createdAt": "2026-06-17T11:35:03.469Z"
+  },
+  {
+    "id": "120f308e-cb44-49f4-9c91-d5fba1be121f",
+    "userId": "b35429f0-bae3-4584-9089-b91c9807c96f",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Locate a pen and a small piece of paper or open a new blank digital note.",
+    "createdAt": "2026-06-17T11:35:01.409Z"
+  },
+  {
+    "id": "8c60b70f-137f-412c-900b-95d5c272fbce",
+    "userId": "b35429f0-bae3-4584-9089-b91c9807c96f",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Read just the first heading or the first sentence of the introduction.",
+    "createdAt": "2026-06-17T11:34:55.382Z"
+  },
+  {
+    "id": "3185bd2d-376c-4b6a-98a4-68a33c7f2f43",
+    "userId": "b35429f0-bae3-4584-9089-b91c9807c96f",
+    "type": "micro_step",
+    "points": 1,
+    "title": "material.",
+    "createdAt": "2026-06-17T11:34:50.528Z"
+  },
+  {
+    "id": "58b75163-3a93-4a5b-94bb-67207c2aa841",
+    "userId": "b35429f0-bae3-4584-9089-b91c9807c96f",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Introduction: What is an Operating System",
+    "createdAt": "2026-06-17T11:34:48.145Z"
+  },
+  {
+    "id": "e9aeb641-313a-429b-9350-451b152d7118",
+    "userId": "b35429f0-bae3-4584-9089-b91c9807c96f",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Find the",
+    "createdAt": "2026-06-17T11:34:42.183Z"
+  },
+  {
+    "id": "3568c1c5-a1c0-44af-98e0-66f8556de576",
+    "userId": "b35429f0-bae3-4584-9089-b91c9807c96f",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Open your 'Study and learning' folder or app.",
+    "createdAt": "2026-06-17T11:34:36.284Z"
+  },
+  {
+    "id": "74c5e633-2c13-4d3a-8447-9515fc0b0944",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "broken_down_task",
+    "points": 4,
+    "title": "Basic Text Markup",
+    "createdAt": "2026-06-17T11:10:24.908Z"
+  },
+  {
+    "id": "93ef3974-a9be-4695-a38a-99e2278f7081",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Close the study material tab.",
+    "createdAt": "2026-06-17T11:10:22.097Z"
+  },
+  {
+    "id": "fca70f68-e4e7-4c73-8019-640278ec68bb",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Set a 5-minute timer and read aloud the next two paragraphs under the same heading.",
+    "createdAt": "2026-06-17T11:10:19.794Z"
+  },
+  {
+    "id": "82fe11a9-6cee-4e57-befb-20be1be4a12d",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "In your notes, write down one new word or concept you just read.",
+    "createdAt": "2026-06-17T11:10:15.729Z"
+  },
+  {
+    "id": "40a6cca4-f266-495d-b448-2e4dce998f21",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Read just the first paragraph under that heading.",
+    "createdAt": "2026-06-17T11:10:05.594Z"
+  },
+  {
+    "id": "bc24a7bb-7db5-489c-a296-14fbe3e118d3",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Locate the very first heading or sub-heading within the \"Basic Text Markup\" section.",
+    "createdAt": "2026-06-17T11:10:03.193Z"
+  },
+  {
+    "id": "4827b873-870c-4e05-bbbe-a2ab2aeaaa45",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Open your browser and navigate to the Unit 1 study material for \"Basic Text Markup.\"",
+    "createdAt": "2026-06-17T11:09:59.758Z"
+  },
+  {
+    "id": "76cfa2ee-9be3-4922-8187-e81d041a23b4",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "focus_session",
+    "points": 8,
+    "title": "Standard HTML Document Structure",
+    "createdAt": "2026-06-17T11:09:48.941Z"
+  },
+  {
+    "id": "7e6f1e98-22a4-47d9-bf09-1e6daf162fb9",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "focus_session",
+    "points": 8,
+    "title": "HTML: Basic Syntax",
+    "createdAt": "2026-06-17T11:09:36.676Z"
+  },
+  {
+    "id": "b792ec36-6027-4e23-9d2c-8eb38eed1b73",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "focus_session",
+    "points": 8,
+    "title": "Unit 1",
+    "createdAt": "2026-06-17T11:09:29.078Z"
+  },
+  {
+    "id": "523c5701-ad8d-4138-a02a-59e85213fb19",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "broken_down_task",
+    "points": 4,
+    "title": "HTML: Basic Syntax",
+    "createdAt": "2026-06-05T10:47:17.479Z"
+  },
+  {
+    "id": "67ec3197-6c6d-4d81-ba0d-69f646514f72",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Close the browser tab.",
+    "createdAt": "2026-06-05T10:47:14.152Z"
+  },
+  {
+    "id": "f50c21f5-c1a4-449b-89cd-72c3613e996f",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Read the first two sentences under 'HTML Documents'.",
+    "createdAt": "2026-06-05T10:47:11.871Z"
+  },
+  {
+    "id": "098962b5-b4bb-4198-a71d-eeefd4a46407",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Scroll down the W3Schools page until you see the heading 'HTML Documents'.",
+    "createdAt": "2026-06-05T10:47:09.856Z"
+  },
+  {
+    "id": "d16eda8f-fe46-4112-93b9-c0ac6aa5e907",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Click on the link that says 'HTML Introduction - W3Schools'.",
+    "createdAt": "2026-06-05T10:47:05.989Z"
+  },
+  {
+    "id": "7abb0d30-eecb-459c-b474-c25867d36327",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "In the search bar, type 'HTML basic syntax W3Schools' and press Enter.",
+    "createdAt": "2026-06-05T10:47:01.593Z"
+  },
+  {
+    "id": "2ea38dfa-0376-4342-a21d-ede5daa6a918",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "micro_step",
+    "points": 1,
+    "title": "Open your web browser (Chrome, Firefox, Edge).",
+    "createdAt": "2026-06-05T10:46:54.861Z"
+  },
+  {
+    "id": "9c6cdc30-7515-4f94-8698-bda9d4a4e26a",
+    "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
+    "type": "focus_session",
+    "points": 8,
+    "title": "Unit 1",
+    "createdAt": "2026-06-05T10:46:31.688Z"
+  },
+  {
     "id": "efe0e064-c725-469d-9c9a-6abd226fabf2",
     "userId": "a9bb2160-eb7a-4a1f-ade5-34a07bee96e5",
     "type": "broken_down_task",

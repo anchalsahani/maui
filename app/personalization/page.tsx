@@ -32,7 +32,11 @@ export default async function PersonalizationPage() {
             </p>
           </section>
 
-          <PersonalizationForm initialProfile={user.studyProfile} />
+          <PersonalizationForm
+            initialProfile={user.studyProfile}
+            initialSurvey={user.survey}
+            redirectToDashboardOnSave={!user.onboardingCompleted || !user.survey}
+          />
         </div>
       </main>
     </>

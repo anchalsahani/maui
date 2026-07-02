@@ -32,7 +32,41 @@ export interface PlannerDayBlock {
   energy: "low" | "medium" | "high";
 }
 
+export type PlannerStrategyType =
+  | "parallel_options"
+  | "alternating_loops"
+  | "deadline_triage"
+  | "burnout_protection"
+  | "interruption_reentry";
+
+export interface PlannerDetectedObligation {
+  id: string;
+  label: string;
+  category: "study" | "chore" | "commitment" | "wellbeing" | "admin";
+  urgency: "low" | "medium" | "high";
+  whyItMatters: string;
+}
+
+export interface PlannerParallelOption {
+  label: string;
+  bestWhen: string;
+  firstAction: string;
+  reentryAction: string;
+}
+
+export interface PlannerSituationMap {
+  detectedObligations: PlannerDetectedObligation[];
+  constraints: string[];
+  emotionalState: EmotionState;
+  emotionReason: string;
+  timePressure: "low" | "medium" | "high";
+  strategyType: PlannerStrategyType;
+  parallelOptions: PlannerParallelOption[];
+  enoughForToday: string;
+}
+
 export interface PlannerResult {
+  situation: PlannerSituationMap;
   plan: PlannerAllocation[];
   headline: string;
   framing: string;

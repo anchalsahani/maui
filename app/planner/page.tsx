@@ -12,7 +12,7 @@ export default async function PlannerPage() {
   }
 
   if (!user.onboardingCompleted || !user.survey) {
-    redirect("/onboarding");
+    redirect("/personalization");
   }
 
   return (
@@ -20,7 +20,11 @@ export default async function PlannerPage() {
       <div className="relative z-50">
         <Navbar />
       </div>
-      <PlannerWorkspace survey={user.survey} studyProfile={user.studyProfile} />
+      <PlannerWorkspace
+        userId={user.id}
+        survey={user.survey}
+        studyProfile={user.studyProfile}
+      />
     </>
   );
 }

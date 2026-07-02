@@ -35,7 +35,7 @@ export default function LoginPage() {
     }
 
     const nextRoute =
-      data?.user?.onboardingCompleted && data.user.survey ? "/dashboard" : "/onboarding";
+      data?.user?.onboardingCompleted && data.user.survey ? "/dashboard" : "/personalization";
 
     router.push(nextRoute);
     router.refresh();

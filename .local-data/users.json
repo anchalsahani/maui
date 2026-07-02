@@ -28,7 +28,7 @@
       "syllabusAsset": null,
       "topics": [
         {
-          "id": "73034322-e9e9-4bc8-82bd-650f663b5363",
+          "id": "f85130e1-2dfd-43ff-a491-d5d1a7842efd",
           "title": "Unit 1",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -37,7 +37,7 @@
           "sourceLine": 2
         },
         {
-          "id": "87f2f963-1411-447b-bf8b-ab2346e70b48",
+          "id": "89deb4fa-5f2c-4323-a436-88a88f641161",
           "title": "HTML: Basic Syntax",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -46,7 +46,7 @@
           "sourceLine": 3
         },
         {
-          "id": "9c0a6dfe-b519-47e9-8019-5ea99523ebf7",
+          "id": "562140f8-ca70-4f03-bca7-ca44fb0950d9",
           "title": "Standard HTML Document Structure",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -55,7 +55,7 @@
           "sourceLine": 4
         },
         {
-          "id": "e4b046fb-43dd-47d2-ad87-f945441fecaa",
+          "id": "6e8b7bcd-cdec-4643-89d6-2421dff88ebc",
           "title": "Basic Text Markup",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -64,7 +64,7 @@
           "sourceLine": 5
         },
         {
-          "id": "83048f3f-5799-4506-b764-9f00f58e6a32",
+          "id": "1e43fdd5-9cbc-4efa-b37d-f50d8cad5882",
           "title": "Html styles",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -73,7 +73,7 @@
           "sourceLine": 6
         },
         {
-          "id": "c6a7a97a-1982-47c2-98ce-f7aea06d362e",
+          "id": "e7ebc4b7-0327-47a6-b72b-a09a82433541",
           "title": "Elements",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -82,7 +82,7 @@
           "sourceLine": 7
         },
         {
-          "id": "cb61984e-8859-4956-9a96-2c707e794541",
+          "id": "0bc89329-a861-4d67-aa38-d42bf98f8cdb",
           "title": "Attributes",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -91,7 +91,7 @@
           "sourceLine": 8
         },
         {
-          "id": "394f9eb9-e118-4d44-ae91-c96c189ae7c8",
+          "id": "a572136e-eb58-4e1e-8d58-2c6d447f5b38",
           "title": "Heading",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -100,7 +100,7 @@
           "sourceLine": 9
         },
         {
-          "id": "0fb3aebc-f00c-4964-bc51-ab86e86842f0",
+          "id": "641fe9d3-9558-4521-b4f6-2a944976c7a5",
           "title": "Layouts",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -109,7 +109,7 @@
           "sourceLine": 10
         },
         {
-          "id": "9a49e44e-fd6f-4244-9696-d741a7e86aac",
+          "id": "ffede6c1-cc45-45bb-913e-32bd4eef8d27",
           "title": "I frames Images",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -118,7 +118,7 @@
           "sourceLine": 11
         },
         {
-          "id": "82276055-6a6f-46e2-a60f-2a4d7331e9d9",
+          "id": "8142e0cc-65af-4535-9e42-46723ae1f576",
           "title": "Hypertext Links",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -127,7 +127,7 @@
           "sourceLine": 12
         },
         {
-          "id": "5a1cb7b0-b0cc-43ed-ba60-2ea870652a1a",
+          "id": "07af60d0-e16b-4fa5-a622-76e3370ee0f0",
           "title": "Lists",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -136,7 +136,7 @@
           "sourceLine": 13
         },
         {
-          "id": "9948724b-c9b8-4842-be12-e334f3f8f7b0",
+          "id": "99385e0a-fc0f-4d94-a861-44d13bdfe0bd",
           "title": "Tables",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -145,7 +145,7 @@
           "sourceLine": 14
         },
         {
-          "id": "06d8ad5f-690f-4e57-a6be-cd22da2a26e2",
+          "id": "49c837ca-2ebe-470a-8e65-142f84b769bf",
           "title": "Forms",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -154,7 +154,7 @@
           "sourceLine": 15
         },
         {
-          "id": "7347b348-a0a7-4b20-990c-add9aa5b87d7",
+          "id": "bced1e01-36ca-402a-9a9d-ab18842a3fad",
           "title": "Dynamic HTML",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -163,7 +163,7 @@
           "sourceLine": 16
         },
         {
-          "id": "6a537417-477e-49c9-acba-81add40c9dbb",
+          "id": "6a6e6b8e-62c1-4090-a13b-7154b3757cda",
           "title": "CSS: Need for CSS",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -172,7 +172,7 @@
           "sourceLine": 17
         },
         {
-          "id": "1ac33280-834e-41aa-bf9e-8fea407064c7",
+          "id": "cc48a743-ac8b-4e7e-a5a7-fdbcb157aca9",
           "title": "introduction to CSS",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -181,7 +181,7 @@
           "sourceLine": 18
         },
         {
-          "id": "fda7df74-2e84-4cb3-bd53-a890f454968d",
+          "id": "63db363c-8040-44e4-ba94-750f4b7b7b74",
           "title": "basic syntax and structure",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -190,7 +190,7 @@
           "sourceLine": 19
         },
         {
-          "id": "8bfb1d01-1fca-42d3-b5d9-dfe4926b814a",
+          "id": "2825e98a-2852-49bc-be3f-fa67fbd45db4",
           "title": "using CSS",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -199,7 +199,7 @@
           "sourceLine": 20
         },
         {
-          "id": "d6e0dbb2-f6eb-4040-b35c-11b3affb6927",
+          "id": "ba9c2123-8805-4e5b-bef2-39f3bfe2570f",
           "title": "background images",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -208,7 +208,7 @@
           "sourceLine": 21
         },
         {
-          "id": "1efd6dbf-5dce-4373-bc01-a4310ce89773",
+          "id": "b98a8acd-c6e9-463d-a584-e8baa51dabfd",
           "title": "colors",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -217,7 +217,7 @@
           "sourceLine": 22
         },
         {
-          "id": "15be0260-028a-45fc-87a3-b1b764f898a2",
+          "id": "7699df71-dfee-44cd-ad9e-8df0334c4975",
           "title": "and properties",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -226,7 +226,7 @@
           "sourceLine": 23
         },
         {
-          "id": "dd9eb1a6-36bd-42b6-bd11-d6c14dbfd1a8",
+          "id": "e7b447ae-910a-4411-8e8a-0c513222e508",
           "title": "manipulating texts",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -235,7 +235,7 @@
           "sourceLine": 24
         },
         {
-          "id": "d4cfc9e0-3275-4bc7-b683-417385c13527",
+          "id": "aa7721ba-6751-4d36-9c33-6d2712572545",
           "title": "using fonts",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -244,7 +244,7 @@
           "sourceLine": 25
         },
         {
-          "id": "e3335634-8cbb-4408-9cc3-0897f4831ef9",
+          "id": "f1b3a685-eec9-422e-a52f-9371f81346e5",
           "title": "borders",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -253,7 +253,7 @@
           "sourceLine": 26
         },
         {
-          "id": "814ff02e-7cbd-49d2-8dea-6650ec00a820",
+          "id": "e805c1b7-6244-4277-8417-2ddf3380b249",
           "title": "boxes",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -262,7 +262,7 @@
           "sourceLine": 27
         },
         {
-          "id": "02a27a61-f2c0-4666-8b8d-0155cc904bcc",
+          "id": "53c17b73-96d6-4c30-8e45-310ac41179f6",
           "title": "margins",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -271,7 +271,7 @@
           "sourceLine": 28
         },
         {
-          "id": "23a26674-c9bc-40bb-ad09-b9efb77f0ac1",
+          "id": "4b0b84d1-c9b7-40b6-bc32-68dae2c7f426",
           "title": "padding lists",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -280,7 +280,7 @@
           "sourceLine": 29
         },
         {
-          "id": "3933485a-2ea0-4564-ae9c-c4aaf3db600d",
+          "id": "7859bfad-1114-4b35-ab89-0d6ffe54c08d",
           "title": "positioning using CSS",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -289,7 +289,7 @@
           "sourceLine": 30
         },
         {
-          "id": "eaaf21de-7b1f-4400-921b-8f97a1eac2ea",
+          "id": "134f5f2a-b9a6-496d-9383-8b4ecdcc5336",
           "title": "CSS2",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -298,7 +298,7 @@
           "sourceLine": 31
         },
         {
-          "id": "3ed234d5-5f00-417e-a9a5-ffa50cfa4348",
+          "id": "3ead6ba6-1206-4f17-a2a5-9269f7acae74",
           "title": "The Box Model",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -307,7 +307,7 @@
           "sourceLine": 32
         },
         {
-          "id": "9b23f537-7115-4174-89b0-6f32de11cb13",
+          "id": "8cdd0d46-e9dc-4748-9a20-a0823e62e567",
           "title": "Working with XML: Document Type Definition (DTD)",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -316,7 +316,7 @@
           "sourceLine": 33
         },
         {
-          "id": "7796a9a1-d9c5-475d-b8e0-db8e3d3af28c",
+          "id": "6852694f-e35f-4ec0-9b46-724c88a051e3",
           "title": "XML schemas",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -325,7 +325,7 @@
           "sourceLine": 34
         },
         {
-          "id": "5f878d7d-8fda-4708-aff3-25074dacfb56",
+          "id": "6f8a1123-4e31-4b1c-8515-aade19e0de2e",
           "title": "Document object model",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -334,7 +334,7 @@
           "sourceLine": 35
         },
         {
-          "id": "26810470-904e-4372-a2e2-134235d0aff9",
+          "id": "e30df3dc-84c5-4cb4-b588-a91ad6cf54a7",
           "title": "Parsers -DOM",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -343,7 +343,7 @@
           "sourceLine": 36
         },
         {
-          "id": "1eea451f-62b5-43a8-bb41-531a3efdb5a4",
+          "id": "98000f0a-07c6-4a23-83cb-b66877e2c360",
           "title": "and SAX",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -352,7 +352,7 @@
           "sourceLine": 37
         },
         {
-          "id": "328a8d37-1240-4f37-8a83-cac031e808b8",
+          "id": "9572ad39-f68f-45dc-8bb4-0e9b384793fd",
           "title": "Introduction to XHTML: XML",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -361,7 +361,7 @@
           "sourceLine": 38
         },
         {
-          "id": "c5678aa1-5ac1-43ad-961c-50f9375f02fe",
+          "id": "bdb32675-907f-40ca-9d6a-e2a1dd441834",
           "title": "Meta tags",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -370,7 +370,7 @@
           "sourceLine": 39
         },
         {
-          "id": "41a7ff77-4ae9-43b7-8f65-b1dbd10b40ec",
+          "id": "1690e3db-9b40-4aad-a785-20495b8869d8",
           "title": "Character entities",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -379,7 +379,7 @@
           "sourceLine": 40
         },
         {
-          "id": "3f0228c5-c2b6-49f4-b2dc-58d415cbbcfa",
+          "id": "6876ae21-1c72-4da4-84c2-cf4ee2fb661a",
           "title": "frames",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -388,7 +388,7 @@
           "sourceLine": 41
         },
         {
-          "id": "a64bd581-4060-4dee-8d59-cea86a1c8f12",
+          "id": "060944d4-71e9-4220-a341-e8b046580613",
           "title": "and frame sets",
           "subject": "Unit 1",
           "difficulty": "easy",
@@ -397,7 +397,7 @@
           "sourceLine": 42
         },
         {
-          "id": "2ad94e01-155b-49cd-90c2-18de2db285d4",
+          "id": "4b9d6e52-0166-45bd-8ee4-2bf37a880606",
           "title": "Unit 2",
           "subject": "Unit 2",
           "difficulty": "easy",
@@ -406,7 +406,7 @@
           "sourceLine": 43
         },
         {
-          "id": "ffaadacc-0c54-4b08-955b-97be6637cd0d",
+          "id": "12ccd205-9ada-45b4-9490-b451db4d3a63",
           "title": "JavaScript - Client-side scripting",
           "subject": "Unit 2",
           "difficulty": "easy",
@@ -415,7 +415,7 @@
           "sourceLine": 44
         },
         {
-          "id": "59e0b5e0-0f49-4e80-bdaf-2abecbe7eb35",
+          "id": "d98cf6bc-6b5b-4195-8814-b6f6e9d559bc",
           "title": "Introduction to JavaScript",
           "subject": "Unit 2",
           "difficulty": "easy",
@@ -424,7 +424,7 @@
           "sourceLine": 45
         },
         {
-          "id": "a8c4cfac-23ef-47b7-9ab7-44fc790b81c2",
+          "id": "b5367f8d-c09b-47c7-8aeb-1589e4869dab",
           "title": "Objects",
           "subject": "Unit 2",
           "difficulty": "easy",
@@ -433,7 +433,7 @@
           "sourceLine": 46
         },
         {
-          "id": "015cde2b-55d2-40b4-b2f3-2aca664ee007",
+          "id": "41e858c2-eded-40bd-95ea-f19c23e6fdaf",
           "title": "Primitives Operations and Expressions",
           "subject": "Unit 2",
           "difficulty": "easy",
@@ -442,7 +442,7 @@
           "sourceLine": 47
         },
         {
-          "id": "0e674db7-9805-4052-bad2-ad59a9d1595f",
+          "id": "6f3599d1-8ad4-4fdb-a9dc-9e519f644164",
           "title": "Control Statements",
           "subject": "Unit 2",
           "difficulty": "easy",
@@ -451,7 +451,7 @@
           "sourceLine": 48
         },
         {
-          "id": "4562f7fc-e3a4-4a53-a939-10be17e94793",
+          "id": "e237318f-c856-47ea-9d7b-029027a1749d",
           "title": "Arrays",
           "subject": "Unit 2",
           "difficulty": "easy",
@@ -460,7 +460,7 @@
           "sourceLine": 49
         },
         {
-          "id": "04bff977-a9c8-4979-80b2-3619af340ff2",
+          "id": "b59a28e7-c43a-4299-8ee7-286dc5586444",
           "title": "Functions",
           "subject": "Unit 2",
           "difficulty": "easy",
@@ -469,7 +469,7 @@
           "sourceLine": 50
         },
         {
-          "id": "7cb1925a-d782-419c-9ed3-04806d297ac2",
+          "id": "d18c1cf6-2867-4e01-9467-8127bc24ca69",
           "title": "Constructors",
           "subject": "Unit 2",
           "difficulty": "easy",
@@ -478,7 +478,7 @@
           "sourceLine": 51
         },
         {
-          "id": "434fcb37-4d0d-402d-89a9-ffaac3d19a0b",
+          "id": "a0091e04-7ff8-49e8-a770-01a766ad10c3",
           "title": "JavaScript",
           "subject": "Unit 2",
           "difficulty": "easy",
@@ -487,7 +487,7 @@
           "sourceLine": 52
         },
         {
-          "id": "3a37c199-7a70-493d-8ccb-05ab51bea4db",
+          "id": "10e6f61b-980b-4e40-bc71-2a3449bf3645",
           "title": "and objects",
           "subject": "Unit 2",
           "difficulty": "easy",
@@ -496,7 +496,7 @@
           "sourceLine": 53
         },
         {
-          "id": "445dbf56-a6d5-4431-8b8c-b65561f72bd6",
+          "id": "9c049128-f851-4b6c-b790-269e9372ca81",
           "title": "JavaScript own objects",
           "subject": "Unit 2",
           "difficulty": "easy",
@@ -505,7 +505,7 @@
           "sourceLine": 54
         },
         {
-          "id": "12df6306-d9b6-453b-9890-aa355df2b284",
+          "id": "456169c3-826e-4893-8573-33933a3bb23e",
           "title": "the DOM and web browser environments",
           "subject": "Unit 2",
           "difficulty": "easy",
@@ -514,7 +514,7 @@
           "sourceLine": 55
         },
         {
-          "id": "fd83d800-9e81-4e08-827f-6ab98aeed599",
+          "id": "ddd16899-f31d-4429-a344-920f3b9b0fc8",
           "title": "forms and validations",
           "subject": "Unit 2",
           "difficulty": "easy",
@@ -523,7 +523,7 @@
           "sourceLine": 56
         },
         {
-          "id": "e873f194-c8d6-45fc-be3a-06e1585d6ca5",
+          "id": "e53eca8b-2424-45cb-a14e-c39b6744477b",
           "title": "Introduction to JSP: The Anatomy of a JSP Page",
           "subject": "Unit 2",
           "difficulty": "easy",
@@ -532,7 +532,7 @@
           "sourceLine": 57
         },
         {
-          "id": "a1faf3c6-289e-4bed-ba8f-5f6fbbc9dda0",
+          "id": "36893155-ce5e-45cf-ab27-71543ac3248e",
           "title": "JSP Processing",
           "subject": "Unit 2",
           "difficulty": "easy",
@@ -541,7 +541,7 @@
           "sourceLine": 58
         },
         {
-          "id": "9865cc3e-2660-497d-a6a8-627e763f75ad",
+          "id": "817a2dec-aef0-4a79-b2f1-4639a71c2b52",
           "title": "Declarations",
           "subject": "Unit 2",
           "difficulty": "easy",
@@ -550,7 +550,7 @@
           "sourceLine": 59
         },
         {
-          "id": "33bf38db-2014-4290-b604-83644addb813",
+          "id": "bbbbcf7f-0857-4028-b399-56235334b04e",
           "title": "Directives",
           "subject": "Unit 2",
           "difficulty": "easy",
@@ -559,7 +559,7 @@
           "sourceLine": 60
         },
         {
-          "id": "cff3b6f6-f496-47e4-b3af-c1766676b3d1",
+          "id": "06d58273-192d-4bb2-9943-438ea21f525c",
           "title": "Expressions",
           "subject": "Unit 2",
           "difficulty": "easy",
@@ -568,7 +568,7 @@
           "sourceLine": 61
         },
         {
-          "id": "5501d4e8-b04e-4846-b5c3-e118bb82b1da",
+          "id": "dbe01e3b-1f0e-4c8e-8ad9-cfd4c8fb168a",
           "title": "Code Snippets",
           "subject": "Unit 2",
           "difficulty": "easy",
@@ -577,7 +577,7 @@
           "sourceLine": 62
         },
         {
-          "id": "dfe47852-4677-4501-8cec-100c9fe4684e",
+          "id": "06d67e1d-8c12-49d6-be00-36e8f1d31fa9",
           "title": "implicit objects",
           "subject": "Unit 2",
           "difficulty": "easy",
@@ -586,7 +586,7 @@
           "sourceLine": 63
         },
         {
-          "id": "9f838041-7bd4-460e-a5b8-b91bc98b11ea",
+          "id": "6f4c5e0f-c72b-432c-bc1e-286ace999ea3",
           "title": "Using Beans in JSP Pages",
           "subject": "Unit 2",
           "difficulty": "easy",
@@ -595,7 +595,7 @@
           "sourceLine": 64
         },
         {
-          "id": "ac609de3-eaed-477f-8d85-a6654fab63d1",
+          "id": "be04981c-5a3c-4c49-8d55-d42f0f99c743",
           "title": "Using Cookies and session for session tracking",
           "subject": "Unit 2",
           "difficulty": "easy",
@@ -604,7 +604,7 @@
           "sourceLine": 65
         },
         {
-          "id": "77e928e9-e9ae-4db3-a733-abd2d3cfb4ae",
+          "id": "196928c5-0648-479c-bd0a-893f88e9ca3a",
           "title": "connecting to database in JSP",
           "subject": "Unit 2",
           "difficulty": "easy",
@@ -613,7 +613,7 @@
           "sourceLine": 66
         },
         {
-          "id": "4c668b8e-ec54-499e-90f3-255746c88c73",
+          "id": "269d74b2-8ff6-44fd-86ee-70834fa6af1e",
           "title": "Unit 3",
           "subject": "Unit 3",
           "difficulty": "easy",
@@ -622,7 +622,7 @@
           "sourceLine": 67
         },
         {
-          "id": "4cb44a98-45e2-4a4c-add8-493662b77fd3",
+          "id": "0657fc92-8f9a-4982-9ac9-131a1d8aa94b",
           "title": "Introduction to Server-Side Development with PHP",
           "subject": "Unit 3",
           "difficulty": "easy",
@@ -631,7 +631,7 @@
           "sourceLine": 68
         },
         {
-          "id": "95d87232-b352-453c-ba4e-f3e3c59bb4d2",
+          "id": "73d0d933-1292-495b-8350-4f11782d956d",
           "title": "what is Server-Side Development",
           "subject": "Unit 3",
           "difficulty": "easy",
@@ -640,7 +640,7 @@
           "sourceLine": 69
         },
         {
-          "id": "fb5f3e72-de5e-498b-ace8-dcccce3943dc",
+          "id": "01b07fde-c0a5-4378-858f-bc171ac48d31",
           "title": "A Web Server’s Responsibilities",
           "subject": "Unit 3",
           "difficulty": "easy",
@@ -649,7 +649,7 @@
           "sourceLine": 70
         },
         {
-          "id": "9dd88b96-257c-4402-b024-e09f6fca15ba",
+          "id": "211daa1d-5b52-475b-9a8e-4e587a17764f",
           "title": "Quick Tour of PHP",
           "subject": "Unit 3",
           "difficulty": "easy",
@@ -658,7 +658,7 @@
           "sourceLine": 71
         },
         {
-          "id": "2dda1a9d-54ec-4de1-a9c5-8b9ebf904b45",
+          "id": "f67e20fa-0865-478c-98a9-eec91593c194",
           "title": "Introduction and basic syntax of PHP",
           "subject": "Unit 3",
           "difficulty": "easy",
@@ -667,7 +667,7 @@
           "sourceLine": 72
         },
         {
-          "id": "3b304467-d545-48dd-8350-aeed4c14dcda",
+          "id": "38c77035-048d-4405-a463-16ed5bd22c8f",
           "title": "decision and looping with examples",
           "subject": "Unit 3",
           "difficulty": "easy",
@@ -676,7 +676,7 @@
           "sourceLine": 73
         },
         {
-          "id": "596b352b-4754-40f4-800f-13fc53e947c4",
+          "id": "f687df61-90a7-477a-aab3-01058b196aac",
           "title": "PHP and HTML",
           "subject": "Unit 3",
           "difficulty": "easy",
@@ -685,7 +685,7 @@
           "sourceLine": 74
         },
         {
-          "id": "bb05fbf3-22f1-4bd8-a427-06fd8fcc96f3",
+          "id": "66510d7f-b736-4fa9-891e-a3429b15c912",
           "title": "Arrays",
           "subject": "Unit 3",
           "difficulty": "easy",
@@ -694,7 +694,7 @@
           "sourceLine": 75
         },
         {
-          "id": "2f5f9bd2-d81b-464b-8760-0ad1baddc335",
+          "id": "48d78bc9-900f-4a11-970f-bcfd512a1102",
           "title": "Functions",
           "subject": "Unit 3",
           "difficulty": "easy",
@@ -703,7 +703,7 @@
           "sourceLine": 76
         },
         {
-          "id": "a27928f1-1b83-4ac3-ab15-1d874e09e4fd",
+          "id": "296d0f47-c6a5-4db0-ba78-20dbaf791acc",
           "title": "Browser control and detection",
           "subject": "Unit 3",
           "difficulty": "easy",
@@ -712,7 +712,7 @@
           "sourceLine": 77
         },
         {
-          "id": "c1d43321-b781-42b1-962b-0f015da2271e",
+          "id": "5b457a87-af86-4089-8768-5d5f60129a68",
           "title": "string",
           "subject": "Unit 3",
           "difficulty": "easy",
@@ -721,7 +721,7 @@
           "sourceLine": 78
         },
         {
-          "id": "766cc681-e487-41d4-950b-dd5a3e5d7efd",
+          "id": "4aa2d83b-fc13-4f7c-8226-7ce0f5c06167",
           "title": "Form processing",
           "subject": "Unit 3",
           "difficulty": "easy",
@@ -730,7 +730,7 @@
           "sourceLine": 79
         },
         {
-          "id": "c1803893-eccb-452a-b108-218c474119ba",
+          "id": "dd8b840c-be55-4b63-a0df-bbc8d7a9a40d",
           "title": "Files",
           "subject": "Unit 3",
           "difficulty": "easy",
@@ -739,7 +739,7 @@
           "sourceLine": 80
         },
         {
-          "id": "02848cce-c9a5-4c33-81ed-493b6b4cf0ba",
+          "id": "e36290f5-17e4-4be3-bd61-f45963603724",
           "title": "Advance Features: Cookies and Sessions",
           "subject": "Unit 3",
           "difficulty": "easy",
@@ -748,7 +748,7 @@
           "sourceLine": 81
         },
         {
-          "id": "3b5e7f4a-ff4a-49db-9e08-9f8392131598",
+          "id": "274ce741-7346-40e2-b87f-3b01f0ae2291",
           "title": "Unit 4",
           "subject": "Unit 4",
           "difficulty": "easy",
@@ -757,7 +757,7 @@
           "sourceLine": 82
         },
         {
-          "id": "cba92910-95f0-4e2b-bc82-f41d4453c002",
+          "id": "3e2471a0-c6cc-4fa5-8235-f6c8fdcd302a",
           "title": "PHP and MySQL: Basic commands with PHP examples",
           "subject": "Unit 4",
           "difficulty": "easy",
@@ -766,7 +766,7 @@
           "sourceLine": 83
         },
         {
-          "id": "0df77c67-6051-40bd-b2b2-f534053765d1",
+          "id": "d1e621c8-b248-4895-a33e-d29ca9377504",
           "title": "Connection to the server",
           "subject": "Unit 4",
           "difficulty": "easy",
@@ -775,7 +775,7 @@
           "sourceLine": 84
         },
         {
-          "id": "59110119-5978-4ebb-9fbb-68b5f0246fa0",
+          "id": "46e32d92-a3c4-4d80-9edd-9e67e4217ef0",
           "title": "creating a database",
           "subject": "Unit 4",
           "difficulty": "easy",
@@ -784,7 +784,7 @@
           "sourceLine": 85
         },
         {
-          "id": "433e5e69-9511-426d-a902-b3a2f599f45a",
+          "id": "db354f3e-49cb-4522-98ee-6e21309ca87a",
           "title": "selecting a database",
           "subject": "Unit 4",
           "difficulty": "easy",
@@ -793,7 +793,7 @@
           "sourceLine": 86
         },
         {
-          "id": "702c9198-2b91-4d22-8a92-eb29ab533edb",
+          "id": "472317e8-5ff6-4660-aa3e-b37c0f913a0e",
           "title": "listing database",
           "subject": "Unit 4",
           "difficulty": "easy",
@@ -802,7 +802,7 @@
           "sourceLine": 87
         },
         {
-          "id": "58c733b0-9a8e-4d02-9d28-22a5b074e1d9",
+          "id": "6e4678cb-72d3-48d8-b924-ee0ae5c7ac62",
           "title": "listing table names",
           "subject": "Unit 4",
           "difficulty": "easy",
@@ -811,7 +811,7 @@
           "sourceLine": 88
         },
         {
-          "id": "97aedefe-8d0e-4085-895a-e3cf6cb631f9",
+          "id": "4b104789-7968-425c-bd47-27e93ea4bd65",
           "title": "creating a table",
           "subject": "Unit 4",
           "difficulty": "easy",
@@ -820,7 +820,7 @@
           "sourceLine": 89
         },
         {
-          "id": "a1ad40a8-123d-4d11-bfd2-640a28efa81b",
+          "id": "33b775c1-ec14-471d-a3b3-677ceebefb3c",
           "title": "inserting data",
           "subject": "Unit 4",
           "difficulty": "easy",
@@ -829,7 +829,7 @@
           "sourceLine": 90
         },
         {
-          "id": "1841ac17-bb48-4dff-91c4-1ccfb7d2b745",
+          "id": "7984e59f-7c67-441c-930b-38f6dc679b5e",
           "title": "altering tables",
           "subject": "Unit 4",
           "difficulty": "easy",
@@ -838,7 +838,7 @@
           "sourceLine": 91
         },
         {
-          "id": "a77ba0bc-b013-42b5-8263-3544c24b2b92",
+          "id": "664a833f-a4af-4bfc-8428-c23cd2b29e61",
           "title": "queries",
           "subject": "Unit 4",
           "difficulty": "easy",
@@ -847,7 +847,7 @@
           "sourceLine": 92
         },
         {
-          "id": "cc9cc96b-db7f-4786-976d-b22a180d5b0c",
+          "id": "2f195902-3c3e-4951-b57b-fc1be7a0cbac",
           "title": "deleting the database",
           "subject": "Unit 4",
           "difficulty": "easy",
@@ -856,7 +856,7 @@
           "sourceLine": 93
         },
         {
-          "id": "ea8ab18e-b07c-41c2-a7b5-8ecb2c4470cd",
+          "id": "29e99d20-b4f0-4746-aa03-5faf1aa1949d",
           "title": "deleting data",
           "subject": "Unit 4",
           "difficulty": "easy",
@@ -865,7 +865,7 @@
           "sourceLine": 94
         },
         {
-          "id": "9c8ec59a-0c58-4ff2-b01a-78af291d14cc",
+          "id": "727faac2-1b12-448f-8501-109ec9db6321",
           "title": "and tables",
           "subject": "Unit 4",
           "difficulty": "easy",
@@ -874,7 +874,7 @@
           "sourceLine": 95
         },
         {
-          "id": "cc61ab44-cfaf-4c57-8198-313247cc7880",
+          "id": "20e3df05-d60f-4c51-ae10-262ac30920cb",
           "title": "PHP my admin and database bugs",
           "subject": "Unit 4",
           "difficulty": "easy",
@@ -883,7 +883,7 @@
           "sourceLine": 96
         },
         {
-          "id": "e6d11e30-c6c9-4fb4-a4d6-d878df58361e",
+          "id": "3cdf7023-1b9f-4f05-a575-939e3203610d",
           "title": "Managing State",
           "subject": "Unit 4",
           "difficulty": "easy",
@@ -892,7 +892,7 @@
           "sourceLine": 97
         },
         {
-          "id": "10f4dad0-e68c-4820-a5f9-accd4858323e",
+          "id": "7dc68ed5-b30f-43c0-8e3d-8a80bff11be0",
           "title": "The Problem of State in Web Applications",
           "subject": "Unit 4",
           "difficulty": "easy",
@@ -901,7 +901,7 @@
           "sourceLine": 98
         },
         {
-          "id": "7516a39f-69f8-4213-bcc2-1841b214c718",
+          "id": "24feceb2-bf8a-462d-bf04-4b066c121bbf",
           "title": "Passing Information via Query Strings",
           "subject": "Unit 4",
           "difficulty": "easy",
@@ -910,7 +910,7 @@
           "sourceLine": 99
         },
         {
-          "id": "957cb1aa-34ed-431a-8aa9-3ccac559563e",
+          "id": "980e564d-a5c7-4bdc-81c4-a85eb74329e5",
           "title": "Passing Information via the URL Path",
           "subject": "Unit 4",
           "difficulty": "easy",
@@ -919,7 +919,7 @@
           "sourceLine": 100
         },
         {
-          "id": "3a6220ec-7341-4231-bb2b-43f977f7a867",
+          "id": "8a862506-d4fd-44ab-9f3c-b9008a1e5ebe",
           "title": "Cookies",
           "subject": "Unit 4",
           "difficulty": "easy",
@@ -928,7 +928,7 @@
           "sourceLine": 101
         },
         {
-          "id": "9f17a262-0d46-4e58-93b5-eac63133ddf1",
+          "id": "6f0edc84-34fe-4d70-beb4-2590685a001e",
           "title": "Serialization",
           "subject": "Unit 4",
           "difficulty": "easy",
@@ -937,7 +937,7 @@
           "sourceLine": 102
         },
         {
-          "id": "66839590-fd03-4000-818b-65defa65a1a2",
+          "id": "02d5d410-9fb4-4832-8dc4-ced6db1f471d",
           "title": "Session State",
           "subject": "Unit 4",
           "difficulty": "easy",
@@ -946,7 +946,7 @@
           "sourceLine": 103
         },
         {
-          "id": "3359e581-978b-4b4d-9da0-6337e2bcba0b",
+          "id": "6e5b608c-7b73-4f71-b26b-9b63e98249c5",
           "title": "UI/UX assignment submission by 11:59 PM",
           "subject": "Fixed commitments and appointments",
           "difficulty": "easy",
@@ -955,7 +955,7 @@
           "sourceLine": 105
         },
         {
-          "id": "9facecbf-704f-4905-a045-eb25dec25a60",
+          "id": "27fb6c96-8c65-4796-80b4-8cabbe4b74a5",
           "title": "college lecture from 10 AM–1 PM",
           "subject": "Fixed commitments and appointments",
           "difficulty": "easy",
@@ -964,7 +964,7 @@
           "sourceLine": 106
         },
         {
-          "id": "dd83c4e1-8a6b-49b6-a0c4-0c2d691cdd57",
+          "id": "d196391f-ee66-42c3-a045-d8c85319a2c6",
           "title": "project discussion call at 6 PM",
           "subject": "Fixed commitments and appointments",
           "difficulty": "easy",
@@ -973,7 +973,7 @@
           "sourceLine": 107
         },
         {
-          "id": "250ccaef-19d6-4f26-8e63-960bc68d41de",
+          "id": "5d6a4df2-6783-412f-8c2c-0c24e5b05591",
           "title": "commute around 45 minutes",
           "subject": "Fixed commitments and appointments",
           "difficulty": "easy",
@@ -982,7 +982,7 @@
           "sourceLine": 108
         },
         {
-          "id": "59601ccc-e120-417b-a595-0d6d171e8177",
+          "id": "b527b7d6-da7e-4107-8436-1aa7e1885ccb",
           "title": "need to reply to internship emails today",
           "subject": "Fixed commitments and appointments",
           "difficulty": "easy",
@@ -991,7 +991,7 @@
           "sourceLine": 109
         },
         {
-          "id": "e9a5b5a1-bf76-4125-b2c3-d6568646c3d8",
+          "id": "3f26c17f-fc27-42d5-be31-fdb0b3f51fd4",
           "title": "quick grocery stop in the evening.",
           "subject": "Fixed commitments and appointments",
           "difficulty": "easy",
@@ -1000,7 +1000,7 @@
           "sourceLine": 110
         },
         {
-          "id": "818443c7-2634-4e15-b762-68b0c078b86f",
+          "id": "b5112eef-23b7-40a7-bb1c-208389921922",
           "title": "Chores",
           "subject": "Chores",
           "difficulty": "easy",
@@ -1009,7 +1009,7 @@
           "sourceLine": 111
         },
         {
-          "id": "a3e7cdd2-7503-436c-891c-f2d877f20d90",
+          "id": "9f7c4858-6f28-4fcf-88f7-70dc9ffe3656",
           "title": "errands",
           "subject": "errands",
           "difficulty": "easy",
@@ -1018,7 +1018,7 @@
           "sourceLine": 112
         },
         {
-          "id": "f182d0e6-c2e4-4f17-b221-17ff24983ebe",
+          "id": "9137f468-0250-4278-a8e0-93b9b6f1dbfd",
           "title": "and household work",
           "subject": "errands",
           "difficulty": "easy",
@@ -1027,7 +1027,7 @@
           "sourceLine": 113
         },
         {
-          "id": "fa7dc620-ea21-43d1-a0e4-4b5ab12a0651",
+          "id": "e1c67463-ba59-4ac9-b3e8-6da205a6b4c8",
           "title": "Clean desk because it’s getting distracting",
           "subject": "errands",
           "difficulty": "easy",
@@ -1036,7 +1036,7 @@
           "sourceLine": 114
         },
         {
-          "id": "511bbb34-e3d5-4c6c-9e84-8d76c6a71301",
+          "id": "0503250d-c5b6-4307-904c-853197159cc1",
           "title": "laundry pending since yesterday",
           "subject": "errands",
           "difficulty": "easy",
@@ -1045,7 +1045,7 @@
           "sourceLine": 115
         },
         {
-          "id": "9ddfd7b1-6aa2-4962-8851-6aa1dc6946fd",
+          "id": "307b9e4a-a8d1-4416-afc6-0eac7f261b7b",
           "title": "refill water bottles",
           "subject": "errands",
           "difficulty": "easy",
@@ -1054,7 +1054,7 @@
           "sourceLine": 116
         },
         {
-          "id": "c7124f54-eb82-432d-90cf-a9a8da6c173b",
+          "id": "f1029e64-421c-4b35-91d0-ee7b241bc8e5",
           "title": "organize downloaded notes and screenshots",
           "subject": "errands",
           "difficulty": "easy",
@@ -1063,7 +1063,7 @@
           "sourceLine": 117
         },
         {
-          "id": "cc15e99d-6b0d-4a71-bb3c-5c7c837a175b",
+          "id": "a60eef0f-8d90-48df-a5c8-510e606eda3f",
           "title": "charge laptop and earbuds before night",
           "subject": "errands",
           "difficulty": "easy",
@@ -1072,7 +1072,7 @@
           "sourceLine": 118
         },
         {
-          "id": "e40639b4-8f05-4ff9-a939-863aa8b176f5",
+          "id": "634557d1-ab2c-496b-935d-597056e6fc3e",
           "title": "take out trash.",
           "subject": "errands",
           "difficulty": "easy",
@@ -1081,7 +1081,7 @@
           "sourceLine": 119
         },
         {
-          "id": "6937ddf2-1923-486f-9bfd-b982314b7b1e",
+          "id": "e4d59c3f-a9e3-4ea7-b9f9-68cd1241e0af",
           "title": "Wellbeing",
           "subject": "Wellbeing",
           "difficulty": "easy",
@@ -1092,177 +1092,79 @@
       ],
       "generatedTasks": [
         {
-          "id": "72cebc82-5275-44a0-87ad-7739bf4b0739",
+          "id": "6720a7ee-4baf-401b-beb2-1e5ad6b1c53e",
           "title": "Study Unit 1",
-          "topicId": "73034322-e9e9-4bc8-82bd-650f663b5363",
+          "topicId": "f85130e1-2dfd-43ff-a491-d5d1a7842efd",
           "subject": "Unit 1",
           "category": "study",
           "status": "todo",
           "priority": "high",
-          "difficulty": "easy",
-          "deadline": "2026-05-30",
-          "progress": 0,
-          "recurrence": "revision_1_3_7",
-          "estimatedMinutes": 25
-        },
-        {
-          "id": "4fbe151b-667a-47fe-b768-2d68a836af37",
-          "title": "Study HTML: Basic Syntax",
-          "topicId": "87f2f963-1411-447b-bf8b-ab2346e70b48",
-          "subject": "Unit 1",
-          "category": "study",
-          "status": "todo",
-          "priority": "high",
-          "difficulty": "easy",
-          "deadline": "2026-05-31",
-          "progress": 0,
-          "recurrence": "revision_1_3_7",
-          "estimatedMinutes": 25
-        },
-        {
-          "id": "52b72bd5-1179-40c8-9d6c-f0ac6bdcec3e",
-          "title": "Study Standard HTML Document Structure",
-          "topicId": "9c0a6dfe-b519-47e9-8019-5ea99523ebf7",
-          "subject": "Unit 1",
-          "category": "study",
-          "status": "todo",
-          "priority": "high",
-          "difficulty": "easy",
-          "deadline": "2026-06-01",
-          "progress": 0,
-          "recurrence": "revision_1_3_7",
-          "estimatedMinutes": 25
-        },
-        {
-          "id": "8a0452b6-3a4c-4f82-b938-e5c7a5e4886a",
-          "title": "Study Basic Text Markup",
-          "topicId": "e4b046fb-43dd-47d2-ad87-f945441fecaa",
-          "subject": "Unit 1",
-          "category": "study",
-          "status": "todo",
-          "priority": "high",
-          "difficulty": "easy",
-          "deadline": "2026-06-02",
-          "progress": 0,
-          "recurrence": "revision_1_3_7",
-          "estimatedMinutes": 25
-        },
-        {
-          "id": "2c60b4b8-512b-4b54-8878-df7cfc4890e5",
-          "title": "Study Html styles",
-          "topicId": "83048f3f-5799-4506-b764-9f00f58e6a32",
-          "subject": "Unit 1",
-          "category": "study",
-          "status": "todo",
-          "priority": "high",
-          "difficulty": "easy",
-          "deadline": "2026-06-03",
-          "progress": 0,
-          "recurrence": "revision_1_3_7",
-          "estimatedMinutes": 25
-        },
-        {
-          "id": "ef22e145-e108-44be-891a-85ba1d51c03c",
-          "title": "Study Elements",
-          "topicId": "c6a7a97a-1982-47c2-98ce-f7aea06d362e",
-          "subject": "Unit 1",
-          "category": "study",
-          "status": "todo",
-          "priority": "medium",
-          "difficulty": "easy",
-          "deadline": "2026-06-04",
-          "progress": 0,
-          "recurrence": "weekly",
-          "estimatedMinutes": 25
-        },
-        {
-          "id": "970b94ee-032b-41c5-9f01-f79ea277314c",
-          "title": "Study Attributes",
-          "topicId": "cb61984e-8859-4956-9a96-2c707e794541",
-          "subject": "Unit 1",
-          "category": "study",
-          "status": "todo",
-          "priority": "medium",
-          "difficulty": "easy",
-          "deadline": "2026-06-05",
-          "progress": 0,
-          "recurrence": "weekly",
-          "estimatedMinutes": 25
-        },
-        {
-          "id": "056a8048-e6d7-4fa5-9543-6003c74aad05",
-          "title": "Study Heading",
-          "topicId": "394f9eb9-e118-4d44-ae91-c96c189ae7c8",
-          "subject": "Unit 1",
-          "category": "study",
-          "status": "todo",
-          "priority": "medium",
           "difficulty": "easy",
           "deadline": "2026-06-06",
           "progress": 0,
-          "recurrence": "weekly",
+          "recurrence": "revision_1_3_7",
           "estimatedMinutes": 25
         },
         {
-          "id": "3f785895-77eb-4c2e-9c6d-ef8fba7b4bda",
-          "title": "Study Layouts",
-          "topicId": "0fb3aebc-f00c-4964-bc51-ab86e86842f0",
+          "id": "7e414ad1-fb29-4966-a14c-d00733991df2",
+          "title": "Study HTML: Basic Syntax",
+          "topicId": "89deb4fa-5f2c-4323-a436-88a88f641161",
           "subject": "Unit 1",
           "category": "study",
           "status": "todo",
-          "priority": "medium",
+          "priority": "high",
           "difficulty": "easy",
           "deadline": "2026-06-07",
           "progress": 0,
-          "recurrence": "weekly",
+          "recurrence": "revision_1_3_7",
           "estimatedMinutes": 25
         },
         {
-          "id": "fdaa448b-e3a6-484d-b6bb-654a801af49e",
-          "title": "Study I frames Images",
-          "topicId": "9a49e44e-fd6f-4244-9696-d741a7e86aac",
+          "id": "c9b80d1a-d304-4f10-849c-dcf4add3c566",
+          "title": "Study Standard HTML Document Structure",
+          "topicId": "562140f8-ca70-4f03-bca7-ca44fb0950d9",
           "subject": "Unit 1",
           "category": "study",
           "status": "todo",
-          "priority": "medium",
+          "priority": "high",
           "difficulty": "easy",
           "deadline": "2026-06-08",
           "progress": 0,
-          "recurrence": "weekly",
+          "recurrence": "revision_1_3_7",
           "estimatedMinutes": 25
         },
         {
-          "id": "1b839109-8b06-47f4-b1a4-e9c2cef3063e",
-          "title": "Study Hypertext Links",
-          "topicId": "82276055-6a6f-46e2-a60f-2a4d7331e9d9",
+          "id": "7708257b-8604-4a8a-ba40-11ae074bdf75",
+          "title": "Study Basic Text Markup",
+          "topicId": "6e8b7bcd-cdec-4643-89d6-2421dff88ebc",
           "subject": "Unit 1",
           "category": "study",
           "status": "todo",
-          "priority": "medium",
+          "priority": "high",
           "difficulty": "easy",
           "deadline": "2026-06-09",
           "progress": 0,
-          "recurrence": "weekly",
+          "recurrence": "revision_1_3_7",
           "estimatedMinutes": 25
         },
         {
-          "id": "4f8ecf7c-82bd-47cf-a07a-0a57beeabf76",
-          "title": "Study Lists",
-          "topicId": "5a1cb7b0-b0cc-43ed-ba60-2ea870652a1a",
+          "id": "5f0ebc06-5a86-44ec-adc6-89dbb831216e",
+          "title": "Study Html styles",
+          "topicId": "1e43fdd5-9cbc-4efa-b37d-f50d8cad5882",
           "subject": "Unit 1",
           "category": "study",
           "status": "todo",
-          "priority": "medium",
+          "priority": "high",
           "difficulty": "easy",
           "deadline": "2026-06-10",
           "progress": 0,
-          "recurrence": "weekly",
+          "recurrence": "revision_1_3_7",
           "estimatedMinutes": 25
         },
         {
-          "id": "2cf45e4d-e61b-4271-ad94-8c5bb2efa7a6",
-          "title": "Study Tables",
-          "topicId": "9948724b-c9b8-4842-be12-e334f3f8f7b0",
+          "id": "bf554149-9808-4b68-921b-56d4b0d925ea",
+          "title": "Study Elements",
+          "topicId": "e7ebc4b7-0327-47a6-b72b-a09a82433541",
           "subject": "Unit 1",
           "category": "study",
           "status": "todo",
@@ -1274,9 +1176,9 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "3fad6cfe-1168-4372-9162-d8f96281c0d9",
-          "title": "Study Forms",
-          "topicId": "06d8ad5f-690f-4e57-a6be-cd22da2a26e2",
+          "id": "0ce44bae-3e93-4ce5-b63c-420090d438ad",
+          "title": "Study Attributes",
+          "topicId": "0bc89329-a861-4d67-aa38-d42bf98f8cdb",
           "subject": "Unit 1",
           "category": "study",
           "status": "todo",
@@ -1288,9 +1190,9 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "0f62a58c-ea90-42d1-b8d0-d9f38db8dcae",
-          "title": "Study Dynamic HTML",
-          "topicId": "7347b348-a0a7-4b20-990c-add9aa5b87d7",
+          "id": "7364025c-70b2-43cb-9d87-a0180c419a50",
+          "title": "Study Heading",
+          "topicId": "a572136e-eb58-4e1e-8d58-2c6d447f5b38",
           "subject": "Unit 1",
           "category": "study",
           "status": "todo",
@@ -1302,9 +1204,9 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "ea1f2287-f924-4e08-9a83-8ef1afbb61f0",
-          "title": "Study CSS: Need for CSS",
-          "topicId": "6a537417-477e-49c9-acba-81add40c9dbb",
+          "id": "cb936273-15dd-4a83-a9b3-620b08579985",
+          "title": "Study Layouts",
+          "topicId": "641fe9d3-9558-4521-b4f6-2a944976c7a5",
           "subject": "Unit 1",
           "category": "study",
           "status": "todo",
@@ -1316,9 +1218,9 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "40911d29-7328-4a8d-a4f5-275e31f77a5e",
-          "title": "Study introduction to CSS",
-          "topicId": "1ac33280-834e-41aa-bf9e-8fea407064c7",
+          "id": "db9cfc8c-a56e-4820-ba65-c76321ba2717",
+          "title": "Study I frames Images",
+          "topicId": "ffede6c1-cc45-45bb-913e-32bd4eef8d27",
           "subject": "Unit 1",
           "category": "study",
           "status": "todo",
@@ -1330,13 +1232,13 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "64529c32-dc8d-41a7-a494-d8e05bf73e84",
-          "title": "Study basic syntax and structure",
-          "topicId": "fda7df74-2e84-4cb3-bd53-a890f454968d",
+          "id": "15f8b220-29c6-462c-b89e-0a85d6d08de0",
+          "title": "Study Hypertext Links",
+          "topicId": "8142e0cc-65af-4535-9e42-46723ae1f576",
           "subject": "Unit 1",
           "category": "study",
           "status": "todo",
-          "priority": "low",
+          "priority": "medium",
           "difficulty": "easy",
           "deadline": "2026-06-16",
           "progress": 0,
@@ -1344,13 +1246,13 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "22586a18-8108-4316-8b76-6d0a558dfc58",
-          "title": "Study using CSS",
-          "topicId": "8bfb1d01-1fca-42d3-b5d9-dfe4926b814a",
+          "id": "1558558c-540e-4b96-93a2-0184fba0ef2a",
+          "title": "Study Lists",
+          "topicId": "07af60d0-e16b-4fa5-a622-76e3370ee0f0",
           "subject": "Unit 1",
           "category": "study",
           "status": "todo",
-          "priority": "low",
+          "priority": "medium",
           "difficulty": "easy",
           "deadline": "2026-06-17",
           "progress": 0,
@@ -1358,13 +1260,13 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "85474bc2-2fa6-4a3f-b99d-eafe240ac11e",
-          "title": "Study background images",
-          "topicId": "d6e0dbb2-f6eb-4040-b35c-11b3affb6927",
+          "id": "38602330-f809-4dd7-8116-090f08000f68",
+          "title": "Study Tables",
+          "topicId": "99385e0a-fc0f-4d94-a861-44d13bdfe0bd",
           "subject": "Unit 1",
           "category": "study",
           "status": "todo",
-          "priority": "low",
+          "priority": "medium",
           "difficulty": "easy",
           "deadline": "2026-06-18",
           "progress": 0,
@@ -1372,13 +1274,13 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "b0563268-c452-4534-8320-8ad5448cd959",
-          "title": "Study colors",
-          "topicId": "1efd6dbf-5dce-4373-bc01-a4310ce89773",
+          "id": "69062618-30e8-43d6-aedb-4a8b08fb18b8",
+          "title": "Study Forms",
+          "topicId": "49c837ca-2ebe-470a-8e65-142f84b769bf",
           "subject": "Unit 1",
           "category": "study",
           "status": "todo",
-          "priority": "low",
+          "priority": "medium",
           "difficulty": "easy",
           "deadline": "2026-06-19",
           "progress": 0,
@@ -1386,13 +1288,13 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "82dea712-4048-4829-9ace-71ace4cfa24c",
-          "title": "Study and properties",
-          "topicId": "15be0260-028a-45fc-87a3-b1b764f898a2",
+          "id": "cb406881-48ad-4af4-90eb-fef5780f2980",
+          "title": "Study Dynamic HTML",
+          "topicId": "bced1e01-36ca-402a-9a9d-ab18842a3fad",
           "subject": "Unit 1",
           "category": "study",
           "status": "todo",
-          "priority": "low",
+          "priority": "medium",
           "difficulty": "easy",
           "deadline": "2026-06-20",
           "progress": 0,
@@ -1400,13 +1302,13 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "9b4427fc-31bc-4bd8-bba8-3112ab3ad813",
-          "title": "Study manipulating texts",
-          "topicId": "dd9eb1a6-36bd-42b6-bd11-d6c14dbfd1a8",
+          "id": "98a29d74-8d3b-479f-8fff-cadd89733673",
+          "title": "Study CSS: Need for CSS",
+          "topicId": "6a6e6b8e-62c1-4090-a13b-7154b3757cda",
           "subject": "Unit 1",
           "category": "study",
           "status": "todo",
-          "priority": "low",
+          "priority": "medium",
           "difficulty": "easy",
           "deadline": "2026-06-21",
           "progress": 0,
@@ -1414,13 +1316,13 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "bb6c11fc-bbe5-49e6-84d7-1163b20f849e",
-          "title": "Study using fonts",
-          "topicId": "d4cfc9e0-3275-4bc7-b683-417385c13527",
+          "id": "2d63101d-b818-401f-8bcd-1f113de5e6be",
+          "title": "Study introduction to CSS",
+          "topicId": "cc48a743-ac8b-4e7e-a5a7-fdbcb157aca9",
           "subject": "Unit 1",
           "category": "study",
           "status": "todo",
-          "priority": "low",
+          "priority": "medium",
           "difficulty": "easy",
           "deadline": "2026-06-22",
           "progress": 0,
@@ -1428,9 +1330,9 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "d76ace7c-2a3d-44d5-ba2d-f885b28aaeb1",
-          "title": "Study borders",
-          "topicId": "e3335634-8cbb-4408-9cc3-0897f4831ef9",
+          "id": "d71870e2-99ab-419c-83b6-e88599db9da7",
+          "title": "Study basic syntax and structure",
+          "topicId": "63db363c-8040-44e4-ba94-750f4b7b7b74",
           "subject": "Unit 1",
           "category": "study",
           "status": "todo",
@@ -1442,9 +1344,9 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "35e84265-8db2-4eb7-89e9-5aa1e98d4ce8",
-          "title": "Study boxes",
-          "topicId": "814ff02e-7cbd-49d2-8dea-6650ec00a820",
+          "id": "ac7b8ef9-c1e0-4512-9769-d5e988b8dacd",
+          "title": "Study using CSS",
+          "topicId": "2825e98a-2852-49bc-be3f-fa67fbd45db4",
           "subject": "Unit 1",
           "category": "study",
           "status": "todo",
@@ -1456,9 +1358,9 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "1b61781c-5124-4162-9925-7377cc33575b",
-          "title": "Study margins",
-          "topicId": "02a27a61-f2c0-4666-8b8d-0155cc904bcc",
+          "id": "7f19a14b-fe1b-44dd-b697-b69eddb8b05a",
+          "title": "Study background images",
+          "topicId": "ba9c2123-8805-4e5b-bef2-39f3bfe2570f",
           "subject": "Unit 1",
           "category": "study",
           "status": "todo",
@@ -1470,9 +1372,9 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "1b5e480d-7efb-4399-89fe-e2e4fa884740",
-          "title": "Study padding lists",
-          "topicId": "23a26674-c9bc-40bb-ad09-b9efb77f0ac1",
+          "id": "b59f4686-12e8-4348-9063-4c71084a8a3c",
+          "title": "Study colors",
+          "topicId": "b98a8acd-c6e9-463d-a584-e8baa51dabfd",
           "subject": "Unit 1",
           "category": "study",
           "status": "todo",
@@ -1484,9 +1386,9 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "367ed8ce-bbda-479e-8e33-d6c31efdd050",
-          "title": "Study positioning using CSS",
-          "topicId": "3933485a-2ea0-4564-ae9c-c4aaf3db600d",
+          "id": "9bff4ddf-589b-4166-b8c0-0c8c3a846593",
+          "title": "Study and properties",
+          "topicId": "7699df71-dfee-44cd-ad9e-8df0334c4975",
           "subject": "Unit 1",
           "category": "study",
           "status": "todo",
@@ -1498,9 +1400,9 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "94055354-042b-4cf4-819f-9822c064ad90",
-          "title": "Study CSS2",
-          "topicId": "eaaf21de-7b1f-4400-921b-8f97a1eac2ea",
+          "id": "024b002c-4215-44af-8e3a-cc39f828b768",
+          "title": "Study manipulating texts",
+          "topicId": "e7b447ae-910a-4411-8e8a-0c513222e508",
           "subject": "Unit 1",
           "category": "study",
           "status": "todo",
@@ -1512,9 +1414,9 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "39b19841-23f5-4143-a86e-cc8156bfa667",
-          "title": "Study The Box Model",
-          "topicId": "3ed234d5-5f00-417e-a9a5-ffa50cfa4348",
+          "id": "ecf7d4ae-0e99-460b-ac88-8dd58bb5d165",
+          "title": "Study using fonts",
+          "topicId": "aa7721ba-6751-4d36-9c33-6d2712572545",
           "subject": "Unit 1",
           "category": "study",
           "status": "todo",
@@ -1526,9 +1428,9 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "5a07d626-d6bf-4223-99a5-8ff71cb22b1a",
-          "title": "Study Working with XML: Document Type Definition (DTD)",
-          "topicId": "9b23f537-7115-4174-89b0-6f32de11cb13",
+          "id": "a9e0a21b-de34-405d-a17b-8a6f3d611364",
+          "title": "Study borders",
+          "topicId": "f1b3a685-eec9-422e-a52f-9371f81346e5",
           "subject": "Unit 1",
           "category": "study",
           "status": "todo",
@@ -1540,9 +1442,9 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "c5f25205-d828-408a-9b32-a9374fb6e563",
-          "title": "Study XML schemas",
-          "topicId": "7796a9a1-d9c5-475d-b8e0-db8e3d3af28c",
+          "id": "dbc6e287-bb97-486a-b139-cc374f250cb5",
+          "title": "Study boxes",
+          "topicId": "e805c1b7-6244-4277-8417-2ddf3380b249",
           "subject": "Unit 1",
           "category": "study",
           "status": "todo",
@@ -1554,9 +1456,9 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "979a35d7-bb05-4495-9846-c294a45aaf7e",
-          "title": "Study Document object model",
-          "topicId": "5f878d7d-8fda-4708-aff3-25074dacfb56",
+          "id": "b0da9060-55a9-41e9-a1c2-26c501fbfdcb",
+          "title": "Study margins",
+          "topicId": "53c17b73-96d6-4c30-8e45-310ac41179f6",
           "subject": "Unit 1",
           "category": "study",
           "status": "todo",
@@ -1568,9 +1470,9 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "00905fd1-133b-4ffb-bb4b-a2025f78754c",
-          "title": "Study Parsers -DOM",
-          "topicId": "26810470-904e-4372-a2e2-134235d0aff9",
+          "id": "15218081-c267-4d14-9c86-01aba0288713",
+          "title": "Study padding lists",
+          "topicId": "4b0b84d1-c9b7-40b6-bc32-68dae2c7f426",
           "subject": "Unit 1",
           "category": "study",
           "status": "todo",
@@ -1582,9 +1484,9 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "3fa0e498-18c6-4011-b66e-038f0b8b10f8",
-          "title": "Study and SAX",
-          "topicId": "1eea451f-62b5-43a8-bb41-531a3efdb5a4",
+          "id": "154bf8b6-6681-47c3-b2c9-36e0fdaa1f3e",
+          "title": "Study positioning using CSS",
+          "topicId": "7859bfad-1114-4b35-ab89-0d6ffe54c08d",
           "subject": "Unit 1",
           "category": "study",
           "status": "todo",
@@ -1596,9 +1498,9 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "1366b09f-a5ac-461c-98ff-1261ab9fd50f",
-          "title": "Study Introduction to XHTML: XML",
-          "topicId": "328a8d37-1240-4f37-8a83-cac031e808b8",
+          "id": "6192c9a1-f8e4-4b11-8bdc-c3da7b8ab065",
+          "title": "Study CSS2",
+          "topicId": "134f5f2a-b9a6-496d-9383-8b4ecdcc5336",
           "subject": "Unit 1",
           "category": "study",
           "status": "todo",
@@ -1610,9 +1512,9 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "f6192106-46d2-43ac-87dd-5d436e6e4178",
-          "title": "Study Meta tags",
-          "topicId": "c5678aa1-5ac1-43ad-961c-50f9375f02fe",
+          "id": "3db21866-b881-4916-ad5d-ff58b93137ae",
+          "title": "Study The Box Model",
+          "topicId": "3ead6ba6-1206-4f17-a2a5-9269f7acae74",
           "subject": "Unit 1",
           "category": "study",
           "status": "todo",
@@ -1624,9 +1526,9 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "5c5a0a01-6958-4471-a924-329a32d9331c",
-          "title": "Study Character entities",
-          "topicId": "41a7ff77-4ae9-43b7-8f65-b1dbd10b40ec",
+          "id": "22c817a1-c9e4-4b00-ac86-09120bc9a468",
+          "title": "Study Working with XML: Document Type Definition (DTD)",
+          "topicId": "8cdd0d46-e9dc-4748-9a20-a0823e62e567",
           "subject": "Unit 1",
           "category": "study",
           "status": "todo",
@@ -1638,9 +1540,9 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "cb009e15-53c5-435a-8f44-13207eac9abc",
-          "title": "Study frames",
-          "topicId": "3f0228c5-c2b6-49f4-b2dc-58d415cbbcfa",
+          "id": "591d4d92-c95f-4fc9-b436-c6dcc608a2d7",
+          "title": "Study XML schemas",
+          "topicId": "6852694f-e35f-4ec0-9b46-724c88a051e3",
           "subject": "Unit 1",
           "category": "study",
           "status": "todo",
@@ -1652,9 +1554,9 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "6a45c4b2-4367-423f-aa57-dacd138a396f",
-          "title": "Study and frame sets",
-          "topicId": "a64bd581-4060-4dee-8d59-cea86a1c8f12",
+          "id": "cbd03f80-f8e1-4a99-8d87-9928aa84e846",
+          "title": "Study Document object model",
+          "topicId": "6f8a1123-4e31-4b1c-8515-aade19e0de2e",
           "subject": "Unit 1",
           "category": "study",
           "status": "todo",
@@ -1666,10 +1568,10 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "ab4d5b92-bfb6-4e16-acbe-98c76f802361",
-          "title": "Study Unit 2",
-          "topicId": "2ad94e01-155b-49cd-90c2-18de2db285d4",
-          "subject": "Unit 2",
+          "id": "68c86332-0116-4143-af4d-b2c5a4bf86a7",
+          "title": "Study Parsers -DOM",
+          "topicId": "e30df3dc-84c5-4cb4-b588-a91ad6cf54a7",
+          "subject": "Unit 1",
           "category": "study",
           "status": "todo",
           "priority": "low",
@@ -1680,10 +1582,10 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "96c01d62-d053-4f8e-9906-01c53aca1744",
-          "title": "Study JavaScript - Client-side scripting",
-          "topicId": "ffaadacc-0c54-4b08-955b-97be6637cd0d",
-          "subject": "Unit 2",
+          "id": "2049b1d8-225f-471d-9d00-e00bd7fda7da",
+          "title": "Study and SAX",
+          "topicId": "98000f0a-07c6-4a23-83cb-b66877e2c360",
+          "subject": "Unit 1",
           "category": "study",
           "status": "todo",
           "priority": "low",
@@ -1694,10 +1596,10 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "ed3fce35-7b57-426e-8ba2-ed35cab4df65",
-          "title": "Study Introduction to JavaScript",
-          "topicId": "59e0b5e0-0f49-4e80-bdaf-2abecbe7eb35",
-          "subject": "Unit 2",
+          "id": "8a02fb2d-f91d-482d-84c9-d897a10da628",
+          "title": "Study Introduction to XHTML: XML",
+          "topicId": "9572ad39-f68f-45dc-8bb4-0e9b384793fd",
+          "subject": "Unit 1",
           "category": "study",
           "status": "todo",
           "priority": "low",
@@ -1708,10 +1610,10 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "0d47f9fd-db24-43a5-b8f5-18b52dff162e",
-          "title": "Study Objects",
-          "topicId": "a8c4cfac-23ef-47b7-9ab7-44fc790b81c2",
-          "subject": "Unit 2",
+          "id": "51403772-17fe-4d28-b13d-a0f3c894dad9",
+          "title": "Study Meta tags",
+          "topicId": "bdb32675-907f-40ca-9d6a-e2a1dd441834",
+          "subject": "Unit 1",
           "category": "study",
           "status": "todo",
           "priority": "low",
@@ -1722,10 +1624,10 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "d75dc5dd-76e6-4a28-9254-c5f423b5e652",
-          "title": "Study Primitives Operations and Expressions",
-          "topicId": "015cde2b-55d2-40b4-b2f3-2aca664ee007",
-          "subject": "Unit 2",
+          "id": "beaf0427-3ab2-40a5-a812-d8d73934747d",
+          "title": "Study Character entities",
+          "topicId": "1690e3db-9b40-4aad-a785-20495b8869d8",
+          "subject": "Unit 1",
           "category": "study",
           "status": "todo",
           "priority": "low",
@@ -1736,10 +1638,10 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "29459831-fbbc-41a3-bdc0-fe68d17e2a46",
-          "title": "Study Control Statements",
-          "topicId": "0e674db7-9805-4052-bad2-ad59a9d1595f",
-          "subject": "Unit 2",
+          "id": "851a0acf-08b4-4f7c-8ae3-41c00651f574",
+          "title": "Study frames",
+          "topicId": "6876ae21-1c72-4da4-84c2-cf4ee2fb661a",
+          "subject": "Unit 1",
           "category": "study",
           "status": "todo",
           "priority": "low",
@@ -1750,10 +1652,10 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "c3449b91-5a53-4e75-bcf5-d3fdb5fe767e",
-          "title": "Study Arrays",
-          "topicId": "4562f7fc-e3a4-4a53-a939-10be17e94793",
-          "subject": "Unit 2",
+          "id": "81e5505b-35ef-4d73-aa88-782330598d0a",
+          "title": "Study and frame sets",
+          "topicId": "060944d4-71e9-4220-a341-e8b046580613",
+          "subject": "Unit 1",
           "category": "study",
           "status": "todo",
           "priority": "low",
@@ -1764,9 +1666,9 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "3d5a9933-51fc-400b-952f-00092d0396bb",
-          "title": "Study Functions",
-          "topicId": "04bff977-a9c8-4979-80b2-3619af340ff2",
+          "id": "a8439335-0d95-49cd-896b-6b07e2fa100d",
+          "title": "Study Unit 2",
+          "topicId": "4b9d6e52-0166-45bd-8ee4-2bf37a880606",
           "subject": "Unit 2",
           "category": "study",
           "status": "todo",
@@ -1778,9 +1680,9 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "b1ecaecf-e5ab-4bc8-81f8-2fbce0af4dd4",
-          "title": "Study Constructors",
-          "topicId": "7cb1925a-d782-419c-9ed3-04806d297ac2",
+          "id": "4ea1aff8-8444-412e-a28b-2634a190efd7",
+          "title": "Study JavaScript - Client-side scripting",
+          "topicId": "12ccd205-9ada-45b4-9490-b451db4d3a63",
           "subject": "Unit 2",
           "category": "study",
           "status": "todo",
@@ -1792,9 +1694,9 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "c312437b-55fa-4c73-a1f9-788a7a49e247",
-          "title": "Study JavaScript",
-          "topicId": "434fcb37-4d0d-402d-89a9-ffaac3d19a0b",
+          "id": "d42f7b9e-c296-4c27-9279-ce9dbde717e2",
+          "title": "Study Introduction to JavaScript",
+          "topicId": "d98cf6bc-6b5b-4195-8814-b6f6e9d559bc",
           "subject": "Unit 2",
           "category": "study",
           "status": "todo",
@@ -1806,9 +1708,9 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "b5d1ffcb-5859-408a-96b5-407e45d24895",
-          "title": "Study and objects",
-          "topicId": "3a37c199-7a70-493d-8ccb-05ab51bea4db",
+          "id": "7e82d8e0-0e65-45d8-8ed7-5fd36e411ea7",
+          "title": "Study Objects",
+          "topicId": "b5367f8d-c09b-47c7-8aeb-1589e4869dab",
           "subject": "Unit 2",
           "category": "study",
           "status": "todo",
@@ -1820,9 +1722,9 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "dc52c243-0c0a-477a-b700-57192e9c9e90",
-          "title": "Study JavaScript own objects",
-          "topicId": "445dbf56-a6d5-4431-8b8c-b65561f72bd6",
+          "id": "294ab53c-2a6b-49d2-857d-3df4d79a230f",
+          "title": "Study Primitives Operations and Expressions",
+          "topicId": "41e858c2-eded-40bd-95ea-f19c23e6fdaf",
           "subject": "Unit 2",
           "category": "study",
           "status": "todo",
@@ -1834,9 +1736,9 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "a1702ce8-bcff-4a0b-9df4-f575f2c43813",
-          "title": "Study the DOM and web browser environments",
-          "topicId": "12df6306-d9b6-453b-9890-aa355df2b284",
+          "id": "8d2aa490-c034-4fb9-abb9-d5c1a29b5322",
+          "title": "Study Control Statements",
+          "topicId": "6f3599d1-8ad4-4fdb-a9dc-9e519f644164",
           "subject": "Unit 2",
           "category": "study",
           "status": "todo",
@@ -1848,9 +1750,9 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "6f42c164-e143-4120-a828-c7b54e3ff374",
-          "title": "Study forms and validations",
-          "topicId": "fd83d800-9e81-4e08-827f-6ab98aeed599",
+          "id": "6ae03751-d5b3-4c27-be88-bb33ed768d37",
+          "title": "Study Arrays",
+          "topicId": "e237318f-c856-47ea-9d7b-029027a1749d",
           "subject": "Unit 2",
           "category": "study",
           "status": "todo",
@@ -1862,9 +1764,9 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "943bde7d-aa3b-4848-b06a-cd91faa4e43d",
-          "title": "Study Introduction to JSP: The Anatomy of a JSP Page",
-          "topicId": "e873f194-c8d6-45fc-be3a-06e1585d6ca5",
+          "id": "91a46824-64b5-4bb4-a84f-fe1bc36be2e3",
+          "title": "Study Functions",
+          "topicId": "b59a28e7-c43a-4299-8ee7-286dc5586444",
           "subject": "Unit 2",
           "category": "study",
           "status": "todo",
@@ -1876,9 +1778,9 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "879bebc5-d041-4964-a58b-e279b1e1934d",
-          "title": "Study JSP Processing",
-          "topicId": "a1faf3c6-289e-4bed-ba8f-5f6fbbc9dda0",
+          "id": "abd11382-41ab-4849-b2a4-b3766247e4dd",
+          "title": "Study Constructors",
+          "topicId": "d18c1cf6-2867-4e01-9467-8127bc24ca69",
           "subject": "Unit 2",
           "category": "study",
           "status": "todo",
@@ -1890,9 +1792,9 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "d496a429-323e-46ab-94ff-33ef055bda55",
-          "title": "Study Declarations",
-          "topicId": "9865cc3e-2660-497d-a6a8-627e763f75ad",
+          "id": "9e8e49f6-7aa6-4bb0-b703-8a90167bf598",
+          "title": "Study JavaScript",
+          "topicId": "a0091e04-7ff8-49e8-a770-01a766ad10c3",
           "subject": "Unit 2",
           "category": "study",
           "status": "todo",
@@ -1904,9 +1806,9 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "1b658eaf-b7aa-4494-a0f9-c374cc703e5b",
-          "title": "Study Directives",
-          "topicId": "33bf38db-2014-4290-b604-83644addb813",
+          "id": "e892bcbb-44a8-4c97-aa9a-2cb29a8bf93f",
+          "title": "Study and objects",
+          "topicId": "10e6f61b-980b-4e40-bc71-2a3449bf3645",
           "subject": "Unit 2",
           "category": "study",
           "status": "todo",
@@ -1918,9 +1820,9 @@
           "estimatedMinutes": 25
         },
         {
-          "id": "5b057899-685e-4866-a60c-cf177242784c",
-          "title": "Study Expressions",
-          "topicId": "cff3b6f6-f496-47e4-b3af-c1766676b3d1",
+          "id": "ccb5d212-103d-4fbe-b2e8-305309874167",
+          "title": "Study JavaScript own objects",
+          "topicId": "9c049128-f851-4b6c-b790-269e9372ca81",
           "subject": "Unit 2",
           "category": "study",
           "status": "todo",
@@ -1930,11 +1832,109 @@
           "progress": 0,
           "recurrence": "weekly",
           "estimatedMinutes": 25
+        },
+        {
+          "id": "cc4adc3c-d8be-43eb-b362-10f7e24e76e1",
+          "title": "Study the DOM and web browser environments",
+          "topicId": "456169c3-826e-4893-8573-33933a3bb23e",
+          "subject": "Unit 2",
+          "category": "study",
+          "status": "todo",
+          "priority": "low",
+          "difficulty": "easy",
+          "deadline": "2026-07-29",
+          "progress": 0,
+          "recurrence": "weekly",
+          "estimatedMinutes": 25
+        },
+        {
+          "id": "1fc70c19-141d-420d-a9a2-7497092198ec",
+          "title": "Study forms and validations",
+          "topicId": "ddd16899-f31d-4429-a344-920f3b9b0fc8",
+          "subject": "Unit 2",
+          "category": "study",
+          "status": "todo",
+          "priority": "low",
+          "difficulty": "easy",
+          "deadline": "2026-07-30",
+          "progress": 0,
+          "recurrence": "weekly",
+          "estimatedMinutes": 25
+        },
+        {
+          "id": "271ebd63-0437-42e9-8a46-87703c671cfa",
+          "title": "Study Introduction to JSP: The Anatomy of a JSP Page",
+          "topicId": "e53eca8b-2424-45cb-a14e-c39b6744477b",
+          "subject": "Unit 2",
+          "category": "study",
+          "status": "todo",
+          "priority": "low",
+          "difficulty": "easy",
+          "deadline": "2026-07-31",
+          "progress": 0,
+          "recurrence": "weekly",
+          "estimatedMinutes": 25
+        },
+        {
+          "id": "892ae7be-ab35-4938-bad6-4aeeaefad671",
+          "title": "Study JSP Processing",
+          "topicId": "36893155-ce5e-45cf-ab27-71543ac3248e",
+          "subject": "Unit 2",
+          "category": "study",
+          "status": "todo",
+          "priority": "low",
+          "difficulty": "easy",
+          "deadline": "2026-08-01",
+          "progress": 0,
+          "recurrence": "weekly",
+          "estimatedMinutes": 25
+        },
+        {
+          "id": "f5243ae6-b10f-422c-affc-3e0149c92b65",
+          "title": "Study Declarations",
+          "topicId": "817a2dec-aef0-4a79-b2f1-4639a71c2b52",
+          "subject": "Unit 2",
+          "category": "study",
+          "status": "todo",
+          "priority": "low",
+          "difficulty": "easy",
+          "deadline": "2026-08-02",
+          "progress": 0,
+          "recurrence": "weekly",
+          "estimatedMinutes": 25
+        },
+        {
+          "id": "21323e67-e693-4ce4-b890-73103b7ae472",
+          "title": "Study Directives",
+          "topicId": "bbbbcf7f-0857-4028-b399-56235334b04e",
+          "subject": "Unit 2",
+          "category": "study",
+          "status": "todo",
+          "priority": "low",
+          "difficulty": "easy",
+          "deadline": "2026-08-03",
+          "progress": 0,
+          "recurrence": "weekly",
+          "estimatedMinutes": 25
+        },
+        {
+          "id": "34791b76-36a5-4756-91dc-7c7692769139",
+          "title": "Study Expressions",
+          "topicId": "06d58273-192d-4bb2-9943-438ea21f525c",
+          "subject": "Unit 2",
+          "category": "study",
+          "status": "todo",
+          "priority": "low",
+          "difficulty": "easy",
+          "deadline": "2026-08-04",
+          "progress": 0,
+          "recurrence": "weekly",
+          "estimatedMinutes": 25
         }
       ],
       "roadmapStatus": "ready",
-      "lastProcessedAt": "2026-05-29T14:35:33.740Z",
-      "updatedAt": "2026-05-29T14:35:33.740Z"
+      "lastProcessedAt": "2026-06-05T10:48:06.779Z",
+      "updatedAt": "2026-06-05T10:48:06.779Z"
     }
   },
   {
@@ -2723,5 +2723,658 @@
     "passwordHash": "db466af8acafd63f7f7f79178c12fc60f1969b5ce99f2949012f12eef602e93130d59be5c794390d45bb5028a8cdaec6ad04a36faa3ffdbfdb22b2812203f110",
     "passwordSalt": "aa9e2d516afc34d8bdcda719765f47ce",
     "authProvider": "local"
+  },
+  {
+    "id": "b35429f0-bae3-4584-9089-b91c9807c96f",
+    "name": "Sweet Potatoes",
+    "email": "potatoessweet08@gmail.com",
+    "createdAt": "2026-06-17T11:13:51.570Z",
+    "onboardingCompleted": true,
+    "survey": {
+      "focusWindow": "short",
+      "taskPace": "tiny",
+      "overwhelmTrigger": "starting",
+      "supportStyle": "gentle",
+      "energyPattern": "waves"
+    },
+    "studyProfile": {
+      "studying": "B.Tech CSE",
+      "goal": "course",
+      "preferences": "",
+      "manualSyllabus": "Introduction: What is an Operating System, Simple Batch Systems, Multiprogrammed Batches systems, Time Sharing Systems, Personal-computer systems, Parallel systems, Distributed Systems, Real-Time Systems, OS – A Resource Manager.\r\n\r\n\r\nProcesses: Introduction, Process states, process management, Interrupts, Interprocess Communication\r\n\r\n\r\nThreads: Introduction, Thread states, Thread Operation, Threading Models\r\n\r\n\r\nProcessor Scheduling: Scheduling levels, preemptive vs no preemptive scheduling, priorities, scheduling objective, scheduling criteria, scheduling algorithms, demand scheduling, real time scheduling.",
+      "fixedCommitments": "",
+      "choresAndErrands": "",
+      "wellbeingAndFun": "",
+      "planningNotes": "",
+      "syllabusAsset": null,
+      "topics": [
+        {
+          "id": "042675d0-e34e-4b53-b144-9f94fef8d98c",
+          "title": "Introduction: What is an Operating System",
+          "subject": "Study and learning",
+          "difficulty": "easy",
+          "priority": "high",
+          "estimatedMinutes": 25,
+          "sourceLine": 2
+        },
+        {
+          "id": "033f5d54-e47b-4683-ab77-5a3e3b80d5f0",
+          "title": "Simple Batch Systems",
+          "subject": "Study and learning",
+          "difficulty": "easy",
+          "priority": "high",
+          "estimatedMinutes": 25,
+          "sourceLine": 3
+        },
+        {
+          "id": "12bfcbb6-9df3-4bc1-9562-de975a61e619",
+          "title": "Multiprogrammed Batches systems",
+          "subject": "Study and learning",
+          "difficulty": "easy",
+          "priority": "high",
+          "estimatedMinutes": 25,
+          "sourceLine": 4
+        },
+        {
+          "id": "6289b313-6f75-44c0-bcee-45916d81f9b9",
+          "title": "Time Sharing Systems",
+          "subject": "Study and learning",
+          "difficulty": "easy",
+          "priority": "high",
+          "estimatedMinutes": 25,
+          "sourceLine": 5
+        },
+        {
+          "id": "5794500f-a3b9-4639-b348-876805793c4e",
+          "title": "Personal-computer systems",
+          "subject": "Study and learning",
+          "difficulty": "easy",
+          "priority": "high",
+          "estimatedMinutes": 25,
+          "sourceLine": 6
+        },
+        {
+          "id": "9bdb813a-fb62-4c33-987a-0d921917bd18",
+          "title": "Parallel systems",
+          "subject": "Study and learning",
+          "difficulty": "easy",
+          "priority": "medium",
+          "estimatedMinutes": 25,
+          "sourceLine": 7
+        },
+        {
+          "id": "e3f8af83-9f96-45c9-89c7-4068c8b03735",
+          "title": "Distributed Systems",
+          "subject": "Study and learning",
+          "difficulty": "easy",
+          "priority": "medium",
+          "estimatedMinutes": 25,
+          "sourceLine": 8
+        },
+        {
+          "id": "0ba70445-a37a-457d-9261-c016be5c036b",
+          "title": "Real-Time Systems",
+          "subject": "Study and learning",
+          "difficulty": "easy",
+          "priority": "medium",
+          "estimatedMinutes": 25,
+          "sourceLine": 9
+        },
+        {
+          "id": "020b1983-c457-455f-a749-062da3d5fda0",
+          "title": "OS – A Resource Manager.",
+          "subject": "Study and learning",
+          "difficulty": "easy",
+          "priority": "medium",
+          "estimatedMinutes": 25,
+          "sourceLine": 10
+        },
+        {
+          "id": "e2cc7775-c697-4b15-95a8-c30f671883cf",
+          "title": "Processes: Introduction",
+          "subject": "Study and learning",
+          "difficulty": "easy",
+          "priority": "medium",
+          "estimatedMinutes": 25,
+          "sourceLine": 11
+        },
+        {
+          "id": "12b82bd5-903c-4e50-86b0-1f123521fc45",
+          "title": "Process states",
+          "subject": "Study and learning",
+          "difficulty": "easy",
+          "priority": "medium",
+          "estimatedMinutes": 25,
+          "sourceLine": 12
+        },
+        {
+          "id": "503e60f5-8662-46c8-87b7-111b3c9b3a18",
+          "title": "process management",
+          "subject": "Study and learning",
+          "difficulty": "easy",
+          "priority": "medium",
+          "estimatedMinutes": 25,
+          "sourceLine": 13
+        },
+        {
+          "id": "e4fd16f5-8e49-482b-b354-1ee728be4553",
+          "title": "Interrupts",
+          "subject": "Study and learning",
+          "difficulty": "easy",
+          "priority": "medium",
+          "estimatedMinutes": 25,
+          "sourceLine": 14
+        },
+        {
+          "id": "d46e2fed-30cc-4586-8c1b-834a7bf0b0e0",
+          "title": "Interprocess Communication",
+          "subject": "Study and learning",
+          "difficulty": "easy",
+          "priority": "medium",
+          "estimatedMinutes": 25,
+          "sourceLine": 15
+        },
+        {
+          "id": "cf4e11cf-2e09-4551-a928-71526b894788",
+          "title": "Threads: Introduction",
+          "subject": "Study and learning",
+          "difficulty": "easy",
+          "priority": "medium",
+          "estimatedMinutes": 25,
+          "sourceLine": 16
+        },
+        {
+          "id": "1e0fb741-9f3a-4d4f-b9eb-603c9ec288d0",
+          "title": "Thread states",
+          "subject": "Study and learning",
+          "difficulty": "easy",
+          "priority": "medium",
+          "estimatedMinutes": 25,
+          "sourceLine": 17
+        },
+        {
+          "id": "26aef16c-210f-4297-9be3-a05398539189",
+          "title": "Thread Operation",
+          "subject": "Study and learning",
+          "difficulty": "easy",
+          "priority": "medium",
+          "estimatedMinutes": 25,
+          "sourceLine": 18
+        },
+        {
+          "id": "ae10f9b7-ab6f-44d9-968a-d5ee2bab4403",
+          "title": "Threading Models",
+          "subject": "Study and learning",
+          "difficulty": "easy",
+          "priority": "low",
+          "estimatedMinutes": 25,
+          "sourceLine": 19
+        },
+        {
+          "id": "e835d6a8-1b26-47d9-818e-ba4cd44d35cf",
+          "title": "Processor Scheduling: Scheduling levels",
+          "subject": "Study and learning",
+          "difficulty": "easy",
+          "priority": "low",
+          "estimatedMinutes": 25,
+          "sourceLine": 20
+        },
+        {
+          "id": "951bb8b2-c995-4641-9f50-ad32b7507969",
+          "title": "preemptive vs no preemptive scheduling",
+          "subject": "Study and learning",
+          "difficulty": "easy",
+          "priority": "low",
+          "estimatedMinutes": 25,
+          "sourceLine": 21
+        },
+        {
+          "id": "74d48d43-ac7c-481f-aee2-5a5a7c84d5e6",
+          "title": "priorities",
+          "subject": "Study and learning",
+          "difficulty": "easy",
+          "priority": "low",
+          "estimatedMinutes": 25,
+          "sourceLine": 22
+        },
+        {
+          "id": "455d7bd8-8dec-4d46-b880-4611b7ddc9f6",
+          "title": "scheduling objective",
+          "subject": "Study and learning",
+          "difficulty": "easy",
+          "priority": "low",
+          "estimatedMinutes": 25,
+          "sourceLine": 23
+        },
+        {
+          "id": "e4a1a55f-cc64-4703-a27f-577cc0bb4d44",
+          "title": "scheduling criteria",
+          "subject": "Study and learning",
+          "difficulty": "easy",
+          "priority": "low",
+          "estimatedMinutes": 25,
+          "sourceLine": 24
+        },
+        {
+          "id": "6d77be7c-509b-4e98-b1c4-2ed5e60dce36",
+          "title": "scheduling algorithms",
+          "subject": "Study and learning",
+          "difficulty": "easy",
+          "priority": "low",
+          "estimatedMinutes": 25,
+          "sourceLine": 25
+        },
+        {
+          "id": "b14fb46a-2da2-4717-bc2c-d7dfca0862f1",
+          "title": "demand scheduling",
+          "subject": "Study and learning",
+          "difficulty": "easy",
+          "priority": "low",
+          "estimatedMinutes": 25,
+          "sourceLine": 26
+        },
+        {
+          "id": "9bbd3b3e-d7c3-46ff-868d-6e8fa3656e92",
+          "title": "real time scheduling.",
+          "subject": "Study and learning",
+          "difficulty": "easy",
+          "priority": "low",
+          "estimatedMinutes": 25,
+          "sourceLine": 27
+        }
+      ],
+      "generatedTasks": [
+        {
+          "id": "541152c1-9997-4d38-9a66-1b79f89bc6a2",
+          "title": "Study Introduction: What is an Operating System",
+          "topicId": "042675d0-e34e-4b53-b144-9f94fef8d98c",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "high",
+          "difficulty": "easy",
+          "deadline": "2026-06-18",
+          "progress": 0,
+          "recurrence": "revision_1_3_7",
+          "estimatedMinutes": 25
+        },
+        {
+          "id": "3d3bc851-6b1b-4f93-adda-52250ce6fed8",
+          "title": "Study Simple Batch Systems",
+          "topicId": "033f5d54-e47b-4683-ab77-5a3e3b80d5f0",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "high",
+          "difficulty": "easy",
+          "deadline": "2026-06-19",
+          "progress": 0,
+          "recurrence": "revision_1_3_7",
+          "estimatedMinutes": 25
+        },
+        {
+          "id": "e5f0f4e7-a878-4a49-bf11-44dde1495d5a",
+          "title": "Study Multiprogrammed Batches systems",
+          "topicId": "12bfcbb6-9df3-4bc1-9562-de975a61e619",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "high",
+          "difficulty": "easy",
+          "deadline": "2026-06-20",
+          "progress": 0,
+          "recurrence": "revision_1_3_7",
+          "estimatedMinutes": 25
+        },
+        {
+          "id": "2e34be93-5b58-4d1f-a1ec-ed7b9f608b8f",
+          "title": "Study Time Sharing Systems",
+          "topicId": "6289b313-6f75-44c0-bcee-45916d81f9b9",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "high",
+          "difficulty": "easy",
+          "deadline": "2026-06-21",
+          "progress": 0,
+          "recurrence": "revision_1_3_7",
+          "estimatedMinutes": 25
+        },
+        {
+          "id": "b5f48d66-ce4c-4107-832b-496e69df2a6d",
+          "title": "Study Personal-computer systems",
+          "topicId": "5794500f-a3b9-4639-b348-876805793c4e",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "high",
+          "difficulty": "easy",
+          "deadline": "2026-06-22",
+          "progress": 0,
+          "recurrence": "revision_1_3_7",
+          "estimatedMinutes": 25
+        },
+        {
+          "id": "824294ec-cc7a-4cba-b85b-e53a604bba99",
+          "title": "Study Parallel systems",
+          "topicId": "9bdb813a-fb62-4c33-987a-0d921917bd18",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "difficulty": "easy",
+          "deadline": "2026-06-23",
+          "progress": 0,
+          "recurrence": "weekly",
+          "estimatedMinutes": 25
+        },
+        {
+          "id": "20c020a6-313f-49b0-b755-89e74dac0c75",
+          "title": "Study Distributed Systems",
+          "topicId": "e3f8af83-9f96-45c9-89c7-4068c8b03735",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "difficulty": "easy",
+          "deadline": "2026-06-24",
+          "progress": 0,
+          "recurrence": "weekly",
+          "estimatedMinutes": 25
+        },
+        {
+          "id": "317c23a2-eda6-48c4-ad8d-7a2930d63931",
+          "title": "Study Real-Time Systems",
+          "topicId": "0ba70445-a37a-457d-9261-c016be5c036b",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "difficulty": "easy",
+          "deadline": "2026-06-25",
+          "progress": 0,
+          "recurrence": "weekly",
+          "estimatedMinutes": 25
+        },
+        {
+          "id": "e26732dd-930a-4030-bc72-21552735ca12",
+          "title": "Study OS – A Resource Manager.",
+          "topicId": "020b1983-c457-455f-a749-062da3d5fda0",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "difficulty": "easy",
+          "deadline": "2026-06-26",
+          "progress": 0,
+          "recurrence": "weekly",
+          "estimatedMinutes": 25
+        },
+        {
+          "id": "fd013ef6-7962-4333-8a97-021ccd0ba443",
+          "title": "Study Processes: Introduction",
+          "topicId": "e2cc7775-c697-4b15-95a8-c30f671883cf",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "difficulty": "easy",
+          "deadline": "2026-06-27",
+          "progress": 0,
+          "recurrence": "weekly",
+          "estimatedMinutes": 25
+        },
+        {
+          "id": "fd5d90d8-534a-46d7-893c-554470fd370e",
+          "title": "Study Process states",
+          "topicId": "12b82bd5-903c-4e50-86b0-1f123521fc45",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "difficulty": "easy",
+          "deadline": "2026-06-28",
+          "progress": 0,
+          "recurrence": "weekly",
+          "estimatedMinutes": 25
+        },
+        {
+          "id": "7b613e8a-a278-43fd-940f-f44f3b048ec8",
+          "title": "Study process management",
+          "topicId": "503e60f5-8662-46c8-87b7-111b3c9b3a18",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "difficulty": "easy",
+          "deadline": "2026-06-29",
+          "progress": 0,
+          "recurrence": "weekly",
+          "estimatedMinutes": 25
+        },
+        {
+          "id": "1beb12ec-6b35-48ec-ac58-f5e7ca06ce37",
+          "title": "Study Interrupts",
+          "topicId": "e4fd16f5-8e49-482b-b354-1ee728be4553",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "difficulty": "easy",
+          "deadline": "2026-06-30",
+          "progress": 0,
+          "recurrence": "weekly",
+          "estimatedMinutes": 25
+        },
+        {
+          "id": "0cdd3001-d47c-4501-bd54-9c848797118f",
+          "title": "Study Interprocess Communication",
+          "topicId": "d46e2fed-30cc-4586-8c1b-834a7bf0b0e0",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "difficulty": "easy",
+          "deadline": "2026-07-01",
+          "progress": 0,
+          "recurrence": "weekly",
+          "estimatedMinutes": 25
+        },
+        {
+          "id": "be67a0bf-91a5-4492-9a86-61eb2fbf0436",
+          "title": "Study Threads: Introduction",
+          "topicId": "cf4e11cf-2e09-4551-a928-71526b894788",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "difficulty": "easy",
+          "deadline": "2026-07-02",
+          "progress": 0,
+          "recurrence": "weekly",
+          "estimatedMinutes": 25
+        },
+        {
+          "id": "45c8a26a-32fb-4afa-bc12-97be32894e00",
+          "title": "Study Thread states",
+          "topicId": "1e0fb741-9f3a-4d4f-b9eb-603c9ec288d0",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "difficulty": "easy",
+          "deadline": "2026-07-03",
+          "progress": 0,
+          "recurrence": "weekly",
+          "estimatedMinutes": 25
+        },
+        {
+          "id": "8953d087-fe9d-4287-89d1-c403f3d5800e",
+          "title": "Study Thread Operation",
+          "topicId": "26aef16c-210f-4297-9be3-a05398539189",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "medium",
+          "difficulty": "easy",
+          "deadline": "2026-07-04",
+          "progress": 0,
+          "recurrence": "weekly",
+          "estimatedMinutes": 25
+        },
+        {
+          "id": "3e92dfe2-b6e4-4f2e-b048-48a90b7363b6",
+          "title": "Study Threading Models",
+          "topicId": "ae10f9b7-ab6f-44d9-968a-d5ee2bab4403",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "low",
+          "difficulty": "easy",
+          "deadline": "2026-07-05",
+          "progress": 0,
+          "recurrence": "weekly",
+          "estimatedMinutes": 25
+        },
+        {
+          "id": "2c9fe1f7-1c95-4b1a-a521-82fdcb0284ce",
+          "title": "Study Processor Scheduling: Scheduling levels",
+          "topicId": "e835d6a8-1b26-47d9-818e-ba4cd44d35cf",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "low",
+          "difficulty": "easy",
+          "deadline": "2026-07-06",
+          "progress": 0,
+          "recurrence": "weekly",
+          "estimatedMinutes": 25
+        },
+        {
+          "id": "b5c477a3-5f86-489f-b0a6-ef374df43b9c",
+          "title": "Study preemptive vs no preemptive scheduling",
+          "topicId": "951bb8b2-c995-4641-9f50-ad32b7507969",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "low",
+          "difficulty": "easy",
+          "deadline": "2026-07-07",
+          "progress": 0,
+          "recurrence": "weekly",
+          "estimatedMinutes": 25
+        },
+        {
+          "id": "edc51dec-763d-434a-968b-cbaa61c375fd",
+          "title": "Study priorities",
+          "topicId": "74d48d43-ac7c-481f-aee2-5a5a7c84d5e6",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "low",
+          "difficulty": "easy",
+          "deadline": "2026-07-08",
+          "progress": 0,
+          "recurrence": "weekly",
+          "estimatedMinutes": 25
+        },
+        {
+          "id": "423b9332-9b5f-41b1-8a13-57ee9311f2da",
+          "title": "Study scheduling objective",
+          "topicId": "455d7bd8-8dec-4d46-b880-4611b7ddc9f6",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "low",
+          "difficulty": "easy",
+          "deadline": "2026-07-09",
+          "progress": 0,
+          "recurrence": "weekly",
+          "estimatedMinutes": 25
+        },
+        {
+          "id": "b1fefb00-3877-497f-af6d-586047db9b0c",
+          "title": "Study scheduling criteria",
+          "topicId": "e4a1a55f-cc64-4703-a27f-577cc0bb4d44",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "low",
+          "difficulty": "easy",
+          "deadline": "2026-07-10",
+          "progress": 0,
+          "recurrence": "weekly",
+          "estimatedMinutes": 25
+        },
+        {
+          "id": "dc399ceb-469a-4410-855d-5f89d167cb02",
+          "title": "Study scheduling algorithms",
+          "topicId": "6d77be7c-509b-4e98-b1c4-2ed5e60dce36",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "low",
+          "difficulty": "easy",
+          "deadline": "2026-07-11",
+          "progress": 0,
+          "recurrence": "weekly",
+          "estimatedMinutes": 25
+        },
+        {
+          "id": "1931cdbd-7e5d-4ad4-92c4-cdcdb096fd32",
+          "title": "Study demand scheduling",
+          "topicId": "b14fb46a-2da2-4717-bc2c-d7dfca0862f1",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "low",
+          "difficulty": "easy",
+          "deadline": "2026-07-12",
+          "progress": 0,
+          "recurrence": "weekly",
+          "estimatedMinutes": 25
+        },
+        {
+          "id": "63fd92ff-a1ea-4559-bac6-62925f8ebd08",
+          "title": "Study real time scheduling.",
+          "topicId": "9bbd3b3e-d7c3-46ff-868d-6e8fa3656e92",
+          "subject": "Study and learning",
+          "category": "study",
+          "status": "todo",
+          "priority": "low",
+          "difficulty": "easy",
+          "deadline": "2026-07-13",
+          "progress": 0,
+          "recurrence": "weekly",
+          "estimatedMinutes": 25
+        }
+      ],
+      "roadmapStatus": "ready",
+      "lastProcessedAt": "2026-06-17T11:24:26.092Z",
+      "updatedAt": "2026-06-17T11:24:26.092Z"
+    },
+    "passwordHash": "",
+    "passwordSalt": "",
+    "authProvider": "google",
+    "googleId": "106418136928968543175"
+  },
+  {
+    "id": "e2e07a43-2b37-4b5a-b613-8acc886b5cf7",
+    "name": "Nemesispoet",
+    "email": "nemesispoet@gmail.com",
+    "createdAt": "2026-06-17T13:18:34.781Z",
+    "onboardingCompleted": true,
+    "survey": {
+      "focusWindow": "short",
+      "taskPace": "tiny",
+      "overwhelmTrigger": "starting",
+      "supportStyle": "gentle",
+      "energyPattern": "waves"
+    },
+    "studyProfile": {},
+    "passwordHash": "",
+    "passwordSalt": "",
+    "authProvider": "google",
+    "googleId": "110460303322532381668"
   }
 ]

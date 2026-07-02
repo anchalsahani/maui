@@ -26,7 +26,7 @@ export async function GET(request: Request) {
   const oauthError = requestUrl.searchParams.get("error");
   const { redirectUri } = getGoogleOAuthConfig();
   const dashboardUrl = new URL("/dashboard", redirectUri);
-  const onboardingUrl = new URL("/onboarding", redirectUri);
+  const personalizationUrl = new URL("/personalization", redirectUri);
   const signupUrl = new URL("/signup", redirectUri);
 
   const cookieHeader = request.headers.get("cookie") ?? "";
@@ -88,7 +88,7 @@ export async function GET(request: Request) {
     const redirectTarget =
       publicUser.onboardingCompleted && publicUser.survey
         ? dashboardUrl
-        : onboardingUrl;
+        : personalizationUrl;
     const response = NextResponse.redirect(redirectTarget);
 
     response.cookies.set({

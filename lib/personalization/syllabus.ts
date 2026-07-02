@@ -8,6 +8,10 @@ import type {
   SyllabusAsset,
   SyllabusTopic,
 } from "@/lib/auth/types";
+import {
+  AIProviderUnavailableError,
+  createStructuredResponse,
+} from "@/lib/ai/provider";
 
 const allowedGoals: StudyGoal[] = ["exam", "course", "skill", "revision", "other"];
 const allowedFileTypes = new Set([
@@ -17,6 +21,21 @@ const allowedFileTypes = new Set([
   "text/plain",
 ]);
 const OCR_PAGE_LIMIT = 10;
+const KNOWN_PROFILE_SUBJECTS = [
+  "Study and learning",
+  "Fixed commitments and appointments",
+  "Chores, errands, and household work",
+  "Wellbeing, games, rest, and social time",
+  "Planning notes and support rules",
+] as const;
+
+interface AiSyllabusTopic {
+  title: string;
+  subject: string;
+  difficulty: "easy" | "medium" | "hard";
+  priority: "low" | "medium" | "high";
+  estimatedMinutes: number;
+}
 
 export interface PersonalizationInput {
   studying: string;
@@ -172,7 +191,7 @@ async function extractTextFromScannedPdf(buffer: Buffer) {
   }
 }
 
-export function buildStudyProfile({
+export async function buildStudyProfile({
   input,
   existing,
   asset,
@@ -181,7 +200,12 @@ export function buildStudyProfile({
   existing: StudyProfile | null;
   asset: SyllabusAsset | null;
 }) {
-  const topics = parseSyllabusTopics(buildWholeDaySource(input), input.studying);
+  const source = buildWholeDaySource(input);
+  const fallbackTopics = parseSyllabusTopics(source, input.studying);
+  const aiTopics = shouldUseAiTopicExtraction(source, fallbackTopics)
+    ? await extractTopicsWithAi(source, input.studying)
+    : [];
+  const topics = aiTopics.length > 1 ? aiTopics : fallbackTopics;
   const generatedTasks = generateStudyTasks(topics);
   const now = new Date().toISOString();
 

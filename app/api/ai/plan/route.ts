@@ -5,6 +5,8 @@ import {
   AIProviderUnavailableError,
   createStructuredResponse,
 } from "@/lib/ai/provider";
+import { getDashboardState } from "@/lib/dashboard/state-store";
+import { getRewardSummary, listRewardEvents } from "@/lib/rewards/store";
 import type {
   PlannerAllocation,
   PlannerRequestInput,
@@ -18,6 +20,7 @@ const planSchema = {
   type: "object",
   additionalProperties: false,
   required: [
+    "situation",
     "plan",
     "headline",
     "framing",
@@ -30,6 +33,81 @@ const planSchema = {
     "avoidedOverload",
   ],
   properties: {
+    situation: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "detectedObligations",
+        "constraints",
+        "emotionalState",
+        "emotionReason",
+        "timePressure",
+        "strategyType",
+        "parallelOptions",
+        "enoughForToday",
+      ],
+      properties: {
+        detectedObligations: {
+          type: "array",
+          minItems: 1,
+          maxItems: 6,
+          items: {
+            type: "object",
+            additionalProperties: false,
+            required: ["id", "label", "category", "urgency", "whyItMatters"],
+            properties: {
+              id: { type: "string", maxLength: 40 },
+              label: { type: "string", maxLength: 90 },
+              category: {
+                type: "string",
+                enum: ["study", "chore", "commitment", "wellbeing", "admin"],
+              },
+              urgency: { type: "string", enum: ["low", "medium", "high"] },
+              whyItMatters: { type: "string", maxLength: 160 },
+            },
+          },
+        },
+        constraints: {
+          type: "array",
+          minItems: 1,
+          maxItems: 6,
+          items: { type: "string", maxLength: 130 },
+        },
+        emotionalState: {
+          type: "string",
+          enum: ["steady", "stressed", "tired", "overwhelmed", "hopeful"],
+        },
+        emotionReason: { type: "string", maxLength: 220 },
+        timePressure: { type: "string", enum: ["low", "medium", "high"] },
+        strategyType: {
+          type: "string",
+          enum: [
+            "parallel_options",
+            "alternating_loops",
+            "deadline_triage",
+            "burnout_protection",
+            "interruption_reentry",
+          ],
+        },
+        parallelOptions: {
+          type: "array",
+          minItems: 2,
+          maxItems: 5,
+          items: {
+            type: "object",
+            additionalProperties: false,
+            required: ["label", "bestWhen", "firstAction", "reentryAction"],
+            properties: {
+              label: { type: "string", maxLength: 80 },
+              bestWhen: { type: "string", maxLength: 130 },
+              firstAction: { type: "string", maxLength: 130 },
+              reentryAction: { type: "string", maxLength: 130 },
+            },
+          },
+        },
+        enoughForToday: { type: "string", maxLength: 200 },
+      },
+    },
     plan: {
       type: "array",
       minItems: 0,
@@ -126,7 +204,21 @@ export async function POST(request: Request) {
 
   const body = (await request.json().catch(() => ({}))) as PlannerRequestInput;
   const tasks = getPlanningTasks(body, user.studyProfile?.generatedTasks ?? []);
-  const fallback = buildFallbackPlan(tasks, body);
+  const dashboardState = await getDashboardState(user.id);
+  const rewardEvents = await listRewardEvents(user.id);
+  const historicalSignals = {
+    recentMoments: dashboardState?.recentMoments?.slice(0, 8) ?? [],
+    activeSession: dashboardState?.session?.status ?? "idle",
+    pendingTasks: dashboardState?.tasks?.length ?? 0,
+    completedTaskIds: dashboardState?.completedTaskIds?.slice(0, 12) ?? [],
+    rewardSummary: getRewardSummary(rewardEvents),
+    recentRewardEvents: rewardEvents.slice(0, 8).map((event) => ({
+      type: event.type,
+      title: event.title,
+      createdAt: event.createdAt,
+    })),
+  };
+  const fallback = buildFallbackPlan(tasks, body, historicalSignals);
 
   if (tasks.length === 0) {
     return NextResponse.json({
@@ -141,17 +233,30 @@ export async function POST(request: Request) {
       name: "planner_allocation",
       schema: planSchema,
       instructions:
-        "You are Maui, an ADHD-aware personal mentor for people with executive dysfunction. Your job is not only task scheduling: observe the user's work pattern, emotional condition, deadlines, routines, avoidance loops, and energy level, then create a healthy day plan. Use fixed commitments as immovable anchors. Place study, chores, errands, meals, games, social time, and rest around those anchors. Treat planning notes as behavioral rules. Detect likely burnout from signs such as overwhelm, low energy, quitting midway, too many unfinished tasks, pressure-heavy deadlines, or emotional rant context. If burnout risk is high, reduce scope and protect recovery. If energy is steady, keep momentum without overloading. Prevent gaming/phone spirals when mentioned, but do not shame the user. Break assignments into tiny starts, name clear stopping points, and choose a next action that can be started in under two minutes. Prefer gentle guidance, plain language, fewer choices, dopamine-friendly wins, and compassionate accountability. Do not tell the user to finish an entire syllabus in one day. Return only schema-valid JSON.",
+        "You are Maui, an ADHD-aware mental-health support planner for executive dysfunction. Follow this exact reasoning: Input -> Detect tasks, constraints, emotion, time pressure -> choose strategy type -> output. First identify ALL active obligations as parallel options, never as a single forced path. Include studying, chores, kitchen work, fixed commitments, rest, admin, and emotional regulation when present. Analyze emotion from current input and historical signals. Correct misclassifications: phrases like 'idk what to do', 'can't choose', 'everything feels too much', 'stuck', or blank/shutdown language mean confusion/overwhelm, not calm. Adapt to time pressure such as an exam tomorrow, deadline today, low sleep, interruptions, and low energy. When responsibilities compete, create flexible loops or alternating blocks such as study + kitchen cycles, not rigid sequential steps. Reduce decision paralysis: validate the conflict, show the smallest meaningful first action, and name re-entry after interruption. Prioritize momentum over completion. Define realistic enough-for-today based on urgency. Avoid generic productivity advice, shame, and long reading. Do not duplicate dashboard-style full task lists. Return only schema-valid JSON.",
       maxOutputTokens: 2600,
       input: {
         availableMinutes: clampNumber(body.availableMinutes, 15, 240, 60),
+        detectedEmotionHint: detectEmotionFromText(
+          [
+            body.emotionState,
+            body.rantContext,
+            body.todayNotes,
+            ...historicalSignals.recentMoments,
+          ].join("\n")
+        ),
         emotionState: body.emotionState ?? "steady",
         burnoutRisk: body.burnoutRisk ?? "low",
         rantContext: typeof body.rantContext === "string" ? body.rantContext.slice(0, 600) : "",
         todayNotes: typeof body.todayNotes === "string" ? body.todayNotes.slice(0, 5000) : "",
+        historicalSignals,
         mentorGoals: [
           "reduce overwhelm",
           "make the first action obvious",
+          "surface all active obligations as parallel choices",
+          "correct calm/neutral misclassification when confusion or stuckness is present",
+          "use loops or alternating blocks when responsibilities compete",
+          "define realistic enough-for-today",
           "protect energy and sleep",
           "adapt to emotional state",
           "balance study with commitments, chores, rest, and recovery",
@@ -255,9 +360,52 @@ function getPlanningTasks(
     }));
 }
 
-function buildFallbackPlan(tasks: TaskItem[], input: PlannerRequestInput): PlannerResult {
+function buildFallbackPlan(
+  tasks: TaskItem[],
+  input: PlannerRequestInput,
+  historicalSignals: {
+    recentMoments: string[];
+    activeSession: string;
+    pendingTasks: number;
+    completedTaskIds: string[];
+    rewardSummary: {
+      totalPoints: number;
+      sessionsCompleted: number;
+      microTasksCompleted: number;
+      streak: number;
+    };
+    recentRewardEvents: Array<{
+      type: string;
+      title: string;
+      createdAt: string;
+    }>;
+  }
+): PlannerResult {
   const availableMinutes = clampNumber(input.availableMinutes, 15, 240, 60);
-  const risk = input.burnoutRisk ?? "low";
+  const detectedEmotion = detectEmotionFromText(
+    [
+      input.emotionState,
+      input.rantContext,
+      input.todayNotes,
+      ...historicalSignals.recentMoments,
+    ].join("\n")
+  );
+  const risk =
+    detectedEmotion === "overwhelmed"
+      ? "high"
+      : detectedEmotion === "tired" || detectedEmotion === "stressed"
+        ? "medium"
+        : input.burnoutRisk ?? "low";
+  const obligations = detectObligations(tasks, input.todayNotes ?? "");
+  const hasCompetingResponsibilities = obligations.length > 1;
+  const hasHighTimePressure = hasUrgentLanguage(input.todayNotes ?? "") || tasks.some(isHighPressureTask);
+  const strategyType = risk === "high"
+    ? "burnout_protection"
+    : hasHighTimePressure
+      ? "deadline_triage"
+      : hasCompetingResponsibilities
+        ? "alternating_loops"
+        : "parallel_options";
   const blockLimit = risk === "high" ? 15 : risk === "medium" ? 25 : 45;
   const maxTasks = risk === "high" ? 1 : risk === "medium" ? 2 : 3;
   const sortedTasks = [...tasks].sort(
@@ -289,10 +437,31 @@ function buildFallbackPlan(tasks: TaskItem[], input: PlannerRequestInput): Plann
   });
 
   return {
+    situation: {
+      detectedObligations: obligations,
+      constraints: detectConstraints(input, historicalSignals, hasHighTimePressure),
+      emotionalState: detectedEmotion,
+      emotionReason: getEmotionReason(detectedEmotion),
+      timePressure: hasHighTimePressure ? "high" : availableMinutes < 30 ? "medium" : "low",
+      strategyType,
+      parallelOptions: buildParallelOptions(obligations, strategyType),
+      enoughForToday: buildEnoughForToday({
+        hasHighTimePressure,
+        risk,
+        firstTaskTitle: plan[0]?.title,
+      }),
+    },
     plan,
-    headline: "Momentum first, perfection later.",
+    headline:
+      strategyType === "alternating_loops"
+        ? "Two tracks, one tiny loop at a time."
+        : strategyType === "deadline_triage"
+          ? "Handle the pressure without trying to do everything."
+          : "Momentum first, perfection later.",
     framing:
-      "You do not need a perfect productivity system today. Start with the easiest useful action, protect your energy, and keep transitions small.",
+      hasCompetingResponsibilities
+        ? "You are not failing because there are multiple real demands. Treat them as parallel options and use short loops so one responsibility does not erase the other."
+        : "You do not need a perfect productivity system today. Start with the easiest useful action, protect your energy, and keep transitions small.",
     dayAtGlance: buildFallbackDayBlocks(plan, risk),
     priorityOrder: plan.map((item) => item.title).slice(0, 5),
     hardRules: [
@@ -365,6 +534,211 @@ function buildFallbackDayBlocks(
       energy: "low" as const,
     },
   ];
+}
+
+function detectEmotionFromText(text: string): "steady" | "stressed" | "tired" | "overwhelmed" | "hopeful" {
+  const normalized = text.toLowerCase();
+
+  if (
+    /\b(idk|i don't know|dont know|can't choose|cant choose|what to do|confused|stuck|freeze|frozen|too much|overwhelmed|spiral|panic)\b/.test(
+      normalized
+    )
+  ) {
+    return "overwhelmed";
+  }
+
+  if (/\b(exam tomorrow|deadline|urgent|late|behind|stress|stressed|pressure)\b/.test(normalized)) {
+    return "stressed";
+  }
+
+  if (/\b(tired|drained|sleepy|exhausted|burnt|burned|low energy)\b/.test(normalized)) {
+    return "tired";
+  }
+
+  if (/\b(hopeful|ready|clear|okay|can start|motivated)\b/.test(normalized)) {
+    return "hopeful";
+  }
+
+  return "steady";
+}
+
+function detectObligations(tasks: TaskItem[], notes: string) {
+  const taskObligations = tasks.slice(0, 5).map((task, index) => ({
+    id: task.id || `task-${index}`,
+    label: task.title,
+    category: getObligationCategory(`${task.category ?? ""} ${task.subject ?? ""} ${task.title}`),
+    urgency: task.priority === "high" || task.urgency >= 8 ? "high" as const : task.urgency >= 6 ? "medium" as const : "low" as const,
+    whyItMatters: task.deadline
+      ? `Deadline pressure around ${task.deadline}.`
+      : "It is already in your active task pool.",
+  }));
+
+  const noteObligations = [
+    {
+      pattern: /\b(kitchen|cook|dishes|clean|laundry|chores?)\b/i,
+      label: "Home or kitchen work",
+      category: "chore" as const,
+    },
+    {
+      pattern: /\b(exam|test|study|revision|syllabus|assignment)\b/i,
+      label: "Study or exam work",
+      category: "study" as const,
+    },
+    {
+      pattern: /\b(appointment|class|meeting|call|commute)\b/i,
+      label: "Fixed commitment",
+      category: "commitment" as const,
+    },
+    {
+      pattern: /\b(rest|sleep|food|eat|meal|break|shower)\b/i,
+      label: "Body care",
+      category: "wellbeing" as const,
+    },
+  ]
+    .filter((item) => item.pattern.test(notes))
+    .map((item, index) => ({
+      id: `context-${index}`,
+      label: item.label,
+      category: item.category,
+      urgency: hasUrgentLanguage(notes) ? "high" as const : "medium" as const,
+      whyItMatters: "Mentioned in the current context, so it competes for attention now.",
+    }));
+
+  const merged = [...noteObligations, ...taskObligations].filter(
+    (item, index, all) =>
+      all.findIndex((candidate) => candidate.label.toLowerCase() === item.label.toLowerCase()) === index
+  );
+
+  return merged.length > 0
+    ? merged.slice(0, 6)
+    : [
+        {
+          id: "emotional-regulation",
+          label: "Reduce decision pressure",
+          category: "wellbeing" as const,
+          urgency: "medium" as const,
+          whyItMatters: "The first obligation is making the next step clear enough to start.",
+        },
+      ];
+}
+
+function getObligationCategory(text: string) {
+  if (/\b(chore|kitchen|cook|dishes|clean|laundry|errand|household)\b/i.test(text)) {
+    return "chore" as const;
+  }
+
+  if (/\b(class|meeting|appointment|call|commute|commitment)\b/i.test(text)) {
+    return "commitment" as const;
+  }
+
+  if (/\b(rest|sleep|meal|break|walk|wellbeing|game|social)\b/i.test(text)) {
+    return "wellbeing" as const;
+  }
+
+  if (/\b(admin|email|form|reply|bill)\b/i.test(text)) {
+    return "admin" as const;
+  }
+
+  return "study" as const;
+}
+
+function hasUrgentLanguage(text: string) {
+  return /\b(exam tomorrow|tomorrow|today|tonight|deadline|urgent|due|late|behind)\b/i.test(text);
+}
+
+function isHighPressureTask(task: TaskItem) {
+  return task.priority === "high" || task.deadlineWeight >= 3 || task.urgency >= 8;
+}
+
+function detectConstraints(
+  input: PlannerRequestInput,
+  historicalSignals: {
+    recentMoments: string[];
+    activeSession: string;
+    pendingTasks: number;
+    completedTaskIds: string[];
+    rewardSummary: { streak: number };
+  },
+  hasHighTimePressure: boolean
+) {
+  const constraints = [
+    hasHighTimePressure ? "Time pressure is high, so scope must be smaller than the full ideal plan." : "",
+    input.availableMinutes ? `${clampNumber(input.availableMinutes, 15, 240, 60)} minutes available right now.` : "",
+    historicalSignals.pendingTasks > 4 ? "There are several active tasks, which can create choice paralysis." : "",
+    historicalSignals.recentMoments.some((moment) => /stopped midway|paused|stuck|overwhelmed/i.test(moment))
+      ? "Recent dashboard activity suggests interruption or stuckness risk."
+      : "",
+    historicalSignals.rewardSummary.streak === 0 ? "Momentum may need a very small first win." : "",
+  ].filter(Boolean);
+
+  return constraints.length > 0 ? constraints.slice(0, 6) : ["Keep the plan short enough to re-enter after interruption."];
+}
+
+function getEmotionReason(emotion: "steady" | "stressed" | "tired" | "overwhelmed" | "hopeful") {
+  switch (emotion) {
+    case "overwhelmed":
+      return "The language or history points to confusion, stuckness, or too many competing options.";
+    case "stressed":
+      return "Deadline or pressure language is present, so urgency should be acknowledged directly.";
+    case "tired":
+      return "Energy appears limited, so the plan should use shorter blocks and easier re-entry.";
+    case "hopeful":
+      return "There are signs of readiness, but the plan should still avoid overloading momentum.";
+    default:
+      return "No strong distress signal was detected, so the plan can stay gentle and practical.";
+  }
+}
+
+function buildParallelOptions(
+  obligations: ReturnType<typeof detectObligations>,
+  strategyType: "parallel_options" | "alternating_loops" | "deadline_triage" | "burnout_protection" | "interruption_reentry"
+) {
+  if (strategyType === "alternating_loops" && obligations.length >= 2) {
+    return [
+      {
+        label: `${obligations[0].label} loop`,
+        bestWhen: "You can focus for one small block before switching.",
+        firstAction: "Set a 10-minute timer and open only the first item.",
+        reentryAction: "Return by reading the last visible line or checklist item.",
+      },
+      {
+        label: `${obligations[1].label} loop`,
+        bestWhen: "The other responsibility is pulling attention hard.",
+        firstAction: "Do one bounded physical or practical action.",
+        reentryAction: "Stop at the timer and name the next tiny step.",
+      },
+    ];
+  }
+
+  return obligations.slice(0, 4).map((obligation) => ({
+    label: obligation.label,
+    bestWhen: obligation.urgency === "high" ? "This is the loudest pressure." : "This feels most startable.",
+    firstAction:
+      obligation.category === "chore"
+        ? "Do the smallest visible piece for five minutes."
+        : "Open the material and touch only the first tiny step.",
+    reentryAction: "Come back by repeating the same first action, not by replanning.",
+  }));
+}
+
+function buildEnoughForToday({
+  hasHighTimePressure,
+  risk,
+  firstTaskTitle,
+}: {
+  hasHighTimePressure: boolean;
+  risk: "low" | "medium" | "high";
+  firstTaskTitle: string | undefined;
+}) {
+  if (risk === "high") {
+    return `Enough is one visible move${firstTaskTitle ? ` on ${firstTaskTitle}` : ""}, plus basic body care.`;
+  }
+
+  if (hasHighTimePressure) {
+    return `Enough is progress on the highest-pressure item${firstTaskTitle ? ` (${firstTaskTitle})` : ""}, not a perfect full-day reset.`;
+  }
+
+  return "Enough is two short starts and a clear re-entry point for tomorrow.";
 }
 
 function clampNumber(value: unknown, min: number, max: number, fallback: number) {

@@ -74,7 +74,7 @@ function SignupContent() {
 
     setSuccess("Signup successful. Let's set up your Maui flow...");
     window.setTimeout(() => {
-      router.push("/onboarding");
+      router.push("/personalization");
       router.refresh();
     }, 1200);
   }
