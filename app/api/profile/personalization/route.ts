@@ -88,13 +88,15 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "User not found." }, { status: 404 });
   }
 
+  const studyProfile = await buildStudyProfile({
+    input: validated.value,
+    existing: storedUser.studyProfile ?? null,
+    asset: fileValidation.asset,
+  });
+
   const updatedUser = await updateUser({
     ...storedUser,
-    studyProfile: buildStudyProfile({
-      input: validated.value,
-      existing: storedUser.studyProfile ?? null,
-      asset: fileValidation.asset,
-    }),
+    studyProfile,
   });
 
   return NextResponse.json({ user: toPublicUser(updatedUser) });

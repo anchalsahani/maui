@@ -227,6 +227,77 @@ export async function buildStudyProfile({
   } satisfies StudyProfile;
 }
 
+function shouldUseAiTopicExtraction(source: string, fallbackTopics: SyllabusTopic[]) {
+  return source.length > 250 && fallbackTopics.length >= 3;
+}
+
+async function extractTopicsWithAi(
+  source: string,
+  studying: string
+): Promise<SyllabusTopic[]> {
+  try {
+    const result = await createStructuredResponse<{ topics: AiSyllabusTopic[] }>({
+      name: "syllabus_topics",
+      schema: {
+        type: "object",
+        additionalProperties: false,
+        required: ["topics"],
+        properties: {
+          topics: {
+            type: "array",
+            minItems: 0,
+            maxItems: 60,
+            items: {
+              type: "object",
+              additionalProperties: false,
+              required: [
+                "title",
+                "subject",
+                "difficulty",
+                "priority",
+                "estimatedMinutes",
+              ],
+              properties: {
+                title: { type: "string", maxLength: 100 },
+                subject: { type: "string", maxLength: 80 },
+                difficulty: { type: "string", enum: ["easy", "medium", "hard"] },
+                priority: { type: "string", enum: ["low", "medium", "high"] },
+                estimatedMinutes: { type: "integer", minimum: 10, maximum: 180 },
+              },
+            },
+          },
+        },
+      },
+      instructions:
+        "Extract concise study, commitment, chore, wellbeing, and planning topics from the user's personalization text. Keep tasks concrete, deduplicate overlapping items, preserve the source category as subject, and return only schema-valid JSON.",
+      maxOutputTokens: 2200,
+      input: {
+        studying,
+        source: source.slice(0, 12000),
+        knownSubjects: KNOWN_PROFILE_SUBJECTS,
+      },
+    });
+
+    return result.topics
+      .filter((topic) => topic.title.trim().length > 0)
+      .map((topic, index) => ({
+        id: randomUUID(),
+        title: topic.title.trim(),
+        subject: topic.subject.trim() || studying,
+        difficulty: topic.difficulty,
+        priority: topic.priority,
+        estimatedMinutes: Math.min(180, Math.max(10, topic.estimatedMinutes)),
+        sourceLine: index + 1,
+      }));
+  } catch (error) {
+    if (!(error instanceof AIProviderUnavailableError)) {
+      console.error("AI syllabus extraction failed", error);
+    }
+
+    return [];
+  }
+}
+
 function buildWholeDaySource(input: PersonalizationInput) {
   return [
     section("Study and learning", input.manualSyllabus),
