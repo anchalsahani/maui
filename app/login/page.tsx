@@ -43,20 +43,20 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[var(--color-bg)]">
-      <div className="absolute right-[-180px] top-[-180px] h-[700px] w-[700px] rounded-full bg-[var(--color-primary)]/15 blur-3xl" />
-      <div className="absolute bottom-[-200px] left-[-120px] h-[500px] w-[500px] rounded-full bg-[var(--color-accent)]/20 blur-3xl" />
+    <div className="relative min-h-dvh overflow-hidden bg-[var(--color-bg)]">
+      <div className="absolute right-[-140px] top-[-140px] h-[360px] w-[360px] rounded-full bg-[var(--color-primary)]/15 blur-3xl sm:right-[-180px] sm:top-[-180px] sm:h-[700px] sm:w-[700px]" />
+      <div className="absolute bottom-[-160px] left-[-120px] h-[320px] w-[320px] rounded-full bg-[var(--color-accent)]/20 blur-3xl sm:bottom-[-200px] sm:h-[500px] sm:w-[500px]" />
 
-      <div className="relative z-10 flex min-h-screen items-center justify-center px-6 pt-20">
-        <div className="w-full max-w-[480px] rounded-[32px] border border-white/20 bg-white/20 p-8 shadow-[0_8px_40px_rgba(16,47,21,0.08)] backdrop-blur-2xl sm:p-10">
-          <div className="mb-6 w-fit rounded-full border border-white/20 bg-white/10 px-4 py-2 backdrop-blur-xl">
+      <div className="relative z-10 flex min-h-dvh items-center justify-center px-3 py-6 pt-20 sm:px-6">
+        <div className="w-full max-w-[480px] rounded-[24px] border border-white/25 bg-white/35 p-5 shadow-[0_8px_40px_rgba(16,47,21,0.08)] backdrop-blur-2xl sm:rounded-[32px] sm:p-10">
+          <div className="mb-5 w-fit rounded-full border border-white/20 bg-white/10 px-4 py-2 backdrop-blur-xl sm:mb-6">
             <span className="text-[13px] font-medium tracking-[-0.02em] text-[var(--color-primary)]">
               Welcome back
             </span>
           </div>
 
           <div className="mb-8 space-y-3">
-            <h1 className="text-[2.5rem] font-semibold leading-[1] tracking-[-0.06em] text-[var(--color-dark)]">
+            <h1 className="text-[2rem] font-semibold leading-[1] tracking-[-0.04em] text-[var(--color-dark)] sm:text-[2.5rem] sm:tracking-[-0.06em]">
               Continue where
               <br />
               you left off.
@@ -137,7 +137,7 @@ export default function LoginPage() {
             <span>Continue with Google</span>
           </button>
 
-          <div className="mt-8 flex items-center gap-2 text-[14px] text-[var(--color-text-secondary)]">
+          <div className="mt-7 flex flex-wrap items-center gap-2 text-[14px] text-[var(--color-text-secondary)] sm:mt-8">
             <span>Don&apos;t have an account?</span>
             <Link
               href="/signup"

@@ -80,13 +80,13 @@ function SignupContent() {
   }
 
   return (
-    <main className="relative min-h-screen overflow-hidden px-3 py-2 sm:px-4 sm:py-2 lg:px-5 lg:py-4">
+    <main className="relative min-h-dvh overflow-hidden px-2 py-2 sm:px-4 sm:py-2 lg:px-5 lg:py-4">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-54 bg-[radial-gradient(circle_at_top,rgba(207,232,213,0.95),transparent_62%)]" />
       <div className="pointer-events-none absolute right-[-8rem] top-16 h-64 w-64 rounded-full bg-[var(--color-primary)]/18 blur-3xl" />
       <div className="pointer-events-none absolute bottom-[-5rem] left-[-4rem] h-56 w-56 rounded-full bg-[var(--color-accent)] blur-3xl" />
 
-      <div className="relative mx-auto grid min-h-[calc(100vh-1rem)] w-full max-w-7xl overflow-hidden rounded-[28px] border border-black/5 bg-white/60 shadow-[0_25px_90px_rgba(53,85,63,0.12)] backdrop-blur-xl lg:grid-cols-[1.02fr_0.98fr]">
-        <section className="relative bg-[linear-gradient(180deg,rgba(255,255,255,0.94),rgba(243,249,245,0.98))] px-5 py-4 sm:px-6 sm:py-5 lg:px-9 lg:py-6">
+      <div className="relative mx-auto grid min-h-[calc(100dvh-1rem)] w-full max-w-7xl overflow-hidden rounded-[22px] border border-black/5 bg-white/60 shadow-[0_25px_90px_rgba(53,85,63,0.12)] backdrop-blur-xl sm:rounded-[28px] lg:grid-cols-[1.02fr_0.98fr]">
+        <section className="relative bg-[linear-gradient(180deg,rgba(255,255,255,0.94),rgba(243,249,245,0.98))] px-4 py-4 sm:px-6 sm:py-5 lg:px-9 lg:py-6">
           <div className="space-y-5">
             <div className="flex items-center justify-between gap-4">
               <Link href="/" className="flex items-center gap-3">
@@ -108,14 +108,14 @@ function SignupContent() {
               </div>
             </div>
 
-            <div className="max-w-xl space-y-5 pt-2 lg:pt-4">
+            <div className="max-w-xl space-y-4 pt-1 sm:space-y-5 sm:pt-2 lg:pt-4">
               <div className="space-y-4">
                 <div className="inline-flex w-fit items-center gap-2 rounded-full border border-[var(--color-primary)]/22 bg-[var(--color-accent)]/50 px-3 py-1.5 text-[12px] font-medium text-[var(--color-primary-deep)]">
                   <Sparkles size={13} />
                   Gentle support for rough days
                 </div>
 
-                <h1 className="text-[clamp(2.1rem,3.9vw,3.7rem)] font-bold leading-[0.92] text-[var(--color-dark)]">
+                <h1 className="text-[clamp(2rem,12vw,3.7rem)] font-bold leading-[0.94] text-[var(--color-dark)]">
                   <span className="block">Start even when</span>
                   <span className="block">your brain says no.</span>
                 </h1>
@@ -161,7 +161,7 @@ function SignupContent() {
             <div className="absolute top-1/2 right-10 h-24 w-40 rounded-[999px] bg-[var(--color-primary)]/16 blur-2xl" />
           </div>
 
-          <div className="relative ml-auto w-full max-w-lg rounded-[24px] border border-[var(--color-border)] bg-[var(--color-surface-strong)] p-4 shadow-[var(--shadow-card)] sm:p-4.5">
+          <div className="relative ml-auto w-full max-w-lg rounded-[22px] border border-[var(--color-border)] bg-[var(--color-surface-strong)] p-4 shadow-[var(--shadow-card)] sm:rounded-[24px] sm:p-4.5">
             <div className="flex flex-col gap-2 border-b border-[var(--color-border)] pb-3.5 sm:flex-row sm:items-start sm:justify-between">
               <div className="space-y-1.5">
                 <div className="inline-flex w-fit items-center gap-2 rounded-full bg-[var(--color-accent)]/55 px-3 py-1 text-[12px] font-medium text-[var(--color-primary-deep)]">
@@ -277,7 +277,7 @@ function SignupContent() {
                 </p>
               ) : null}
 
-              <div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-2 pt-0.5">
+              <div className="grid gap-2 pt-0.5 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] sm:items-center">
                 <button
                   type="submit"
                   disabled={isPending}
@@ -292,7 +292,7 @@ function SignupContent() {
                   />
                 </button>
 
-                <span className="text-[10px] font-medium uppercase tracking-[0.18em] text-[var(--color-text-secondary)]">
+                <span className="text-center text-[10px] font-medium uppercase tracking-[0.18em] text-[var(--color-text-secondary)]">
                   or
                 </span>
 

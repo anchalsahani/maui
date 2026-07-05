@@ -19,7 +19,7 @@ export default function Button({
     group
     relative
     inline-flex
-    min-w-[140px]
+    min-w-0
     items-center
     rounded-full
     overflow-hidden
@@ -94,10 +94,10 @@ export default function Button({
         />
       )}
 
-      <div className="relative z-10 grid w-full grid-cols-[24px_1fr_auto] items-center gap-2">
+      <div className="relative z-10 grid w-full grid-cols-[16px_minmax(0,1fr)_auto] items-center gap-1.5 sm:grid-cols-[24px_minmax(0,1fr)_auto] sm:gap-2">
         
         {/* The Left Padding Spacer */}
-        <div className="w-6" />
+        <div className="w-4 sm:w-6" />
 
         {/* TEXT */}
         <span
@@ -106,9 +106,10 @@ export default function Button({
             font-semibold
             tracking-tight
             text-center
-            pr-2
+            pr-1
             transition-colors
             duration-500
+            whitespace-nowrap
             ${current.text }
           `}
         >
@@ -119,14 +120,16 @@ export default function Button({
         <div
           className={`
             flex
-            h-11
-            w-11
+            h-9
+            w-9
             shrink-0
             items-center
             justify-center
             rounded-full
             transition-all
             duration-500
+            sm:h-11
+            sm:w-11
             ${current.iconContainer}
           `}
         >

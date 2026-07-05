@@ -5,14 +5,14 @@ import { motion } from "framer-motion";
 
 export default function Home() {
   return (
-    <div className="relative flex min-h-screen flex-col bg-[var(--color-bg)] px-4 pb-6 pt-24 sm:px-6 lg:px-8">
-      <section className="relative flex min-h-[calc(100vh-7.5rem)] flex-col overflow-hidden rounded-[2rem] border border-white/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.86),rgba(250,250,250,0.68))] shadow-[0_30px_90px_rgba(47,74,57,0.14),inset_0_1px_0_rgba(255,255,255,0.9)] sm:rounded-[2.5rem]">
+    <div className="relative flex min-h-dvh flex-col bg-[var(--color-bg)] px-3 pb-4 pt-20 sm:px-6 sm:pb-6 sm:pt-24 lg:px-8">
+      <section className="relative flex min-h-[calc(100dvh-6rem)] flex-col overflow-hidden rounded-[1.35rem] border border-white/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.86),rgba(250,250,250,0.68))] shadow-[0_30px_90px_rgba(47,74,57,0.14),inset_0_1px_0_rgba(255,255,255,0.9)] sm:min-h-[calc(100vh-7.5rem)] sm:rounded-[2.5rem]">
         <div className="pointer-events-none absolute inset-0 rounded-[inherit] ring-1 ring-[var(--color-primary)]/10" />
 
       {/* BACKGROUND GLOW */}
-      <div className="pointer-events-none absolute left-1/2 top-[10%] h-[620px] w-[620px] -translate-x-1/2 rounded-full bg-[var(--color-primary)]/10 blur-[140px]" />
+      <div className="pointer-events-none absolute left-1/2 top-[10%] h-[360px] w-[360px] -translate-x-1/2 rounded-full bg-[var(--color-primary)]/10 blur-[100px] sm:h-[620px] sm:w-[620px] sm:blur-[140px]" />
 
-      <div className="pointer-events-none absolute bottom-0 left-0 h-[420px] w-[420px] rounded-full bg-[var(--color-accent)]/60 blur-[120px]" />
+      <div className="pointer-events-none absolute bottom-0 left-0 h-[260px] w-[260px] rounded-full bg-[var(--color-accent)]/60 blur-[90px] sm:h-[420px] sm:w-[420px] sm:blur-[120px]" />
 
       {/* SUBTLE GRID */}
       <div className="pointer-events-none absolute inset-0 opacity-[0.03]">
@@ -20,13 +20,13 @@ export default function Home() {
       </div>
 
       {/* HERO */}
-      <main className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 pb-44 pt-20 text-center">
+      <main className="relative z-10 flex flex-1 flex-col items-center justify-center px-4 pb-36 pt-14 text-center sm:px-6 sm:pb-44 sm:pt-20">
         {/* BADGE */}
         <motion.div
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="glass-card mb-8 rounded-full border border-[var(--color-border)] bg-white/60 px-6 py-2 backdrop-blur-xl"
+          className="glass-card mb-6 max-w-full rounded-full border border-[var(--color-border)] bg-white/60 px-4 py-2 backdrop-blur-xl sm:mb-8 sm:px-6"
         >
           <span className="text-[13px] font-medium text-[var(--color-dark)]/70">
             Work with your brain, not against it.
@@ -40,7 +40,7 @@ export default function Home() {
           transition={{ duration: 0.7 }}
           className="max-w-7xl"
         >
-          <h1 className="text-[clamp(3.4rem,8vw,6.8rem)] font-bold leading-[0.9] tracking-[-0.08em] text-[var(--color-dark)]">
+          <h1 className="text-[clamp(2.45rem,15vw,6.8rem)] font-bold leading-[0.92] tracking-[-0.04em] text-[var(--color-dark)] sm:leading-[0.9] sm:tracking-[-0.08em]">
             Helping you start,
             <br />
 
@@ -55,7 +55,7 @@ export default function Home() {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.15 }}
-          className="mt-12 transition-transform duration-300 hover:scale-[1.03]"
+          className="mt-9 transition-transform duration-300 hover:scale-[1.03] sm:mt-12"
         >
           <Button variant="secondary">
             Watch Demo
@@ -64,7 +64,7 @@ export default function Home() {
       </main>
 
       {/* HANDHOLD STYLE RIBBON WAVE */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-[-3vh] z-0 h-[clamp(170px,22vw,280px)] overflow-visible">
+      <div className="pointer-events-none absolute inset-x-0 bottom-[-2vh] z-0 h-[140px] overflow-hidden sm:bottom-[-3vh] sm:h-[clamp(170px,22vw,280px)]">
         <motion.div
           animate={{
             x: ["-2.5%", "2.5%", "-2.5%"],
@@ -75,12 +75,12 @@ export default function Home() {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute left-1/2 top-1/2 w-[145vw] min-w-[1180px] -translate-x-1/2 -translate-y-1/2"
+          className="absolute left-1/2 top-1/2 w-[180vw] min-w-[680px] -translate-x-1/2 -translate-y-1/2 sm:w-[145vw] sm:min-w-[1180px]"
         >
           <svg
             viewBox="0 0 1800 420"
             preserveAspectRatio="none"
-            className="h-[clamp(170px,22vw,280px)] w-full"
+            className="h-[140px] w-full sm:h-[clamp(170px,22vw,280px)]"
             aria-hidden="true"
           >
             <defs>

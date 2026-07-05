@@ -17,7 +17,7 @@ export default async function RewardsPage() {
   const summary = getRewardSummary(events);
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[var(--color-bg)]">
+    <div className="relative min-h-dvh overflow-hidden bg-[var(--color-bg)]">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(207,232,213,0.72),transparent_28%),linear-gradient(180deg,rgba(255,255,255,0.72),rgba(250,250,250,0.96))]" />
       <div className="pointer-events-none absolute right-[-10%] top-[-8%] h-[560px] w-[560px] rounded-full bg-[var(--color-primary)]/12 blur-[120px]" />
 
@@ -25,12 +25,12 @@ export default async function RewardsPage() {
         <Navbar />
       </div>
 
-      <main className="relative z-10 mx-auto w-full max-w-7xl px-5 pb-14 pt-24 sm:px-6">
-        <section className="rounded-[32px] border border-white/45 bg-[linear-gradient(135deg,rgba(255,255,255,0.9),rgba(242,250,244,0.84))] p-6 shadow-[0_28px_80px_rgba(53,85,63,0.1)] backdrop-blur-2xl sm:p-8">
+      <main className="relative z-10 mx-auto w-full max-w-7xl px-3 pb-10 pt-20 sm:px-6 sm:pb-14 sm:pt-24">
+        <section className="rounded-[24px] border border-white/45 bg-[linear-gradient(135deg,rgba(255,255,255,0.9),rgba(242,250,244,0.84))] p-4 shadow-[0_28px_80px_rgba(53,85,63,0.1)] backdrop-blur-2xl sm:rounded-[32px] sm:p-8">
           <p className="text-sm font-medium uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
             Rewards
           </p>
-          <h1 className="mt-3 max-w-3xl text-[clamp(2.2rem,5vw,4.4rem)] font-bold leading-[0.98] tracking-[-0.06em] text-[var(--color-dark)]">
+          <h1 className="mt-3 max-w-3xl text-[clamp(2rem,12vw,4.4rem)] font-bold leading-[0.98] tracking-[-0.04em] text-[var(--color-dark)] sm:tracking-[-0.06em]">
             Your small wins are being counted.
           </h1>
           <p className="mt-4 max-w-2xl text-[15px] leading-7 text-[var(--color-text-secondary)] sm:text-[16px]">
@@ -38,7 +38,7 @@ export default async function RewardsPage() {
           </p>
         </section>
 
-        <section className="mt-8 grid gap-4 md:grid-cols-4">
+        <section className="mt-5 grid grid-cols-2 gap-3 sm:mt-8 md:grid-cols-4 md:gap-4">
           <RewardStat label="Total points" value={summary.totalPoints} icon={Trophy} />
           <RewardStat label="Daily streak" value={summary.streak} icon={Flame} />
           <RewardStat
@@ -53,8 +53,8 @@ export default async function RewardsPage() {
           />
         </section>
 
-        <section className="mt-8 rounded-[32px] border border-white/45 bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(247,250,248,0.8))] p-6 shadow-[0_24px_70px_rgba(53,85,63,0.1)] backdrop-blur-2xl sm:p-7">
-          <div className="flex items-start justify-between gap-4">
+        <section className="mt-5 rounded-[24px] border border-white/45 bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(247,250,248,0.8))] p-4 shadow-[0_24px_70px_rgba(53,85,63,0.1)] backdrop-blur-2xl sm:mt-8 sm:rounded-[32px] sm:p-7">
+          <div className="flex items-start justify-between gap-3 sm:gap-4">
             <div>
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
                 Reward history
@@ -73,7 +73,7 @@ export default async function RewardsPage() {
               events.slice(0, 12).map((event) => (
                 <div
                   key={event.id}
-                  className="flex items-center justify-between gap-4 rounded-[22px] border border-white/45 bg-white/76 px-4 py-3 shadow-[0_10px_28px_rgba(53,85,63,0.05)]"
+                  className="flex items-center justify-between gap-3 rounded-[18px] border border-white/45 bg-white/76 px-3 py-3 shadow-[0_10px_28px_rgba(53,85,63,0.05)] sm:rounded-[22px] sm:px-4"
                 >
                   <div className="min-w-0">
                     <p className="truncate text-sm font-semibold text-[var(--color-dark)]">
@@ -115,16 +115,16 @@ function RewardStat({
   icon: LucideIcon;
 }) {
   return (
-    <div className="rounded-[26px] border border-white/45 bg-[linear-gradient(180deg,rgba(255,255,255,0.82),rgba(247,250,248,0.78))] p-4 shadow-[0_18px_55px_rgba(53,85,63,0.08)]">
+    <div className="rounded-[20px] border border-white/45 bg-[linear-gradient(180deg,rgba(255,255,255,0.82),rgba(247,250,248,0.78))] p-3 shadow-[0_18px_55px_rgba(53,85,63,0.08)] sm:rounded-[26px] sm:p-4">
       <div className="flex items-center justify-between gap-3">
         <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[var(--color-accent)]/48 text-[var(--color-primary-deep)]">
           <Icon size={18} />
         </div>
-        <p className="text-[1.45rem] font-semibold tracking-[-0.05em] text-[var(--color-dark)]">
+        <p className="text-[1.2rem] font-semibold tracking-[-0.05em] text-[var(--color-dark)] sm:text-[1.45rem]">
           {value}
         </p>
       </div>
-      <p className="mt-4 text-xs uppercase tracking-[0.18em] text-[var(--color-text-secondary)]">
+      <p className="mt-3 text-[10px] uppercase tracking-[0.14em] text-[var(--color-text-secondary)] sm:mt-4 sm:text-xs sm:tracking-[0.18em]">
         {label}
       </p>
     </div>

@@ -53,7 +53,7 @@ export default function UserMenu({ userName }: UserMenuProps) {
       <button
         type="button"
         onClick={() => setOpen((value) => !value)}
-        className={`group flex h-11 items-center gap-2 rounded-full border px-3 text-[var(--color-dark)] shadow-[0_8px_24px_rgba(16,47,21,0.08)] backdrop-blur-xl transition-all duration-200 hover:-translate-y-0.5 ${
+        className={`group flex h-10 items-center gap-1.5 rounded-full border px-2 text-[var(--color-dark)] shadow-[0_8px_24px_rgba(16,47,21,0.08)] backdrop-blur-xl transition-all duration-200 hover:-translate-y-0.5 sm:h-11 sm:gap-2 sm:px-3 ${
           open
             ? "border-[var(--color-primary)]/35 bg-white/88 shadow-[0_14px_30px_rgba(16,47,21,0.14)]"
             : "border-white/35 bg-white/55"
@@ -72,7 +72,7 @@ export default function UserMenu({ userName }: UserMenuProps) {
       </button>
 
       {open ? (
-        <div className="absolute right-0 top-[calc(100%+0.75rem)] z-50 w-[340px] overflow-hidden rounded-[28px] border border-white/55 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(244,250,246,0.96))] p-3 shadow-[0_30px_90px_rgba(16,47,21,0.16)] backdrop-blur-2xl animate-in fade-in zoom-in-95 duration-200">
+        <div className="fixed left-3 right-3 top-16 z-50 max-h-[calc(100dvh-5rem)] overflow-y-auto rounded-[22px] border border-white/55 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(244,250,246,0.96))] p-3 shadow-[0_30px_90px_rgba(16,47,21,0.16)] backdrop-blur-2xl animate-in fade-in zoom-in-95 duration-200 sm:absolute sm:left-auto sm:right-0 sm:top-[calc(100%+0.75rem)] sm:w-[340px] sm:max-h-[calc(100dvh-6rem)] sm:rounded-[28px]">
           <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-[linear-gradient(180deg,rgba(207,232,213,0.55),transparent)]" />
 
           <div className="relative rounded-[22px] border border-white/55 bg-[linear-gradient(180deg,rgba(250,252,250,0.96),rgba(239,247,242,0.92))] px-4 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.55)]">

@@ -68,7 +68,7 @@ export default function FloatingModal({
       {open ? (
         <motion.div
           key="modal-backdrop"
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6"
+          className="fixed inset-0 z-[100] flex items-end justify-center p-2 sm:items-center sm:p-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -93,7 +93,7 @@ export default function FloatingModal({
             aria-labelledby={titleId}
             aria-describedby={description ? descriptionId : undefined}
             tabIndex={-1}
-            className={`relative z-[101] w-full ${widthClasses[size]} overflow-hidden rounded-[32px] border border-white/35 bg-[linear-gradient(180deg,rgba(255,255,255,0.86),rgba(245,250,247,0.82))] shadow-[0_40px_120px_rgba(14,30,20,0.22),0_0_0_1px_rgba(207,232,213,0.32)] outline-none backdrop-blur-2xl`}
+            className={`relative z-[101] w-full ${widthClasses[size]} max-h-[calc(100dvh-1rem)] overflow-hidden rounded-[24px] border border-white/35 bg-[linear-gradient(180deg,rgba(255,255,255,0.9),rgba(245,250,247,0.88))] shadow-[0_40px_120px_rgba(14,30,20,0.22),0_0_0_1px_rgba(207,232,213,0.32)] outline-none backdrop-blur-2xl sm:rounded-[32px]`}
             initial={{ opacity: 0, y: 28, scale: 0.96, filter: "blur(8px)" }}
             animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
             exit={{ opacity: 0, y: 20, scale: 0.97, filter: "blur(6px)" }}
@@ -102,11 +102,11 @@ export default function FloatingModal({
             <div className="pointer-events-none absolute inset-x-0 top-0 h-36 bg-[radial-gradient(circle_at_top,rgba(207,232,213,0.9),transparent_68%)]" />
             <div className="pointer-events-none absolute right-[-4rem] top-[-2rem] h-40 w-40 rounded-full bg-[var(--color-primary)]/18 blur-3xl" />
 
-            <div className="relative border-b border-[var(--color-border)]/80 px-5 py-5 sm:px-7">
+            <div className="relative border-b border-[var(--color-border)]/80 px-4 py-4 pr-14 sm:px-7 sm:py-5">
               <button
                 type="button"
                 onClick={onClose}
-                className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border border-black/8 bg-white/72 text-[var(--color-text-secondary)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--color-primary)]/25 hover:bg-white hover:text-[var(--color-dark)]"
+                className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full border border-black/8 bg-white/72 text-[var(--color-text-secondary)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--color-primary)]/25 hover:bg-white hover:text-[var(--color-dark)] sm:right-4 sm:top-4"
                 aria-label="Close modal"
               >
                 <X size={17} />
@@ -117,7 +117,7 @@ export default function FloatingModal({
               </p>
               <h2
                 id={titleId}
-                className="mt-3 max-w-[24ch] text-[1.9rem] font-semibold leading-[0.98] tracking-[-0.05em] text-[var(--color-dark)] sm:text-[2.25rem]"
+                className="mt-3 max-w-[24ch] text-[1.55rem] font-semibold leading-[1] tracking-[-0.04em] text-[var(--color-dark)] sm:text-[2.25rem] sm:leading-[0.98] sm:tracking-[-0.05em]"
               >
                 {title}
               </h2>
@@ -131,7 +131,7 @@ export default function FloatingModal({
               ) : null}
             </div>
 
-            <div className="relative max-h-[min(80vh,860px)] overflow-y-auto px-5 py-5 sm:px-7 sm:py-6">
+            <div className="relative max-h-[calc(100dvh-12rem)] overflow-y-auto px-4 py-4 sm:max-h-[min(80vh,860px)] sm:px-7 sm:py-6">
               {children}
             </div>
           </motion.div>

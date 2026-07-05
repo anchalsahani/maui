@@ -24,6 +24,12 @@
   box-sizing: border-box;
 }
 
+*,
+*::before,
+*::after {
+  min-width: 0;
+}
+
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
@@ -44,6 +50,13 @@ body {
   font-family: var(--font-body), sans-serif;
   line-height: 1.5;
   overflow-x: hidden;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
 }
 
 a {
@@ -75,6 +88,19 @@ p {
   font-family: var(--font-heading), sans-serif;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+button,
+a {
+  overflow-wrap: anywhere;
+}
+
 .first-name {
   font-family: "Story Script", cursive;
   font-weight: 400;
@@ -95,6 +121,7 @@ p {
 
 .input {
   width: 100%;
+  min-width: 0;
   border-radius: 16px;
   border: 1px solid var(--color-border);
   background: rgba(255, 255, 255, 0.9);
@@ -108,6 +135,24 @@ p {
     box-shadow 160ms ease,
     background-color 160ms ease,
     transform 160ms ease;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --radius-card: 20px;
+  }
+
+  body {
+    background:
+      radial-gradient(circle at top left, rgba(207, 232, 213, 0.58), transparent 38%),
+      var(--color-bg);
+  }
+
+  .input {
+    border-radius: 14px;
+    padding: 0.72rem 0.85rem;
+    font-size: 0.92rem;
+  }
 }
 
 .input::placeholder {

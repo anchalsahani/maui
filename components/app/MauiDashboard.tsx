@@ -1590,34 +1590,34 @@ export default function MauiDashboard({
   }
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[var(--color-bg)]">
+    <div className="relative min-h-dvh overflow-hidden bg-[var(--color-bg)]">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(207,232,213,0.78),transparent_30%),radial-gradient(circle_at_82%_18%,rgba(143,191,159,0.14),transparent_24%),linear-gradient(180deg,rgba(255,255,255,0.64),rgba(250,250,250,0.96))]" />
-      <div className="pointer-events-none absolute left-[-8%] top-[10%] h-[520px] w-[520px] rounded-full bg-[var(--color-accent)]/42 blur-[120px]" />
-      <div className="pointer-events-none absolute right-[-10%] top-[-8%] h-[560px] w-[560px] rounded-full bg-[var(--color-primary)]/12 blur-[120px]" />
+      <div className="pointer-events-none absolute left-[-30%] top-[10%] h-[320px] w-[320px] rounded-full bg-[var(--color-accent)]/42 blur-[90px] sm:left-[-8%] sm:h-[520px] sm:w-[520px] sm:blur-[120px]" />
+      <div className="pointer-events-none absolute right-[-36%] top-[-8%] h-[340px] w-[340px] rounded-full bg-[var(--color-primary)]/12 blur-[90px] sm:right-[-10%] sm:h-[560px] sm:w-[560px] sm:blur-[120px]" />
 
       <motion.main
         animate={{ scale: activeModal ? 0.985 : 1, opacity: activeModal ? 0.9 : 1 }}
         transition={{ duration: 0.24, ease: "easeOut" }}
-        className="relative z-10 mx-auto w-full max-w-7xl px-5 pb-14 pt-24 sm:px-6"
+        className="relative z-10 mx-auto w-full max-w-7xl px-3 pb-10 pt-20 sm:px-6 sm:pb-14 sm:pt-24"
       >
         <motion.section
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="relative overflow-hidden rounded-[32px] border border-white/45 bg-[linear-gradient(135deg,rgba(255,255,255,0.9),rgba(242,250,244,0.84))] p-6 shadow-[0_28px_80px_rgba(53,85,63,0.1)] backdrop-blur-2xl sm:p-8"
+          className="relative overflow-hidden rounded-[24px] border border-white/45 bg-[linear-gradient(135deg,rgba(255,255,255,0.9),rgba(242,250,244,0.84))] p-4 shadow-[0_28px_80px_rgba(53,85,63,0.1)] backdrop-blur-2xl sm:rounded-[32px] sm:p-8"
         >
           <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-[radial-gradient(circle_at_top,rgba(207,232,213,0.95),transparent_68%)]" />
           <div className="pointer-events-none absolute right-[-4rem] top-[-2rem] h-48 w-48 rounded-full bg-[var(--color-primary)]/18 blur-3xl" />
 
-          <div className="relative flex flex-col gap-8 xl:flex-row xl:items-end xl:justify-between">
+          <div className="relative flex flex-col gap-5 sm:gap-8 xl:flex-row xl:items-end xl:justify-between">
             <div className="max-w-3xl">
-              <h1 className="max-w-4xl font-[var(--font-heading)] text-[clamp(2.2rem,5vw,4.5rem)] font-bold leading-[0.98] text-[var(--color-dark)]">
+              <h1 className="max-w-4xl font-[var(--font-heading)] text-[clamp(2rem,13vw,4.5rem)] font-bold leading-[0.98] tracking-[-0.03em] text-[var(--color-dark)] sm:tracking-normal">
                 Hey,{" "}
-                <span className="first-name text-[clamp(3rem,6.4vw,5.8rem)] leading-none text-[var(--color-mainstar)]">
+                <span className="first-name text-[clamp(2.6rem,15vw,5.8rem)] leading-none text-[var(--color-mainstar)]">
                   {firstName}
                 </span>
               </h1>
-              <h2 className="mt-4 text-[clamp(1.6rem,3vw,2.35rem)] font-semibold leading-tight tracking-[-0.04em] text-[var(--color-dark)]">
+              <h2 className="mt-3 text-[clamp(1.35rem,8vw,2.35rem)] font-semibold leading-tight tracking-[-0.04em] text-[var(--color-dark)] sm:mt-4">
                 How are you feeling?
               </h2>
               <p className="mt-4 max-w-2xl text-[15px] leading-7 text-[var(--color-text-secondary)] sm:text-[16px]">
@@ -1625,7 +1625,7 @@ export default function MauiDashboard({
               </p>
             </div>
 
-            <div className="grid gap-3 sm:grid-cols-3 xl:max-w-[420px] xl:flex-1">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3 xl:max-w-[420px] xl:flex-1">
               <StatsCard label="Points" value={reward.points} icon={Trophy} />
               <StatsCard label="Streak" value={reward.streak} icon={Sparkles} />
               <StatsCard
@@ -1637,7 +1637,7 @@ export default function MauiDashboard({
           </div>
         </motion.section>
 
-        <div className="mt-8 grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
+        <div className="mt-5 grid gap-5 sm:mt-8 sm:gap-6 xl:grid-cols-[1.2fr_0.8fr]">
           <motion.section
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
@@ -1645,13 +1645,13 @@ export default function MauiDashboard({
             className="space-y-5"
           >
             {isRestoring ? (
-              <div className="grid gap-4 lg:grid-cols-3">
+              <div className="grid gap-3 sm:grid-cols-3 lg:gap-4">
                 <SkeletonCard />
                 <SkeletonCard />
                 <SkeletonCard />
               </div>
             ) : (
-              <div className="grid gap-4 lg:grid-cols-3">
+              <div className="grid gap-3 sm:grid-cols-3 lg:gap-4">
                 <FlowCard
                   title="Ready to begin?"
                   body=""
@@ -1691,7 +1691,7 @@ export default function MauiDashboard({
               initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.15, ease: "easeOut" }}
-              className="rounded-[32px] border border-white/45 bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(247,250,248,0.8))] p-6 shadow-[0_24px_70px_rgba(53,85,63,0.1)] backdrop-blur-2xl sm:p-7"
+              className="rounded-[24px] border border-white/45 bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(247,250,248,0.8))] p-4 shadow-[0_24px_70px_rgba(53,85,63,0.1)] backdrop-blur-2xl sm:rounded-[32px] sm:p-7"
             >
               <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
                 <div className="max-w-xl">
@@ -1708,7 +1708,7 @@ export default function MauiDashboard({
                   </p>
                 </div>
 
-                <div className="grid w-full gap-3 sm:grid-cols-3 lg:w-[420px]">
+                <div className="grid w-full grid-cols-3 gap-2 sm:gap-3 lg:w-[420px]">
                   {[
                     { label: "Urgency", value: nextTask?.urgency ?? "-" },
                     { label: "Difficulty", value: nextTask?.difficulty ?? "-" },
@@ -1717,12 +1717,12 @@ export default function MauiDashboard({
                     <motion.div
                       key={item.label}
                       whileHover={{ y: -4 }}
-                      className="min-w-0 rounded-[20px] border border-white/45 bg-white/78 px-4 py-4 shadow-[0_12px_30px_rgba(53,85,63,0.06)]"
+                      className="min-w-0 rounded-[16px] border border-white/45 bg-white/78 px-2.5 py-3 shadow-[0_12px_30px_rgba(53,85,63,0.06)] sm:rounded-[20px] sm:px-4 sm:py-4"
                     >
-                      <p className="truncate text-[1.35rem] font-semibold text-[var(--color-dark)]">
+                      <p className="truncate text-[1.05rem] font-semibold text-[var(--color-dark)] sm:text-[1.35rem]">
                         {item.value}
                       </p>
-                      <p className="mt-2 whitespace-nowrap text-[11px] uppercase tracking-[0.14em] text-[var(--color-text-secondary)]">
+                      <p className="mt-2 text-[10px] uppercase tracking-[0.1em] text-[var(--color-text-secondary)] sm:whitespace-nowrap sm:text-[11px] sm:tracking-[0.14em]">
                         {item.label}
                       </p>
                     </motion.div>
@@ -1739,8 +1739,8 @@ export default function MauiDashboard({
             transition={{ duration: 0.5, delay: 0.18, ease: "easeOut" }}
             className="space-y-6"
           >
-            <div className="rounded-[32px] border border-white/45 bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(247,250,248,0.8))] p-6 shadow-[0_24px_70px_rgba(53,85,63,0.1)] backdrop-blur-2xl">
-              <div className="flex items-start justify-between gap-4">
+            <div className="rounded-[24px] border border-white/45 bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(247,250,248,0.8))] p-4 shadow-[0_24px_70px_rgba(53,85,63,0.1)] backdrop-blur-2xl sm:rounded-[32px] sm:p-6">
+              <div className="flex items-start justify-between gap-3 sm:gap-4">
                 <div>
                   <p className="text-sm font-medium uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
                     Session engine
@@ -1760,7 +1760,7 @@ export default function MauiDashboard({
               </button>
             </div>
 
-            <div className="rounded-[32px] border border-white/45 bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(247,250,248,0.8))] p-6 shadow-[0_24px_70px_rgba(53,85,63,0.1)] backdrop-blur-2xl">
+            <div className="rounded-[24px] border border-white/45 bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(247,250,248,0.8))] p-4 shadow-[0_24px_70px_rgba(53,85,63,0.1)] backdrop-blur-2xl sm:rounded-[32px] sm:p-6">
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <p className="text-sm font-medium uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
@@ -1775,7 +1775,7 @@ export default function MauiDashboard({
                 </span>
               </div>
 
-              <div className="mt-5 max-h-[520px] space-y-3 overflow-y-auto pr-2">
+              <div className="mt-5 max-h-[460px] space-y-3 overflow-y-auto pr-1 sm:max-h-[520px] sm:pr-2">
                 <AnimatePresence initial={false}>
                   {taskChecklist.map((task, index) => {
                     const done = completedTaskIds.includes(task.id);
@@ -1787,7 +1787,7 @@ export default function MauiDashboard({
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -8 }}
-                        className={`flex items-start gap-3 rounded-[22px] border px-4 py-3 shadow-[0_10px_28px_rgba(53,85,63,0.05)] ${
+                        className={`flex items-start gap-3 rounded-[18px] border px-3 py-3 shadow-[0_10px_28px_rgba(53,85,63,0.05)] sm:rounded-[22px] sm:px-4 ${
                           done
                             ? "border-[var(--color-primary)]/28 bg-[var(--color-accent)]/42"
                             : "border-white/45 bg-white/74"

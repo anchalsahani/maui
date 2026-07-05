@@ -169,18 +169,18 @@ export default function PlannerWorkspace({
   }
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[var(--color-bg)]">
+    <div className="relative min-h-dvh overflow-hidden bg-[var(--color-bg)]">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(207,232,213,0.78),transparent_30%),linear-gradient(180deg,rgba(255,255,255,0.72),rgba(250,250,250,0.96))]" />
 
-      <main className="relative z-10 mx-auto w-full max-w-7xl px-5 pb-14 pt-24 sm:px-6">
-        <section className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="space-y-6">
-            <div className="rounded-[30px] border border-white/50 bg-white/78 p-6 shadow-[var(--shadow-soft)] backdrop-blur-2xl">
+      <main className="relative z-10 mx-auto w-full max-w-7xl px-3 pb-10 pt-20 sm:px-6 sm:pb-14 sm:pt-24">
+        <section className="grid gap-5 sm:gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="space-y-5 sm:space-y-6">
+            <div className="rounded-[22px] border border-white/50 bg-white/78 p-4 shadow-[var(--shadow-soft)] backdrop-blur-2xl sm:rounded-[30px] sm:p-6">
               <div className="flex items-center gap-2 text-sm font-semibold text-[var(--color-primary-deep)]">
                 <HeartPulse size={17} />
                 Mood Check-In
               </div>
-              <h1 className="mt-4 max-w-2xl text-[clamp(2.1rem,5vw,3.45rem)] font-bold leading-[0.95] text-[var(--color-dark)]">
+              <h1 className="mt-4 max-w-2xl text-[clamp(1.9rem,11vw,3.45rem)] font-bold leading-[0.98] tracking-[-0.03em] text-[var(--color-dark)] sm:leading-[0.95]">
                 How have you been feeling recently?
               </h1>
               <p className="mt-4 max-w-xl text-sm leading-6 text-[var(--color-text-secondary)]">
@@ -189,7 +189,7 @@ export default function PlannerWorkspace({
               </p>
             </div>
 
-            <section className="rounded-[30px] border border-white/50 bg-white/78 p-5 shadow-[var(--shadow-soft)] backdrop-blur-2xl sm:p-6">
+            <section className="rounded-[22px] border border-white/50 bg-white/78 p-4 shadow-[var(--shadow-soft)] backdrop-blur-2xl sm:rounded-[30px] sm:p-6">
               <div className="flex items-center gap-3">
                 <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--color-accent)]/60 text-[var(--color-primary-deep)]">
                   <Brain size={19} />
@@ -238,8 +238,8 @@ export default function PlannerWorkspace({
             </section>
           </div>
 
-          <section className="rounded-[30px] border border-white/50 bg-white/78 p-5 shadow-[var(--shadow-soft)] backdrop-blur-2xl sm:p-6">
-            <div className="flex items-center justify-between gap-3">
+          <section className="rounded-[22px] border border-white/50 bg-white/78 p-4 shadow-[var(--shadow-soft)] backdrop-blur-2xl sm:rounded-[30px] sm:p-6">
+            <div className="flex items-start justify-between gap-3 sm:items-center">
               <div>
                 <h2 className="text-xl font-semibold text-[var(--color-dark)]">
                   Emotional history
@@ -283,8 +283,8 @@ export default function PlannerWorkspace({
         </section>
 
         <section className="mt-6">
-          <div className="rounded-[30px] border border-white/50 bg-white/78 p-5 shadow-[var(--shadow-soft)] backdrop-blur-2xl sm:p-6">
-            <div className="flex items-start justify-between gap-4">
+          <div className="rounded-[22px] border border-white/50 bg-white/78 p-4 shadow-[var(--shadow-soft)] backdrop-blur-2xl sm:rounded-[30px] sm:p-6">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-text-secondary)]">
                   Support result
@@ -293,7 +293,7 @@ export default function PlannerWorkspace({
                   {plan?.headline ?? "A smaller next step will appear here."}
                 </h2>
               </div>
-              <span className="rounded-full bg-[var(--color-accent)]/65 px-3 py-1 text-xs font-semibold text-[var(--color-primary-deep)]">
+              <span className="w-fit rounded-full bg-[var(--color-accent)]/65 px-3 py-1 text-xs font-semibold text-[var(--color-primary-deep)]">
                 {mood.minutes} min max
               </span>
             </div>

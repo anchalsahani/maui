@@ -293,12 +293,12 @@ export default function PersonalizationForm({
     <form
       ref={formRef}
       action={(formData) => startTransition(() => void handleSubmit(formData))}
-      className="space-y-6"
+      className="space-y-5 sm:space-y-6"
     >
       <input type="hidden" name="syllabusMode" value="paste" />
 
-      <section className="rounded-[30px] border border-white/50 bg-white/78 p-5 shadow-[var(--shadow-soft)] backdrop-blur-2xl sm:p-6">
-        <div className="flex items-center gap-3">
+      <section className="rounded-[22px] border border-white/50 bg-white/78 p-4 shadow-[var(--shadow-soft)] backdrop-blur-2xl sm:rounded-[30px] sm:p-6">
+        <div className="flex items-start gap-3 sm:items-center">
           <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--color-accent)]/60 text-[var(--color-primary-deep)]">
             <Brain size={19} />
           </div>
@@ -334,7 +334,7 @@ export default function PersonalizationForm({
                         }))
                       }
                       disabled={isBusy}
-                      className={`rounded-[20px] border px-4 py-3 text-left transition-all duration-200 ${
+                    className={`rounded-[16px] border px-3.5 py-3 text-left transition-all duration-200 sm:rounded-[20px] sm:px-4 ${
                         selected
                           ? "border-[var(--color-primary)]/45 bg-[var(--color-accent)]/45 shadow-[0_12px_24px_rgba(53,85,63,0.08)]"
                           : "border-[var(--color-border)] bg-white/78 hover:-translate-y-0.5 hover:border-[var(--color-primary)]/28 hover:bg-white"
@@ -355,9 +355,9 @@ export default function PersonalizationForm({
         </div>
       </section>
 
-      <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
-        <section className="rounded-[30px] border border-white/50 bg-white/78 p-5 shadow-[var(--shadow-soft)] backdrop-blur-2xl sm:p-6">
-          <div className="flex items-center gap-3">
+      <div className="grid gap-5 sm:gap-6 lg:grid-cols-[1.05fr_0.95fr]">
+        <section className="rounded-[22px] border border-white/50 bg-white/78 p-4 shadow-[var(--shadow-soft)] backdrop-blur-2xl sm:rounded-[30px] sm:p-6">
+          <div className="flex items-start gap-3 sm:items-center">
             <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--color-accent)]/60 text-[var(--color-primary-deep)]">
               <FileText size={19} />
             </div>
@@ -458,7 +458,7 @@ export default function PersonalizationForm({
                 name="syllabusFile"
                 type="file"
                 accept=".pdf,.doc,.docx,.txt,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain"
-                className="mt-3 text-xs"
+                className="mt-3 max-w-full text-xs"
                 disabled={isBusy}
               />
             </label>
@@ -525,8 +525,8 @@ export default function PersonalizationForm({
         </section>
 
         <aside className="space-y-5">
-          <section className="rounded-[30px] border border-white/50 bg-white/78 p-5 shadow-[var(--shadow-soft)] backdrop-blur-2xl sm:p-6">
-            <div className="flex items-center gap-3">
+          <section className="rounded-[22px] border border-white/50 bg-white/78 p-4 shadow-[var(--shadow-soft)] backdrop-blur-2xl sm:rounded-[30px] sm:p-6">
+            <div className="flex items-start gap-3 sm:items-center">
               <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--color-accent)]/60 text-[var(--color-primary-deep)]">
                 <Sparkles size={19} />
               </div>
@@ -570,11 +570,11 @@ export default function PersonalizationForm({
             </div>
           </section>
 
-          <section className="rounded-[30px] border border-white/50 bg-white/78 p-5 shadow-[var(--shadow-soft)] backdrop-blur-2xl sm:p-6">
+          <section className="rounded-[22px] border border-white/50 bg-white/78 p-4 shadow-[var(--shadow-soft)] backdrop-blur-2xl sm:rounded-[30px] sm:p-6">
             <p className="text-sm font-medium uppercase tracking-[0.18em] text-[var(--color-text-secondary)]">
               Parsed preview
             </p>
-            <div className="mt-4 max-h-[520px] space-y-3 overflow-y-auto pr-2">
+            <div className="mt-4 max-h-[430px] space-y-3 overflow-y-auto pr-1 sm:max-h-[520px] sm:pr-2">
               {taskPreview.length > 0 ? (
                 taskPreview.map((task, index) => (
                   <div
@@ -607,8 +607,8 @@ export default function PersonalizationForm({
             </div>
           </section>
 
-          <section className="rounded-[30px] border border-white/50 bg-white/78 p-5 shadow-[var(--shadow-soft)] backdrop-blur-2xl sm:p-6">
-            <div className="flex items-start justify-between gap-3">
+          <section className="rounded-[22px] border border-white/50 bg-white/78 p-4 shadow-[var(--shadow-soft)] backdrop-blur-2xl sm:rounded-[30px] sm:p-6">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div>
                 <p className="text-sm font-medium uppercase tracking-[0.18em] text-[var(--color-text-secondary)]">
                   AI day plan
@@ -658,7 +658,7 @@ export default function PersonalizationForm({
         </aside>
       </div>
 
-      <section className="flex flex-col gap-3 rounded-[28px] border border-white/50 bg-white/78 p-4 shadow-[var(--shadow-soft)] backdrop-blur-2xl sm:flex-row sm:items-center sm:justify-between">
+      <section className="flex flex-col gap-3 rounded-[22px] border border-white/50 bg-white/78 p-4 shadow-[var(--shadow-soft)] backdrop-blur-2xl sm:flex-row sm:items-center sm:justify-between sm:rounded-[28px]">
         <div>
           <p className="text-sm font-semibold text-[var(--color-dark)]">
             Ready to update your day plan?
@@ -671,7 +671,7 @@ export default function PersonalizationForm({
         <button
           type="submit"
           disabled={isBusy}
-          className="flex h-12 items-center justify-center gap-2 rounded-full bg-[var(--color-primary-deep)] px-6 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[var(--color-dark)] disabled:cursor-not-allowed disabled:opacity-70"
+          className="flex min-h-12 items-center justify-center gap-2 rounded-full bg-[var(--color-primary-deep)] px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[var(--color-dark)] disabled:cursor-not-allowed disabled:opacity-70 sm:h-12 sm:px-6 sm:py-0"
         >
           {isBusy ? "Processing..." : "Save and regenerate day plan"}
           {isBusy ? <RefreshCcw size={16} className="animate-spin" /> : <ArrowRight size={16} />}
@@ -697,8 +697,8 @@ export default function PersonalizationForm({
       ) : null}
 
       {processing.active ? (
-        <div className="fixed inset-0 z-[80] flex items-center justify-center bg-[var(--color-dark)]/28 px-4 backdrop-blur-sm">
-          <section className="w-full max-w-lg rounded-[30px] border border-white/55 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(244,250,246,0.98))] p-6 shadow-[0_30px_100px_rgba(16,47,21,0.22)]">
+        <div className="fixed inset-0 z-[80] flex items-center justify-center bg-[var(--color-dark)]/28 px-3 py-4 backdrop-blur-sm">
+          <section className="max-h-[calc(100dvh-2rem)] w-full max-w-lg overflow-y-auto rounded-[24px] border border-white/55 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(244,250,246,0.98))] p-4 shadow-[0_30px_100px_rgba(16,47,21,0.22)] sm:rounded-[30px] sm:p-6">
             <div className="flex items-start gap-4">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[var(--color-accent)]/70 text-[var(--color-primary-deep)]">
                 <Loader2 size={22} className="animate-spin" />

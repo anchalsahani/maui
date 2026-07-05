@@ -22,7 +22,7 @@ const problems = [
 
 export default function ProblemSection() {
   return (
-    <section className="relative bg-amber-50 overflow-hidden py-24">
+    <section className="relative overflow-hidden bg-amber-50 py-16 sm:py-24">
       {/* BG GLOW */}
       <div className="pointer-events-none absolute left-1/2 top-0 h-[380px] w-[380px] -translate-x-1/2 rounded-full bg-[var(--color-primary)]/8 blur-[120px]" />
 
@@ -31,7 +31,7 @@ export default function ProblemSection() {
         <div className="h-full w-full bg-[linear-gradient(to_right,#00000010_1px,transparent_1px),linear-gradient(to_bottom,#00000010_1px,transparent_1px)] bg-[size:72px_72px]" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-5xl px-6">
+      <div className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6">
         {/* HEADER */}
         <motion.div
           initial={{ opacity: 0, y: 14 }}
@@ -48,7 +48,7 @@ export default function ProblemSection() {
           </div>
 
           {/* HEADING */}
-          <h4 className="text-[clamp(1.2rem,2vw,1.8rem)] font-semibold leading-[1.3] tracking-[-0.04em] text-[var(--color-dark)]">
+          <h4 className="text-[clamp(1.45rem,7vw,1.8rem)] font-semibold leading-[1.12] tracking-[-0.03em] text-[var(--color-dark)] sm:leading-[1.3] sm:tracking-[-0.04em]">
             Knowing what to do{" "}
             <span className="relative inline-block text-[var(--color-mainstar)]">
               isn&apos;t enough
@@ -62,7 +62,7 @@ export default function ProblemSection() {
           </h4>
 
           {/* SUBTEXT */}
-          <p className="mx-auto mt-4  max-w-full text-center text-[1.05rem] leading-relaxed text-[var(--color-dark)]">
+          <p className="mx-auto mt-4 max-w-full text-center text-[0.98rem] leading-7 text-[var(--color-dark)] sm:text-[1.05rem]">
             ADHD creates {" "} <span className="relative inline-block text-[var(--color-mainstar)]">
             invisible friction
             </span>{" "} between <br></br> intention,
@@ -71,7 +71,7 @@ export default function ProblemSection() {
         </motion.div>
 
         {/* ITEMS */}
-        <div className="mt-16 space-y-8">
+        <div className="mt-10 space-y-6 sm:mt-16 sm:space-y-8">
           {problems.map((problem, index) => (
             <motion.div
               key={problem.title}
@@ -82,10 +82,10 @@ export default function ProblemSection() {
                 duration: 0.6,
                 delay: index * 0.08,
               }}
-              className="grid items-center gap-6 lg:grid-cols-[240px_1fr]"
+              className="grid items-center gap-4 rounded-[24px] border border-white/60 bg-white/42 p-3 shadow-[0_12px_35px_rgba(53,85,63,0.06)] backdrop-blur-sm sm:gap-6 sm:p-4 lg:grid-cols-[240px_1fr]"
             >
               {/* VISUAL CARD */}
-              <div className="relative overflow-hidden rounded-[24px] border border-[var(--color-border)] bg-[var(--color-surface)] p-4 shadow-[var(--shadow-soft)] backdrop-blur-2xl">
+              <div className="relative overflow-hidden rounded-[20px] border border-[var(--color-border)] bg-[var(--color-surface)] p-3 shadow-[var(--shadow-soft)] backdrop-blur-2xl sm:rounded-[24px] sm:p-4">
                 <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary)]/[0.03] to-transparent" />
 
                 {/* GRID */}
@@ -187,7 +187,7 @@ export default function ProblemSection() {
               </div>
 
               {/* TEXT */}
-              <div className="mx-auto max-w-md text-center">
+              <div className="mx-auto max-w-md px-1 text-center lg:text-left">
                 <h3 className="text-[1.35rem] font-semibold leading-[1.1] tracking-[-0.04em] text-[var(--color-dark)]">
                   {problem.title}
                 </h3>
