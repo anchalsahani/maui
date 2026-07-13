@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 export default function Home() {
   return (
     <div className="relative flex min-h-dvh flex-col bg-[var(--color-bg)] px-3 pb-4 pt-20 sm:px-6 sm:pb-6 sm:pt-24 lg:px-8">
-      <section className="relative flex min-h-[calc(100dvh-6rem)] flex-col overflow-hidden rounded-[1.35rem] border border-white/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.86),rgba(250,250,250,0.68))] shadow-[0_30px_90px_rgba(47,74,57,0.14),inset_0_1px_0_rgba(255,255,255,0.9)] sm:min-h-[calc(100vh-7.5rem)] sm:rounded-[2.5rem]">
+      <section className="relative flex min-h-[calc(100dvh-6rem)] flex-col overflow-hidden rounded-[1.35rem] border border-[var(--color-border)] bg-[image:var(--color-hero-panel)] shadow-[0_30px_90px_rgba(47,74,57,0.14),inset_0_1px_0_rgba(255,255,255,0.18)] sm:min-h-[calc(100vh-7.5rem)] sm:rounded-[2.5rem]">
         <div className="pointer-events-none absolute inset-0 rounded-[inherit] ring-1 ring-[var(--color-primary)]/10" />
 
       {/* BACKGROUND GLOW */}
@@ -15,8 +15,8 @@ export default function Home() {
       <div className="pointer-events-none absolute bottom-0 left-0 h-[260px] w-[260px] rounded-full bg-[var(--color-accent)]/60 blur-[90px] sm:h-[420px] sm:w-[420px] sm:blur-[120px]" />
 
       {/* SUBTLE GRID */}
-      <div className="pointer-events-none absolute inset-0 opacity-[0.03]">
-        <div className="h-full w-full bg-[linear-gradient(to_right,#00000010_1px,transparent_1px),linear-gradient(to_bottom,#00000010_1px,transparent_1px)] bg-[size:72px_72px]" />
+      <div className="pointer-events-none absolute inset-0 opacity-100">
+        <div className="h-full w-full bg-[linear-gradient(to_right,var(--color-grid-line)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-grid-line)_1px,transparent_1px)] bg-[size:72px_72px]" />
       </div>
 
       {/* HERO */}
@@ -26,7 +26,7 @@ export default function Home() {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="glass-card mb-6 max-w-full rounded-full border border-[var(--color-border)] bg-white/60 px-4 py-2 backdrop-blur-xl sm:mb-8 sm:px-6"
+          className="glass-card mb-6 max-w-full rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-2 backdrop-blur-xl sm:mb-8 sm:px-6"
         >
           <span className="text-[13px] font-medium text-[var(--color-dark)]/70">
             Work with your brain, not against it.
@@ -57,7 +57,7 @@ export default function Home() {
           transition={{ duration: 0.8, delay: 0.15 }}
           className="mt-9 transition-transform duration-300 hover:scale-[1.03] sm:mt-12"
         >
-          <Button variant="secondary">
+          <Button href="#problems" variant="secondary">
             Watch Demo
           </Button>
         </motion.div>

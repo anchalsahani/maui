@@ -80,13 +80,14 @@ function SignupContent() {
   }
 
   return (
-    <main className="relative min-h-dvh overflow-hidden px-2 py-2 sm:px-4 sm:py-2 lg:px-5 lg:py-4">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-54 bg-[radial-gradient(circle_at_top,rgba(207,232,213,0.95),transparent_62%)]" />
+    <main className="relative min-h-dvh overflow-hidden bg-[var(--color-bg)] px-2 py-2 sm:px-4 sm:py-2 lg:px-5 lg:py-4">
+      <div className="app-page-wash pointer-events-none absolute inset-0" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-54 bg-[radial-gradient(circle_at_top,var(--color-accent),transparent_62%)] opacity-55" />
       <div className="pointer-events-none absolute right-[-8rem] top-16 h-64 w-64 rounded-full bg-[var(--color-primary)]/18 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-[-5rem] left-[-4rem] h-56 w-56 rounded-full bg-[var(--color-accent)] blur-3xl" />
+      <div className="pointer-events-none absolute bottom-[-5rem] left-[-4rem] h-56 w-56 rounded-full bg-[var(--color-accent)]/70 blur-3xl" />
 
-      <div className="relative mx-auto grid min-h-[calc(100dvh-1rem)] w-full max-w-7xl overflow-hidden rounded-[22px] border border-black/5 bg-white/60 shadow-[0_25px_90px_rgba(53,85,63,0.12)] backdrop-blur-xl sm:rounded-[28px] lg:grid-cols-[1.02fr_0.98fr]">
-        <section className="relative bg-[linear-gradient(180deg,rgba(255,255,255,0.94),rgba(243,249,245,0.98))] px-4 py-4 sm:px-6 sm:py-5 lg:px-9 lg:py-6">
+      <div className="app-card-strong relative mx-auto grid min-h-[calc(100dvh-1rem)] w-full max-w-7xl overflow-hidden rounded-[22px] sm:rounded-[28px] lg:grid-cols-[1.02fr_0.98fr]">
+        <section className="relative bg-[var(--color-card-soft)] px-4 py-4 sm:px-6 sm:py-5 lg:px-9 lg:py-6">
           <div className="space-y-5">
             <div className="flex items-center justify-between gap-4">
               <Link href="/" className="flex items-center gap-3">
@@ -103,7 +104,7 @@ function SignupContent() {
                 </div>
               </Link>
 
-              <div className="hidden rounded-full border border-[var(--color-border)] bg-white/70 px-3 py-1.5 text-[13px] text-[var(--color-text-secondary)] sm:block">
+              <div className="hidden rounded-full border border-[var(--color-border)] bg-[var(--color-card-muted)] px-3 py-1.5 text-[13px] text-[var(--color-text-secondary)] sm:block">
                 One calm step at a time
               </div>
             </div>
@@ -130,7 +131,7 @@ function SignupContent() {
                 {features.map(({ icon: Icon, title, description }) => (
                   <div
                     key={title}
-                    className="flex items-start gap-4 rounded-[22px] border border-[var(--color-border)] bg-white/72 px-4 py-3 shadow-[0_12px_35px_rgba(53,85,63,0.06)] backdrop-blur-sm"
+                    className="app-subcard flex items-start gap-4 rounded-[22px] px-4 py-3"
                   >
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[var(--color-primary)]/14 text-[var(--color-primary-deep)]">
                       <Icon size={17} />
@@ -150,18 +151,18 @@ function SignupContent() {
           </div>
         </section>
 
-        <section className="relative overflow-hidden bg-[linear-gradient(180deg,rgba(241,250,244,0.98),rgba(217,236,223,0.96))] px-4 py-4 sm:px-5 sm:py-4 lg:px-7 lg:pt-30 lg:pb-10">
+        <section className="relative overflow-hidden border-t border-[var(--color-border)] bg-[var(--color-card-muted)] px-4 py-4 sm:px-5 sm:py-4 lg:border-l lg:border-t-0 lg:px-7 lg:pb-10 lg:pt-30">
           <div className="pointer-events-none absolute inset-0">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.78),transparent_28%),radial-gradient(circle_at_20%_30%,rgba(143,191,159,0.26),transparent_30%)]" />
-            <div className="absolute right-[-4rem] top-8 h-64 w-64 rounded-full bg-[var(--color-accent)]/80 blur-3xl" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,var(--color-card-hover),transparent_28%),radial-gradient(circle_at_20%_30%,rgba(143,191,159,0.18),transparent_30%)] opacity-60" />
+            <div className="absolute right-[-4rem] top-8 h-64 w-64 rounded-full bg-[var(--color-accent)]/55 blur-3xl" />
             <div className="absolute left-[-4rem] top-28 h-64 w-64 rounded-full bg-[var(--color-primary)]/22 blur-3xl" />
-            <div className="absolute bottom-10 right-[-3rem] h-48 w-80 rounded-[100%] bg-[linear-gradient(135deg,rgba(207,232,213,0.92),rgba(143,191,159,0.46))] blur-2xl" />
-            <div className="absolute bottom-4 left-2 h-28 w-64 rounded-[999px] border border-white/55 bg-white/28 opacity-90 blur-[1px]" />
-            <div className="absolute bottom-14 left-14 h-20 w-52 rounded-[999px] border border-white/45 bg-[var(--color-accent)]/28 opacity-85 blur-[1px]" />
+            <div className="absolute bottom-10 right-[-3rem] h-48 w-80 rounded-[100%] bg-[var(--color-accent)]/42 blur-2xl" />
+            <div className="absolute bottom-4 left-2 h-28 w-64 rounded-[999px] border border-[var(--color-border)] bg-[var(--color-card-soft)] opacity-70 blur-[1px]" />
+            <div className="absolute bottom-14 left-14 h-20 w-52 rounded-[999px] border border-[var(--color-border)] bg-[var(--color-accent)]/24 opacity-75 blur-[1px]" />
             <div className="absolute top-1/2 right-10 h-24 w-40 rounded-[999px] bg-[var(--color-primary)]/16 blur-2xl" />
           </div>
 
-          <div className="relative ml-auto w-full max-w-lg rounded-[22px] border border-[var(--color-border)] bg-[var(--color-surface-strong)] p-4 shadow-[var(--shadow-card)] sm:rounded-[24px] sm:p-4.5">
+          <div className="app-card-strong relative ml-auto w-full max-w-lg rounded-[22px] p-4 sm:rounded-[24px] sm:p-4.5">
             <div className="flex flex-col gap-2 border-b border-[var(--color-border)] pb-3.5 sm:flex-row sm:items-start sm:justify-between">
               <div className="space-y-1.5">
                 <div className="inline-flex w-fit items-center gap-2 rounded-full bg-[var(--color-accent)]/55 px-3 py-1 text-[12px] font-medium text-[var(--color-primary-deep)]">
@@ -250,7 +251,7 @@ function SignupContent() {
                 />
               </label>
 
-              <label className="flex items-start gap-2.5 rounded-[16px] border border-[var(--color-border)] bg-[var(--color-bg)]/75 p-2.5">
+              <label className="flex items-start gap-2.5 rounded-[16px] border border-[var(--color-border)] bg-[var(--color-card-soft)] p-2.5">
                 <input
                   type="checkbox"
                   className="mt-0.5 h-3.5 w-3.5 rounded border-[var(--color-border-strong)] text-[var(--color-primary-deep)] accent-[var(--color-primary-deep)]"
@@ -281,7 +282,7 @@ function SignupContent() {
                 <button
                   type="submit"
                   disabled={isPending}
-                  className="group flex h-10 min-w-0 items-center justify-center gap-2 rounded-full bg-[var(--color-primary-deep)] px-3.5 text-[12px] font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--color-dark)] hover:shadow-[0_16px_30px_rgba(26,26,26,0.14)] disabled:cursor-not-allowed disabled:opacity-70"
+                  className="maui-button-primary group flex h-10 min-w-0 items-center justify-center gap-2 rounded-full px-3.5 text-[12px] font-semibold transition-all duration-200 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70"
                 >
                   <span className="truncate">
                     {isPending ? "Creating..." : "Create account"}
@@ -302,9 +303,9 @@ function SignupContent() {
                     window.location.href = "/api/auth/google";
                   }}
                   disabled={isPending}
-                  className="flex h-10 min-w-0 items-center justify-center gap-2 rounded-full bg-[#171717] px-3.5 text-[12px] font-medium text-white transition-colors hover:bg-black disabled:cursor-not-allowed disabled:opacity-70"
+                  className="maui-button-secondary flex h-10 min-w-0 items-center justify-center gap-2 rounded-full px-3.5 text-[12px] font-medium transition-all hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70"
                 >
-                  <span className="flex h-6.5 w-6.5 shrink-0 items-center justify-center rounded-full bg-white text-[14px] font-semibold text-[#4285F4]">
+                  <span className="flex h-6.5 w-6.5 shrink-0 items-center justify-center rounded-full bg-[var(--color-card-hover)] text-[14px] font-semibold text-[#4285F4]">
                     G
                   </span>
                   <span className="truncate">Sign up with Google</span>

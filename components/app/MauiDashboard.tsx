@@ -537,7 +537,7 @@ function StreakCalendar({
   );
 
   return (
-    <div className="rounded-[32px] border border-white/45 bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(247,250,248,0.8))] p-6 shadow-[0_24px_70px_rgba(53,85,63,0.1)] backdrop-blur-2xl">
+    <div className="app-card rounded-[32px] p-6">
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-sm font-medium uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
@@ -553,7 +553,7 @@ function StreakCalendar({
       </div>
 
       <div className="mt-5 grid grid-cols-3 gap-3">
-        <div className="rounded-[18px] bg-white/72 px-3 py-3">
+        <div className="app-subcard rounded-[18px] px-3 py-3">
           <p className="text-[1.25rem] font-semibold tracking-[-0.04em] text-[var(--color-dark)]">
             {activeDays}
           </p>
@@ -561,7 +561,7 @@ function StreakCalendar({
             Active days
           </p>
         </div>
-        <div className="rounded-[18px] bg-white/72 px-3 py-3">
+        <div className="app-subcard rounded-[18px] px-3 py-3">
           <p className="text-[1.25rem] font-semibold tracking-[-0.04em] text-[var(--color-dark)]">
             {events.length}
           </p>
@@ -569,7 +569,7 @@ function StreakCalendar({
             Wins
           </p>
         </div>
-        <div className="rounded-[18px] bg-white/72 px-3 py-3">
+        <div className="app-subcard rounded-[18px] px-3 py-3">
           <p className="text-[1.25rem] font-semibold tracking-[-0.04em] text-[var(--color-dark)]">
             {totalPoints}
           </p>
@@ -614,7 +614,7 @@ function StreakCalendar({
                     getActivityTone(dayEvents.length)
                   } ${
                     isSelected
-                      ? "border-[var(--color-dark)] shadow-[0_0_0_2px_rgba(255,255,255,0.9)]"
+                      ? "border-[var(--color-dark)] shadow-[0_0_0_2px_var(--color-card-hover)]"
                       : isToday
                         ? "border-[var(--color-primary-deep)]"
                         : "border-[rgba(47,74,57,0.18)]"
@@ -644,7 +644,7 @@ function StreakCalendar({
         </p>
       </div>
 
-      <div className="mt-5 rounded-[22px] bg-white/66 px-4 py-4">
+      <div className="app-subcard mt-5 rounded-[22px] px-4 py-4">
         <div className="flex items-center justify-between gap-3">
           <p className="text-sm font-semibold text-[var(--color-dark)]">
             {getCalendarDayLabel(selectedDay)}
@@ -851,15 +851,15 @@ function FlowCard({
       whileTap={{ scale: 0.985 }}
       className={`group relative flex h-full min-h-[176px] overflow-hidden rounded-[30px] border p-5 text-left transition-all duration-300 ${
         active
-          ? "border-[var(--color-primary)]/42 bg-[linear-gradient(180deg,rgba(207,232,213,0.42),rgba(255,255,255,0.86))] shadow-[0_30px_70px_rgba(53,85,63,0.12)]"
-          : "border-white/45 bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(247,250,248,0.8))] shadow-[0_18px_55px_rgba(53,85,63,0.08)]"
+          ? "border-[var(--color-primary)]/45 bg-[var(--color-accent)]/44 shadow-[0_30px_70px_rgba(53,85,63,0.12)]"
+          : "border-[var(--color-border)] bg-[var(--color-card)] shadow-[0_18px_55px_rgba(53,85,63,0.08)]"
       }`}
       style={{ transformStyle: "preserve-3d" }}
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(207,232,213,0.5),transparent_38%)] opacity-70 transition-opacity duration-300 group-hover:opacity-100" />
       <div className="relative flex h-full min-w-0 flex-col">
         <div className="flex items-start justify-between gap-3">
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/50 bg-white/78 text-[var(--color-primary-deep)] shadow-[0_10px_24px_rgba(53,85,63,0.08)]">
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--color-border)] bg-[var(--color-card-hover)] text-[var(--color-primary-deep)] shadow-[0_10px_24px_rgba(53,85,63,0.08)]">
             <Icon size={20} />
           </div>
           <ChevronRight
@@ -875,7 +875,7 @@ function FlowCard({
             {body}
           </p>
         ) : null}
-        <div className="mt-auto inline-flex w-fit rounded-full border border-white/55 bg-white/72 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-[var(--color-primary-deep)]">
+        <div className="mt-auto inline-flex w-fit rounded-full border border-[var(--color-border)] bg-[var(--color-card-soft)] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-[var(--color-primary-deep)]">
           {tone}
         </div>
       </div>
@@ -885,7 +885,7 @@ function FlowCard({
 
 function SkeletonCard() {
   return (
-    <div className="overflow-hidden rounded-[28px] border border-white/45 bg-white/70 p-5 shadow-[0_18px_55px_rgba(53,85,63,0.08)]">
+    <div className="app-card overflow-hidden rounded-[28px] p-5">
       <div className="h-12 w-12 animate-pulse rounded-2xl bg-[var(--color-accent)]/45" />
       <div className="mt-5 h-6 w-28 animate-pulse rounded-full bg-[var(--color-accent)]/38" />
       <div className="mt-3 space-y-2">
@@ -908,7 +908,7 @@ function StatsCard({
   return (
     <motion.div
       whileHover={{ y: -4 }}
-      className="rounded-[26px] border border-white/45 bg-[linear-gradient(180deg,rgba(255,255,255,0.82),rgba(247,250,248,0.78))] p-4 shadow-[0_18px_55px_rgba(53,85,63,0.08)]"
+      className="app-subcard rounded-[26px] p-4 shadow-[0_18px_55px_rgba(53,85,63,0.08)]"
     >
       <div className="flex items-center justify-between gap-3">
         <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[var(--color-accent)]/48 text-[var(--color-primary-deep)]">
@@ -942,7 +942,7 @@ function MentorCard({ snapshot }: { snapshot: MentorSnapshot }) {
         : {
             icon: Compass,
             label: "Steady",
-            className: "border-[var(--color-border)] bg-white/76 text-[var(--color-primary-deep)]",
+            className: "border-[var(--color-border)] bg-[var(--color-card-soft)] text-[var(--color-primary-deep)]",
           };
   const Icon = tone.icon;
 
@@ -951,7 +951,7 @@ function MentorCard({ snapshot }: { snapshot: MentorSnapshot }) {
       initial={{ opacity: 0, y: 22 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.12, ease: "easeOut" }}
-      className="rounded-[32px] border border-white/45 bg-[linear-gradient(135deg,rgba(255,255,255,0.88),rgba(242,250,244,0.82))] p-6 shadow-[0_24px_70px_rgba(53,85,63,0.1)] backdrop-blur-2xl sm:p-7"
+      className="app-card rounded-[32px] p-6 sm:p-7"
     >
       <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
         <div className="min-w-0">
@@ -962,7 +962,7 @@ function MentorCard({ snapshot }: { snapshot: MentorSnapshot }) {
               <Icon size={14} />
               Mentor read: {tone.label}
             </span>
-            <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-white/72 px-3 py-1.5 text-xs font-semibold text-[var(--color-text-secondary)]">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-card-soft)] px-3 py-1.5 text-xs font-semibold text-[var(--color-text-secondary)]">
               <Activity size={14} />
               {snapshot.focusPattern}
             </span>
@@ -976,7 +976,7 @@ function MentorCard({ snapshot }: { snapshot: MentorSnapshot }) {
           </p>
         </div>
 
-        <div className="rounded-[24px] border border-white/55 bg-white/74 p-4 lg:w-[300px]">
+        <div className="app-subcard rounded-[24px] p-4 lg:w-[300px]">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-text-secondary)]">
             Next healthy move
           </p>
@@ -990,7 +990,7 @@ function MentorCard({ snapshot }: { snapshot: MentorSnapshot }) {
         {snapshot.signals.map((signal) => (
           <span
             key={signal}
-            className="rounded-full border border-[var(--color-border)] bg-white/64 px-3 py-1.5 text-xs text-[var(--color-text-secondary)]"
+            className="rounded-full border border-[var(--color-border)] bg-[var(--color-card-muted)] px-3 py-1.5 text-xs text-[var(--color-text-secondary)]"
           >
             {signal}
           </span>
@@ -1591,7 +1591,7 @@ export default function MauiDashboard({
 
   return (
     <div className="relative min-h-dvh overflow-hidden bg-[var(--color-bg)]">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(207,232,213,0.78),transparent_30%),radial-gradient(circle_at_82%_18%,rgba(143,191,159,0.14),transparent_24%),linear-gradient(180deg,rgba(255,255,255,0.64),rgba(250,250,250,0.96))]" />
+      <div className="app-page-wash pointer-events-none absolute inset-0" />
       <div className="pointer-events-none absolute left-[-30%] top-[10%] h-[320px] w-[320px] rounded-full bg-[var(--color-accent)]/42 blur-[90px] sm:left-[-8%] sm:h-[520px] sm:w-[520px] sm:blur-[120px]" />
       <div className="pointer-events-none absolute right-[-36%] top-[-8%] h-[340px] w-[340px] rounded-full bg-[var(--color-primary)]/12 blur-[90px] sm:right-[-10%] sm:h-[560px] sm:w-[560px] sm:blur-[120px]" />
 
@@ -1604,7 +1604,7 @@ export default function MauiDashboard({
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="relative overflow-hidden rounded-[24px] border border-white/45 bg-[linear-gradient(135deg,rgba(255,255,255,0.9),rgba(242,250,244,0.84))] p-4 shadow-[0_28px_80px_rgba(53,85,63,0.1)] backdrop-blur-2xl sm:rounded-[32px] sm:p-8"
+          className="app-card-strong relative overflow-hidden rounded-[24px] p-4 sm:rounded-[32px] sm:p-8"
         >
           <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-[radial-gradient(circle_at_top,rgba(207,232,213,0.95),transparent_68%)]" />
           <div className="pointer-events-none absolute right-[-4rem] top-[-2rem] h-48 w-48 rounded-full bg-[var(--color-primary)]/18 blur-3xl" />
@@ -1691,7 +1691,7 @@ export default function MauiDashboard({
               initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.15, ease: "easeOut" }}
-              className="rounded-[24px] border border-white/45 bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(247,250,248,0.8))] p-4 shadow-[0_24px_70px_rgba(53,85,63,0.1)] backdrop-blur-2xl sm:rounded-[32px] sm:p-7"
+              className="app-card rounded-[24px] p-4 sm:rounded-[32px] sm:p-7"
             >
               <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
                 <div className="max-w-xl">
@@ -1717,7 +1717,7 @@ export default function MauiDashboard({
                     <motion.div
                       key={item.label}
                       whileHover={{ y: -4 }}
-                      className="min-w-0 rounded-[16px] border border-white/45 bg-white/78 px-2.5 py-3 shadow-[0_12px_30px_rgba(53,85,63,0.06)] sm:rounded-[20px] sm:px-4 sm:py-4"
+                      className="app-subcard min-w-0 rounded-[16px] px-2.5 py-3 shadow-[0_12px_30px_rgba(53,85,63,0.06)] sm:rounded-[20px] sm:px-4 sm:py-4"
                     >
                       <p className="truncate text-[1.05rem] font-semibold text-[var(--color-dark)] sm:text-[1.35rem]">
                         {item.value}
@@ -1739,7 +1739,7 @@ export default function MauiDashboard({
             transition={{ duration: 0.5, delay: 0.18, ease: "easeOut" }}
             className="space-y-6"
           >
-            <div className="rounded-[24px] border border-white/45 bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(247,250,248,0.8))] p-4 shadow-[0_24px_70px_rgba(53,85,63,0.1)] backdrop-blur-2xl sm:rounded-[32px] sm:p-6">
+            <div className="app-card rounded-[24px] p-4 sm:rounded-[32px] sm:p-6">
               <div className="flex items-start justify-between gap-3 sm:gap-4">
                 <div>
                   <p className="text-sm font-medium uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
@@ -1754,13 +1754,13 @@ export default function MauiDashboard({
               <button
                 type="button"
                 onClick={resetSession}
-                className="mt-5 flex h-11 items-center justify-center rounded-full border border-[var(--color-border)] bg-white/82 px-4 text-sm font-medium text-[var(--color-dark)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--color-primary)]/24"
+                className="mt-5 flex h-11 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-card-soft)] px-4 text-sm font-medium text-[var(--color-dark)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--color-primary)]/24 hover:bg-[var(--color-card-hover)]"
               >
                 Reset session
               </button>
             </div>
 
-            <div className="rounded-[24px] border border-white/45 bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(247,250,248,0.8))] p-4 shadow-[0_24px_70px_rgba(53,85,63,0.1)] backdrop-blur-2xl sm:rounded-[32px] sm:p-6">
+            <div className="app-card rounded-[24px] p-4 sm:rounded-[32px] sm:p-6">
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <p className="text-sm font-medium uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
@@ -1770,7 +1770,7 @@ export default function MauiDashboard({
                     Everything from Personalization, ordered into a startable day.
                   </p>
                 </div>
-                <span className="rounded-full bg-white/80 px-3 py-1 text-xs font-semibold text-[var(--color-primary-deep)]">
+                <span className="rounded-full bg-[var(--color-card-soft)] px-3 py-1 text-xs font-semibold text-[var(--color-primary-deep)]">
                   {completedTaskIds.length}/{taskChecklist.length}
                 </span>
               </div>
@@ -1790,14 +1790,14 @@ export default function MauiDashboard({
                         className={`flex items-start gap-3 rounded-[18px] border px-3 py-3 shadow-[0_10px_28px_rgba(53,85,63,0.05)] sm:rounded-[22px] sm:px-4 ${
                           done
                             ? "border-[var(--color-primary)]/28 bg-[var(--color-accent)]/42"
-                            : "border-white/45 bg-white/74"
+                            : "border-[var(--color-border)] bg-[var(--color-card-soft)]"
                         }`}
                       >
                         <span
                           className={`mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border text-[11px] font-bold ${
                             done
-                              ? "border-[var(--color-primary-deep)] bg-[var(--color-primary-deep)] text-white"
-                              : "border-[var(--color-border-strong)] bg-white text-[var(--color-text-secondary)]"
+                              ? "maui-button-primary"
+                              : "border-[var(--color-border-strong)] bg-[var(--color-card-hover)] text-[var(--color-text-secondary)]"
                           }`}
                         >
                           {done ? "✓" : index + 1}
@@ -1823,7 +1823,7 @@ export default function MauiDashboard({
               </div>
 
               {recentMoments.length > 0 ? (
-                <p className="mt-5 rounded-[20px] bg-white/64 px-4 py-3 text-xs leading-5 text-[var(--color-text-secondary)]">
+                <p className="app-muted-card mt-5 rounded-[20px] px-4 py-3 text-xs leading-5 text-[var(--color-text-secondary)]">
                   {recentMoments[0]}
                 </p>
               ) : null}

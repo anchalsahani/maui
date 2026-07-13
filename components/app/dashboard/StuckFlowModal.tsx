@@ -42,7 +42,7 @@ export default function StuckFlowModal({
       <motion.div
         initial={{ opacity: 0, x: -12 }}
         animate={{ opacity: 1, x: 0 }}
-        className="flex h-full flex-col rounded-[28px] border border-[var(--color-border)] bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(245,250,247,0.9))] p-4 sm:p-5"
+        className="app-card flex h-full flex-col rounded-[28px] p-4 sm:p-5"
       >
         <div className="flex items-start justify-between gap-4">
           <div>
@@ -58,7 +58,7 @@ export default function StuckFlowModal({
               </p>
             ) : null}
           </div>
-          <span className="rounded-full bg-white/82 px-3 py-1 text-xs font-medium text-[var(--color-primary-deep)]">
+          <span className="rounded-full bg-[var(--color-card-soft)] px-3 py-1 text-xs font-medium text-[var(--color-primary-deep)]">
             {completedCount}/{microSteps.length}
           </span>
         </div>
@@ -68,7 +68,7 @@ export default function StuckFlowModal({
             <motion.div
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              className="rounded-[26px] border border-[var(--color-primary)]/24 bg-white/84 p-4 sm:p-5"
+              className="rounded-[26px] border border-[var(--color-primary)]/24 bg-[var(--color-card-soft)] p-4 sm:p-5"
             >
               <div className="flex items-start gap-4">
                 <Loader2 className="mt-1 animate-spin text-[var(--color-primary-deep)]" size={22} />
@@ -92,7 +92,7 @@ export default function StuckFlowModal({
               exit={{ opacity: 0, y: -10, scale: 0.98 }}
               whileHover={{ y: -3 }}
               whileTap={{ scale: 0.985 }}
-              className="w-full rounded-[26px] border border-[var(--color-primary)]/24 bg-white/84 p-4 text-left shadow-[0_18px_42px_rgba(53,85,63,0.08)] transition-all duration-200 hover:border-[var(--color-primary)]/42 hover:bg-white sm:p-5"
+              className="w-full rounded-[26px] border border-[var(--color-primary)]/24 bg-[var(--color-card-soft)] p-4 text-left shadow-[0_18px_42px_rgba(53,85,63,0.08)] transition-all duration-200 hover:border-[var(--color-primary)]/42 hover:bg-[var(--color-card-hover)] sm:p-5"
             >
               <div className="flex items-start gap-4">
                 <span className="mt-1 text-[var(--color-primary-deep)]">
@@ -141,10 +141,10 @@ export default function StuckFlowModal({
                   key={step}
                   className={`h-2 flex-1 rounded-full transition-colors duration-300 ${
                     done
-                      ? "bg-[var(--color-primary-deep)]"
+                      ? "bg-[var(--color-button-primary)]"
                       : active
                         ? "bg-[var(--color-primary)]"
-                        : "bg-white/78"
+                        : "bg-[var(--color-card-soft)]"
                   }`}
                 />
               );
@@ -152,7 +152,7 @@ export default function StuckFlowModal({
           </div>
 
           {breakdownError ? (
-            <p className="mt-3 rounded-[16px] border border-[var(--color-border)] bg-white/78 px-3 py-2 text-xs leading-5 text-[var(--color-text-secondary)]">
+            <p className="app-subcard mt-3 rounded-[16px] px-3 py-2 text-xs leading-5 text-[var(--color-text-secondary)]">
               {breakdownError}
             </p>
           ) : null}
@@ -162,20 +162,20 @@ export default function StuckFlowModal({
               type="button"
               onClick={onFinishTask}
               disabled={!allMicroStepsDone}
-              className="flex h-11 flex-1 items-center justify-center rounded-full bg-[var(--color-primary-deep)] text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--color-dark)] disabled:cursor-not-allowed disabled:opacity-50"
+              className="maui-button-primary flex h-11 flex-1 items-center justify-center rounded-full text-sm font-semibold transition-all duration-200 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50"
             >
               Finish task +4
             </button>
             <button
               type="button"
               onClick={onResetSteps}
-              className="flex h-11 flex-1 items-center justify-center rounded-full border border-[var(--color-border)] bg-white/82 text-sm font-medium text-[var(--color-dark)] transition-all duration-200 hover:-translate-y-0.5"
+              className="flex h-11 flex-1 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-card-soft)] text-sm font-medium text-[var(--color-dark)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--color-card-hover)]"
             >
               Reset steps
             </button>
           </div>
         </div>
-        <div className="mt-auto h-16 rounded-[24px] bg-[linear-gradient(180deg,rgba(207,232,213,0.18),rgba(255,255,255,0.5))]" />
+        <div className="mt-auto h-16 rounded-[24px] bg-[var(--color-accent)]/28" />
       </motion.div>
 
       <motion.div
@@ -183,12 +183,12 @@ export default function StuckFlowModal({
         animate={{ opacity: 1, x: 0 }}
         className="flex h-full flex-col gap-4"
       >
-        <div className="rounded-[28px] border border-[var(--color-border)] bg-[linear-gradient(180deg,rgba(255,255,255,0.88),rgba(247,250,248,0.82))] p-4 sm:p-5">
+        <div className="app-card rounded-[28px] p-4 sm:p-5">
           <p className="text-xs font-medium uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
             Reward path
           </p>
           <div className="mt-3 grid grid-cols-2 gap-3">
-            <div className="rounded-[22px] bg-white/80 px-4 py-3 text-center">
+            <div className="app-subcard rounded-[22px] px-4 py-3 text-center">
               <p className="text-[1.45rem] font-semibold tracking-[-0.05em] text-[var(--color-dark)]">
                 {reward.microTasksCompleted}
               </p>
@@ -196,7 +196,7 @@ export default function StuckFlowModal({
                 Micro wins
               </p>
             </div>
-            <div className="rounded-[22px] bg-white/80 px-4 py-3 text-center">
+            <div className="app-subcard rounded-[22px] px-4 py-3 text-center">
               <p className="text-[1.45rem] font-semibold tracking-[-0.05em] text-[var(--color-dark)]">
                 {reward.points}
               </p>
@@ -210,7 +210,7 @@ export default function StuckFlowModal({
           </p>
         </div>
 
-        <div className="overflow-hidden rounded-[28px] border border-[var(--color-border)] bg-[linear-gradient(180deg,rgba(255,255,255,0.9),rgba(241,249,244,0.86))] p-4 sm:p-5">
+        <div className="app-card overflow-hidden rounded-[28px] p-4 sm:p-5">
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="text-xs font-medium uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
@@ -225,13 +225,13 @@ export default function StuckFlowModal({
               initial={{ scale: 0.84, rotate: -8 }}
               animate={{ scale: 1, rotate: 0 }}
               transition={{ type: "spring", stiffness: 260, damping: 16 }}
-              className="rounded-full bg-white/84 px-3 py-2 text-sm font-semibold text-[var(--color-primary-deep)] shadow-[0_10px_24px_rgba(53,85,63,0.08)]"
+              className="rounded-full bg-[var(--color-card-hover)] px-3 py-2 text-sm font-semibold text-[var(--color-primary-deep)] shadow-[0_10px_24px_rgba(53,85,63,0.08)]"
             >
               :) {smileyPoints}
             </motion.div>
           </div>
 
-          <div className="relative mt-3 h-28 overflow-hidden rounded-[24px] bg-[linear-gradient(180deg,rgba(207,232,213,0.34),rgba(255,255,255,0.72))]">
+          <div className="relative mt-3 h-28 overflow-hidden rounded-[24px] bg-[var(--color-accent)]/32">
             <div className="absolute inset-x-8 bottom-5 h-3 rounded-full bg-[var(--color-primary)]/18" />
             <motion.div
               className="absolute bottom-8 left-1/2 w-3 origin-bottom -translate-x-1/2 rounded-full bg-[var(--color-primary-deep)]"
@@ -269,14 +269,14 @@ export default function StuckFlowModal({
               initial={{ opacity: 0, y: 10, scale: 0.9 }}
               animate={{ opacity: completedCount > 0 ? 1 : 0.55, y: 0, scale: 1 }}
               transition={{ duration: 0.35 }}
-              className="absolute bottom-3 left-1/2 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-white text-lg shadow-[0_12px_30px_rgba(53,85,63,0.12)]"
+              className="absolute bottom-3 left-1/2 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-[var(--color-card-hover)] text-lg shadow-[0_12px_30px_rgba(53,85,63,0.12)]"
             >
               :)
             </motion.div>
           </div>
         </div>
 
-        <div className="min-h-0 flex-1 rounded-[28px] bg-[linear-gradient(180deg,rgba(207,232,213,0.16),rgba(255,255,255,0.46))]" />
+        <div className="min-h-0 flex-1 rounded-[28px] bg-[var(--color-accent)]/18" />
       </motion.div>
     </div>
   );

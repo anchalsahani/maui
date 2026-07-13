@@ -55,8 +55,8 @@ export default function UserMenu({ userName }: UserMenuProps) {
         onClick={() => setOpen((value) => !value)}
         className={`group flex h-10 items-center gap-1.5 rounded-full border px-2 text-[var(--color-dark)] shadow-[0_8px_24px_rgba(16,47,21,0.08)] backdrop-blur-xl transition-all duration-200 hover:-translate-y-0.5 sm:h-11 sm:gap-2 sm:px-3 ${
           open
-            ? "border-[var(--color-primary)]/35 bg-white/88 shadow-[0_14px_30px_rgba(16,47,21,0.14)]"
-            : "border-white/35 bg-white/55"
+            ? "border-[var(--color-primary)]/35 bg-[var(--color-card-hover)] shadow-[0_14px_30px_rgba(16,47,21,0.14)]"
+            : "border-[var(--color-border)] bg-[var(--color-nav-surface)]"
         }`}
         aria-haspopup="menu"
         aria-expanded={open}
@@ -72,10 +72,10 @@ export default function UserMenu({ userName }: UserMenuProps) {
       </button>
 
       {open ? (
-        <div className="fixed left-3 right-3 top-16 z-50 max-h-[calc(100dvh-5rem)] overflow-y-auto rounded-[22px] border border-white/55 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(244,250,246,0.96))] p-3 shadow-[0_30px_90px_rgba(16,47,21,0.16)] backdrop-blur-2xl animate-in fade-in zoom-in-95 duration-200 sm:absolute sm:left-auto sm:right-0 sm:top-[calc(100%+0.75rem)] sm:w-[340px] sm:max-h-[calc(100dvh-6rem)] sm:rounded-[28px]">
+        <div className="app-card-strong fixed left-3 right-3 top-16 z-50 max-h-[calc(100dvh-5rem)] overflow-y-auto rounded-[22px] p-3 animate-in fade-in zoom-in-95 duration-200 sm:absolute sm:left-auto sm:right-0 sm:top-[calc(100%+0.75rem)] sm:w-[340px] sm:max-h-[calc(100dvh-6rem)] sm:rounded-[28px]">
           <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-[linear-gradient(180deg,rgba(207,232,213,0.55),transparent)]" />
 
-          <div className="relative rounded-[22px] border border-white/55 bg-[linear-gradient(180deg,rgba(250,252,250,0.96),rgba(239,247,242,0.92))] px-4 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.55)]">
+          <div className="app-subcard relative rounded-[22px] px-4 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)]">
             <div className="flex items-start justify-between gap-3">
               <div>
                 <p className="text-sm font-semibold text-[var(--color-dark)]">
@@ -86,7 +86,7 @@ export default function UserMenu({ userName }: UserMenuProps) {
                 </p>
               </div>
 
-              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/72 text-[var(--color-primary-deep)] shadow-[0_8px_18px_rgba(16,47,21,0.08)]">
+              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--color-card-hover)] text-[var(--color-primary-deep)] shadow-[0_8px_18px_rgba(16,47,21,0.08)]">
                 <Sparkles size={15} />
               </div>
             </div>
@@ -103,7 +103,7 @@ export default function UserMenu({ userName }: UserMenuProps) {
                 key={page.href}
                 href={page.href}
                 onClick={() => setOpen(false)}
-                className="group block rounded-[20px] border border-[var(--color-border)]/55 bg-[linear-gradient(180deg,rgba(255,255,255,0.58),rgba(248,251,249,0.72))] px-4 py-3 transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--color-primary)]/45 hover:bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(232,246,236,0.96))] hover:shadow-[0_14px_28px_rgba(16,47,21,0.1)]"
+                className="group block rounded-[20px] border border-[var(--color-border)]/75 bg-[var(--color-card-soft)] px-4 py-3 transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--color-primary)]/45 hover:bg-[var(--color-card-hover)] hover:shadow-[0_14px_28px_rgba(16,47,21,0.1)]"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div>
@@ -129,7 +129,7 @@ export default function UserMenu({ userName }: UserMenuProps) {
               type="button"
               onClick={handleLogout}
               disabled={isPending}
-              className="group flex w-full items-center justify-between rounded-[20px] border border-[var(--color-border)]/55 bg-[linear-gradient(180deg,rgba(255,248,248,0.72),rgba(255,255,255,0.88))] px-4 py-3 text-left text-sm font-medium text-[var(--color-dark)] transition-all duration-200 hover:border-[var(--color-error)]/35 hover:bg-[linear-gradient(180deg,rgba(255,244,244,0.98),rgba(255,250,250,0.98))] hover:shadow-[0_14px_28px_rgba(16,47,21,0.08)] disabled:cursor-not-allowed disabled:opacity-70"
+              className="group flex w-full items-center justify-between rounded-[20px] border border-[var(--color-border)]/75 bg-[var(--color-card-soft)] px-4 py-3 text-left text-sm font-medium text-[var(--color-dark)] transition-all duration-200 hover:border-[var(--color-error)]/35 hover:bg-[var(--color-card-hover)] hover:shadow-[0_14px_28px_rgba(16,47,21,0.08)] disabled:cursor-not-allowed disabled:opacity-70"
             >
               <span className="flex items-center gap-3">
                 <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--color-error)]/12 text-[var(--color-error)] transition-colors duration-200 group-hover:bg-[var(--color-error)]/18">

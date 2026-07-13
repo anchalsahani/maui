@@ -297,7 +297,7 @@ export default function PersonalizationForm({
     >
       <input type="hidden" name="syllabusMode" value="paste" />
 
-      <section className="rounded-[22px] border border-white/50 bg-white/78 p-4 shadow-[var(--shadow-soft)] backdrop-blur-2xl sm:rounded-[30px] sm:p-6">
+      <section className="app-card rounded-[22px] p-4 sm:rounded-[30px] sm:p-6">
         <div className="flex items-start gap-3 sm:items-center">
           <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--color-accent)]/60 text-[var(--color-primary-deep)]">
             <Brain size={19} />
@@ -337,7 +337,7 @@ export default function PersonalizationForm({
                     className={`rounded-[16px] border px-3.5 py-3 text-left transition-all duration-200 sm:rounded-[20px] sm:px-4 ${
                         selected
                           ? "border-[var(--color-primary)]/45 bg-[var(--color-accent)]/45 shadow-[0_12px_24px_rgba(53,85,63,0.08)]"
-                          : "border-[var(--color-border)] bg-white/78 hover:-translate-y-0.5 hover:border-[var(--color-primary)]/28 hover:bg-white"
+                          : "border-[var(--color-border)] bg-[var(--color-card-soft)] hover:-translate-y-0.5 hover:border-[var(--color-primary)]/28 hover:bg-[var(--color-card-hover)]"
                       } disabled:cursor-not-allowed disabled:opacity-70`}
                     >
                       <span className="text-sm font-semibold text-[var(--color-dark)]">
@@ -356,7 +356,7 @@ export default function PersonalizationForm({
       </section>
 
       <div className="grid gap-5 sm:gap-6 lg:grid-cols-[1.05fr_0.95fr]">
-        <section className="rounded-[22px] border border-white/50 bg-white/78 p-4 shadow-[var(--shadow-soft)] backdrop-blur-2xl sm:rounded-[30px] sm:p-6">
+        <section className="app-card rounded-[22px] p-4 sm:rounded-[30px] sm:p-6">
           <div className="flex items-start gap-3 sm:items-center">
             <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--color-accent)]/60 text-[var(--color-primary-deep)]">
               <FileText size={19} />
@@ -398,7 +398,7 @@ export default function PersonalizationForm({
                       input.focus();
                     }
                   }}
-                  className="rounded-full border border-[var(--color-border)] bg-white/78 px-3 py-1.5 text-xs text-[var(--color-text-secondary)] transition hover:-translate-y-0.5 hover:border-[var(--color-primary)]/35 hover:text-[var(--color-dark)]"
+                  className="rounded-full border border-[var(--color-border)] bg-[var(--color-card-soft)] px-3 py-1.5 text-xs text-[var(--color-text-secondary)] transition hover:-translate-y-0.5 hover:border-[var(--color-primary)]/35 hover:bg-[var(--color-card-hover)] hover:text-[var(--color-dark)]"
                 >
                   {example}
                 </button>
@@ -449,7 +449,7 @@ export default function PersonalizationForm({
               />
             </label>
 
-            <label className="flex min-h-32 cursor-pointer flex-col justify-center rounded-2xl border border-dashed border-[var(--color-primary)]/35 bg-white/62 px-4 py-4 text-sm text-[var(--color-text-secondary)]">
+            <label className="flex min-h-32 cursor-pointer flex-col justify-center rounded-2xl border border-dashed border-[var(--color-primary)]/35 bg-[var(--color-card-muted)] px-4 py-4 text-sm text-[var(--color-text-secondary)]">
               <span className="font-semibold text-[var(--color-dark)]">
                 Upload syllabus or plan
               </span>
@@ -525,7 +525,7 @@ export default function PersonalizationForm({
         </section>
 
         <aside className="space-y-5">
-          <section className="rounded-[22px] border border-white/50 bg-white/78 p-4 shadow-[var(--shadow-soft)] backdrop-blur-2xl sm:rounded-[30px] sm:p-6">
+          <section className="app-card rounded-[22px] p-4 sm:rounded-[30px] sm:p-6">
             <div className="flex items-start gap-3 sm:items-center">
               <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--color-accent)]/60 text-[var(--color-primary-deep)]">
                 <Sparkles size={19} />
@@ -541,7 +541,7 @@ export default function PersonalizationForm({
             </div>
 
             <div className="mt-5 grid gap-3 sm:grid-cols-2">
-              <div className="rounded-[20px] border border-[var(--color-border)] bg-white/72 px-4 py-3">
+              <div className="app-subcard rounded-[20px] px-4 py-3">
                 <p className="text-xs uppercase tracking-[0.16em] text-[var(--color-text-secondary)]">
                   Studying
                 </p>
@@ -549,7 +549,7 @@ export default function PersonalizationForm({
                   {currentProfile?.studying || "Not set yet"}
                 </p>
               </div>
-              <div className="rounded-[20px] border border-[var(--color-border)] bg-white/72 px-4 py-3">
+              <div className="app-subcard rounded-[20px] px-4 py-3">
                 <p className="text-xs uppercase tracking-[0.16em] text-[var(--color-text-secondary)]">
                   Topics
                 </p>
@@ -557,7 +557,7 @@ export default function PersonalizationForm({
                   {taskPreview.length}
                 </p>
               </div>
-              <div className="rounded-[20px] border border-[var(--color-border)] bg-white/72 px-4 py-3 sm:col-span-2">
+              <div className="app-subcard rounded-[20px] px-4 py-3 sm:col-span-2">
                 <p className="text-xs uppercase tracking-[0.16em] text-[var(--color-text-secondary)]">
                   Last processed
                 </p>
@@ -570,7 +570,7 @@ export default function PersonalizationForm({
             </div>
           </section>
 
-          <section className="rounded-[22px] border border-white/50 bg-white/78 p-4 shadow-[var(--shadow-soft)] backdrop-blur-2xl sm:rounded-[30px] sm:p-6">
+          <section className="app-card rounded-[22px] p-4 sm:rounded-[30px] sm:p-6">
             <p className="text-sm font-medium uppercase tracking-[0.18em] text-[var(--color-text-secondary)]">
               Parsed preview
             </p>
@@ -579,7 +579,7 @@ export default function PersonalizationForm({
                 taskPreview.map((task, index) => (
                   <div
                     key={task.id}
-                    className="rounded-[20px] border border-[var(--color-border)] bg-white/74 px-4 py-3"
+                    className="app-subcard rounded-[20px] px-4 py-3"
                   >
                     <div className="flex items-start gap-3">
                       <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--color-accent)]/55 text-[11px] font-semibold text-[var(--color-primary-deep)]">
@@ -600,14 +600,14 @@ export default function PersonalizationForm({
                   </div>
                 ))
               ) : (
-                <div className="rounded-[22px] border border-[var(--color-border)] bg-white/70 px-4 py-5 text-sm leading-6 text-[var(--color-text-secondary)]">
+                <div className="app-muted-card rounded-[22px] px-4 py-5 text-sm leading-6 text-[var(--color-text-secondary)]">
                   No day details processed yet. Add study, chores, appointments, or routines, then regenerate the plan.
                 </div>
               )}
             </div>
           </section>
 
-          <section className="rounded-[22px] border border-white/50 bg-white/78 p-4 shadow-[var(--shadow-soft)] backdrop-blur-2xl sm:rounded-[30px] sm:p-6">
+          <section className="app-card rounded-[22px] p-4 sm:rounded-[30px] sm:p-6">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div>
                 <p className="text-sm font-medium uppercase tracking-[0.18em] text-[var(--color-text-secondary)]">
@@ -625,7 +625,7 @@ export default function PersonalizationForm({
             </div>
 
             {aiWarning ? (
-              <p className="mt-4 rounded-[18px] border border-[var(--color-border)] bg-white/72 p-3 text-sm leading-6 text-[var(--color-text-secondary)]">
+              <p className="app-subcard mt-4 rounded-[18px] p-3 text-sm leading-6 text-[var(--color-text-secondary)]">
                 {aiWarning}
               </p>
             ) : null}
@@ -638,7 +638,7 @@ export default function PersonalizationForm({
                 {aiPlan.dayAtGlance.slice(0, 4).map((block, index) => (
                   <div
                     key={`${block.timeLabel}-${block.title}-${index}`}
-                    className="rounded-[18px] border border-[var(--color-border)] bg-white/74 px-4 py-3"
+                    className="app-subcard rounded-[18px] px-4 py-3"
                   >
                     <p className="inline-flex items-center gap-1 text-xs font-semibold text-[var(--color-primary-deep)]">
                       <Clock size={13} />
@@ -658,7 +658,7 @@ export default function PersonalizationForm({
         </aside>
       </div>
 
-      <section className="flex flex-col gap-3 rounded-[22px] border border-white/50 bg-white/78 p-4 shadow-[var(--shadow-soft)] backdrop-blur-2xl sm:flex-row sm:items-center sm:justify-between sm:rounded-[28px]">
+      <section className="app-card flex flex-col gap-3 rounded-[22px] p-4 sm:flex-row sm:items-center sm:justify-between sm:rounded-[28px]">
         <div>
           <p className="text-sm font-semibold text-[var(--color-dark)]">
             Ready to update your day plan?
@@ -671,7 +671,7 @@ export default function PersonalizationForm({
         <button
           type="submit"
           disabled={isBusy}
-          className="flex min-h-12 items-center justify-center gap-2 rounded-full bg-[var(--color-primary-deep)] px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[var(--color-dark)] disabled:cursor-not-allowed disabled:opacity-70 sm:h-12 sm:px-6 sm:py-0"
+          className="maui-button-primary flex min-h-12 items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70 sm:h-12 sm:px-6 sm:py-0"
         >
           {isBusy ? "Processing..." : "Save and regenerate day plan"}
           {isBusy ? <RefreshCcw size={16} className="animate-spin" /> : <ArrowRight size={16} />}
@@ -689,7 +689,7 @@ export default function PersonalizationForm({
           <p>{success}</p>
           <Link
             href="/dashboard"
-            className="mt-3 inline-flex h-10 items-center justify-center rounded-full bg-white/82 px-4 text-xs font-semibold text-[var(--color-dark)] transition hover:-translate-y-0.5 hover:bg-white"
+            className="mt-3 inline-flex h-10 items-center justify-center rounded-full bg-[var(--color-card-hover)] px-4 text-xs font-semibold text-[var(--color-dark)] transition hover:-translate-y-0.5"
           >
             Open dashboard and start working
           </Link>
@@ -698,7 +698,7 @@ export default function PersonalizationForm({
 
       {processing.active ? (
         <div className="fixed inset-0 z-[80] flex items-center justify-center bg-[var(--color-dark)]/28 px-3 py-4 backdrop-blur-sm">
-          <section className="max-h-[calc(100dvh-2rem)] w-full max-w-lg overflow-y-auto rounded-[24px] border border-white/55 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(244,250,246,0.98))] p-4 shadow-[0_30px_100px_rgba(16,47,21,0.22)] sm:rounded-[30px] sm:p-6">
+          <section className="app-card-strong max-h-[calc(100dvh-2rem)] w-full max-w-lg overflow-y-auto rounded-[24px] p-4 sm:rounded-[30px] sm:p-6">
             <div className="flex items-start gap-4">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[var(--color-accent)]/70 text-[var(--color-primary-deep)]">
                 <Loader2 size={22} className="animate-spin" />
@@ -727,11 +727,11 @@ export default function PersonalizationForm({
                       isComplete
                         ? "border-[var(--color-primary)]/25 bg-[var(--color-accent)]/42"
                         : isActive
-                          ? "border-[var(--color-primary)]/35 bg-white/88"
-                          : "border-[var(--color-border)] bg-white/56"
+                          ? "border-[var(--color-primary)]/35 bg-[var(--color-card-hover)]"
+                          : "border-[var(--color-border)] bg-[var(--color-card-muted)]"
                     }`}
                   >
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/84 text-[var(--color-primary-deep)]">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--color-card-hover)] text-[var(--color-primary-deep)]">
                       {isComplete ? (
                         <CheckCircle2 size={17} />
                       ) : isActive ? (
@@ -749,7 +749,7 @@ export default function PersonalizationForm({
             </div>
 
             {processing.summary ? (
-              <div className="mt-5 grid gap-3 rounded-[22px] border border-[var(--color-border)] bg-white/70 p-4 sm:grid-cols-3">
+              <div className="app-subcard mt-5 grid gap-3 rounded-[22px] p-4 sm:grid-cols-3">
                 <div>
                   <p className="text-[10px] uppercase tracking-[0.16em] text-[var(--color-text-secondary)]">
                     Profile

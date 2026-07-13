@@ -71,11 +71,11 @@ export default function FocusTimer({
       : 0;
 
   return (
-    <div className="rounded-[28px] border border-[var(--color-border)] bg-[linear-gradient(180deg,rgba(255,255,255,0.88),rgba(247,250,248,0.82))] p-5">
+    <div className="app-subcard rounded-[28px] p-5">
       <p className="text-xs font-medium uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
         Pomodoro
       </p>
-      <div className="mt-4 rounded-[24px] bg-white/78 px-5 py-5 text-center shadow-[0_12px_34px_rgba(53,85,63,0.06)]">
+      <div className="mt-4 rounded-[24px] bg-[var(--color-card-hover)] px-5 py-5 text-center shadow-[0_12px_34px_rgba(53,85,63,0.06)]">
         <motion.p
           key={snapshot.remainingSeconds}
           initial={{ opacity: 0.65, y: 4 }}

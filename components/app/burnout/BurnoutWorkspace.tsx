@@ -81,7 +81,7 @@ export default function BurnoutWorkspace({ survey }: BurnoutWorkspaceProps) {
             type="button"
             onClick={analyzeRant}
             disabled={isAnalyzing || rant.trim().length === 0}
-            className="mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-full bg-[var(--color-dark)] text-sm font-semibold text-white transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-55"
+            className="maui-button-primary mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-full text-sm font-semibold transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-55"
           >
             {isAnalyzing ? <Loader2 className="animate-spin" size={17} /> : <Brain size={17} />}
             Analyze rant

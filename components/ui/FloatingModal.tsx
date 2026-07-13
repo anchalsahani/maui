@@ -93,7 +93,7 @@ export default function FloatingModal({
             aria-labelledby={titleId}
             aria-describedby={description ? descriptionId : undefined}
             tabIndex={-1}
-            className={`relative z-[101] w-full ${widthClasses[size]} max-h-[calc(100dvh-1rem)] overflow-hidden rounded-[24px] border border-white/35 bg-[linear-gradient(180deg,rgba(255,255,255,0.9),rgba(245,250,247,0.88))] shadow-[0_40px_120px_rgba(14,30,20,0.22),0_0_0_1px_rgba(207,232,213,0.32)] outline-none backdrop-blur-2xl sm:rounded-[32px]`}
+            className={`relative z-[101] w-full ${widthClasses[size]} max-h-[calc(100dvh-1rem)] overflow-hidden rounded-[24px] border border-[var(--color-border)] bg-[var(--color-card-gradient)] shadow-[0_40px_120px_rgba(14,30,20,0.22),0_0_0_1px_rgba(207,232,213,0.28)] outline-none backdrop-blur-2xl sm:rounded-[32px]`}
             initial={{ opacity: 0, y: 28, scale: 0.96, filter: "blur(8px)" }}
             animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
             exit={{ opacity: 0, y: 20, scale: 0.97, filter: "blur(6px)" }}
@@ -106,7 +106,7 @@ export default function FloatingModal({
               <button
                 type="button"
                 onClick={onClose}
-                className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full border border-black/8 bg-white/72 text-[var(--color-text-secondary)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--color-primary)]/25 hover:bg-white hover:text-[var(--color-dark)] sm:right-4 sm:top-4"
+                className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-card-soft)] text-[var(--color-text-secondary)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--color-primary)]/30 hover:bg-[var(--color-card-hover)] hover:text-[var(--color-dark)] sm:right-4 sm:top-4"
                 aria-label="Close modal"
               >
                 <X size={17} />

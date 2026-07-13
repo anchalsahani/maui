@@ -1,11 +1,14 @@
 import React from "react";
 import { ArrowUpRight, Play } from "lucide-react";
+import Link from "next/link";
 
 interface ButtonProps {
   children: React.ReactNode;
   variant?: "primary" | "secondary";
   type?: "button" | "submit";
   className?: string;
+  href?: string;
+  onClick?: () => void;
 }
 
 export default function Button({
@@ -13,6 +16,8 @@ export default function Button({
   variant = "primary",
   type = "button",
   className = "",
+  href,
+  onClick,
 }: ButtonProps) {
   
   const baseStyles = `
@@ -31,37 +36,18 @@ export default function Button({
 
   const variants = {
     primary: {
-      button: `
-        bg-[var(--color-accent)]
-        text-[var(--color-dark)]
-        shadow-[0_10px_30px_rgba(0,0,0,0.08)]
-      `,
-      fill: "bg-[var(--color-dark)]",
-      text: "group-hover:text-white",
-      iconContainer: `
-        bg-[var(--color-dark)]
-        text-white 
-        group-hover:bg-white
-        group-hover:text-[var(--color-dark)]
-      `,
+      button: "maui-button-primary",
+      fill: "maui-button-fill",
+      text: "",
+      iconContainer: "maui-button-icon",
       // Define the icon component for primary
       Icon: ArrowUpRight, 
     },
     secondary: {
-      button: `
-        bg-[var(--color-bg)]
-        text-slate-500
-        shadow-[-5px_-5px_10px_rgba(255,255,255,0.8),5px_5px_10px_rgba(0,0,0,0.25)]
-        hover:shadow-[-1px_-1px_5px_rgba(255,255,255,0.6),1px_1px_5px_rgba(0,0,0,0.3),inset_-2px_-2px_5px_rgba(255,255,255,1),inset_2px_2px_4px_rgba(0,0,0,0.3)]
-        hover:text-[var(--color-primary)]
-      `,
+      button: "maui-button-secondary",
       fill: "hidden", 
       text: " ",
-      iconContainer: `
-        bg-transparent
-        text-slate-500
-        group-hover:text-[var(--color-primary)]
-      `,
+      iconContainer: "maui-button-icon",
       // Define the icon component for secondary
       Icon: Play,
     },
@@ -69,12 +55,9 @@ export default function Button({
 
   const current = variants[variant];
   const IconComponent = current.Icon;
-
-  return (
-    <button
-      type={type}
-      className={`${baseStyles} ${current.button} ${className}`}
-    >
+  const classNames = `${baseStyles} ${current.button} ${className}`;
+  const content = (
+    <>
       {/* Fill Layer (Only for Primary) */}
       {variant === "primary" && (
         <span
@@ -95,7 +78,6 @@ export default function Button({
       )}
 
       <div className="relative z-10 grid w-full grid-cols-[16px_minmax(0,1fr)_auto] items-center gap-1.5 sm:grid-cols-[24px_minmax(0,1fr)_auto] sm:gap-2">
-        
         {/* The Left Padding Spacer */}
         <div className="w-4 sm:w-6" />
 
@@ -110,7 +92,7 @@ export default function Button({
             transition-colors
             duration-500
             whitespace-nowrap
-            ${current.text }
+            ${current.text}
           `}
         >
           {children}
@@ -134,11 +116,29 @@ export default function Button({
           `}
         >
           <IconComponent
-            size={variant === "secondary" ? 16 : 20} // Play icon usually looks better slightly smaller
+            size={variant === "secondary" ? 16 : 20}
             className={`transition-transform duration-500 ${variant === "primary" ? "group-hover:rotate-45" : "group-hover:scale-110"}`}
           />
         </div>
       </div>
+    </>
+  );
+
+  if (href) {
+    return (
+      <Link href={href} className={classNames}>
+        {content}
+      </Link>
+    );
+  }
+
+  return (
+    <button
+      type={type}
+      onClick={onClick}
+      className={classNames}
+    >
+      {content}
     </button>
   );
 }

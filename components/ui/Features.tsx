@@ -84,7 +84,7 @@ function MetamorphosisStage({
           {stage.description}
         </p>
 
-        <div className="mt-4 inline-flex items-center gap-3 rounded-full bg-[var(--color-dark)] px-8 py-3 text-white shadow-lg">
+        <div className="maui-button-primary mt-4 inline-flex items-center gap-3 rounded-full px-8 py-3">
           <span className="text-sm font-bold uppercase tracking-wider">How it works</span>
           <div className="h-2 w-2 animate-pulse rounded-full bg-[var(--color-accent)]" />
         </div>

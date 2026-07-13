@@ -17,9 +17,9 @@ export default async function PersonalizationPage() {
         <Navbar />
       </div>
       <main className="relative min-h-screen overflow-hidden bg-[var(--color-bg)] px-4 pb-14 pt-28 sm:px-6">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(207,232,213,0.72),transparent_30%),linear-gradient(180deg,rgba(255,255,255,0.6),rgba(250,250,250,0.96))]" />
+        <div className="app-page-wash pointer-events-none absolute inset-0" />
         <div className="relative mx-auto max-w-7xl">
-          <section className="mb-7 rounded-[34px] border border-white/45 bg-white/76 p-6 shadow-[var(--shadow-card)] backdrop-blur-2xl sm:p-8">
+          <section className="app-card-strong mb-7 rounded-[34px] p-6 sm:p-8">
             <p className="text-sm font-medium uppercase tracking-[0.18em] text-[var(--color-text-secondary)]">
               Personalization
             </p>

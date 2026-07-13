@@ -170,12 +170,12 @@ export default function PlannerWorkspace({
 
   return (
     <div className="relative min-h-dvh overflow-hidden bg-[var(--color-bg)]">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(207,232,213,0.78),transparent_30%),linear-gradient(180deg,rgba(255,255,255,0.72),rgba(250,250,250,0.96))]" />
+      <div className="app-page-wash pointer-events-none absolute inset-0" />
 
       <main className="relative z-10 mx-auto w-full max-w-7xl px-3 pb-10 pt-20 sm:px-6 sm:pb-14 sm:pt-24">
         <section className="grid gap-5 sm:gap-6 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="space-y-5 sm:space-y-6">
-            <div className="rounded-[22px] border border-white/50 bg-white/78 p-4 shadow-[var(--shadow-soft)] backdrop-blur-2xl sm:rounded-[30px] sm:p-6">
+            <div className="app-card-strong rounded-[22px] p-4 sm:rounded-[30px] sm:p-6">
               <div className="flex items-center gap-2 text-sm font-semibold text-[var(--color-primary-deep)]">
                 <HeartPulse size={17} />
                 Mood Check-In
@@ -189,7 +189,7 @@ export default function PlannerWorkspace({
               </p>
             </div>
 
-            <section className="rounded-[22px] border border-white/50 bg-white/78 p-4 shadow-[var(--shadow-soft)] backdrop-blur-2xl sm:rounded-[30px] sm:p-6">
+            <section className="app-card rounded-[22px] p-4 sm:rounded-[30px] sm:p-6">
               <div className="flex items-center gap-3">
                 <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--color-accent)]/60 text-[var(--color-primary-deep)]">
                   <Brain size={19} />
@@ -211,7 +211,7 @@ export default function PlannerWorkspace({
                 className="input mt-5 min-h-32 resize-y"
                 placeholder="Example: I want to study, but every option feels like too much."
               />
-              <div className="mt-4 rounded-[22px] border border-[var(--color-border)] bg-white/66 p-4">
+              <div className="app-subcard mt-4 rounded-[22px] p-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-text-secondary)]">
                   Next useful option
                 </p>
@@ -224,21 +224,21 @@ export default function PlannerWorkspace({
                 type="button"
                 onClick={generatePlan}
                 disabled={isPlanning || tasks.length === 0}
-                className="mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-full bg-[var(--color-dark)] text-sm font-semibold text-white transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-55"
+                className="maui-button-primary mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-full text-sm font-semibold transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-55"
               >
                 {isPlanning ? <Loader2 className="animate-spin" size={17} /> : <Sparkles size={17} />}
                 Give me one gentle plan
               </button>
 
               {warning ? (
-                <p className="mt-4 rounded-[18px] border border-[var(--color-border)] bg-white/78 p-3 text-sm leading-6 text-[var(--color-text-secondary)]">
+                <p className="app-subcard mt-4 rounded-[18px] p-3 text-sm leading-6 text-[var(--color-text-secondary)]">
                   {warning}
                 </p>
               ) : null}
             </section>
           </div>
 
-          <section className="rounded-[22px] border border-white/50 bg-white/78 p-4 shadow-[var(--shadow-soft)] backdrop-blur-2xl sm:rounded-[30px] sm:p-6">
+          <section className="app-card rounded-[22px] p-4 sm:rounded-[30px] sm:p-6">
             <div className="flex items-start justify-between gap-3 sm:items-center">
               <div>
                 <h2 className="text-xl font-semibold text-[var(--color-dark)]">
@@ -274,7 +274,7 @@ export default function PlannerWorkspace({
                   </article>
                 ))
               ) : (
-                <p className="rounded-[20px] border border-dashed border-[var(--color-border)] bg-white/62 px-4 py-5 text-sm leading-6 text-[var(--color-text-secondary)]">
+                <p className="app-muted-card rounded-[20px] border-dashed px-4 py-5 text-sm leading-6 text-[var(--color-text-secondary)]">
                   Your next check-in will appear here.
                 </p>
               )}
@@ -283,7 +283,7 @@ export default function PlannerWorkspace({
         </section>
 
         <section className="mt-6">
-          <div className="rounded-[22px] border border-white/50 bg-white/78 p-4 shadow-[var(--shadow-soft)] backdrop-blur-2xl sm:rounded-[30px] sm:p-6">
+          <div className="app-card-strong rounded-[22px] p-4 sm:rounded-[30px] sm:p-6">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-text-secondary)]">
@@ -310,14 +310,14 @@ export default function PlannerWorkspace({
                   {visibleBlocks.map((block, index) => (
                     <article
                       key={`${block.timeLabel}-${block.title}-${index}`}
-                      className="rounded-[22px] border border-[var(--color-border)] bg-white/76 p-4"
+                      className="app-subcard rounded-[22px] p-4"
                     >
                       <div className="flex flex-wrap items-center gap-2">
-                        <span className="inline-flex items-center gap-1 rounded-full bg-[var(--color-bg)] px-3 py-1 text-xs font-semibold text-[var(--color-primary-deep)]">
+                        <span className="inline-flex items-center gap-1 rounded-full bg-[var(--color-card-soft)] px-3 py-1 text-xs font-semibold text-[var(--color-primary-deep)]">
                           <Clock size={13} />
                           {block.timeLabel}
                         </span>
-                        <span className="rounded-full border border-[var(--color-border)] bg-white px-3 py-1 text-xs font-semibold text-[var(--color-text-secondary)]">
+                        <span className="rounded-full border border-[var(--color-border)] bg-[var(--color-card-soft)] px-3 py-1 text-xs font-semibold text-[var(--color-text-secondary)]">
                           Step {index + 1}
                         </span>
                       </div>
@@ -327,7 +327,7 @@ export default function PlannerWorkspace({
                       <p className="mt-2 text-sm leading-6 text-[var(--color-text-secondary)]">
                         {block.goal}
                       </p>
-                      <p className="mt-3 rounded-[16px] bg-[var(--color-bg)] px-3 py-2 text-sm text-[var(--color-dark)]">
+                      <p className="mt-3 rounded-[16px] bg-[var(--color-card-muted)] px-3 py-2 text-sm text-[var(--color-dark)]">
                         {block.actions[0] ?? block.adhdNote}
                       </p>
                     </article>
@@ -340,7 +340,7 @@ export default function PlannerWorkspace({
                 </div>
               </div>
             ) : (
-              <div className="mt-6 rounded-[22px] border border-dashed border-[var(--color-border)] bg-white/62 p-6 text-sm leading-6 text-[var(--color-text-secondary)]">
+              <div className="app-muted-card mt-6 rounded-[22px] border-dashed p-6 text-sm leading-6 text-[var(--color-text-secondary)]">
                 Choose a feeling, write one line if you want, then ask for a gentle plan.
               </div>
             )}
@@ -353,7 +353,7 @@ export default function PlannerWorkspace({
 
 function MiniSupport({ title, items }: { title: string; items: string[] }) {
   return (
-    <div className="rounded-[20px] border border-[var(--color-border)] bg-white/72 p-4">
+    <div className="app-subcard rounded-[20px] p-4">
       <div className="flex items-center gap-2 text-sm font-semibold text-[var(--color-dark)]">
         <CheckCircle2 size={15} />
         {title}
@@ -362,7 +362,7 @@ function MiniSupport({ title, items }: { title: string; items: string[] }) {
         {items.map((item) => (
           <p
             key={item}
-            className="rounded-[14px] bg-[var(--color-bg)] px-3 py-2 text-sm leading-5 text-[var(--color-text-secondary)]"
+            className="rounded-[14px] bg-[var(--color-card-muted)] px-3 py-2 text-sm leading-5 text-[var(--color-text-secondary)]"
           >
             {item}
           </p>
@@ -374,7 +374,7 @@ function MiniSupport({ title, items }: { title: string; items: string[] }) {
 
 function SituationSummary({ plan }: { plan: PlannerResult }) {
   return (
-    <div className="rounded-[24px] border border-[var(--color-border)] bg-white/74 p-4">
+    <div className="app-subcard rounded-[24px] p-4">
       <div className="grid gap-3 sm:grid-cols-3">
         <div>
           <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--color-text-secondary)]">
@@ -402,7 +402,7 @@ function SituationSummary({ plan }: { plan: PlannerResult }) {
         </div>
       </div>
 
-      <p className="mt-4 rounded-[18px] bg-[var(--color-bg)] px-3 py-2 text-sm leading-6 text-[var(--color-text-secondary)]">
+      <p className="mt-4 rounded-[18px] bg-[var(--color-card-muted)] px-3 py-2 text-sm leading-6 text-[var(--color-text-secondary)]">
         {plan.situation.emotionReason}
       </p>
 
@@ -410,7 +410,7 @@ function SituationSummary({ plan }: { plan: PlannerResult }) {
         {plan.situation.detectedObligations.slice(0, 4).map((obligation) => (
           <div
             key={obligation.id}
-            className="flex items-start justify-between gap-3 rounded-[16px] bg-white/82 px-3 py-2"
+            className="flex items-start justify-between gap-3 rounded-[16px] bg-[var(--color-card-soft)] px-3 py-2"
           >
             <div>
               <p className="text-sm font-semibold text-[var(--color-dark)]">
@@ -431,7 +431,7 @@ function SituationSummary({ plan }: { plan: PlannerResult }) {
         {plan.situation.parallelOptions.slice(0, 2).map((option) => (
           <div
             key={option.label}
-            className="rounded-[16px] border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-3"
+            className="rounded-[16px] border border-[var(--color-border)] bg-[var(--color-card-muted)] px-3 py-3"
           >
             <p className="text-sm font-semibold text-[var(--color-dark)]">
               {option.label}
@@ -556,17 +556,17 @@ function formatEmotionLabel(emotion: PlannerResult["situation"]["emotionalState"
 function getMoodHistoryClass(mood: MoodKey) {
   switch (mood) {
     case "clear":
-      return "border-emerald-200 bg-emerald-50";
+      return "border-[var(--color-primary)]/30 bg-[var(--color-accent)]/34";
     case "hopeful":
-      return "border-sky-200 bg-sky-50";
+      return "border-[var(--color-primary)]/24 bg-[var(--color-card-soft)]";
     case "tired":
-      return "border-amber-200 bg-amber-50";
+      return "border-[var(--color-primary)]/20 bg-[var(--color-card-muted)]";
     case "stuck":
-      return "border-orange-200 bg-orange-50";
+      return "border-[var(--color-primary-deep)]/24 bg-[var(--color-card-soft)]";
     case "overwhelmed":
-      return "border-rose-200 bg-rose-50";
+      return "border-[var(--color-error)]/24 bg-[var(--color-card-muted)]";
     default:
-      return "border-[var(--color-border)] bg-white";
+      return "border-[var(--color-border)] bg-[var(--color-card-soft)]";
   }
 }
 

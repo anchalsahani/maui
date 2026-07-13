@@ -50,7 +50,7 @@ const trustCards = [
     icon: LockKeyhole,
   },
   {
-    title: "Trusted by thousands",
+    title: "Trusted by many",
     text: "Join a growing community feeling better every day.",
     icon: UsersRound,
   },
@@ -170,7 +170,7 @@ export default function ProblemSection() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mx-auto mt-12 max-w-7xl sm:mt-28"
         >
-          <div className="relative overflow-hidden rounded-[22px] border border-[var(--color-border)] bg-[rgba(255,255,255,0.74)] px-4 py-5 shadow-[0_20px_80px_rgba(47,74,57,0.08)] backdrop-blur-2xl sm:rounded-[28px] sm:px-8 sm:py-6">
+          <div className="relative overflow-hidden rounded-[22px] border border-[var(--color-border)] bg-[var(--color-panel-strong)] px-4 py-5 shadow-[0_20px_80px_rgba(47,74,57,0.08)] backdrop-blur-2xl sm:rounded-[28px] sm:px-8 sm:py-6">
             <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4 xl:divide-x xl:divide-[var(--color-border)]">
               {trustCards.map((item, index) => {
                 const Icon = item.icon;

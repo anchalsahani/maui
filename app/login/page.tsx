@@ -108,7 +108,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isPending}
-              className="group flex h-[52px] w-full items-center justify-center gap-2 rounded-full bg-[var(--color-dark)] text-[15px] font-medium text-white transition-all duration-300 hover:translate-y-[-1px] hover:shadow-[0_10px_30px_rgba(16,47,21,0.16)] disabled:cursor-not-allowed disabled:opacity-70"
+              className="maui-button-primary group flex h-[52px] w-full items-center justify-center gap-2 rounded-full text-[15px] font-medium transition-all duration-300 hover:translate-y-[-1px] disabled:cursor-not-allowed disabled:opacity-70"
             >
               <span>{isPending ? "Logging in..." : "Login"}</span>
               <ArrowRight size={16} className="transition-transform duration-200 group-hover:translate-x-1" />
@@ -129,7 +129,7 @@ export default function LoginPage() {
               window.location.href = "/api/auth/google";
             }}
             disabled={isPending}
-            className="mt-5 flex h-[52px] w-full items-center justify-center gap-3 rounded-full bg-[#171717] px-4 text-[15px] font-medium text-white transition-colors hover:bg-black disabled:cursor-not-allowed disabled:opacity-70"
+            className="maui-button-secondary mt-5 flex h-[52px] w-full items-center justify-center gap-3 rounded-full px-4 text-[15px] font-medium transition-all hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70"
           >
             <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white text-[15px] font-semibold text-[#4285F4]">
               G

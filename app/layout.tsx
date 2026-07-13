@@ -27,7 +27,56 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                var theme = localStorage.getItem('maui-theme');
+                if (theme !== 'light' && theme !== 'dark') {
+                  theme = 'dark';
+                }
+                document.documentElement.dataset.theme = theme;
+              } catch (error) {
+                document.documentElement.dataset.theme = 'dark';
+              }
+            `,
+          }}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function () {
+                function setTheme(theme) {
+                  document.documentElement.dataset.theme = theme;
+                  try {
+                    localStorage.setItem('maui-theme', theme);
+                  } catch (error) {}
+                  document.querySelectorAll('[data-theme-toggle]').forEach(function (button) {
+                    button.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+                  });
+                }
+
+                document.addEventListener('click', function (event) {
+                  var target = event.target && event.target.closest ? event.target.closest('[data-theme-toggle]') : null;
+
+                  if (!target) {
+                    return;
+                  }
+
+                  var currentTheme = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+                  setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+                });
+
+                document.addEventListener('DOMContentLoaded', function () {
+                  setTheme(document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light');
+                });
+              })();
+            `,
+          }}
+        />
+      </head>
       <body className={`${inter.variable} ${dmSans.variable}`}>
         {children}
       </body>
