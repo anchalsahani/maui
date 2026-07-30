@@ -1,4 +1,9 @@
-import type { LoginInput, OnboardingInput, SignupInput } from "./types";
+import type {
+  LoginInput,
+  OnboardingDraft,
+  OnboardingInput,
+  SignupInput,
+} from "./types";
 
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -104,4 +109,36 @@ export function validateOnboardingInput(input: OnboardingInput) {
       energyPattern,
     },
   };
+}
+
+export function validateOnboardingDraft(input: unknown) {
+  if (!input || typeof input !== "object") {
+    return { ok: false as const, error: "Invalid onboarding answer." };
+  }
+
+  const candidate = input as Record<string, unknown>;
+  const allowedKeys = Object.keys(allowedSurveyValues) as Array<
+    keyof typeof allowedSurveyValues
+  >;
+  const draft: OnboardingDraft = {};
+
+  for (const key of allowedKeys) {
+    const value = candidate[key];
+
+    if (value === undefined) {
+      continue;
+    }
+
+    if (!(allowedSurveyValues[key] as readonly unknown[]).includes(value)) {
+      return { ok: false as const, error: "Invalid onboarding answer." };
+    }
+
+    Object.assign(draft, { [key]: value });
+  }
+
+  if (Object.keys(draft).length === 0) {
+    return { ok: false as const, error: "Choose an answer before continuing." };
+  }
+
+  return { ok: true as const, value: draft };
 }

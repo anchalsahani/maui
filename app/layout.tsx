@@ -27,36 +27,41 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" data-theme="dark" suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              try {
-                var theme = localStorage.getItem('maui-theme');
-                if (theme !== 'light' && theme !== 'dark') {
-                  theme = 'dark';
-                }
-                document.documentElement.dataset.theme = theme;
-              } catch (error) {
-                document.documentElement.dataset.theme = 'dark';
-              }
-            `,
-          }}
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
               (function () {
-                function setTheme(theme) {
-                  document.documentElement.dataset.theme = theme;
+                var storageKey = 'maui-theme';
+
+                function readTheme() {
                   try {
-                    localStorage.setItem('maui-theme', theme);
-                  } catch (error) {}
+                    var storedTheme = localStorage.getItem(storageKey);
+                    return storedTheme === 'light' || storedTheme === 'dark'
+                      ? storedTheme
+                      : 'dark';
+                  } catch (error) {
+                    return 'dark';
+                  }
+                }
+
+                function applyTheme(theme, persist) {
+                  document.documentElement.dataset.theme = theme;
+                  document.documentElement.style.colorScheme = theme;
+
+                  if (persist) {
+                    try {
+                      localStorage.setItem(storageKey, theme);
+                    } catch (error) {}
+                  }
+
                   document.querySelectorAll('[data-theme-toggle]').forEach(function (button) {
                     button.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
                   });
                 }
+
+                applyTheme(readTheme(), false);
 
                 document.addEventListener('click', function (event) {
                   var target = event.target && event.target.closest ? event.target.closest('[data-theme-toggle]') : null;
@@ -65,12 +70,12 @@ export default function RootLayout({
                     return;
                   }
 
-                  var currentTheme = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
-                  setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+                  var currentTheme = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
+                  applyTheme(currentTheme === 'dark' ? 'light' : 'dark', true);
                 });
 
                 document.addEventListener('DOMContentLoaded', function () {
-                  setTheme(document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light');
+                  applyTheme(document.documentElement.dataset.theme === 'light' ? 'light' : 'dark', false);
                 });
               })();
             `,

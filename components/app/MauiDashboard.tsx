@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
+import dynamic from "next/dynamic";
 import {
   Activity,
   CalendarDays,
@@ -11,18 +12,16 @@ import {
   Gauge,
   HeartPulse,
   Play,
+  Plus,
   ShieldCheck,
   Sparkles,
   TimerReset,
-  Trophy,
 } from "lucide-react";
 import type { ComponentType } from "react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-import ReadyFlowModal from "@/components/app/dashboard/ReadyFlowModal";
 import RewardToast from "@/components/app/dashboard/RewardToast";
-import StuckFlowModal from "@/components/app/dashboard/StuckFlowModal";
-import TiredFlowModal from "@/components/app/dashboard/TiredFlowModal";
+import DashboardExperience from "@/components/app/dashboard/DashboardExperience";
 import FocusTimer from "@/components/app/dashboard/FocusTimer";
 import {
   completeFocusTimer,
@@ -30,12 +29,14 @@ import {
   pauseFocusTimer,
   resetFocusTimer,
   resumeFocusTimer,
+  restoreFocusTimerFromPlan,
   startFocusTimer,
 } from "@/components/app/dashboard/focusTimerStore";
 import type {
   EmotionState,
   EntryMode,
   PersistedDashboardState,
+  PlanningSystemState,
   RewardState,
   SessionState,
   TaskItem,
@@ -43,7 +44,25 @@ import type {
 import type { UserSurvey } from "@/lib/auth/types";
 import type { StudyProfile } from "@/lib/auth/types";
 import type { BurnoutAnalysis, BurnoutRisk, TaskBreakdownResult } from "@/lib/ai/types";
+import {
+  adaptTasksToCapacity,
+  getAdaptiveTaskScore,
+} from "@/lib/tasks/adaptation";
+import {
+  announcePlanningUpdate,
+  subscribeToPlanningUpdates,
+} from "@/lib/planning/client-sync";
 import FloatingModal from "@/components/ui/FloatingModal";
+
+const ReadyFlowModal = dynamic(
+  () => import("@/components/app/dashboard/ReadyFlowModal")
+);
+const StuckFlowModal = dynamic(
+  () => import("@/components/app/dashboard/StuckFlowModal")
+);
+const TiredFlowModal = dynamic(
+  () => import("@/components/app/dashboard/TiredFlowModal")
+);
 
 const STORAGE_KEY = "maui-dashboard-state";
 const DASHBOARD_STATE_VERSION = "title-wrap-v2";
@@ -125,6 +144,47 @@ const idleSession: SessionState = {
   focusMinutes: 20,
   runId: 0,
 };
+
+function getPlanningEnergy(
+  emotion: EmotionState
+): "low" | "medium" | "high" {
+  if (emotion === "tired" || emotion === "overwhelmed") {
+    return "low";
+  }
+
+  if (emotion === "hopeful") {
+    return "high";
+  }
+
+  return "medium";
+}
+
+function getReplanNote(trigger: string, title?: string) {
+  if (trigger === "task_completed" && title) {
+    return `${title} was completed. Reconsider the time that opened up without adding pressure.`;
+  }
+
+  if (trigger === "task_skipped" && title) {
+    return `${title} was stopped partway through. Reduce resistance before rescheduling it.`;
+  }
+
+  if (trigger === "burnout_protection") {
+    return "Burnout signals increased. Protect recovery, reduce load, and postpone lower-value work.";
+  }
+
+  return "The user’s capacity changed. Keep the schedule realistic and explain any trade-off.";
+}
+
+function formatPlannerTime(value: string) {
+  const date = new Date(value);
+
+  return Number.isFinite(date.getTime())
+    ? new Intl.DateTimeFormat("en", {
+        hour: "numeric",
+        minute: "2-digit",
+      }).format(date)
+    : "Planned";
+}
 
 function buildStarterTasks(survey: UserSurvey): TaskItem[] {
   return starterTasks.map((task) => ({
@@ -721,10 +781,6 @@ function getInitialDashboardState(
   };
 }
 
-function getTaskScore(task: TaskItem) {
-  return task.urgency + task.deadlineWeight - task.difficulty;
-}
-
 function detectEmotion(input: string): {
   state: EmotionState;
   burnoutRisk: BurnoutRisk;
@@ -1053,17 +1109,26 @@ export default function MauiDashboard({
   const [breakdownTaskId, setBreakdownTaskId] = useState("");
   const [breakdownError, setBreakdownError] = useState("");
   const [isGeneratingBreakdown, setIsGeneratingBreakdown] = useState(false);
+  const [newTaskTitle, setNewTaskTitle] = useState("");
+  const [currentContext, setCurrentContext] = useState<{
+    emotionState: EmotionState;
+    burnoutRisk: BurnoutRisk;
+    updatedAt: string;
+  }>({
+    emotionState: "steady",
+    burnoutRisk: "low",
+    updatedAt: new Date(0).toISOString(),
+  });
+  const [survivalMode, setSurvivalMode] =
+    useState<PersistedDashboardState["survivalMode"]>(null);
+  const [planning, setPlanning] = useState<PlanningSystemState | null>(null);
   const saveTimerRef = useRef<number | null>(null);
 
-  useEffect(() => {
-    let cancelled = false;
-
-    function applyPersistedState(parsed: Partial<PersistedDashboardState>) {
-      if (cancelled) {
-        return;
-      }
-
-      const hasFreshRoadmap = parsed.dashboardRoadmapKey === dashboardRoadmapKey;
+  const applyPersistedState = useCallback(
+    (parsed: Partial<PersistedDashboardState>) => {
+      const hasFreshRoadmap =
+        parsed.dashboardRoadmapKey === dashboardRoadmapKey ||
+        Boolean(parsed.planning?.activePlan);
 
       setTasks(hasFreshRoadmap ? (parsed.tasks ?? initialState.tasks) : initialState.tasks);
       setTaskChecklist(
@@ -1092,14 +1157,42 @@ export default function MauiDashboard({
           : initialState.completedMicroSteps
       );
       setEmotionInput(hasFreshRoadmap ? (parsed.emotionDraft ?? "") : "");
-    }
+      setCurrentContext(
+        hasFreshRoadmap && parsed.currentContext
+          ? parsed.currentContext
+          : {
+              emotionState: "steady",
+              burnoutRisk: "low",
+              updatedAt: new Date(0).toISOString(),
+            }
+      );
+      setEmotionState(
+        hasFreshRoadmap && parsed.currentContext
+          ? parsed.currentContext.emotionState
+          : "steady"
+      );
+      setBurnoutRisk(
+        hasFreshRoadmap && parsed.currentContext
+          ? parsed.currentContext.burnoutRisk
+          : "low"
+      );
+      setSurvivalMode(hasFreshRoadmap ? (parsed.survivalMode ?? null) : null);
+      setPlanning(hasFreshRoadmap ? (parsed.planning ?? null) : null);
+    },
+    [dashboardRoadmapKey, initialState, studyProfile?.studying]
+  );
+
+  useEffect(() => {
+    let cancelled = false;
 
     async function restoreDashboardState() {
       try {
         const raw = window.localStorage.getItem(STORAGE_KEY);
 
         if (raw) {
-          applyPersistedState(JSON.parse(raw) as Partial<PersistedDashboardState>);
+          if (!cancelled) {
+            applyPersistedState(JSON.parse(raw) as Partial<PersistedDashboardState>);
+          }
         }
       } catch {
         // Ignore invalid stored state and keep the fresh snapshot.
@@ -1120,7 +1213,9 @@ export default function MauiDashboard({
         };
 
         if (data.state) {
-          applyPersistedState(data.state);
+          if (!cancelled) {
+            applyPersistedState(data.state);
+          }
         }
       } catch {
         // Local storage remains the fallback when server persistence is unavailable.
@@ -1137,15 +1232,44 @@ export default function MauiDashboard({
       cancelled = true;
     };
   }, [
-    initialState.completedMicroSteps,
-    initialState.recentMoments,
-    initialState.reward,
-    initialState.session,
-    initialState.taskChecklist,
-    initialState.tasks,
-    dashboardRoadmapKey,
-    studyProfile?.studying,
+    applyPersistedState,
   ]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function refreshPlanningState() {
+      try {
+        const response = await fetch("/api/dashboard/state", {
+          headers: { Accept: "application/json" },
+        });
+        const data = (await response.json()) as {
+          state?: Partial<PersistedDashboardState> | null;
+        };
+
+        if (!cancelled && response.ok && data.state) {
+          applyPersistedState(data.state);
+        }
+      } catch {
+        // The most recently rendered state stays available while offline.
+      }
+    }
+
+    const unsubscribe = subscribeToPlanningUpdates(() => {
+      void refreshPlanningState();
+    });
+
+    return () => {
+      cancelled = true;
+      unsubscribe();
+    };
+  }, [applyPersistedState]);
+
+  useEffect(() => {
+    if (planning?.activeSession) {
+      restoreFocusTimerFromPlan(planning.activeSession);
+    }
+  }, [planning?.activeSession]);
 
   useEffect(() => {
     let cancelled = false;
@@ -1209,6 +1333,9 @@ export default function MauiDashboard({
       recentMoments,
       completedMicroSteps,
       emotionDraft: emotionInput,
+      currentContext,
+      survivalMode,
+      planning: planning ?? undefined,
     };
 
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(snapshot));
@@ -1237,19 +1364,52 @@ export default function MauiDashboard({
   }, [
     completedMicroSteps,
     completedTaskIds,
+    currentContext,
     dashboardRoadmapKey,
     emotionInput,
     isRestoring,
     recentMoments,
     reward,
     session,
+    survivalMode,
     taskChecklist,
     tasks,
+    planning,
   ]);
 
   const nextTask = useMemo(() => {
-    return [...tasks].sort((a, b) => getTaskScore(b) - getTaskScore(a))[0] ?? null;
-  }, [tasks]);
+    const plannedTaskId = planning?.activePlan?.schedule.find(
+      (block) =>
+        block.taskId &&
+        planning.blockStatus[block.id] !== "completed" &&
+        planning.blockStatus[block.id] !== "skipped"
+    )?.taskId;
+    const plannedTask = plannedTaskId
+      ? tasks.find((task) => task.id === plannedTaskId)
+      : null;
+
+    return (
+      plannedTask ??
+      [...tasks].sort(
+        (a, b) =>
+          getAdaptiveTaskScore(b, currentContext) -
+          getAdaptiveTaskScore(a, currentContext)
+      )[0] ??
+      null
+    );
+  }, [currentContext, planning, tasks]);
+
+  const upcomingBlocks = useMemo(
+    () =>
+      (planning?.activePlan?.schedule ?? [])
+        .filter(
+          (block) =>
+            planning?.blockStatus[block.id] !== "completed" &&
+            planning?.blockStatus[block.id] !== "skipped"
+        )
+        .slice(0, 3),
+    [planning]
+  );
 
   const microSteps = useMemo(() => {
     if (nextTask && aiBreakdown && breakdownTaskId === nextTask.id) {
@@ -1290,6 +1450,49 @@ export default function MauiDashboard({
 
   function recordMoment(message: string) {
     setRecentMoments((current) => [message, ...current].slice(0, 4));
+  }
+
+  function addQuickTask() {
+    const title = newTaskTitle.trim();
+
+    if (!title) {
+      return;
+    }
+
+    const task: TaskItem = {
+      id: `task-${Date.now()}-${Math.random().toString(16).slice(2)}`,
+      title,
+      subject: "Personal",
+      category: "study",
+      status: "todo",
+      priority: "medium",
+      urgency: 6,
+      difficulty: 4,
+      deadlineWeight: 1,
+      focusMinutes:
+        currentContext.burnoutRisk === "high"
+          ? 10
+          : currentContext.burnoutRisk === "medium"
+            ? 15
+            : 20,
+      steps: [
+        `Open what you need for "${title}".`,
+        "Do one visible two-minute action.",
+        "Mark what changed.",
+      ],
+    };
+
+    const nextTasks = adaptTasksToCapacity([...tasks, task], currentContext);
+    setTasks(nextTasks);
+    setTaskChecklist((current) => [...current, task]);
+    setNewTaskTitle("");
+    recordMoment(`Added "${title}" as a startable task.`);
+    void syncPlanningAfterEvent({
+      type: "context_changed",
+      title,
+      nextTasks,
+      trigger: "task_added",
+    });
   }
 
   function showReward(points: number, title: string) {
@@ -1345,6 +1548,91 @@ export default function MauiDashboard({
           return nextEvents;
         });
       });
+  }
+
+  async function syncPlanningAfterEvent({
+    type,
+    taskId,
+    title,
+    durationMinutes,
+    rewardPoints,
+    incrementStreak,
+    incrementSessions,
+    nextTasks,
+    nextContext = currentContext,
+    trigger,
+  }: {
+    type: "task_completed" | "focus_completed" | "task_skipped" | "context_changed";
+    taskId?: string;
+    title?: string;
+    durationMinutes?: number;
+    rewardPoints?: number;
+    incrementStreak?: boolean;
+    incrementSessions?: boolean;
+    nextTasks: TaskItem[];
+    nextContext?: {
+      emotionState: EmotionState;
+      burnoutRisk: BurnoutRisk;
+      updatedAt: string;
+    };
+    trigger: string;
+  }) {
+    try {
+      const eventResponse = await fetch("/api/planning/events", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type,
+          taskId,
+          title,
+          durationMinutes,
+          rewardPoints,
+          incrementStreak,
+          incrementSessions,
+          emotionState: nextContext.emotionState,
+          burnoutRisk: nextContext.burnoutRisk,
+          energyLevel: getPlanningEnergy(nextContext.emotionState),
+        }),
+      });
+      const eventData = (await eventResponse.json().catch(() => null)) as
+        | { state?: Partial<PersistedDashboardState>; revision?: number }
+        | null;
+
+      if (eventResponse.ok && eventData?.state) {
+        applyPersistedState(eventData.state);
+      }
+
+      const planResponse = await fetch("/api/ai/plan", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          currentTime: new Date().toISOString(),
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+          availableMinutes: 300,
+          energyLevel: getPlanningEnergy(nextContext.emotionState),
+          emotionState: nextContext.emotionState,
+          burnoutRisk: nextContext.burnoutRisk,
+          todayNotes: getReplanNote(trigger, title),
+          tasks: nextTasks,
+          replanTrigger: trigger,
+        }),
+      });
+      const planData = (await planResponse.json().catch(() => null)) as
+        | {
+            state?: Partial<PersistedDashboardState>;
+            revision?: number;
+          }
+        | null;
+
+      if (planResponse.ok && planData?.state) {
+        applyPersistedState(planData.state);
+        announcePlanningUpdate(planData.revision ?? Date.now());
+      } else if (eventResponse.ok) {
+        announcePlanningUpdate(eventData?.revision ?? Date.now());
+      }
+    } catch {
+      // The local dashboard remains usable; a later planner refresh reconciles it.
+    }
   }
 
   function getMicroStepKey(taskId: string, step: string) {
@@ -1415,16 +1703,73 @@ export default function MauiDashboard({
       return;
     }
 
+    const activeBlock = planning?.activePlan?.schedule.find(
+      (block) =>
+        block.taskId === nextTask.id &&
+        planning.blockStatus[block.id] !== "completed" &&
+        planning.blockStatus[block.id] !== "skipped"
+    );
+    const focusMinutes = activeBlock?.durationMinutes ?? nextTask.focusMinutes;
     const runId = session.runId + 1;
+    const startedAt = new Date();
+    const endsAt = new Date(startedAt.getTime() + focusMinutes * 60_000);
     setSession({
       status: "active",
       title: nextTask.title,
       mode: "pomodoro",
-      focusMinutes: selectedFocusMinutes,
+      focusMinutes,
       runId,
     });
-    startFocusTimer(nextTask.title, selectedFocusMinutes, runId);
-    recordMoment(`Started a ${selectedFocusMinutes}-minute focus block for "${nextTask.title}".`);
+    setSelectedFocusMinutes(focusMinutes);
+    startFocusTimer(nextTask.title, focusMinutes, runId);
+    setPlanning((current) =>
+      current && activeBlock
+        ? {
+            ...current,
+            revision: current.revision + 1,
+            blockStatus: { ...current.blockStatus, [activeBlock.id]: "in_progress" },
+            activeSession: {
+              blockId: activeBlock.id,
+              taskId: nextTask.id,
+              title: nextTask.title,
+              focusMinutes,
+              status: "active",
+              startedAt: startedAt.toISOString(),
+              endsAt: endsAt.toISOString(),
+              runId,
+            },
+          }
+        : current
+    );
+    recordMoment(`Started a ${focusMinutes}-minute focus block for "${nextTask.title}".`);
+    if (activeBlock) {
+      void fetch("/api/planning/events", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "focus_started",
+          taskId: nextTask.id,
+          title: nextTask.title,
+          blockId: activeBlock.id,
+          durationMinutes: focusMinutes,
+          runId,
+          startedAt: startedAt.toISOString(),
+          endsAt: endsAt.toISOString(),
+          emotionState: currentContext.emotionState,
+          burnoutRisk: currentContext.burnoutRisk,
+          energyLevel: getPlanningEnergy(currentContext.emotionState),
+        }),
+      })
+        .then(async (response) => {
+          const data = (await response.json().catch(() => null)) as { state?: Partial<PersistedDashboardState> } | null;
+          if (response.ok && data?.state) {
+            applyPersistedState(data.state);
+          }
+        })
+        .catch(() => {
+          // The local plan snapshot remains the immediate source of truth offline.
+        });
+    }
   }
 
   function pauseOrResumeSession() {
@@ -1433,12 +1778,43 @@ export default function MauiDashboard({
     if (timer.status === "active") {
       pauseFocusTimer();
       setSession((current) => ({ ...current, status: "paused" }));
+      const pausedTimer = getFocusTimerSnapshot();
+      setPlanning((current) =>
+        current?.activeSession
+          ? {
+              ...current,
+              activeSession: {
+                ...current.activeSession,
+                status: "paused",
+                elapsedSeconds: pausedTimer.elapsedSeconds,
+                remainingSeconds: pausedTimer.remainingSeconds,
+                pausedAt: new Date().toISOString(),
+              },
+            }
+          : current
+      );
       return;
     }
 
     if (timer.status === "paused") {
       resumeFocusTimer();
       setSession((current) => ({ ...current, status: "active" }));
+      const resumedTimer = getFocusTimerSnapshot();
+      setPlanning((current) =>
+        current?.activeSession
+          ? {
+              ...current,
+              activeSession: {
+                ...current.activeSession,
+                status: "active",
+                endsAt: new Date(resumedTimer.endsAt ?? Date.now()).toISOString(),
+                elapsedSeconds: resumedTimer.elapsedSeconds,
+                remainingSeconds: resumedTimer.remainingSeconds,
+                pausedAt: null,
+              },
+            }
+          : current
+      );
     }
   }
 
@@ -1454,17 +1830,46 @@ export default function MauiDashboard({
       streak: current.streak + 1,
       sessionsCompleted: current.sessionsCompleted + 1,
     }));
-    setTasks((current) => current.filter((task) => task.id !== nextTask.id));
+    const completedTask = nextTask;
+    const remainingTasks = tasks.filter((task) => task.id !== completedTask.id);
+    setTasks(remainingTasks);
     setCompletedTaskIds((current) =>
-      current.includes(nextTask.id) ? current : [...current, nextTask.id]
+      current.includes(completedTask.id) ? current : [...current, completedTask.id]
     );
     setSession((current) => ({
       ...current,
       status: "completed",
     }));
-    showReward(8, nextTask.title);
-    recordRewardActivity("focus_session", 8, nextTask.title);
-    recordMoment(`Completed a focus block for "${nextTask.title}".`);
+    setPlanning((current) =>
+      current
+        ? {
+            ...current,
+            revision: current.revision + 1,
+            blockStatus: current.activeSession
+              ? { ...current.blockStatus, [current.activeSession.blockId]: "completed" }
+              : current.blockStatus,
+            activeSession: null,
+            study: {
+              ...current.study,
+              completedMinutes: current.study.completedMinutes + selectedFocusMinutes,
+            },
+          }
+        : current
+    );
+    showReward(8, completedTask.title);
+    recordRewardActivity("focus_session", 8, completedTask.title);
+    recordMoment(`Completed a focus block for "${completedTask.title}".`);
+    void syncPlanningAfterEvent({
+      type: "task_completed",
+      taskId: completedTask.id,
+      title: completedTask.title,
+      durationMinutes: selectedFocusMinutes,
+      rewardPoints: 8,
+      incrementStreak: true,
+      incrementSessions: true,
+      nextTasks: remainingTasks,
+      trigger: "task_completed",
+    });
   }
 
   function resetSession() {
@@ -1472,6 +1877,14 @@ export default function MauiDashboard({
 
     if (session.status === "active" || session.status === "paused") {
       recordMoment(`Stopped midway during "${session.title}". Maui will make the next start smaller.`);
+      const pausedTask = tasks.find((task) => task.title === session.title);
+      void syncPlanningAfterEvent({
+        type: "task_skipped",
+        taskId: pausedTask?.id,
+        title: session.title,
+        nextTasks: tasks,
+        trigger: "task_skipped",
+      });
     }
 
     setSession({
@@ -1479,6 +1892,51 @@ export default function MauiDashboard({
       runId,
     });
     resetFocusTimer(selectedFocusMinutes, runId);
+  }
+
+  function skipNextTask() {
+    if (!nextTask) {
+      return;
+    }
+
+    const remainingTasks = tasks.filter((task) => task.id !== nextTask.id);
+    setTasks(remainingTasks);
+    if (getFocusTimerSnapshot().title === nextTask.title) {
+      const runId = session.runId + 1;
+      resetFocusTimer(nextTask.focusMinutes, runId);
+      setSession({ ...idleSession, runId });
+    }
+    setPlanning((current) => {
+      if (!current?.activePlan) {
+        return current;
+      }
+
+      const blockId = current.activeSession?.taskId === nextTask.id
+        ? current.activeSession.blockId
+        : current.activePlan.schedule.find(
+            (item) =>
+              item.taskId === nextTask.id &&
+              current.blockStatus[item.id] !== "completed" &&
+              current.blockStatus[item.id] !== "skipped"
+          )?.id;
+
+      return blockId
+        ? {
+            ...current,
+            revision: current.revision + 1,
+            blockStatus: { ...current.blockStatus, [blockId]: "skipped" },
+            activeSession: current.activeSession?.blockId === blockId ? null : current.activeSession,
+          }
+        : current;
+    });
+    recordMoment(`Set "${nextTask.title}" aside for now. Maui will choose a gentler next step.`);
+    void syncPlanningAfterEvent({
+      type: "task_skipped",
+      taskId: nextTask.id,
+      title: nextTask.title,
+      nextTasks: remainingTasks,
+      trigger: "task_skipped",
+    });
   }
 
   function toggleMicroStep(step: string) {
@@ -1514,16 +1972,27 @@ export default function MauiDashboard({
       points: current.points + 4,
       streak: current.streak + 1,
     }));
-    setTasks((current) => current.filter((task) => task.id !== nextTask.id));
+    const completedTask = nextTask;
+    const remainingTasks = tasks.filter((task) => task.id !== completedTask.id);
+    setTasks(remainingTasks);
     setCompletedTaskIds((current) =>
-      current.includes(nextTask.id) ? current : [...current, nextTask.id]
+      current.includes(completedTask.id) ? current : [...current, completedTask.id]
     );
     setCompletedMicroSteps((current) =>
-      current.filter((stepKey) => !stepKey.startsWith(`${nextTask.id}::`))
+      current.filter((stepKey) => !stepKey.startsWith(`${completedTask.id}::`))
     );
-    showReward(4, nextTask.title);
-    recordRewardActivity("broken_down_task", 4, nextTask.title);
-    recordMoment(`Finished the broken-down task "${nextTask.title}".`);
+    showReward(4, completedTask.title);
+    recordRewardActivity("broken_down_task", 4, completedTask.title);
+    recordMoment(`Finished the broken-down task "${completedTask.title}".`);
+    void syncPlanningAfterEvent({
+      type: "task_completed",
+      taskId: completedTask.id,
+      title: completedTask.title,
+      rewardPoints: 4,
+      incrementStreak: true,
+      nextTasks: remainingTasks,
+      trigger: "task_completed",
+    });
   }
 
   async function analyzeEmotion() {
@@ -1581,19 +2050,50 @@ export default function MauiDashboard({
     setEmotionKeywords(result.signals);
     setBurnoutRisk(result.burnoutRisk);
     setCrisisFlag(result.crisisFlag);
+    const nextContext = {
+      emotionState: result.state,
+      burnoutRisk: result.burnoutRisk,
+      updatedAt: new Date().toISOString(),
+    };
+    setCurrentContext(nextContext);
+    const adaptedTasks = adaptTasksToCapacity(tasks, nextContext);
+    setTasks(adaptedTasks);
+    setTaskChecklist((current) => adaptTasksToCapacity(current, nextContext));
     setEmotionMessage({
       title: result.title,
       body: result.crisisFlag
         ? result.nextStep
         : `${result.suggestedAdjustment} ${result.nextStep}`,
     });
+    void syncPlanningAfterEvent({
+      type: "context_changed",
+      nextTasks: adaptedTasks,
+      nextContext,
+      trigger: result.crisisFlag ? "burnout_protection" : "emotion_changed",
+    });
   }
 
   return (
+    <>
+      <DashboardExperience
+        userName={userName}
+        planning={planning}
+        nextTask={nextTask}
+        reward={reward}
+        emotion={emotionState}
+        recentMoments={recentMoments}
+        onStart={startPomodoro}
+        onStuck={openStuckFlow}
+        onCheckIn={() => setActiveModal("tired")}
+        onSkip={skipNextTask}
+        onComplete={completePomodoro}
+        onReset={resetSession}
+      />
+      {false && (
     <div className="relative min-h-dvh overflow-hidden bg-[var(--color-bg)]">
       <div className="app-page-wash pointer-events-none absolute inset-0" />
-      <div className="pointer-events-none absolute left-[-30%] top-[10%] h-[320px] w-[320px] rounded-full bg-[var(--color-accent)]/42 blur-[90px] sm:left-[-8%] sm:h-[520px] sm:w-[520px] sm:blur-[120px]" />
-      <div className="pointer-events-none absolute right-[-36%] top-[-8%] h-[340px] w-[340px] rounded-full bg-[var(--color-primary)]/12 blur-[90px] sm:right-[-10%] sm:h-[560px] sm:w-[560px] sm:blur-[120px]" />
+      <div className="pointer-events-none absolute left-[-30%] top-[10%] h-[320px] w-[320px] rounded-full bg-[var(--color-accent)]/32 blur-[64px] sm:left-[-8%] sm:h-[460px] sm:w-[460px] sm:blur-[78px]" />
+      <div className="pointer-events-none absolute right-[-36%] top-[-8%] h-[340px] w-[340px] rounded-full bg-[var(--color-primary)]/10 blur-[64px] sm:right-[-10%] sm:h-[480px] sm:w-[480px] sm:blur-[78px]" />
 
       <motion.main
         animate={{ scale: activeModal ? 0.985 : 1, opacity: activeModal ? 0.9 : 1 }}
@@ -1604,29 +2104,24 @@ export default function MauiDashboard({
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="app-card-strong relative overflow-hidden rounded-[24px] p-4 sm:rounded-[32px] sm:p-8"
+          className="app-card relative overflow-hidden rounded-[24px] p-5 sm:rounded-[28px] sm:px-7 sm:py-6"
         >
           <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-[radial-gradient(circle_at_top,rgba(207,232,213,0.95),transparent_68%)]" />
           <div className="pointer-events-none absolute right-[-4rem] top-[-2rem] h-48 w-48 rounded-full bg-[var(--color-primary)]/18 blur-3xl" />
 
-          <div className="relative flex flex-col gap-5 sm:gap-8 xl:flex-row xl:items-end xl:justify-between">
+          <div className="relative flex flex-col gap-5 sm:gap-6 xl:flex-row xl:items-end xl:justify-between">
             <div className="max-w-3xl">
-              <h1 className="max-w-4xl font-[var(--font-heading)] text-[clamp(2rem,13vw,4.5rem)] font-bold leading-[0.98] tracking-[-0.03em] text-[var(--color-dark)] sm:tracking-normal">
-                Hey,{" "}
-                <span className="first-name text-[clamp(2.6rem,15vw,5.8rem)] leading-none text-[var(--color-mainstar)]">
-                  {firstName}
-                </span>
+              <p className="text-sm text-[var(--color-text-secondary)]">Good afternoon, {firstName}</p>
+              <h1 className="mt-2 text-[clamp(1.45rem,4vw,2.15rem)] font-semibold leading-tight tracking-[-0.045em] text-[var(--color-dark)]">
+                {nextTask?.title ?? "Choose one small thing to begin."}
               </h1>
-              <h2 className="mt-3 text-[clamp(1.35rem,8vw,2.35rem)] font-semibold leading-tight tracking-[-0.04em] text-[var(--color-dark)] sm:mt-4">
-                How are you feeling?
-              </h2>
-              <p className="mt-4 max-w-2xl text-[15px] leading-7 text-[var(--color-text-secondary)] sm:text-[16px]">
-                Choose the closest state. Maui will turn it into one clear next move.
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-[var(--color-text-secondary)]">
+                {planning?.activePlan?.todayFocus ?? "Maui has kept your next step small and clear."}
               </p>
             </div>
 
-            <div className="grid grid-cols-3 gap-2 sm:gap-3 xl:max-w-[420px] xl:flex-1">
-              <StatsCard label="Points" value={reward.points} icon={Trophy} />
+            <div className="grid grid-cols-3 gap-2 sm:gap-3 xl:max-w-[360px] xl:flex-1">
+              <StatsCard label="Focus" value={nextTask ? `${nextTask.focusMinutes}m` : "—"} icon={Play} />
               <StatsCard label="Streak" value={reward.streak} icon={Sparkles} />
               <StatsCard
                 label="Session"
@@ -1645,7 +2140,7 @@ export default function MauiDashboard({
             className="space-y-5"
           >
             {isRestoring ? (
-              <div className="grid gap-3 sm:grid-cols-3 lg:gap-4">
+              <div className="hidden grid gap-3 sm:grid-cols-3 lg:gap-4">
                 <SkeletonCard />
                 <SkeletonCard />
                 <SkeletonCard />
@@ -1679,40 +2174,55 @@ export default function MauiDashboard({
               </div>
             )}
 
-            <MentorCard snapshot={mentorSnapshot} />
+            <div className="hidden"><MentorCard snapshot={mentorSnapshot} /></div>
 
-            <StreakCalendar
+            <div className="hidden"><StreakCalendar
               events={rewardEvents}
               streak={reward.streak}
               isLoading={isLoadingRewardEvents}
-            />
+            /></div>
 
             <motion.div
               initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.15, ease: "easeOut" }}
-              className="app-card rounded-[24px] p-4 sm:rounded-[32px] sm:p-7"
+              className="app-card-strong rounded-[24px] p-5 sm:rounded-[30px] sm:p-7"
             >
               <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
                 <div className="max-w-xl">
                   <p className="text-sm font-medium uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
-                    Current study focus
+                    Today&apos;s AI plan
                   </p>
                   <h2 className="mt-3 break-words text-[clamp(1.55rem,3vw,2rem)] font-semibold leading-tight tracking-[-0.04em] text-[var(--color-dark)]">
                     {nextTask ? nextTask.title : "No active task right now"}
                   </h2>
                   <p className="mt-3 text-sm leading-6 text-[var(--color-text-secondary)]">
-                    {nextTask
-                      ? "This is what you are studying now. Complete it, and Maui will move you to the next item."
-                      : "You can add one gentle starter task next. The dashboard is ready when you are."}
+                    {planning?.activePlan?.strategy ?? (nextTask
+                      ? "This is the smallest useful action to start with. Finish this block and Maui will guide the next one."
+                      : "Add one gentle starter task when you are ready.")}
                   </p>
+                  <div className="mt-5 flex flex-wrap gap-3">
+                    <button type="button" onClick={() => setActiveModal("ready")} className="maui-button-primary inline-flex h-11 items-center gap-2 rounded-full px-5 text-sm font-semibold transition-transform duration-200 hover:-translate-y-0.5">
+                      <Play size={15} fill="currentColor" /> Start focus
+                    </button>
+                    <button type="button" onClick={openStuckFlow} className="maui-button-secondary inline-flex h-11 items-center gap-2 rounded-full px-5 text-sm font-medium">
+                      <TimerReset size={15} /> Make it smaller
+                    </button>
+                  </div>
                 </div>
 
-                <div className="grid w-full grid-cols-3 gap-2 sm:gap-3 lg:w-[420px]">
+                <div className="grid w-full grid-cols-2 gap-2 sm:gap-3 lg:w-[420px]">
                   {[
-                    { label: "Urgency", value: nextTask?.urgency ?? "-" },
-                    { label: "Difficulty", value: nextTask?.difficulty ?? "-" },
-                    { label: "Focus", value: nextTask ? `${nextTask.focusMinutes}m` : "-" },
+                    { label: "Focus block", value: nextTask ? `${nextTask.focusMinutes}m` : "-" },
+                    {
+                      label: "Study time",
+                      value: planning ? `${planning?.study.plannedMinutes}m` : "-",
+                    },
+                    {
+                      label: "Completed",
+                      value: planning ? `${planning?.study.completedMinutes}m` : "-",
+                    },
+                    { label: "Finish by", value: planning?.activePlan ? formatPlannerTime(planning?.activePlan?.planningWindow.endTime ?? "") : "flexible" },
                   ].map((item) => (
                     <motion.div
                       key={item.label}
@@ -1729,6 +2239,20 @@ export default function MauiDashboard({
                   ))}
                 </div>
               </div>
+
+              {planning?.study.currentGoal ? (
+                <p className="app-muted-card mt-5 rounded-[18px] px-4 py-3 text-sm text-[var(--color-text-secondary)]">
+                  <span className="font-semibold text-[var(--color-dark)]">Current study goal:</span>{" "}
+                  {planning?.study.currentGoal}
+                </p>
+              ) : null}
+
+              <details className="app-muted-card mt-4 rounded-[18px] px-4 py-3">
+                <summary className="cursor-pointer text-sm font-medium text-[var(--color-dark)]">Why Maui chose this</summary>
+                <p className="mt-2 text-sm leading-6 text-[var(--color-text-secondary)]">
+                  {planning?.activePlan?.assessment.keyTradeoff ?? mentorSnapshot.body}
+                </p>
+              </details>
 
             </motion.div>
           </motion.section>
@@ -1767,7 +2291,7 @@ export default function MauiDashboard({
                     Today in sequence
                   </p>
                   <p className="mt-2 text-sm leading-6 text-[var(--color-text-secondary)]">
-                    Everything from Personalization, ordered into a startable day.
+                    The latest AI plan is the shared order for your day.
                   </p>
                 </div>
                 <span className="rounded-full bg-[var(--color-card-soft)] px-3 py-1 text-xs font-semibold text-[var(--color-primary-deep)]">
@@ -1775,9 +2299,63 @@ export default function MauiDashboard({
                 </span>
               </div>
 
+              <form
+                className="mt-5 flex gap-2"
+                onSubmit={(event) => {
+                  event.preventDefault();
+                  addQuickTask();
+                }}
+              >
+                <label htmlFor="quick-task" className="sr-only">
+                  Add a task
+                </label>
+                <input
+                  id="quick-task"
+                  value={newTaskTitle}
+                  onChange={(event) => setNewTaskTitle(event.target.value)}
+                  maxLength={140}
+                  className="input h-11 min-w-0 flex-1"
+                  placeholder="Add one task…"
+                />
+                <button
+                  type="submit"
+                  disabled={!newTaskTitle.trim()}
+                  className="maui-button-primary flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition-transform duration-200 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-40"
+                  aria-label="Add task"
+                >
+                  <Plus size={17} />
+                </button>
+              </form>
+
+              {upcomingBlocks.length > 0 ? (
+                <div className="mt-5 space-y-2">
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-text-secondary)]">
+                    Planner timeline
+                  </p>
+                  {upcomingBlocks.map((block) => (
+                    <div
+                      key={block.id}
+                      className="app-muted-card flex items-center justify-between gap-3 rounded-[16px] px-3 py-2.5"
+                    >
+                      <div className="min-w-0">
+                        <p className="truncate text-sm font-semibold text-[var(--color-dark)]">
+                          {block.title}
+                        </p>
+                        <p className="mt-0.5 text-xs text-[var(--color-text-secondary)]">
+                          {formatPlannerTime(block.startTime)} · {block.durationMinutes}m · {block.type}
+                        </p>
+                      </div>
+                      <span className="shrink-0 rounded-full bg-[var(--color-accent)]/45 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.1em] text-[var(--color-primary-deep)]">
+                        {block.energy}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              ) : null}
+
               <div className="mt-5 max-h-[460px] space-y-3 overflow-y-auto pr-1 sm:max-h-[520px] sm:pr-2">
                 <AnimatePresence initial={false}>
-                  {taskChecklist.map((task, index) => {
+                  {taskChecklist.slice(0, 3).map((task, index) => {
                     const done = completedTaskIds.includes(task.id);
 
                     return (
@@ -1831,6 +2409,8 @@ export default function MauiDashboard({
           </motion.aside>
         </div>
       </motion.main>
+      </div>
+      )}
 
       <FloatingModal
         open={activeModal === "ready"}
@@ -1909,6 +2489,6 @@ export default function MauiDashboard({
         points={rewardToast.points}
         title={rewardToast.title}
       />
-    </div>
+    </>
   );
 }

@@ -84,6 +84,7 @@ export function toPublicUser(user: StoredUser): AuthUser {
     createdAt: user.createdAt,
     onboardingCompleted: user.onboardingCompleted ?? false,
     survey: user.survey ?? null,
+    onboardingDraft: user.onboardingDraft ?? null,
     studyProfile: normalizeStudyProfile(user.studyProfile ?? null),
   };
 }
@@ -107,6 +108,7 @@ function normalizeStoredUser(user: StoredUser): StoredUser {
     ...user,
     onboardingCompleted: user.onboardingCompleted ?? false,
     survey: user.survey ?? null,
+    onboardingDraft: user.onboardingDraft ?? null,
     studyProfile: user.studyProfile ?? null,
   };
 }

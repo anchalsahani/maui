@@ -1,7 +1,4 @@
-"use client";
-
 import Button from "@/components/ui/Button";
-import { motion } from "framer-motion";
 
 export default function Home() {
   return (
@@ -10,9 +7,9 @@ export default function Home() {
         <div className="pointer-events-none absolute inset-0 rounded-[inherit] ring-1 ring-[var(--color-primary)]/10" />
 
       {/* BACKGROUND GLOW */}
-      <div className="pointer-events-none absolute left-1/2 top-[10%] h-[360px] w-[360px] -translate-x-1/2 rounded-full bg-[var(--color-primary)]/10 blur-[100px] sm:h-[620px] sm:w-[620px] sm:blur-[140px]" />
+      <div className="hero-glow-primary pointer-events-none absolute left-1/2 top-[10%] h-[360px] w-[360px] -translate-x-1/2 rounded-full sm:h-[620px] sm:w-[620px]" />
 
-      <div className="pointer-events-none absolute bottom-0 left-0 h-[260px] w-[260px] rounded-full bg-[var(--color-accent)]/60 blur-[90px] sm:h-[420px] sm:w-[420px] sm:blur-[120px]" />
+      <div className="hero-glow-accent pointer-events-none absolute bottom-0 left-0 h-[260px] w-[260px] rounded-full sm:h-[420px] sm:w-[420px]" />
 
       {/* SUBTLE GRID */}
       <div className="pointer-events-none absolute inset-0 opacity-100">
@@ -22,24 +19,14 @@ export default function Home() {
       {/* HERO */}
       <main className="relative z-10 flex flex-1 flex-col items-center justify-center px-4 pb-36 pt-14 text-center sm:px-6 sm:pb-44 sm:pt-20">
         {/* BADGE */}
-        <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="glass-card mb-6 max-w-full rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-2 backdrop-blur-xl sm:mb-8 sm:px-6"
-        >
+        <div className="hero-enter hero-enter-badge glass-card mb-6 max-w-full rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-2 sm:mb-8 sm:px-6">
           <span className="text-[13px] font-medium text-[var(--color-dark)]/70">
             Work with your brain, not against it.
           </span>
-        </motion.div>
+        </div>
 
         {/* HEADLINE */}
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="max-w-7xl"
-        >
+        <div className="hero-enter hero-enter-heading max-w-7xl">
           <h1 className="text-[clamp(2.45rem,15vw,6.8rem)] font-bold leading-[0.92] tracking-[-0.04em] text-[var(--color-dark)] sm:leading-[0.9] sm:tracking-[-0.08em]">
             Helping you start,
             <br />
@@ -48,35 +35,19 @@ export default function Home() {
               even on your worst days.
             </span>
           </h1>
-        </motion.div>
+        </div>
 
         {/* BUTTON */}
-        <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.15 }}
-          className="mt-9 transition-transform duration-300 hover:scale-[1.03] sm:mt-12"
-        >
+        <div className="hero-enter hero-enter-cta mt-9 transition-transform duration-300 hover:scale-[1.03] sm:mt-12">
           <Button href="#problems" variant="secondary">
             Watch Demo
           </Button>
-        </motion.div>
+        </div>
       </main>
 
       {/* HANDHOLD STYLE RIBBON WAVE */}
       <div className="pointer-events-none absolute inset-x-0 bottom-[-2vh] z-0 h-[140px] overflow-hidden sm:bottom-[-3vh] sm:h-[clamp(170px,22vw,280px)]">
-        <motion.div
-          animate={{
-            x: ["-2.5%", "2.5%", "-2.5%"],
-            y: [0, -8, 0],
-          }}
-          transition={{
-            duration: 18,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute left-1/2 top-1/2 w-[180vw] min-w-[680px] -translate-x-1/2 -translate-y-1/2 sm:w-[145vw] sm:min-w-[1180px]"
-        >
+        <div className="hero-ribbon-motion absolute left-1/2 top-1/2 w-[180vw] min-w-[680px] sm:w-[145vw] sm:min-w-[1180px]">
           <svg
             viewBox="0 0 1800 420"
             preserveAspectRatio="none"
@@ -159,7 +130,7 @@ export default function Home() {
               />
             </g>
           </svg>
-        </motion.div>
+        </div>
       </div>
 
       {/* BOTTOM FADE */}

@@ -3,7 +3,9 @@ import type { LucideIcon } from "lucide-react";
 import { redirect } from "next/navigation";
 
 import Navbar from "@/components/layout/Navbar";
+import PlanningProgressCard from "@/components/app/rewards/PlanningProgressCard";
 import { getAuthenticatedUser } from "@/lib/auth/session";
+import { getDashboardState } from "@/lib/dashboard/state-store";
 import { getRewardSummary, listRewardEvents } from "@/lib/rewards/store";
 
 export default async function RewardsPage() {
@@ -15,18 +17,20 @@ export default async function RewardsPage() {
 
   const events = await listRewardEvents(user.id);
   const summary = getRewardSummary(events);
+  const weekly = getWeeklyInsight(events);
+  const workspace = await getDashboardState(user.id);
 
   return (
     <div className="relative min-h-dvh overflow-hidden bg-[var(--color-bg)]">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(207,232,213,0.72),transparent_28%),linear-gradient(180deg,rgba(255,255,255,0.72),rgba(250,250,250,0.96))]" />
-      <div className="pointer-events-none absolute right-[-10%] top-[-8%] h-[560px] w-[560px] rounded-full bg-[var(--color-primary)]/12 blur-[120px]" />
+      <div className="app-page-wash pointer-events-none absolute inset-0" />
+      <div className="pointer-events-none absolute right-[-10%] top-[-8%] h-[480px] w-[480px] rounded-full bg-[var(--color-primary)]/10 blur-[78px]" />
 
       <div className="relative z-50">
         <Navbar />
       </div>
 
       <main className="relative z-10 mx-auto w-full max-w-7xl px-3 pb-10 pt-20 sm:px-6 sm:pb-14 sm:pt-24">
-        <section className="rounded-[24px] border border-white/45 bg-[linear-gradient(135deg,rgba(255,255,255,0.9),rgba(242,250,244,0.84))] p-4 shadow-[0_28px_80px_rgba(53,85,63,0.1)] backdrop-blur-2xl sm:rounded-[32px] sm:p-8">
+        <section className="app-card-strong rounded-[24px] p-4 sm:rounded-[32px] sm:p-8">
           <p className="text-sm font-medium uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
             Rewards
           </p>
@@ -53,7 +57,24 @@ export default async function RewardsPage() {
           />
         </section>
 
-        <section className="mt-5 rounded-[24px] border border-white/45 bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(247,250,248,0.8))] p-4 shadow-[0_24px_70px_rgba(53,85,63,0.1)] backdrop-blur-2xl sm:mt-8 sm:rounded-[32px] sm:p-7">
+        <section className="app-card mt-5 grid gap-4 rounded-[24px] p-4 sm:mt-8 sm:grid-cols-[auto_1fr] sm:items-center sm:rounded-[32px] sm:p-6">
+          <div className="flex h-14 w-14 items-center justify-center rounded-[20px] bg-[var(--color-accent)]/48 text-[var(--color-primary-deep)]">
+            <Sparkles size={22} />
+          </div>
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.17em] text-[var(--color-primary-deep)]">
+              This week · {weekly.activeDays} active day{weekly.activeDays === 1 ? "" : "s"}
+            </p>
+            <h2 className="mt-2 text-xl font-semibold">{weekly.title}</h2>
+            <p className="mt-1 text-sm leading-6 text-[var(--color-text-secondary)]">
+              {weekly.body}
+            </p>
+          </div>
+        </section>
+
+        <PlanningProgressCard initialPlanning={workspace?.planning ?? null} />
+
+        <section className="app-card mt-5 rounded-[24px] p-4 sm:mt-8 sm:rounded-[32px] sm:p-7">
           <div className="flex items-start justify-between gap-3 sm:gap-4">
             <div>
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
@@ -73,7 +94,7 @@ export default async function RewardsPage() {
               events.slice(0, 12).map((event) => (
                 <div
                   key={event.id}
-                  className="flex items-center justify-between gap-3 rounded-[18px] border border-white/45 bg-white/76 px-3 py-3 shadow-[0_10px_28px_rgba(53,85,63,0.05)] sm:rounded-[22px] sm:px-4"
+                  className="app-subcard flex items-center justify-between gap-3 rounded-[18px] px-3 py-3 sm:rounded-[22px] sm:px-4"
                 >
                   <div className="min-w-0">
                     <p className="truncate text-sm font-semibold text-[var(--color-dark)]">
@@ -89,7 +110,7 @@ export default async function RewardsPage() {
                 </div>
               ))
             ) : (
-              <div className="rounded-[24px] border border-dashed border-[var(--color-border-strong)] bg-white/58 px-5 py-8 text-center">
+              <div className="app-muted-card rounded-[24px] border-dashed px-5 py-8 text-center">
                 <p className="text-sm font-semibold text-[var(--color-dark)]">
                   No reward events yet.
                 </p>
@@ -115,7 +136,7 @@ function RewardStat({
   icon: LucideIcon;
 }) {
   return (
-    <div className="rounded-[20px] border border-white/45 bg-[linear-gradient(180deg,rgba(255,255,255,0.82),rgba(247,250,248,0.78))] p-3 shadow-[0_18px_55px_rgba(53,85,63,0.08)] sm:rounded-[26px] sm:p-4">
+    <div className="app-subcard rounded-[20px] p-3 sm:rounded-[26px] sm:p-4">
       <div className="flex items-center justify-between gap-3">
         <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[var(--color-accent)]/48 text-[var(--color-primary-deep)]">
           <Icon size={18} />
@@ -149,4 +170,43 @@ function formatRewardDate(value: string) {
     hour: "numeric",
     minute: "2-digit",
   }).format(new Date(value));
+}
+
+function getWeeklyInsight(
+  events: Array<{ createdAt: string; type: string }>
+) {
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - 6);
+  cutoff.setHours(0, 0, 0, 0);
+  const recentEvents = events.filter(
+    (event) => new Date(event.createdAt).getTime() >= cutoff.getTime()
+  );
+  const activeDays = new Set(
+    recentEvents.map((event) => event.createdAt.slice(0, 10))
+  ).size;
+  const microWins = recentEvents.filter(
+    (event) => event.type === "micro_step"
+  ).length;
+
+  if (activeDays === 0) {
+    return {
+      activeDays,
+      title: "A restart still counts.",
+      body: "One tiny step today is enough to begin a new pattern.",
+    };
+  }
+
+  if (activeDays <= 2) {
+    return {
+      activeDays,
+      title: "You kept the thread alive.",
+      body: `${microWins} micro win${microWins === 1 ? "" : "s"} made progress visible without asking for perfection.`,
+    };
+  }
+
+  return {
+    activeDays,
+    title: "Consistency is becoming visible.",
+    body: `You returned on ${activeDays} different days. Maui values returning more than perfect streaks.`,
+  };
 }

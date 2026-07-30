@@ -5,7 +5,8 @@ export default function ThemeToggle() {
     <button
       type="button"
       data-theme-toggle
-      aria-label="Switch to dark mode"
+      aria-label="Switch to light mode"
+      suppressHydrationWarning
       className="maui-button-secondary group flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-all duration-200 hover:-translate-y-0.5 sm:h-11 sm:w-11"
     >
       <Sun

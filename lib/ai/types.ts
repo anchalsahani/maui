@@ -20,71 +20,81 @@ export interface PlannerAllocation {
   focusMinutes: number;
   intensity: "light" | "balanced" | "deep";
   reason: string;
-  microSteps: string[];
 }
 
-export interface PlannerDayBlock {
-  timeLabel: string;
-  title: string;
-  goal: string;
-  actions: string[];
-  adhdNote: string;
-  energy: "low" | "medium" | "high";
-}
+export type PlannerBlockType =
+  | "reset"
+  | "focus"
+  | "recovery"
+  | "admin"
+  | "commitment"
+  | "rest";
 
-export type PlannerStrategyType =
-  | "parallel_options"
-  | "alternating_loops"
-  | "deadline_triage"
-  | "burnout_protection"
-  | "interruption_reentry";
-
-export interface PlannerDetectedObligation {
+export interface PlannerScheduleBlock {
   id: string;
-  label: string;
-  category: "study" | "chore" | "commitment" | "wellbeing" | "admin";
-  urgency: "low" | "medium" | "high";
-  whyItMatters: string;
+  type: PlannerBlockType;
+  startTime: string;
+  endTime: string;
+  title: string;
+  taskId: string;
+  durationMinutes: number;
+  energy: "low" | "medium" | "high";
+  priority: "low" | "medium" | "high";
+  reason: string;
+  expectedOutcome: string;
+  conditional: string;
 }
 
-export interface PlannerParallelOption {
-  label: string;
-  bestWhen: string;
-  firstAction: string;
-  reentryAction: string;
+export interface PlannerEnergyForecast {
+  period: string;
+  level: "low" | "medium" | "high";
+  guidance: string;
 }
 
-export interface PlannerSituationMap {
-  detectedObligations: PlannerDetectedObligation[];
-  constraints: string[];
+export interface PlannerPostponedItem {
+  taskId: string;
+  title: string;
+  reason: string;
+  revisit: string;
+}
+
+export interface PlannerAssessment {
   emotionalState: EmotionState;
-  emotionReason: string;
-  timePressure: "low" | "medium" | "high";
-  strategyType: PlannerStrategyType;
-  parallelOptions: PlannerParallelOption[];
-  enoughForToday: string;
+  emotionalSummary: string;
+  capacitySummary: string;
+  workloadSummary: string;
+  keyTradeoff: string;
+  confidence: "low" | "medium" | "high";
 }
 
 export interface PlannerResult {
-  situation: PlannerSituationMap;
-  plan: PlannerAllocation[];
+  generatedAt: string;
+  planningWindow: {
+    startTime: string;
+    endTime: string;
+    totalAvailableMinutes: number;
+  };
   headline: string;
-  framing: string;
-  dayAtGlance: PlannerDayBlock[];
-  priorityOrder: string[];
-  hardRules: string[];
-  emergencyProtocol: string[];
-  realisticOutcome: string[];
-  todayStrategy: string;
-  avoidedOverload: string;
+  strategy: string;
+  todayFocus: string;
+  assessment: PlannerAssessment;
+  energyForecast: PlannerEnergyForecast[];
+  schedule: PlannerScheduleBlock[];
+  postponed: PlannerPostponedItem[];
+  reassessment: string;
+  plan: PlannerAllocation[];
 }
 
 export interface PlannerRequestInput {
   availableMinutes?: number;
+  currentTime?: string;
+  timezone?: string;
+  energyLevel?: "low" | "medium" | "high";
   emotionState?: EmotionState;
   burnoutRisk?: BurnoutRisk;
   rantContext?: string;
   todayNotes?: string;
+  replanTrigger?: string;
   tasks?: TaskItem[];
   survey?: UserSurvey | null;
 }

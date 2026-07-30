@@ -217,6 +217,47 @@ export function startFocusTimer(
   });
 }
 
+export function restoreFocusTimerFromPlan(session: {
+  title: string;
+  focusMinutes: number;
+  status: "active" | "paused";
+  startedAt: string;
+  endsAt: string;
+  runId: number;
+  elapsedSeconds?: number;
+  remainingSeconds?: number;
+  pausedAt?: string | null;
+}) {
+  const startedAt = new Date(session.startedAt).getTime();
+  const endsAt = new Date(session.endsAt).getTime();
+
+  if (!Number.isFinite(startedAt) || !Number.isFinite(endsAt)) {
+    return;
+  }
+
+  // The persisted plan owns the timer identity. Only replace a local timer when
+  // it belongs to a different plan session, such as after a browser refresh.
+  if (snapshot.runId === session.runId && snapshot.title === session.title) {
+    return;
+  }
+
+  const totalSeconds = Math.max(60, Math.round(session.focusMinutes * 60));
+  setSnapshot({
+    status: session.status,
+    mode: "study",
+    title: session.title,
+    focusMinutes: session.focusMinutes,
+    totalSeconds,
+    elapsedSeconds: session.elapsedSeconds ?? 0,
+    remainingSeconds: session.remainingSeconds ?? totalSeconds,
+    startedAt,
+    endsAt,
+    pausedAt: session.status === "paused" ? new Date(session.pausedAt ?? Date.now()).getTime() : null,
+    accumulatedPausedMs: 0,
+    runId: session.runId,
+  });
+}
+
 export function pauseFocusTimer() {
   if (snapshot.status !== "active") {
     return;

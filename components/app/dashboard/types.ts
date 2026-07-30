@@ -1,3 +1,5 @@
+import type { PlannerResult } from "@/lib/ai/types";
+
 export type EntryMode = "ready" | "stuck" | "tired" | null;
 export type SessionStatus = "idle" | "active" | "paused" | "completed";
 export type EmotionState = "steady" | "stressed" | "tired" | "overwhelmed" | "hopeful";
@@ -35,6 +37,56 @@ export interface SessionState {
   runId: number;
 }
 
+export type PlanningBlockStatus = "planned" | "in_progress" | "completed" | "skipped";
+
+export interface ActivePlanningSession {
+  blockId: string;
+  taskId: string;
+  title: string;
+  focusMinutes: number;
+  status: "active" | "paused";
+  startedAt: string;
+  endsAt: string;
+  runId: number;
+  elapsedSeconds?: number;
+  remainingSeconds?: number;
+  pausedAt?: string | null;
+}
+
+export interface PlanningMemoryEntry {
+  id: string;
+  type:
+    | "plan_created"
+    | "focus_started"
+    | "task_completed"
+    | "focus_completed"
+    | "task_skipped"
+    | "context_changed";
+  summary: string;
+  createdAt: string;
+  taskId?: string;
+}
+
+export interface PlanningSystemState {
+  revision: number;
+  activePlan: PlannerResult | null;
+  blockStatus: Record<string, PlanningBlockStatus>;
+  activeSession?: ActivePlanningSession | null;
+  context: {
+    emotionState: EmotionState;
+    burnoutRisk: "low" | "medium" | "high";
+    energyLevel: "low" | "medium" | "high";
+    updatedAt: string;
+  };
+  memory: PlanningMemoryEntry[];
+  lastTrigger: string;
+  study: {
+    plannedMinutes: number;
+    completedMinutes: number;
+    currentGoal: string | null;
+  };
+}
+
 export interface PersistedDashboardState {
   dashboardRoadmapKey?: string;
   tasks: TaskItem[];
@@ -45,4 +97,15 @@ export interface PersistedDashboardState {
   recentMoments: string[];
   completedMicroSteps: string[];
   emotionDraft?: string;
+  currentContext?: {
+    emotionState: EmotionState;
+    burnoutRisk: "low" | "medium" | "high";
+    updatedAt: string;
+  };
+  planning?: PlanningSystemState;
+  survivalMode?: {
+    active: boolean;
+    activatedAt: string;
+    originalTasks: TaskItem[];
+  } | null;
 }

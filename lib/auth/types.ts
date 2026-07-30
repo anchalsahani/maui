@@ -6,6 +6,8 @@ export interface UserSurvey {
   energyPattern: "steady" | "waves" | "low";
 }
 
+export type OnboardingDraft = Partial<UserSurvey>;
+
 export type StudyGoal = "exam" | "course" | "skill" | "revision" | "other";
 
 export interface SyllabusTopic {
@@ -67,6 +69,7 @@ export interface AuthUser {
   createdAt: string;
   onboardingCompleted: boolean;
   survey: UserSurvey | null;
+  onboardingDraft?: OnboardingDraft | null;
   studyProfile: StudyProfile | null;
 }
 

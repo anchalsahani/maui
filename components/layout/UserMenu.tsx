@@ -2,10 +2,15 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowUpRight, ChevronDown, LogOut, Sparkles, User } from "lucide-react";
+import {
+  ArrowUpRight,
+  ChevronDown,
+  LogOut,
+  Settings,
+  Sparkles,
+  User,
+} from "lucide-react";
 import { useEffect, useRef, useState, useTransition } from "react";
-
-import { appPages } from "@/lib/app-pages";
 
 interface UserMenuProps {
   userName: string;
@@ -72,7 +77,11 @@ export default function UserMenu({ userName }: UserMenuProps) {
       </button>
 
       {open ? (
-        <div className="app-card-strong fixed left-3 right-3 top-16 z-50 max-h-[calc(100dvh-5rem)] overflow-y-auto rounded-[22px] p-3 animate-in fade-in zoom-in-95 duration-200 sm:absolute sm:left-auto sm:right-0 sm:top-[calc(100%+0.75rem)] sm:w-[340px] sm:max-h-[calc(100dvh-6rem)] sm:rounded-[28px]">
+        <div
+          role="menu"
+          aria-label="Account menu"
+          className="app-card-strong fixed left-3 right-3 top-16 z-50 max-h-[calc(100dvh-5rem)] overflow-y-auto rounded-[22px] p-3 animate-in fade-in zoom-in-95 duration-200 sm:absolute sm:left-auto sm:right-0 sm:top-[calc(100%+0.75rem)] sm:w-[340px] sm:max-h-[calc(100dvh-6rem)] sm:rounded-[28px]"
+        >
           <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-[linear-gradient(180deg,rgba(207,232,213,0.55),transparent)]" />
 
           <div className="app-subcard relative rounded-[22px] px-4 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)]">
@@ -97,36 +106,37 @@ export default function UserMenu({ userName }: UserMenuProps) {
             </div>
           </div>
 
-          <div className="relative mt-3 space-y-1.5">
-            {appPages.map((page) => (
-              <Link
-                key={page.href}
-                href={page.href}
-                onClick={() => setOpen(false)}
-                className="group block rounded-[20px] border border-[var(--color-border)]/75 bg-[var(--color-card-soft)] px-4 py-3 transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--color-primary)]/45 hover:bg-[var(--color-card-hover)] hover:shadow-[0_14px_28px_rgba(16,47,21,0.1)]"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <p className="text-sm font-medium text-[var(--color-dark)] transition-colors duration-200 group-hover:text-[var(--color-primary-deep)]">
-                      {page.label}
-                    </p>
-                    <p className="mt-0.5 text-xs leading-5 text-[var(--color-text-secondary)] transition-colors duration-200 group-hover:text-[var(--color-dark)]/72">
-                      {page.description}
-                    </p>
-                  </div>
-
-                  <ArrowUpRight
-                    size={15}
-                    className="mt-0.5 shrink-0 text-[var(--color-primary-deep)]/55 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-[var(--color-primary-deep)]"
-                  />
-                </div>
-              </Link>
-            ))}
+          <div className="relative mt-3">
+            <Link
+              href="/settings"
+              role="menuitem"
+              onClick={() => setOpen(false)}
+              className="group flex items-center justify-between rounded-[20px] border border-[var(--color-border)]/75 bg-[var(--color-card-soft)] px-4 py-3 transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--color-primary)]/45 hover:bg-[var(--color-card-hover)]"
+            >
+              <span className="flex items-center gap-3">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--color-accent)]/45 text-[var(--color-primary-deep)]">
+                  <Settings size={16} />
+                </span>
+                <span>
+                  <span className="block text-sm font-semibold text-[var(--color-dark)]">
+                    Settings
+                  </span>
+                  <span className="mt-0.5 block text-xs text-[var(--color-text-secondary)]">
+                    Account and personalization
+                  </span>
+                </span>
+              </span>
+              <ArrowUpRight
+                size={15}
+                className="text-[var(--color-primary-deep)]/65 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              />
+            </Link>
           </div>
 
           <div className="relative mt-3 border-t border-[var(--color-border)]/80 pt-3">
             <button
               type="button"
+              role="menuitem"
               onClick={handleLogout}
               disabled={isPending}
               className="group flex w-full items-center justify-between rounded-[20px] border border-[var(--color-border)]/75 bg-[var(--color-card-soft)] px-4 py-3 text-left text-sm font-medium text-[var(--color-dark)] transition-all duration-200 hover:border-[var(--color-error)]/35 hover:bg-[var(--color-card-hover)] hover:shadow-[0_14px_28px_rgba(16,47,21,0.08)] disabled:cursor-not-allowed disabled:opacity-70"

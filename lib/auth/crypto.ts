@@ -2,11 +2,21 @@ import { createHmac, pbkdf2Sync, randomBytes, timingSafeEqual } from "node:crypt
 
 import type { SessionPayload } from "./types";
 
-const AUTH_SECRET =
-  process.env.AUTH_SECRET ?? "maui-dev-secret-change-me-before-production";
 const HASH_ITERATIONS = 120_000;
 const HASH_KEY_LENGTH = 64;
 const HASH_DIGEST = "sha512";
+
+function resolveAuthSecret() {
+  if (process.env.AUTH_SECRET) {
+    return process.env.AUTH_SECRET;
+  }
+
+  if (process.env.NODE_ENV === "production") {
+    throw new Error("AUTH_SECRET is required in production.");
+  }
+
+  return "maui-local-development-secret";
+}
 
 function encodeBase64Url(value: string) {
   return Buffer.from(value, "utf8").toString("base64url");
@@ -53,7 +63,9 @@ export function verifyPassword({
 }
 
 function signPayload(payload: string) {
-  return createHmac("sha256", AUTH_SECRET).update(payload).digest("base64url");
+  return createHmac("sha256", resolveAuthSecret())
+    .update(payload)
+    .digest("base64url");
 }
 
 export function createSessionToken(payload: SessionPayload) {
@@ -91,4 +103,3 @@ export function verifySessionToken(token: string) {
     return null;
   }
 }
-

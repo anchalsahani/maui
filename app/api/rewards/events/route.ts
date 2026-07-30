@@ -74,16 +74,28 @@ function getRewardEventPayload(body: unknown) {
 
   if (
     !isRewardEventType(candidate.type) ||
-    typeof candidate.points !== "number" ||
-    candidate.points <= 0 ||
-    typeof candidate.title !== "string"
+    typeof candidate.title !== "string" ||
+    !candidate.title.trim()
   ) {
     return null;
   }
 
   return {
     type: candidate.type,
-    points: Math.round(candidate.points),
+    points: getRewardPoints(candidate.type),
     title: candidate.title.trim().slice(0, 160),
   };
+}
+
+function getRewardPoints(
+  type: "focus_session" | "micro_step" | "broken_down_task"
+) {
+  switch (type) {
+    case "focus_session":
+      return 8;
+    case "broken_down_task":
+      return 4;
+    default:
+      return 1;
+  }
 }

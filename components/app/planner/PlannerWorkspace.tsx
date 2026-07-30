@@ -1,35 +1,44 @@
 "use client";
 
-import { useMemo, useState } from "react";
 import {
+  BatteryLow,
   Brain,
+  CalendarClock,
   CheckCircle2,
-  Clock,
-  HeartPulse,
+  Clock3,
+  Coffee,
+  Gauge,
+  History,
+  Lightbulb,
   Loader2,
   Moon,
+  Pause,
   Sparkles,
+  Target,
+  TimerReset,
+  Zap,
 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import { useMemo, useState } from "react";
 
 import type { TaskItem } from "@/components/app/dashboard/types";
-import type { PlannerResult } from "@/lib/ai/types";
+import type {
+  PlannerResult,
+  PlannerScheduleBlock,
+} from "@/lib/ai/types";
 import type { StudyProfile, UserSurvey } from "@/lib/auth/types";
+import { announcePlanningUpdate } from "@/lib/planning/client-sync";
 
 interface PlannerWorkspaceProps {
   userId: string;
   survey: UserSurvey;
   studyProfile: StudyProfile | null;
+  initialTasks: TaskItem[];
+  initialPlan: PlannerResult | null;
 }
 
-type MoodKey = "clear" | "hopeful" | "tired" | "stuck" | "overwhelmed";
-
-interface MoodOption {
-  key: MoodKey;
-  label: string;
-  body: string;
-  energy: "steady" | "tired" | "overwhelmed";
-  minutes: number;
-}
+type MoodKey = "clear" | "hopeful" | "tired" | "stressed" | "overwhelmed";
+type EnergyLevel = "low" | "medium" | "high";
 
 interface MoodEntry {
   id: string;
@@ -41,76 +50,67 @@ interface MoodEntry {
 
 const HISTORY_KEY_PREFIX = "maui-mood-history";
 
-const moodOptions: MoodOption[] = [
-  {
-    key: "clear",
-    label: "Clear",
-    body: "Start the best available task.",
-    energy: "steady",
-    minutes: 60,
-  },
-  {
-    key: "hopeful",
-    label: "Hopeful",
-    body: "Use the momentum, gently.",
-    energy: "steady",
-    minutes: 45,
-  },
-  {
-    key: "tired",
-    label: "Tired",
-    body: "Shrink the plan to one useful thing.",
-    energy: "tired",
-    minutes: 25,
-  },
-  {
-    key: "stuck",
-    label: "Stuck",
-    body: "Pick the least impossible doorway.",
-    energy: "overwhelmed",
-    minutes: 15,
-  },
-  {
-    key: "overwhelmed",
-    label: "Overwhelmed",
-    body: "Protect energy before productivity.",
-    energy: "overwhelmed",
-    minutes: 10,
-  },
+const moodOptions: Array<{
+  key: MoodKey;
+  label: string;
+  emotion: "steady" | "hopeful" | "tired" | "stressed" | "overwhelmed";
+}> = [
+  { key: "clear", label: "Clear", emotion: "steady" },
+  { key: "hopeful", label: "Hopeful", emotion: "hopeful" },
+  { key: "tired", label: "Tired", emotion: "tired" },
+  { key: "stressed", label: "Stressed", emotion: "stressed" },
+  { key: "overwhelmed", label: "Overwhelmed", emotion: "overwhelmed" },
+];
+
+const horizonOptions = [
+  { minutes: 180, label: "Next 3 hours" },
+  { minutes: 300, label: "Next 5 hours" },
+  { minutes: 480, label: "Rest of day" },
 ];
 
 export default function PlannerWorkspace({
   userId,
   survey,
   studyProfile,
+  initialTasks,
+  initialPlan,
 }: PlannerWorkspaceProps) {
-  const defaultMood = survey.energyPattern === "low" ? "tired" : "hopeful";
+  const defaultMood: MoodKey =
+    survey.energyPattern === "low" ? "tired" : "clear";
   const historyKey = `${HISTORY_KEY_PREFIX}:${userId}`;
   const [selectedMood, setSelectedMood] = useState<MoodKey>(defaultMood);
+  const [energyLevel, setEnergyLevel] = useState<EnergyLevel>(
+    survey.energyPattern === "low" ? "low" : "medium"
+  );
+  const [availableMinutes, setAvailableMinutes] = useState(300);
   const [note, setNote] = useState("");
-  const [history, setHistory] = useState<MoodEntry[]>(() => readStoredHistory(historyKey));
-  const [plan, setPlan] = useState<PlannerResult | null>(null);
-  const [warning, setWarning] = useState("");
+  const [history, setHistory] = useState<MoodEntry[]>(() =>
+    readStoredHistory(historyKey)
+  );
+  const [plan, setPlan] = useState<PlannerResult | null>(initialPlan);
   const [isPlanning, setIsPlanning] = useState(false);
+  const [error, setError] = useState("");
 
-  const tasks = useMemo(() => buildTaskItems(studyProfile), [studyProfile]);
-  const mood = moodOptions.find((option) => option.key === selectedMood) ?? moodOptions[1];
-  const visibleBlocks = plan?.dayAtGlance.slice(0, 3) ?? [];
-  const nextTask = tasks[0];
-
-  function saveHistoryEntry(entry: MoodEntry) {
-    setHistory((current) => {
-      const next = [entry, ...current].slice(0, 8);
-      window.localStorage.setItem(historyKey, JSON.stringify(next));
-      return next;
-    });
-  }
+  const tasks = useMemo(
+    () => mergeTaskItems(initialTasks, buildTaskItems(studyProfile)),
+    [initialTasks, studyProfile]
+  );
+  const mood =
+    moodOptions.find((option) => option.key === selectedMood) ?? moodOptions[0];
+  const urgentCount = tasks.filter(
+    (task) => task.priority === "high" || task.deadlineWeight >= 3
+  ).length;
+  const emotionalSummary = getLiveEmotionalSummary(
+    selectedMood,
+    energyLevel,
+    note
+  );
 
   async function generatePlan() {
     setIsPlanning(true);
-    setWarning("");
+    setError("");
 
-    const draftEntry: MoodEntry = {
+    const entry: MoodEntry = {
       id: `${Date.now()}-${selectedMood}`,
       mood: selectedMood,
       label: mood.label,
@@ -121,228 +121,452 @@ export default function PlannerWorkspace({
     try {
       const response = await fetch("/api/ai/plan", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          availableMinutes: mood.minutes,
-          emotionState: mood.energy,
+          currentTime: new Date().toISOString(),
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+          availableMinutes,
+          energyLevel,
+          emotionState: mood.emotion,
           burnoutRisk:
-            mood.energy === "overwhelmed"
+            selectedMood === "overwhelmed"
               ? "high"
-              : mood.energy === "tired"
+              : selectedMood === "tired" || selectedMood === "stressed"
                 ? "medium"
                 : "low",
-          rantContext: buildHistoryContext(history, draftEntry),
-          todayNotes: buildTodayNotes({ mood, note, studyProfile, nextTask }),
+          rantContext: buildHistoryContext(history, entry),
+          todayNotes: buildTodayContext({
+            note,
+            studyProfile,
+            energyLevel,
+            availableMinutes,
+          }),
           tasks,
         }),
       });
-      const data = (await response.json()) as {
-        plan?: PlannerResult;
-        warning?: string;
-        error?: string;
-      };
+      const data = (await response.json().catch(() => null)) as
+        | { plan?: PlannerResult; revision?: number; error?: string }
+        | null;
 
-      if (!response.ok || !data.plan) {
-        throw new Error(data.error ?? "Planner failed.");
+      if (!response.ok || !data?.plan) {
+        throw new Error("Maui could not refresh your day plan.");
       }
 
-      const detectedMood = mapEmotionToMood(data.plan.situation.emotionalState);
-      const correctedEntry: MoodEntry = {
-        ...draftEntry,
-        id: `${draftEntry.id}-${data.plan.situation.emotionalState}`,
-        mood: detectedMood,
-        label: formatEmotionLabel(data.plan.situation.emotionalState),
-      };
-
-      setSelectedMood(detectedMood);
-      saveHistoryEntry(correctedEntry);
       setPlan(data.plan);
-      setWarning(data.warning ?? "");
-    } catch (error) {
-      saveHistoryEntry(normalizeHistoryEntry(draftEntry));
-      setWarning(error instanceof Error ? error.message : "Planner failed.");
+      announcePlanningUpdate(data.revision ?? Date.now());
+      setHistory((current) => {
+        const next = [entry, ...current].slice(0, 10);
+        window.localStorage.setItem(historyKey, JSON.stringify(next));
+        return next;
+      });
+    } catch {
+      setError(
+        "Maui could not refresh the schedule right now. Your previous plan is still available."
+      );
     } finally {
       setIsPlanning(false);
     }
   }
 
   return (
-    <div className="relative min-h-dvh overflow-hidden bg-[var(--color-bg)]">
+    <div className="relative min-h-dvh bg-[var(--color-bg)]">
       <div className="app-page-wash pointer-events-none absolute inset-0" />
 
-      <main className="relative z-10 mx-auto w-full max-w-7xl px-3 pb-10 pt-20 sm:px-6 sm:pb-14 sm:pt-24">
-        <section className="grid gap-5 sm:gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="space-y-5 sm:space-y-6">
-            <div className="app-card-strong rounded-[22px] p-4 sm:rounded-[30px] sm:p-6">
-              <div className="flex items-center gap-2 text-sm font-semibold text-[var(--color-primary-deep)]">
-                <HeartPulse size={17} />
-                Mood Check-In
+      <main className="relative z-10 mx-auto w-full max-w-[1440px] px-3 pb-12 pt-20 sm:px-6 sm:pt-24">
+        <header className="app-card-strong rounded-[24px] p-5 sm:rounded-[32px] sm:p-7">
+          <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-3xl">
+              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-primary-deep)]">
+                <Sparkles size={15} />
+                AI Planner
               </div>
-              <h1 className="mt-4 max-w-2xl text-[clamp(1.9rem,11vw,3.45rem)] font-bold leading-[0.98] tracking-[-0.03em] text-[var(--color-dark)] sm:leading-[0.95]">
-                How have you been feeling recently?
+              <h1 className="mt-4 text-[clamp(2.25rem,7vw,5rem)] font-bold leading-[0.94] tracking-[-0.06em]">
+                A day shaped around your actual capacity.
               </h1>
-              <p className="mt-4 max-w-xl text-sm leading-6 text-[var(--color-text-secondary)]">
-                A low-friction ADHD support space for messy days, competing demands,
-                and the &quot;I do not know what to do&quot; spiral.
+              <p className="mt-4 max-w-2xl text-sm leading-7 text-[var(--color-text-secondary)] sm:text-base">
+                Maui weighs deadlines, energy, commitments, progress, and emotional
+                load—then decides what deserves time and what can wait.
               </p>
             </div>
 
-            <section className="app-card rounded-[22px] p-4 sm:rounded-[30px] sm:p-6">
+            {plan ? (
+              <div className="app-subcard grid min-w-[280px] grid-cols-2 gap-3 rounded-[22px] p-4">
+                <SummaryMetric
+                  label="Planning window"
+                  value={`${Math.round(plan.planningWindow.totalAvailableMinutes / 60)}h`}
+                />
+                <SummaryMetric
+                  label="Scheduled blocks"
+                  value={String(plan.schedule.length)}
+                />
+              </div>
+            ) : null}
+          </div>
+        </header>
+
+        <div className="mt-5 grid items-start gap-5 xl:grid-cols-[minmax(0,1.55fr)_minmax(320px,0.65fr)]">
+          <section className="min-w-0 space-y-5">
+            {plan ? (
+              <>
+                <section className="app-card-strong rounded-[24px] p-5 sm:rounded-[32px] sm:p-7">
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                    <div className="max-w-3xl">
+                      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-text-secondary)]">
+                        Today&apos;s strategy
+                      </p>
+                      <h2 className="mt-2 text-[clamp(1.6rem,4vw,2.5rem)] font-semibold leading-tight">
+                        {plan.headline}
+                      </h2>
+                      <p className="mt-3 text-sm leading-7 text-[var(--color-text-secondary)]">
+                        {plan.strategy}
+                      </p>
+                    </div>
+                    <span className="w-fit rounded-full bg-[var(--color-accent)]/45 px-3 py-1.5 text-xs font-semibold text-[var(--color-primary-deep)]">
+                      Focus: {plan.todayFocus}
+                    </span>
+                  </div>
+
+                  <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                    <InsightCard
+                      icon={Brain}
+                      label="Capacity read"
+                      body={plan.assessment.capacitySummary}
+                    />
+                    <InsightCard
+                      icon={Target}
+                      label="Key trade-off"
+                      body={plan.assessment.keyTradeoff}
+                    />
+                  </div>
+                </section>
+
+                <section
+                  className="app-card rounded-[24px] p-4 sm:rounded-[32px] sm:p-7"
+                  aria-labelledby="today-plan-heading"
+                >
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-primary-deep)]">
+                        Timeline
+                      </p>
+                      <h2
+                        id="today-plan-heading"
+                        className="mt-2 text-2xl font-semibold"
+                      >
+                        Today&apos;s plan
+                      </h2>
+                    </div>
+                    <p className="text-sm text-[var(--color-text-secondary)]">
+                      {formatTime(plan.planningWindow.startTime)}–{formatTime(plan.planningWindow.endTime)}
+                    </p>
+                  </div>
+
+                  <div className="relative mt-6">
+                    <div className="absolute bottom-5 left-[15px] top-5 w-px bg-[var(--color-border-strong)] sm:left-[19px]" />
+                    <div className="space-y-4">
+                      {plan.schedule.map((block, index) => (
+                        <TimelineBlock
+                          key={block.id}
+                          block={block}
+                          index={index}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </section>
+
+                <section className="grid gap-5 lg:grid-cols-2">
+                  <div className="app-card rounded-[24px] p-5 sm:rounded-[28px] sm:p-6">
+                    <div className="flex items-center gap-2">
+                      <Gauge
+                        size={18}
+                        className="text-[var(--color-primary-deep)]"
+                      />
+                      <h2 className="text-lg font-semibold">Energy forecast</h2>
+                    </div>
+                    <div className="mt-4 space-y-3">
+                      {plan.energyForecast.map((forecast) => (
+                        <div
+                          key={forecast.period}
+                          className="app-subcard rounded-[18px] p-3.5"
+                        >
+                          <div className="flex items-center justify-between gap-3">
+                            <p className="text-sm font-semibold">
+                              {forecast.period}
+                            </p>
+                            <EnergyBadge level={forecast.level} />
+                          </div>
+                          <p className="mt-2 text-xs leading-5 text-[var(--color-text-secondary)]">
+                            {forecast.guidance}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="app-card rounded-[24px] p-5 sm:rounded-[28px] sm:p-6">
+                    <div className="flex items-center gap-2">
+                      <Pause
+                        size={18}
+                        className="text-[var(--color-primary-deep)]"
+                      />
+                      <h2 className="text-lg font-semibold">
+                        Deliberately postponed
+                      </h2>
+                    </div>
+                    <div className="mt-4 space-y-3">
+                      {plan.postponed.length ? (
+                        plan.postponed.slice(0, 4).map((item) => (
+                          <div
+                            key={`${item.taskId}-${item.title}`}
+                            className="app-subcard rounded-[18px] p-3.5"
+                          >
+                            <p className="text-sm font-semibold">{item.title}</p>
+                            <p className="mt-1.5 text-xs leading-5 text-[var(--color-text-secondary)]">
+                              {item.reason}
+                            </p>
+                            <p className="mt-2 text-xs font-semibold text-[var(--color-primary-deep)]">
+                              {item.revisit}
+                            </p>
+                          </div>
+                        ))
+                      ) : (
+                        <p className="app-muted-card rounded-[18px] p-4 text-sm leading-6 text-[var(--color-text-secondary)]">
+                          Nothing needs an explicit postponement in this planning window.
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </section>
+
+                <section className="app-card flex flex-col gap-4 rounded-[24px] p-5 sm:flex-row sm:items-center sm:justify-between sm:rounded-[28px]">
+                  <div className="max-w-2xl">
+                    <p className="text-sm font-semibold">Reassessment rule</p>
+                    <p className="mt-1.5 text-sm leading-6 text-[var(--color-text-secondary)]">
+                      {plan.reassessment}
+                    </p>
+                  </div>
+                  <div className="inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-full bg-[var(--color-accent)]/48 px-5 text-sm font-semibold text-[var(--color-primary-deep)]">
+                    <CheckCircle2 size={17} />
+                    Synced across Maui
+                  </div>
+                </section>
+              </>
+            ) : (
+              <EmptyPlan tasks={tasks} />
+            )}
+          </section>
+
+          <aside className="space-y-5 xl:sticky xl:top-24">
+            <section className="app-card-strong rounded-[24px] p-5 sm:rounded-[30px] sm:p-6">
               <div className="flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--color-accent)]/60 text-[var(--color-primary-deep)]">
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--color-accent)]/48 text-[var(--color-primary-deep)]">
                   <Brain size={19} />
                 </div>
                 <div>
-                  <h2 className="text-xl font-semibold text-[var(--color-dark)]">
-                    What is true right now?
-                  </h2>
-                  <p className="text-sm text-[var(--color-text-secondary)]">
-                    One sentence is enough.
+                  <h2 className="text-lg font-semibold">Mood check-in</h2>
+                  <p className="text-xs text-[var(--color-text-secondary)]">
+                    Enough context to plan intelligently
                   </p>
                 </div>
               </div>
 
-              <textarea
-                value={note}
-                onChange={(event) => setNote(event.target.value)}
-                maxLength={600}
-                className="input mt-5 min-h-32 resize-y"
-                placeholder="Example: I want to study, but every option feels like too much."
-              />
-              <div className="app-subcard mt-4 rounded-[22px] p-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-text-secondary)]">
-                  Next useful option
-                </p>
-                <p className="mt-2 text-base font-semibold text-[var(--color-dark)]">
-                  {nextTask?.title ?? "Add tasks in Personalization when you are ready."}
-                </p>
-              </div>
+              <fieldset className="mt-5">
+                <legend className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-text-secondary)]">
+                  How do you feel?
+                </legend>
+                <div className="mt-3 grid grid-cols-2 gap-2">
+                  {moodOptions.map((option) => (
+                    <label
+                      key={option.key}
+                      className={`cursor-pointer rounded-[16px] border px-3 py-2.5 text-center text-xs font-semibold transition-colors duration-200 ${
+                        selectedMood === option.key
+                          ? "border-[var(--color-primary)] bg-[var(--color-accent)]/42 text-[var(--color-dark)]"
+                          : "border-[var(--color-border)] bg-[var(--color-card-soft)] text-[var(--color-text-secondary)] hover:bg-[var(--color-card-hover)]"
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="planner-mood"
+                        value={option.key}
+                        checked={selectedMood === option.key}
+                        onChange={() => {
+                          setSelectedMood(option.key);
+                          if (
+                            option.key === "tired" ||
+                            option.key === "overwhelmed"
+                          ) {
+                            setEnergyLevel("low");
+                          }
+                        }}
+                        className="sr-only"
+                      />
+                      {option.label}
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+
+              <fieldset className="mt-5">
+                <legend className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-text-secondary)]">
+                  Energy available
+                </legend>
+                <div className="mt-3 grid grid-cols-3 gap-2">
+                  {(["low", "medium", "high"] as const).map((level) => (
+                    <label
+                      key={level}
+                      className={`cursor-pointer rounded-[15px] border px-2 py-2.5 text-center text-xs font-semibold capitalize transition-colors duration-200 ${
+                        energyLevel === level
+                          ? "border-[var(--color-primary)] bg-[var(--color-accent)]/42"
+                          : "border-[var(--color-border)] bg-[var(--color-card-soft)] text-[var(--color-text-secondary)]"
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="planner-energy"
+                        checked={energyLevel === level}
+                        onChange={() => setEnergyLevel(level)}
+                        className="sr-only"
+                      />
+                      {level}
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+
+              <fieldset className="mt-5">
+                <legend className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-text-secondary)]">
+                  Plan for
+                </legend>
+                <div className="mt-3 grid gap-2">
+                  {horizonOptions.map((option) => (
+                    <label
+                      key={option.minutes}
+                      className={`flex cursor-pointer items-center justify-between rounded-[15px] border px-3 py-2.5 text-xs font-semibold transition-colors duration-200 ${
+                        availableMinutes === option.minutes
+                          ? "border-[var(--color-primary)] bg-[var(--color-accent)]/42"
+                          : "border-[var(--color-border)] bg-[var(--color-card-soft)] text-[var(--color-text-secondary)]"
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="planning-window"
+                        checked={availableMinutes === option.minutes}
+                        onChange={() => setAvailableMinutes(option.minutes)}
+                        className="sr-only"
+                      />
+                      {option.label}
+                      <Clock3 size={14} aria-hidden="true" />
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+
+              <label className="mt-5 block">
+                <span className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-text-secondary)]">
+                  What should Maui know?
+                </span>
+                <textarea
+                  value={note}
+                  onChange={(event) => setNote(event.target.value)}
+                  maxLength={1200}
+                  className="input mt-3 min-h-28 resize-y"
+                  placeholder="Deadlines, appointments, poor sleep, interruptions, or anything competing for attention…"
+                />
+              </label>
 
               <button
                 type="button"
-                onClick={generatePlan}
-                disabled={isPlanning || tasks.length === 0}
-                className="maui-button-primary mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-full text-sm font-semibold transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-55"
+                onClick={() => void generatePlan()}
+                disabled={isPlanning}
+                className="maui-button-primary mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-full text-sm font-semibold transition-transform duration-200 hover:-translate-y-0.5 disabled:cursor-wait disabled:opacity-60"
               >
-                {isPlanning ? <Loader2 className="animate-spin" size={17} /> : <Sparkles size={17} />}
-                Give me one gentle plan
+                {isPlanning ? (
+                  <Loader2 size={17} className="animate-spin" />
+                ) : (
+                  <Sparkles size={17} />
+                )}
+                {isPlanning
+                  ? "Reasoning through your day…"
+                  : plan
+                    ? "Replan my day"
+                    : "Plan my day"}
               </button>
 
-              {warning ? (
-                <p className="app-subcard mt-4 rounded-[18px] p-3 text-sm leading-6 text-[var(--color-text-secondary)]">
-                  {warning}
+              {error ? (
+                <p
+                  role="status"
+                  className="mt-4 rounded-[16px] border border-[var(--color-border)] bg-[var(--color-card-soft)] p-3 text-xs leading-5 text-[var(--color-text-secondary)]"
+                >
+                  {error}
                 </p>
               ) : null}
             </section>
+
+            <section className="app-card rounded-[24px] p-5">
+              <div className="flex items-center gap-2">
+                <Lightbulb
+                  size={17}
+                  className="text-[var(--color-primary-deep)]"
+                />
+                <h2 className="text-base font-semibold">Current read</h2>
+              </div>
+              <p className="mt-3 text-sm leading-6 text-[var(--color-text-secondary)]">
+                {emotionalSummary}
+              </p>
+              <div className="mt-4 grid grid-cols-3 gap-2">
+                <QuickMetric label="Tasks" value={String(tasks.length)} />
+                <QuickMetric label="Urgent" value={String(urgentCount)} />
+                <QuickMetric
+                  label="Window"
+                  value={`${Math.round(availableMinutes / 60)}h`}
+                />
+              </div>
+            </section>
+          </aside>
+        </div>
+
+        <section className="app-card mt-5 rounded-[24px] p-5 sm:rounded-[30px] sm:p-6">
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center gap-2">
+              <History
+                size={18}
+                className="text-[var(--color-primary-deep)]"
+              />
+              <div>
+                <h2 className="text-lg font-semibold">Emotional history</h2>
+                <p className="text-xs text-[var(--color-text-secondary)]">
+                  Context, not a scorecard
+                </p>
+              </div>
+            </div>
+            <Moon
+              size={18}
+              className="text-[var(--color-primary-deep)]"
+            />
           </div>
-
-          <section className="app-card rounded-[22px] p-4 sm:rounded-[30px] sm:p-6">
-            <div className="flex items-start justify-between gap-3 sm:items-center">
-              <div>
-                <h2 className="text-xl font-semibold text-[var(--color-dark)]">
-                  Emotional history
-                </h2>
-                <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
-                  Recent check-ins, kept short.
-                </p>
-              </div>
-              <Moon size={19} className="text-[var(--color-primary-deep)]" />
-            </div>
-
-            <div className="mt-5 space-y-3">
-              {history.length > 0 ? (
-                history.map((entry) => (
-                  <article
-                    key={entry.id}
-                    className={`rounded-[20px] border px-4 py-3 ${getMoodHistoryClass(entry.mood)}`}
-                  >
-                    <div className="flex items-center justify-between gap-3">
-                      <span className="text-sm font-semibold text-[var(--color-dark)]">
-                        {entry.label}
-                      </span>
-                      <span className="text-xs text-[var(--color-text-secondary)]">
-                        {formatTime(entry.createdAt)}
-                      </span>
-                    </div>
-                    {entry.note ? (
-                      <p className="mt-2 line-clamp-2 text-sm leading-5 text-[var(--color-text-secondary)]">
-                        {entry.note}
-                      </p>
-                    ) : null}
-                  </article>
-                ))
-              ) : (
-                <p className="app-muted-card rounded-[20px] border-dashed px-4 py-5 text-sm leading-6 text-[var(--color-text-secondary)]">
-                  Your next check-in will appear here.
-                </p>
-              )}
-            </div>
-          </section>
-        </section>
-
-        <section className="mt-6">
-          <div className="app-card-strong rounded-[22px] p-4 sm:rounded-[30px] sm:p-6">
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-              <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-text-secondary)]">
-                  Support result
-                </p>
-                <h2 className="mt-2 text-2xl font-bold leading-tight text-[var(--color-dark)]">
-                  {plan?.headline ?? "A smaller next step will appear here."}
-                </h2>
-              </div>
-              <span className="w-fit rounded-full bg-[var(--color-accent)]/65 px-3 py-1 text-xs font-semibold text-[var(--color-primary-deep)]">
-                {mood.minutes} min max
-              </span>
-            </div>
-
-            {plan ? (
-              <div className="mt-5 space-y-4">
-                <SituationSummary plan={plan} />
-
-                <p className="rounded-[22px] bg-[var(--color-accent)]/34 p-4 text-sm leading-6 text-[var(--color-dark)]">
-                  {plan.framing}
-                </p>
-
-                <div className="grid gap-3">
-                  {visibleBlocks.map((block, index) => (
-                    <article
-                      key={`${block.timeLabel}-${block.title}-${index}`}
-                      className="app-subcard rounded-[22px] p-4"
-                    >
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span className="inline-flex items-center gap-1 rounded-full bg-[var(--color-card-soft)] px-3 py-1 text-xs font-semibold text-[var(--color-primary-deep)]">
-                          <Clock size={13} />
-                          {block.timeLabel}
-                        </span>
-                        <span className="rounded-full border border-[var(--color-border)] bg-[var(--color-card-soft)] px-3 py-1 text-xs font-semibold text-[var(--color-text-secondary)]">
-                          Step {index + 1}
-                        </span>
-                      </div>
-                      <h3 className="mt-3 text-lg font-semibold leading-tight text-[var(--color-dark)]">
-                        {block.title}
-                      </h3>
-                      <p className="mt-2 text-sm leading-6 text-[var(--color-text-secondary)]">
-                        {block.goal}
-                      </p>
-                      <p className="mt-3 rounded-[16px] bg-[var(--color-card-muted)] px-3 py-2 text-sm text-[var(--color-dark)]">
-                        {block.actions[0] ?? block.adhdNote}
-                      </p>
-                    </article>
-                  ))}
-                </div>
-
-                <div className="grid gap-3 sm:grid-cols-2">
-                  <MiniSupport title="If you freeze" items={plan.emergencyProtocol.slice(0, 2)} />
-                  <MiniSupport title="Enough for today" items={plan.realisticOutcome.slice(0, 2)} />
-                </div>
-              </div>
+          <div className="mt-4 flex gap-3 overflow-x-auto pb-2">
+            {history.length ? (
+              history.map((entry) => (
+                <article
+                  key={entry.id}
+                  className="app-subcard min-w-[220px] max-w-[280px] rounded-[18px] p-3.5"
+                >
+                  <div className="flex items-center justify-between gap-3">
+                    <p className="text-sm font-semibold">{entry.label}</p>
+                    <p className="text-[10px] text-[var(--color-text-secondary)]">
+                      {formatHistoryTime(entry.createdAt)}
+                    </p>
+                  </div>
+                  <p className="mt-2 line-clamp-2 text-xs leading-5 text-[var(--color-text-secondary)]">
+                    {entry.note || "No extra context added."}
+                  </p>
+                </article>
+              ))
             ) : (
-              <div className="app-muted-card mt-6 rounded-[22px] border-dashed p-6 text-sm leading-6 text-[var(--color-text-secondary)]">
-                Choose a feeling, write one line if you want, then ask for a gentle plan.
-              </div>
+              <p className="app-muted-card w-full rounded-[18px] p-4 text-sm text-[var(--color-text-secondary)]">
+                Your first planning check-in will appear here.
+              </p>
             )}
           </div>
         </section>
@@ -351,254 +575,269 @@ export default function PlannerWorkspace({
   );
 }
 
-function MiniSupport({ title, items }: { title: string; items: string[] }) {
+function TimelineBlock({
+  block,
+  index,
+}: {
+  block: PlannerScheduleBlock;
+  index: number;
+}) {
+  const visual = getBlockVisual(block.type);
+  const Icon = visual.icon;
+
+  return (
+    <article className="relative grid grid-cols-[32px_minmax(0,1fr)] gap-3 sm:grid-cols-[40px_minmax(0,1fr)] sm:gap-4">
+      <div
+        className={`relative z-10 flex h-8 w-8 items-center justify-center rounded-full border sm:h-10 sm:w-10 ${visual.marker}`}
+      >
+        <Icon size={16} aria-hidden="true" />
+      </div>
+      <div
+        className={`rounded-[20px] border p-4 sm:rounded-[24px] sm:p-5 ${visual.card}`}
+      >
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+          <div>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-xs font-semibold text-[var(--color-primary-deep)]">
+                {formatTime(block.startTime)}–{formatTime(block.endTime)}
+              </span>
+              <span className="rounded-full bg-[var(--color-card-muted)] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
+                {block.durationMinutes} min
+              </span>
+              <span className="rounded-full bg-[var(--color-card-muted)] px-2.5 py-1 text-[10px] font-semibold capitalize text-[var(--color-text-secondary)]">
+                {block.priority} priority
+              </span>
+            </div>
+            <h3 className="mt-3 text-lg font-semibold leading-tight">
+              {block.title}
+            </h3>
+          </div>
+          <EnergyBadge level={block.energy} />
+        </div>
+
+        <div className="mt-4 grid gap-3 sm:grid-cols-2">
+          <div className="rounded-[16px] bg-[var(--color-card-muted)] p-3">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[var(--color-text-secondary)]">
+              Why this block
+            </p>
+            <p className="mt-1.5 text-xs leading-5 text-[var(--color-dark)]/80">
+              {block.reason}
+            </p>
+          </div>
+          <div className="rounded-[16px] bg-[var(--color-card-muted)] p-3">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[var(--color-text-secondary)]">
+              Expected outcome
+            </p>
+            <p className="mt-1.5 text-xs leading-5 text-[var(--color-dark)]/80">
+              {block.expectedOutcome}
+            </p>
+          </div>
+        </div>
+
+        {block.conditional ? (
+          <p className="mt-3 flex items-start gap-2 text-xs leading-5 text-[var(--color-text-secondary)]">
+            <TimerReset
+              size={14}
+              className="mt-0.5 shrink-0 text-[var(--color-primary-deep)]"
+            />
+            {block.conditional}
+          </p>
+        ) : null}
+        <span className="sr-only">Schedule block {index + 1}</span>
+      </div>
+    </article>
+  );
+}
+
+function EmptyPlan({ tasks }: { tasks: TaskItem[] }) {
+  return (
+    <section className="app-card-strong flex min-h-[620px] items-center justify-center rounded-[24px] p-6 text-center sm:rounded-[32px]">
+      <div className="max-w-xl">
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-[22px] bg-[var(--color-accent)]/42 text-[var(--color-primary-deep)]">
+          <CalendarClock size={28} />
+        </div>
+        <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-primary-deep)]">
+          Today is not a checklist
+        </p>
+        <h2 className="mt-3 text-[clamp(1.8rem,5vw,3rem)] font-semibold leading-tight">
+          Maui will make the trade-offs for you.
+        </h2>
+        <p className="mt-4 text-sm leading-7 text-[var(--color-text-secondary)]">
+          Choose your mood, energy, and planning window. Maui will decide which
+          work deserves your best attention, where recovery belongs, and what can
+          wait.
+        </p>
+        <div className="app-subcard mt-6 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold text-[var(--color-text-secondary)]">
+          <Target size={14} />
+          {tasks.length} active task{tasks.length === 1 ? "" : "s"} available for planning
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function InsightCard({
+  icon: Icon,
+  label,
+  body,
+}: {
+  icon: LucideIcon;
+  label: string;
+  body: string;
+}) {
   return (
     <div className="app-subcard rounded-[20px] p-4">
-      <div className="flex items-center gap-2 text-sm font-semibold text-[var(--color-dark)]">
-        <CheckCircle2 size={15} />
-        {title}
+      <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-primary-deep)]">
+        <Icon size={15} />
+        {label}
       </div>
-      <div className="mt-3 space-y-2">
-        {items.map((item) => (
-          <p
-            key={item}
-            className="rounded-[14px] bg-[var(--color-card-muted)] px-3 py-2 text-sm leading-5 text-[var(--color-text-secondary)]"
-          >
-            {item}
-          </p>
-        ))}
-      </div>
+      <p className="mt-2 text-sm leading-6 text-[var(--color-text-secondary)]">
+        {body}
+      </p>
     </div>
   );
 }
 
-function SituationSummary({ plan }: { plan: PlannerResult }) {
+function SummaryMetric({ label, value }: { label: string; value: string }) {
   return (
-    <div className="app-subcard rounded-[24px] p-4">
-      <div className="grid gap-3 sm:grid-cols-3">
-        <div>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--color-text-secondary)]">
-            Emotion
-          </p>
-          <p className="mt-1 text-sm font-semibold capitalize text-[var(--color-dark)]">
-            {plan.situation.emotionalState}
-          </p>
-        </div>
-        <div>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--color-text-secondary)]">
-            Pressure
-          </p>
-          <p className="mt-1 text-sm font-semibold capitalize text-[var(--color-dark)]">
-            {plan.situation.timePressure}
-          </p>
-        </div>
-        <div>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--color-text-secondary)]">
-            Strategy
-          </p>
-          <p className="mt-1 text-sm font-semibold text-[var(--color-dark)]">
-            {formatStrategy(plan.situation.strategyType)}
-          </p>
-        </div>
-      </div>
-
-      <p className="mt-4 rounded-[18px] bg-[var(--color-card-muted)] px-3 py-2 text-sm leading-6 text-[var(--color-text-secondary)]">
-        {plan.situation.emotionReason}
-      </p>
-
-      <div className="mt-4 grid gap-2">
-        {plan.situation.detectedObligations.slice(0, 4).map((obligation) => (
-          <div
-            key={obligation.id}
-            className="flex items-start justify-between gap-3 rounded-[16px] bg-[var(--color-card-soft)] px-3 py-2"
-          >
-            <div>
-              <p className="text-sm font-semibold text-[var(--color-dark)]">
-                {obligation.label}
-              </p>
-              <p className="mt-0.5 text-xs leading-5 text-[var(--color-text-secondary)]">
-                {obligation.whyItMatters}
-              </p>
-            </div>
-            <span className="shrink-0 rounded-full bg-[var(--color-accent)]/55 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--color-primary-deep)]">
-              {obligation.urgency}
-            </span>
-          </div>
-        ))}
-      </div>
-
-      <div className="mt-4 grid gap-2 sm:grid-cols-2">
-        {plan.situation.parallelOptions.slice(0, 2).map((option) => (
-          <div
-            key={option.label}
-            className="rounded-[16px] border border-[var(--color-border)] bg-[var(--color-card-muted)] px-3 py-3"
-          >
-            <p className="text-sm font-semibold text-[var(--color-dark)]">
-              {option.label}
-            </p>
-            <p className="mt-1 text-xs leading-5 text-[var(--color-text-secondary)]">
-              {option.firstAction}
-            </p>
-          </div>
-        ))}
-      </div>
-
-      <p className="mt-4 rounded-[18px] bg-[var(--color-accent)]/34 px-3 py-2 text-sm font-semibold leading-6 text-[var(--color-primary-deep)]">
-        Enough for today: {plan.situation.enoughForToday}
+    <div>
+      <p className="text-xl font-semibold">{value}</p>
+      <p className="mt-1 text-[10px] uppercase tracking-[0.14em] text-[var(--color-text-secondary)]">
+        {label}
       </p>
     </div>
   );
 }
 
-function formatStrategy(strategy: PlannerResult["situation"]["strategyType"]) {
-  switch (strategy) {
-    case "alternating_loops":
-      return "Alternating loops";
-    case "deadline_triage":
-      return "Deadline triage";
-    case "burnout_protection":
-      return "Burnout protection";
-    case "interruption_reentry":
-      return "Re-entry plan";
+function QuickMetric({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="app-subcard rounded-[14px] p-2.5 text-center">
+      <p className="text-base font-semibold">{value}</p>
+      <p className="mt-0.5 text-[9px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
+        {label}
+      </p>
+    </div>
+  );
+}
+
+function EnergyBadge({ level }: { level: "low" | "medium" | "high" }) {
+  const Icon = level === "high" ? Zap : level === "low" ? BatteryLow : Gauge;
+
+  return (
+    <span className="inline-flex w-fit shrink-0 items-center gap-1.5 rounded-full bg-[var(--color-accent)]/42 px-2.5 py-1 text-[10px] font-semibold capitalize text-[var(--color-primary-deep)]">
+      <Icon size={12} />
+      {level} energy
+    </span>
+  );
+}
+
+function getBlockVisual(type: PlannerScheduleBlock["type"]) {
+  switch (type) {
+    case "focus":
+      return {
+        icon: Target,
+        marker:
+          "border-[var(--color-primary)]/35 bg-[var(--color-accent)] text-[var(--color-primary-deep)]",
+        card:
+          "border-[var(--color-primary)]/24 bg-[var(--color-accent)]/22",
+      };
+    case "recovery":
+    case "rest":
+      return {
+        icon: Coffee,
+        marker:
+          "border-[var(--color-border)] bg-[var(--color-card-hover)] text-[var(--color-primary-deep)]",
+        card: "border-[var(--color-border)] bg-[var(--color-card-soft)]",
+      };
+    case "commitment":
+      return {
+        icon: CalendarClock,
+        marker:
+          "border-[var(--color-primary-deep)]/30 bg-[var(--color-card-hover)] text-[var(--color-primary-deep)]",
+        card:
+          "border-[var(--color-primary-deep)]/20 bg-[var(--color-card-soft)]",
+      };
+    case "admin":
+      return {
+        icon: CheckCircle2,
+        marker:
+          "border-[var(--color-border)] bg-[var(--color-card-hover)] text-[var(--color-primary-deep)]",
+        card: "border-[var(--color-border)] bg-[var(--color-card-soft)]",
+      };
     default:
-      return "Parallel options";
+      return {
+        icon: TimerReset,
+        marker:
+          "border-[var(--color-primary)]/30 bg-[var(--color-card-hover)] text-[var(--color-primary-deep)]",
+        card: "border-[var(--color-border)] bg-[var(--color-card-soft)]",
+      };
   }
 }
 
-function formatTime(value: string) {
-  return new Date(value).toLocaleString(undefined, {
-    month: "short",
-    day: "numeric",
-    hour: "numeric",
-    minute: "2-digit",
-  });
+function getLiveEmotionalSummary(
+  mood: MoodKey,
+  energy: EnergyLevel,
+  note: string
+) {
+  const noteContext = note.trim()
+    ? " Maui will treat the detail you added as a current constraint."
+    : "";
+
+  if (mood === "overwhelmed") {
+    return `Choice pressure is high and energy is ${energy}. The plan should narrow priorities and make postponement explicit.${noteContext}`;
+  }
+
+  if (mood === "stressed") {
+    return `Pressure is present with ${energy} energy. Maui should protect the closest deadline without filling the entire window.${noteContext}`;
+  }
+
+  if (mood === "tired") {
+    return `Energy is limited. Maui should use shorter commitments and leave recovery between demanding blocks.${noteContext}`;
+  }
+
+  if (mood === "hopeful") {
+    return `There is useful momentum with ${energy} energy. Maui should use it without turning optimism into overcommitment.${noteContext}`;
+  }
+
+  return `Your emotional state appears relatively clear with ${energy} energy. Priorities and deadlines can lead while capacity stays protected.${noteContext}`;
 }
 
-function readStoredHistory(historyKey: string) {
-  if (typeof window === "undefined") {
-    return [];
-  }
-
-  try {
-    const stored = window.localStorage.getItem(historyKey);
-    const parsed = stored ? (JSON.parse(stored) as MoodEntry[]) : [];
-    return Array.isArray(parsed) ? parsed.slice(0, 8).map(normalizeHistoryEntry) : [];
-  } catch {
-    return [];
-  }
-}
-
-function normalizeHistoryEntry(entry: MoodEntry): MoodEntry {
-  const correctedMood = detectMoodFromNote(entry.note);
-
-  if (!correctedMood) {
-    return entry;
-  }
-
-  return {
-    ...entry,
-    mood: correctedMood,
-    label: moodOptions.find((option) => option.key === correctedMood)?.label ?? entry.label,
-  };
-}
-
-function detectMoodFromNote(note: string): MoodKey | null {
-  const text = note.toLowerCase();
-
-  if (
-    /\b(idk|i don't know|dont know|what to do|can't choose|cant choose|confused|stuck|freeze|frozen|too much|overwhelmed|really hard|hard to complete)\b/.test(
-      text
-    )
-  ) {
-    return "overwhelmed";
-  }
-
-  if (/\b(tired|drained|exhausted|sleepy|low energy)\b/.test(text)) {
-    return "tired";
-  }
-
-  if (/\b(hopeful|motivated|ready)\b/.test(text)) {
-    return "hopeful";
-  }
-
-  return null;
-}
-
-function mapEmotionToMood(emotion: PlannerResult["situation"]["emotionalState"]): MoodKey {
-  switch (emotion) {
-    case "overwhelmed":
-      return "overwhelmed";
-    case "stressed":
-      return "stuck";
-    case "tired":
-      return "tired";
-    case "hopeful":
-      return "hopeful";
-    default:
-      return "clear";
-  }
-}
-
-function formatEmotionLabel(emotion: PlannerResult["situation"]["emotionalState"]) {
-  switch (emotion) {
-    case "overwhelmed":
-      return "Overwhelmed";
-    case "stressed":
-      return "Stressed";
-    case "tired":
-      return "Tired";
-    case "hopeful":
-      return "Hopeful";
-    default:
-      return "Clear";
-  }
-}
-function getMoodHistoryClass(mood: MoodKey) {
-  switch (mood) {
-    case "clear":
-      return "border-[var(--color-primary)]/30 bg-[var(--color-accent)]/34";
-    case "hopeful":
-      return "border-[var(--color-primary)]/24 bg-[var(--color-card-soft)]";
-    case "tired":
-      return "border-[var(--color-primary)]/20 bg-[var(--color-card-muted)]";
-    case "stuck":
-      return "border-[var(--color-primary-deep)]/24 bg-[var(--color-card-soft)]";
-    case "overwhelmed":
-      return "border-[var(--color-error)]/24 bg-[var(--color-card-muted)]";
-    default:
-      return "border-[var(--color-border)] bg-[var(--color-card-soft)]";
-  }
-}
-
-function buildTodayNotes({
-  mood,
+function buildTodayContext({
   note,
   studyProfile,
-  nextTask,
+  energyLevel,
+  availableMinutes,
 }: {
-  mood: MoodOption;
   note: string;
   studyProfile: StudyProfile | null;
-  nextTask: TaskItem | undefined;
+  energyLevel: EnergyLevel;
+  availableMinutes: number;
 }) {
   return [
-    `Current emotional fig: ${mood.label}`,
-    `Support need: ${mood.body}`,
-    note.trim() ? `User note: ${note.trim()}` : "",
-    studyProfile?.planningNotes ? `Existing support notes: ${studyProfile.planningNotes}` : "",
-    nextTask ? `Likely next task: ${nextTask.title}` : "",
+    note.trim() ? `Current user context: ${note.trim()}` : "",
+    `Current energy: ${energyLevel}`,
+    `Planning horizon: ${availableMinutes} minutes`,
+    studyProfile?.fixedCommitments
+      ? `Fixed commitments: ${studyProfile.fixedCommitments}`
+      : "",
+    studyProfile?.choresAndErrands
+      ? `Chores and errands: ${studyProfile.choresAndErrands}`
+      : "",
+    studyProfile?.wellbeingAndFun
+      ? `Rest and wellbeing: ${studyProfile.wellbeingAndFun}`
+      : "",
+    studyProfile?.planningNotes
+      ? `Saved planning notes: ${studyProfile.planningNotes}`
+      : "",
   ]
     .filter(Boolean)
     .join("\n\n");
 }
 
-function buildHistoryContext(history: MoodEntry[], currentEntry: MoodEntry) {
-  return [currentEntry, ...history]
+function buildHistoryContext(history: MoodEntry[], current: MoodEntry) {
+  return [current, ...history]
     .slice(0, 6)
-    .map((entry) => {
-      const note = entry.note ? `: ${entry.note}` : "";
-      return `${entry.label}${note}`;
-    })
+    .map((entry) => `${entry.label}${entry.note ? `: ${entry.note}` : ""}`)
     .join("\n");
 }
 
@@ -606,26 +845,72 @@ function buildTaskItems(studyProfile: StudyProfile | null): TaskItem[] {
   return (
     studyProfile?.generatedTasks
       .filter((task) => task.status !== "done")
-      .slice(0, 12)
+      .slice(0, 20)
       .map((task) => ({
         id: task.id,
         title: task.title,
         subject: task.subject,
         category: task.category,
         status: task.status,
-        priority: task.priority, 
-        urgency: task.priority === "high" ? 9 : task.priority === "medium" ? 6 : 4,
-        difficulty: task.difficulty === "hard" ? 7 : task.difficulty === "medium" ? 5 : 3,
+        priority: task.priority,
+        urgency:
+          task.priority === "high" ? 9 : task.priority === "medium" ? 6 : 4,
+        difficulty:
+          task.difficulty === "hard"
+            ? 7
+            : task.difficulty === "medium"
+              ? 5
+              : 3,
         deadlineWeight: task.deadline ? 3 : 1,
-        focusMinutes: Math.min(45, Math.max(10, task.estimatedMinutes)),
+        focusMinutes: Math.min(90, Math.max(15, task.estimatedMinutes)),
         progress: task.progress,
         deadline: task.deadline,
         recurrence: task.recurrence,
-        steps: [
-          `Open ${task.title}.`,
-          "Do the smallest visible start.",
-          "Stop and mark what changed.",
-        ],
+        steps: [],
       })) ?? []
   );
+}
+
+function mergeTaskItems(...groups: TaskItem[][]) {
+  const tasks = new Map<string, TaskItem>();
+
+  for (const group of groups) {
+    for (const task of group) {
+      if (!task.id || task.status === "done") {
+        continue;
+      }
+
+      tasks.set(task.id, { ...(tasks.get(task.id) ?? {}), ...task });
+    }
+  }
+
+  return [...tasks.values()];
+}
+
+function readStoredHistory(key: string) {
+  if (typeof window === "undefined") {
+    return [];
+  }
+
+  try {
+    const parsed = JSON.parse(window.localStorage.getItem(key) ?? "[]") as MoodEntry[];
+    return Array.isArray(parsed) ? parsed.slice(0, 10) : [];
+  } catch {
+    return [];
+  }
+}
+
+function formatTime(value: string) {
+  return new Intl.DateTimeFormat(undefined, {
+    hour: "numeric",
+    minute: "2-digit",
+  }).format(new Date(value));
+}
+
+function formatHistoryTime(value: string) {
+  return new Intl.DateTimeFormat(undefined, {
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+  }).format(new Date(value));
 }

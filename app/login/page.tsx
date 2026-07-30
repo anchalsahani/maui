@@ -36,7 +36,7 @@ export default function LoginPage() {
     }
 
     const nextRoute =
-      data?.user?.onboardingCompleted && data.user.survey ? "/dashboard" : "/personalization";
+      data?.user?.onboardingCompleted && data.user.survey ? "/dashboard" : "/onboarding";
 
     router.push(nextRoute);
     router.refresh();
@@ -44,26 +44,28 @@ export default function LoginPage() {
 
   return (
     <div className="relative min-h-dvh overflow-hidden bg-[var(--color-bg)]">
-      <div className="absolute right-[-140px] top-[-140px] h-[360px] w-[360px] rounded-full bg-[var(--color-primary)]/15 blur-3xl sm:right-[-180px] sm:top-[-180px] sm:h-[700px] sm:w-[700px]" />
-      <div className="absolute bottom-[-160px] left-[-120px] h-[320px] w-[320px] rounded-full bg-[var(--color-accent)]/20 blur-3xl sm:bottom-[-200px] sm:h-[500px] sm:w-[500px]" />
+      <div className="app-page-wash pointer-events-none absolute inset-0" />
+      <div className="pointer-events-none absolute right-[-100px] top-[-100px] h-72 w-72 rounded-full bg-[var(--color-primary)]/10 blur-[72px]" />
 
-      <div className="relative z-10 flex min-h-dvh items-center justify-center px-3 py-6 pt-20 sm:px-6">
-        <div className="w-full max-w-[480px] rounded-[24px] border border-white/25 bg-white/35 p-5 shadow-[0_8px_40px_rgba(16,47,21,0.08)] backdrop-blur-2xl sm:rounded-[32px] sm:p-10">
-          <div className="mb-5 w-fit rounded-full border border-white/20 bg-white/10 px-4 py-2 backdrop-blur-xl sm:mb-6">
-            <span className="text-[13px] font-medium tracking-[-0.02em] text-[var(--color-primary)]">
-              Welcome back
+      <div className="relative z-10 flex min-h-dvh items-center justify-center px-4 py-5 sm:px-6">
+        <div className="app-card-strong w-full max-w-[500px] rounded-[26px] p-5 sm:rounded-[34px] sm:p-9">
+          <Link
+            href="/"
+            className="mb-6 inline-flex items-center gap-2.5 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
+          >
+            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--color-button-primary)] text-sm font-bold text-[var(--color-button-primary-text)]">
+              M
             </span>
-          </div>
+            <span className="text-lg font-semibold">Maui</span>
+          </Link>
 
-          <div className="mb-8 space-y-3">
+          <div className="mb-7 space-y-3">
             <h1 className="text-[2rem] font-semibold leading-[1] tracking-[-0.04em] text-[var(--color-dark)] sm:text-[2.5rem] sm:tracking-[-0.06em]">
-              Continue where
-              <br />
-              you left off.
+              Welcome back
             </h1>
 
             <p className="text-[15px] leading-7 text-[var(--color-text-secondary)]">
-              Maui helps you start before your brain talks you out of it.
+              Sign in to continue to your Maui workspace.
             </p>
           </div>
 
@@ -100,7 +102,7 @@ export default function LoginPage() {
             </label>
 
             {error ? (
-              <p className="rounded-2xl border border-[var(--color-error)]/25 bg-[var(--color-error)]/8 px-4 py-3 text-sm text-[var(--color-error)]">
+              <p role="alert" className="rounded-2xl border border-[var(--color-error)]/25 bg-[var(--color-error)]/8 px-4 py-3 text-sm text-[var(--color-error)]">
                 {error}
               </p>
             ) : null}
@@ -131,7 +133,7 @@ export default function LoginPage() {
             disabled={isPending}
             className="maui-button-secondary mt-5 flex h-[52px] w-full items-center justify-center gap-3 rounded-full px-4 text-[15px] font-medium transition-all hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70"
           >
-            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white text-[15px] font-semibold text-[#4285F4]">
+            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[var(--color-surface-strong)] text-[15px] font-semibold text-[#4285F4]">
               G
             </span>
             <span>Continue with Google</span>

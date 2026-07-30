@@ -25,6 +25,7 @@ import type {
   StudyProfile,
   UserSurvey,
 } from "@/lib/auth/types";
+import { announcePlanningUpdate } from "@/lib/planning/client-sync";
 
 const studyExamples = [
   "B.Tech CSE",
@@ -257,7 +258,10 @@ export default function PersonalizationForm({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          currentTime: new Date().toISOString(),
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
           availableMinutes: getAvailableMinutes(profile),
+          energyLevel: "medium",
           emotionState: "steady",
           burnoutRisk: "low",
           todayNotes: buildTodayNotes(profile),
@@ -266,7 +270,7 @@ export default function PersonalizationForm({
       });
       const data = (await response.json()) as {
         plan?: PlannerResult;
-        warning?: string;
+        revision?: number;
         error?: string;
       };
 
@@ -275,14 +279,10 @@ export default function PersonalizationForm({
       }
 
       setAiPlan(data.plan);
-      setAiWarning(data.warning ?? "");
-      setSuccess(
-        data.warning
-          ? "Personalization saved. Local fallback made a day plan because AI planning was unavailable."
-          : "Personalization saved. AI day plan generated."
-      );
-    } catch (error) {
-      setAiWarning(error instanceof Error ? error.message : "Planner failed.");
+      announcePlanningUpdate(data.revision ?? Date.now());
+      setSuccess("Personalization saved. Your day plan is ready.");
+    } catch {
+      setAiWarning("Maui could not refresh the schedule right now.");
       setSuccess("Personalization saved. Your dashboard will now use this roadmap.");
     } finally {
       setIsPlanning(false);
@@ -297,7 +297,10 @@ export default function PersonalizationForm({
     >
       <input type="hidden" name="syllabusMode" value="paste" />
 
-      <section className="app-card rounded-[22px] p-4 sm:rounded-[30px] sm:p-6">
+      <section
+        id="support-preferences"
+        className="app-card scroll-mt-28 rounded-[22px] p-4 sm:rounded-[30px] sm:p-6"
+      >
         <div className="flex items-start gap-3 sm:items-center">
           <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--color-accent)]/60 text-[var(--color-primary-deep)]">
             <Brain size={19} />
@@ -635,20 +638,23 @@ export default function PersonalizationForm({
                 <h3 className="text-base font-semibold leading-5 text-[var(--color-dark)]">
                   {aiPlan.headline}
                 </h3>
-                {aiPlan.dayAtGlance.slice(0, 4).map((block, index) => (
+                {aiPlan.schedule.slice(0, 4).map((block, index) => (
                   <div
-                    key={`${block.timeLabel}-${block.title}-${index}`}
+                    key={`${block.startTime}-${block.title}-${index}`}
                     className="app-subcard rounded-[18px] px-4 py-3"
                   >
                     <p className="inline-flex items-center gap-1 text-xs font-semibold text-[var(--color-primary-deep)]">
                       <Clock size={13} />
-                      {block.timeLabel}
+                      {new Intl.DateTimeFormat(undefined, {
+                        hour: "numeric",
+                        minute: "2-digit",
+                      }).format(new Date(block.startTime))}
                     </p>
                     <p className="mt-2 text-sm font-semibold text-[var(--color-dark)]">
                       {block.title}
                     </p>
                     <p className="mt-1 text-xs leading-5 text-[var(--color-text-secondary)]">
-                      {block.goal}
+                      {block.expectedOutcome}
                     </p>
                   </div>
                 ))}

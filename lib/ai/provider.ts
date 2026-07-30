@@ -4,6 +4,8 @@ interface StructuredResponseOptions {
   instructions: string;
   input: unknown;
   maxOutputTokens?: number;
+  thinkingBudget?: number;
+  reasoningEffort?: "low" | "medium" | "high";
 }
 
 export class AIProviderUnavailableError extends Error {
@@ -29,6 +31,7 @@ async function createOpenAIStructuredResponse<T>({
   instructions,
   input,
   maxOutputTokens = 1200,
+  reasoningEffort,
 }: StructuredResponseOptions): Promise<T> {
   const apiKey = process.env.OPENAI_API_KEY;
 
@@ -65,6 +68,13 @@ async function createOpenAIStructuredResponse<T>({
           schema,
         },
       },
+      ...(reasoningEffort
+        ? {
+            reasoning: {
+              effort: reasoningEffort,
+            },
+          }
+        : {}),
     }),
   });
 
@@ -88,6 +98,7 @@ async function createGeminiStructuredResponse<T>({
   instructions,
   input,
   maxOutputTokens = 1200,
+  thinkingBudget = 0,
 }: StructuredResponseOptions): Promise<T> {
   const apiKey = process.env.GEMINI_API_KEY;
 
@@ -120,7 +131,7 @@ async function createGeminiStructuredResponse<T>({
         generationConfig: {
           maxOutputTokens,
           thinkingConfig: {
-            thinkingBudget: 0,
+            thinkingBudget,
           },
           responseMimeType: "application/json",
           responseJsonSchema: toGeminiSchema(schema),
@@ -155,9 +166,18 @@ function toGeminiSchema(value: unknown): unknown {
 
   const source = value as Record<string, unknown>;
   const output: Record<string, unknown> = {};
+  const unsupportedOrExpensiveConstraints = new Set([
+    "additionalProperties",
+    "maxLength",
+    "minLength",
+    "minItems",
+    "maxItems",
+    "minimum",
+    "maximum",
+  ]);
 
   for (const [key, entry] of Object.entries(source)) {
-    if (key === "additionalProperties") {
+    if (unsupportedOrExpensiveConstraints.has(key)) {
       continue;
     }
 

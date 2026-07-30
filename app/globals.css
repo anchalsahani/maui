@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Jolly+Lodger&family=Story+Script&display=swap");
 @import "tailwindcss";
 
 :root {
@@ -249,6 +248,36 @@ p {
   font-family: var(--font-heading), sans-serif;
 }
 
+.maui-question-enter {
+  animation: maui-question-in 240ms ease-out both;
+}
+
+@keyframes maui-question-in {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 h1,
 h2,
 h3,
@@ -263,7 +292,7 @@ a {
 }
 
 .first-name {
-  font-family: "Story Script", cursive;
+  font-family: "Segoe Print", "Bradley Hand", cursive;
   font-weight: 400;
   letter-spacing: 0;
 }
@@ -306,6 +335,83 @@ a {
 .app-muted-card {
   border: 1px solid var(--color-border);
   background: var(--color-card-muted);
+}
+
+.landing-page .app-card,
+.landing-page .app-card-strong,
+.landing-page .glass-card {
+  backdrop-filter: none;
+}
+
+.landing-deferred {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1400px;
+}
+
+.hero-glow-primary {
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--color-primary) 13%, transparent) 0%,
+    transparent 69%
+  );
+}
+
+.hero-glow-accent {
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--color-accent) 55%, transparent) 0%,
+    transparent 70%
+  );
+}
+
+.footer-radial-glow {
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--color-mainstar) 16%, transparent) 0%,
+    transparent 70%
+  );
+}
+
+.hero-enter-badge {
+  animation: hero-reveal 420ms ease-out both;
+}
+
+.hero-enter-cta {
+  animation: hero-reveal 520ms 120ms ease-out both;
+}
+
+.hero-ribbon-motion {
+  transform: translate(-50%, -50%);
+}
+
+@media (min-width: 768px) {
+  .hero-ribbon-motion {
+    animation: hero-ribbon-drift 18s ease-in-out infinite;
+    will-change: transform;
+  }
+}
+
+@keyframes hero-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-ribbon-drift {
+  0%,
+  100% {
+    transform: translate(-52.5%, -50%);
+  }
+
+  50% {
+    transform: translate(-47.5%, calc(-50% - 8px));
+  }
 }
 
 .input {

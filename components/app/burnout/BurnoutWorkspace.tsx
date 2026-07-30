@@ -5,6 +5,7 @@ import { Brain, Loader2, ShieldAlert } from "lucide-react";
 
 import type { BurnoutAnalysis } from "@/lib/ai/types";
 import type { UserSurvey } from "@/lib/auth/types";
+import { announcePlanningUpdate } from "@/lib/planning/client-sync";
 
 interface BurnoutWorkspaceProps {
   survey: UserSurvey | null;
@@ -15,10 +16,12 @@ export default function BurnoutWorkspace({ survey }: BurnoutWorkspaceProps) {
   const [analysis, setAnalysis] = useState<BurnoutAnalysis | null>(null);
   const [warning, setWarning] = useState("");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [planMessage, setPlanMessage] = useState("");
 
   async function analyzeRant() {
     setIsAnalyzing(true);
     setWarning("");
+    setPlanMessage("");
 
     try {
       const response = await fetch("/api/ai/burnout", {
@@ -46,10 +49,66 @@ export default function BurnoutWorkspace({ survey }: BurnoutWorkspaceProps) {
 
       setAnalysis(data.analysis);
       setWarning(data.warning ?? "");
+      await updateSharedPlan(data.analysis);
     } catch (error) {
       setWarning(error instanceof Error ? error.message : "Analysis failed.");
     } finally {
       setIsAnalyzing(false);
+    }
+  }
+
+  async function updateSharedPlan(nextAnalysis: BurnoutAnalysis) {
+    const energyLevel =
+      nextAnalysis.state === "tired" || nextAnalysis.state === "overwhelmed"
+        ? "low"
+        : nextAnalysis.state === "hopeful"
+          ? "high"
+          : "medium";
+
+    try {
+      const eventResponse = await fetch("/api/planning/events", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "context_changed",
+          emotionState: nextAnalysis.state,
+          burnoutRisk: nextAnalysis.burnoutRisk,
+          energyLevel,
+          summary: "Burnout check-in changed Maui’s capacity read.",
+        }),
+      });
+      const eventData = (await eventResponse.json().catch(() => null)) as
+        | { revision?: number }
+        | null;
+      const planResponse = await fetch("/api/ai/plan", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          currentTime: new Date().toISOString(),
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+          availableMinutes: 300,
+          emotionState: nextAnalysis.state,
+          burnoutRisk: nextAnalysis.burnoutRisk,
+          energyLevel,
+          todayNotes: nextAnalysis.crisisFlag
+            ? "Protect recovery immediately. Keep only essential work and explain what was postponed."
+            : "Adjust today around the latest burnout check-in. Reduce unnecessary pressure.",
+          replanTrigger: "burnout_checkin",
+        }),
+      });
+      const planData = (await planResponse.json().catch(() => null)) as
+        | { revision?: number }
+        | null;
+
+      if (planResponse.ok) {
+        announcePlanningUpdate(planData?.revision ?? Date.now());
+        setPlanMessage("Maui updated today’s shared plan to match this check-in.");
+      } else if (eventResponse.ok) {
+        announcePlanningUpdate(eventData?.revision ?? Date.now());
+        setPlanMessage("Maui saved this capacity signal for your next plan.");
+      }
+    } catch {
+      setPlanMessage("This check-in is saved locally. Maui will use it the next time you plan.");
     }
   }
 
@@ -58,7 +117,7 @@ export default function BurnoutWorkspace({ survey }: BurnoutWorkspaceProps) {
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.72),rgba(250,250,250,0.96))]" />
 
       <main className="relative z-10 mx-auto grid min-h-screen w-full max-w-7xl gap-6 px-5 pb-14 pt-24 lg:grid-cols-[1fr_1fr]">
-        <section className="rounded-[28px] border border-[var(--color-border)] bg-white/76 p-5 shadow-[0_18px_55px_rgba(53,85,63,0.08)] sm:p-6">
+        <section className="app-card rounded-[28px] p-5 sm:p-6">
           <div className="flex items-center gap-2 text-sm font-semibold text-[var(--color-primary-deep)]">
             <Brain size={17} />
             Burnout
@@ -87,13 +146,13 @@ export default function BurnoutWorkspace({ survey }: BurnoutWorkspaceProps) {
             Analyze rant
           </button>
           {warning ? (
-            <p className="mt-4 rounded-[18px] border border-[var(--color-border)] bg-white/78 p-3 text-sm leading-6 text-[var(--color-text-secondary)]">
+            <p className="app-subcard mt-4 rounded-[18px] p-3 text-sm leading-6 text-[var(--color-text-secondary)]">
               {warning}
             </p>
           ) : null}
         </section>
 
-        <section className="rounded-[28px] border border-[var(--color-border)] bg-white/72 p-5 shadow-[0_18px_55px_rgba(53,85,63,0.08)] sm:p-6">
+        <section className="app-card rounded-[28px] p-5 sm:p-6">
           {analysis ? (
             <div className="flex h-full flex-col">
               <div className="flex flex-wrap items-start justify-between gap-3">
@@ -135,21 +194,26 @@ export default function BurnoutWorkspace({ survey }: BurnoutWorkspaceProps) {
                     analysis.signals.map((signal) => (
                       <span
                         key={signal}
-                        className="rounded-full border border-white/55 bg-white/82 px-3 py-1.5 text-xs text-[var(--color-dark)]"
+                        className="rounded-full border border-[var(--color-border)] bg-[var(--color-card-soft)] px-3 py-1.5 text-xs text-[var(--color-dark)]"
                       >
                         {signal}
                       </span>
                     ))
                   ) : (
-                    <span className="rounded-full border border-white/55 bg-white/82 px-3 py-1.5 text-xs text-[var(--color-text-secondary)]">
+                    <span className="rounded-full border border-[var(--color-border)] bg-[var(--color-card-soft)] px-3 py-1.5 text-xs text-[var(--color-text-secondary)]">
                       No strong signals
                     </span>
                   )}
                 </div>
               </div>
+              {planMessage ? (
+                <p className="app-muted-card mt-5 rounded-[18px] px-4 py-3 text-sm leading-6 text-[var(--color-text-secondary)]">
+                  {planMessage}
+                </p>
+              ) : null}
             </div>
           ) : (
-            <div className="flex h-full min-h-[420px] items-center justify-center rounded-[22px] border border-dashed border-[var(--color-border)] bg-white/62 p-6 text-center text-sm leading-6 text-[var(--color-text-secondary)]">
+            <div className="app-muted-card flex h-full min-h-[420px] items-center justify-center rounded-[22px] border-dashed p-6 text-center text-sm leading-6 text-[var(--color-text-secondary)]">
               Your analysis will appear here.
             </div>
           )}

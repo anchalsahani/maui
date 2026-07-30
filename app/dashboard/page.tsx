@@ -12,7 +12,7 @@ export default async function DashboardPage() {
   }
 
   if (!user.onboardingCompleted || !user.survey) {
-    redirect("/personalization");
+    redirect("/onboarding");
   }
 
   return (

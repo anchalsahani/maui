@@ -1,0 +1,541 @@
+.section {
+  --problem-line: color-mix(in srgb, var(--color-primary-deep) 20%, transparent);
+  position: relative;
+  overflow: hidden;
+  padding: 8rem 1rem 0;
+  background:
+    linear-gradient(180deg, var(--color-section-muted) 0%, color-mix(in srgb, var(--color-section-muted) 74%, var(--color-bg)) 74%, var(--color-bg) 100%);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 2500px;
+}
+
+.section::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  opacity: 0.65;
+  background-image:
+    linear-gradient(var(--color-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-grid-line) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(to bottom, transparent, black 10%, black 82%, transparent);
+}
+
+.ambientOne,
+.ambientTwo {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(100px);
+}
+
+.ambientOne {
+  top: 8rem;
+  left: -8rem;
+  width: 28rem;
+  height: 28rem;
+  background: color-mix(in srgb, var(--color-primary) 17%, transparent);
+}
+
+.ambientTwo {
+  right: -10rem;
+  bottom: 28rem;
+  width: 30rem;
+  height: 30rem;
+  background: rgba(91, 168, 255, 0.07);
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 82rem);
+  margin-inline: auto;
+}
+
+.header {
+  max-width: 61rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.5rem 0.82rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  color: var(--color-text-secondary);
+  background: var(--color-surface);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.eyebrowMark {
+  position: relative;
+  width: 0.44rem;
+  height: 0.44rem;
+  border-radius: 50%;
+  background: #f0d98b;
+  box-shadow: 0 0 0 5px rgba(240, 217, 139, 0.12);
+}
+
+.heading {
+  margin-top: 1.5rem;
+  color: var(--color-text-main);
+  font-size: clamp(2.5rem, 6.5vw, 5.65rem);
+  font-weight: 600;
+  letter-spacing: -0.07em;
+  line-height: 0.96;
+}
+
+.heading span {
+  display: block;
+  color: var(--color-primary-deep);
+}
+
+.intro {
+  max-width: 43rem;
+  margin: 1.6rem auto 0;
+  color: var(--color-text-secondary);
+  font-size: clamp(0.98rem, 1.4vw, 1.08rem);
+  line-height: 1.75;
+}
+
+.intentionMap {
+  position: relative;
+  display: grid;
+  min-height: 13.5rem;
+  grid-template-columns: minmax(0, 1fr) minmax(13rem, 1.15fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 1.5rem;
+  overflow: hidden;
+  margin-top: 5rem;
+  padding: 2.1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 2rem;
+  background: color-mix(in srgb, var(--color-panel-strong) 78%, transparent);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.18) inset,
+    0 30px 80px rgba(47, 74, 57, 0.08);
+}
+
+.mapGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 18rem;
+  height: 11rem;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-primary) 16%, transparent);
+  filter: blur(50px);
+  transform: translate(-50%, -50%);
+}
+
+.mapEndpoint {
+  position: relative;
+  z-index: 1;
+  padding: 1.35rem;
+  border: 1px solid var(--color-border);
+  border-radius: 1.25rem;
+  background: var(--color-card);
+  box-shadow: 0 16px 40px rgba(47, 74, 57, 0.08);
+}
+
+.mapEndpoint::before {
+  display: block;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: 50%;
+  background: var(--color-primary);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--color-primary) 13%, transparent);
+  content: "";
+}
+
+.mapEndpointMuted {
+  opacity: 0.86;
+}
+
+.mapEndpointMuted::before {
+  background: #f0d98b;
+  box-shadow: 0 0 0 6px rgba(240, 217, 139, 0.11);
+}
+
+.mapLabel,
+.smallLabel {
+  display: block;
+  color: var(--color-text-secondary);
+  font-size: 0.67rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.mapEndpoint strong {
+  display: block;
+  margin-top: 0.42rem;
+  color: var(--color-text-main);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  letter-spacing: -0.035em;
+}
+
+.frictionField {
+  position: relative;
+  height: 8rem;
+}
+
+.pathLine {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-primary), #f0d98b, var(--color-primary));
+  opacity: 0.45;
+}
+
+.frictionDot {
+  position: absolute;
+  top: 50%;
+  width: 0.72rem;
+  height: 0.72rem;
+  border: 2px solid var(--color-card-hover);
+  border-radius: 50%;
+  background: var(--color-primary-deep);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--color-primary) 12%, transparent);
+  animation: travel 5.4s ease-in-out infinite;
+}
+
+.dotOne {
+  left: 8%;
+}
+
+.dotTwo {
+  left: 43%;
+  animation-delay: -1.5s;
+}
+
+.dotThree {
+  left: 78%;
+  animation-delay: -3s;
+}
+
+.frictionLabel {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: max-content;
+  max-width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-card-hover);
+  box-shadow: 0 12px 32px rgba(47, 74, 57, 0.09);
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+.frictionLabel span {
+  display: block;
+  color: var(--color-primary-deep);
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.frictionLabel small {
+  display: block;
+  margin-top: 0.16rem;
+  color: var(--color-text-secondary);
+  font-size: 0.57rem;
+  letter-spacing: 0.01em;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.card {
+  position: relative;
+  height: 31.5rem;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: 1.55rem;
+  background: linear-gradient(150deg, var(--color-card), var(--color-card-soft));
+  box-shadow: 0 20px 58px rgba(47, 74, 57, 0.06);
+  transition:
+    transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 420ms ease,
+    box-shadow 420ms ease;
+}
+
+.card:hover {
+  border-color: color-mix(in srgb, var(--color-primary) 36%, var(--color-border));
+  box-shadow: 0 28px 70px rgba(47, 74, 57, 0.11);
+  transform: translateY(-5px);
+}
+
+.cardVisual {
+  position: relative;
+  height: 13.25rem;
+  overflow: hidden;
+  border-bottom: 1px solid var(--color-border);
+  background:
+    radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--color-primary) 16%, transparent), transparent 56%),
+    linear-gradient(160deg, color-mix(in srgb, var(--color-panel-strong) 82%, transparent), transparent);
+}
+
+.cardVisual::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  opacity: 0.55;
+  background-image:
+    linear-gradient(var(--problem-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--problem-line) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: radial-gradient(circle, black, transparent 76%);
+}
+
+.scene {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.cardBody {
+  padding: 1.55rem;
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--color-text-secondary);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cardMeta span:last-child {
+  color: var(--color-primary-deep);
+}
+
+.card h3 {
+  max-width: 20rem;
+  margin-top: 1.35rem;
+  color: var(--color-text-main);
+  font-size: clamp(1.4rem, 2vw, 1.78rem);
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  line-height: 1.06;
+}
+
+.card p {
+  margin-top: 1rem;
+  color: var(--color-text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.68;
+}
+
+.float {
+  animation: none;
+}
+
+.floatSlow {
+  animation: none;
+}
+
+.choicePulse {
+  animation: none;
+  transform-origin: 160px 95px;
+}
+
+.weight {
+  animation: none;
+  transform-origin: 160px 146px;
+}
+
+.pressureLine {
+  animation: none;
+}
+
+.loopPath {
+  stroke-dasharray: 14 7;
+  animation: none;
+}
+
+.fadingTask {
+  animation: none;
+  transform-origin: 161px 95px;
+}
+
+.card:hover .float {
+  animation: float 4.4s ease-in-out infinite;
+}
+
+.card:hover .floatSlow {
+  animation: float 5.6s ease-in-out infinite reverse;
+}
+
+.card:hover .choicePulse {
+  animation: pulse 2.8s ease-in-out infinite;
+}
+
+.card:hover .weight {
+  animation: weight 4.8s ease-in-out infinite;
+}
+
+.card:hover .pressureLine {
+  animation: pressure 4.8s ease-in-out infinite;
+}
+
+.card:hover .loopPath {
+  animation: loop 7s linear infinite;
+}
+
+.card:hover .fadingTask {
+  animation: fadeTask 5s ease-in-out infinite;
+}
+
+@keyframes travel {
+  0%, 100% { transform: translate(-4px, -50%) scale(0.8); opacity: 0.45; }
+  50% { transform: translate(4px, -50%) scale(1.1); opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(0.92); opacity: 0.7; }
+  50% { transform: scale(1.08); opacity: 1; }
+}
+
+@keyframes weight {
+  0%, 100% { transform: translateY(-5px) scaleY(1); }
+  52%, 74% { transform: translateY(11px) scaleY(0.91); }
+}
+
+@keyframes pressure {
+  0%, 100% { opacity: 0.25; transform: translateY(-4px); }
+  52%, 74% { opacity: 0.72; transform: translateY(8px); }
+}
+
+@keyframes loop {
+  to { stroke-dashoffset: -84; }
+}
+
+@keyframes fadeTask {
+  0%, 100% { opacity: 0.95; transform: scale(1); filter: blur(0); }
+  62%, 82% { opacity: 0.42; transform: scale(0.84); filter: blur(0.6px); }
+}
+
+@media (max-width: 60rem) {
+  .intentionMap {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .frictionField {
+    height: 7.5rem;
+    transform: rotate(90deg);
+  }
+
+  .frictionLabel {
+    transform: translate(-50%, -50%) rotate(-90deg);
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    display: grid;
+    height: auto;
+    min-height: 21rem;
+    grid-template-columns: minmax(15rem, 0.9fr) 1.1fr;
+  }
+
+  .cardVisual {
+    height: 100%;
+    min-height: 21rem;
+    border-right: 1px solid var(--color-border);
+    border-bottom: 0;
+  }
+
+  .cardBody {
+    align-self: center;
+  }
+
+}
+
+@media (max-width: 40rem) {
+  .section {
+    padding: 6.5rem 0.9rem 0;
+  }
+
+  .heading {
+    font-size: clamp(2.35rem, 12vw, 3.65rem);
+  }
+
+  .intentionMap {
+    margin-top: 3.5rem;
+    padding: 1rem;
+    border-radius: 1.4rem;
+  }
+
+  .mapEndpoint {
+    padding: 1.15rem;
+  }
+
+  .cards {
+    margin-top: 0.8rem;
+    gap: 0.8rem;
+  }
+
+  .card {
+    display: block;
+    min-height: 0;
+    border-radius: 1.35rem;
+  }
+
+  .cardVisual {
+    height: 12.5rem;
+    min-height: 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .cardBody {
+    padding: 1.35rem 1.3rem 1.55rem;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frictionDot,
+  .float,
+  .floatSlow,
+  .choicePulse,
+  .weight,
+  .pressureLine,
+  .loopPath,
+  .fadingTask {
+    animation: none;
+  }
+
+  .card {
+    transition-duration: 0.01ms;
+  }
+}

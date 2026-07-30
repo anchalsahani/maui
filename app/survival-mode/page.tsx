@@ -1,7 +1,9 @@
 import { redirect } from "next/navigation";
 
-import PlaceholderWorkspace from "@/components/app/PlaceholderWorkspace";
+import SurvivalModeWorkspace from "@/components/app/survival/SurvivalModeWorkspace";
+import Navbar from "@/components/layout/Navbar";
 import { getAuthenticatedUser } from "@/lib/auth/session";
+import { getDashboardState } from "@/lib/dashboard/state-store";
 
 export default async function SurvivalModePage() {
   const user = await getAuthenticatedUser();
@@ -10,11 +12,14 @@ export default async function SurvivalModePage() {
     redirect("/login");
   }
 
+  const state = await getDashboardState(user.id);
+
   return (
-    <PlaceholderWorkspace
-      badge="Survival Mode"
-      title="A softer path for the hard days."
-      description="This page will offer the lowest-pressure way to begin: lighter tasks, smaller sessions, and fallback support when everything feels too much."
-    />
+    <>
+      <div className="relative z-50">
+        <Navbar />
+      </div>
+      <SurvivalModeWorkspace initialState={state} />
+    </>
   );
 }

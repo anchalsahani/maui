@@ -45,6 +45,16 @@ export async function PUT(request: Request) {
     );
   }
 
+  const currentState = await getDashboardState(user.id);
+  const incomingRevision = state.planning?.revision ?? 0;
+  const currentRevision = currentState?.planning?.revision ?? 0;
+
+  // A debounced client snapshot can arrive after the planner has already
+  // created a newer shared state. Never let that older snapshot undo a plan.
+  if (currentState && currentRevision > incomingRevision) {
+    return NextResponse.json({ state: currentState });
+  }
+
   const savedState = await saveDashboardState(user.id, state);
 
   return NextResponse.json({ state: savedState });

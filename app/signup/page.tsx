@@ -3,38 +3,9 @@
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useState, useTransition } from "react";
-import {
-  ArrowRight,
-  Bolt,
-  Brain,
-  CircleDashed,
-  MessageSquareHeart,
-  Split,
-  Sparkles,
-} from "lucide-react";
+import { ArrowRight, CircleDashed, ShieldCheck } from "lucide-react";
 
-const features = [
-  {
-    icon: Bolt,
-    title: "AI task assignment",
-    description: "Instantly picks the next task so you can start faster.",
-  },
-  {
-    icon: Split,
-    title: "Task breakdown",
-    description: "Turns big, intimidating work into tiny doable steps.",
-  },
-  {
-    icon: Brain,
-    title: "Auto planning",
-    description: "Builds structure for you when planning feels too heavy.",
-  },
-  {
-    icon: MessageSquareHeart,
-    title: "Emotion-aware support",
-    description: "Adjusts task intensity based on what you are feeling.",
-  },
-];
+import styles from "./Signup.module.css";
 
 function SignupContent() {
   const router = useRouter();
@@ -72,199 +43,184 @@ function SignupContent() {
       return;
     }
 
-    setSuccess("Signup successful. Let's set up your Maui flow...");
+    setSuccess("Account created. Preparing your Maui setup...");
     window.setTimeout(() => {
-      router.push("/personalization");
+      router.push("/onboarding");
       router.refresh();
     }, 1200);
   }
 
   return (
-    <main className="relative min-h-dvh overflow-hidden bg-[var(--color-bg)] px-2 py-2 sm:px-4 sm:py-2 lg:px-5 lg:py-4">
-      <div className="app-page-wash pointer-events-none absolute inset-0" />
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-54 bg-[radial-gradient(circle_at_top,var(--color-accent),transparent_62%)] opacity-55" />
-      <div className="pointer-events-none absolute right-[-8rem] top-16 h-64 w-64 rounded-full bg-[var(--color-primary)]/18 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-[-5rem] left-[-4rem] h-56 w-56 rounded-full bg-[var(--color-accent)]/70 blur-3xl" />
+    <main className={styles.page}>
+      <div className={styles.grid} aria-hidden="true" />
+      <div className={styles.shell}>
+        <section className={styles.story} aria-label="About Maui">
+          <Link href="/" className={styles.brand} aria-label="Maui home">
+            <span className={styles.brandMark}>
+              <CircleDashed size={19} strokeWidth={1.8} />
+            </span>
+            <span>Maui</span>
+          </Link>
 
-      <div className="app-card-strong relative mx-auto grid min-h-[calc(100dvh-1rem)] w-full max-w-7xl overflow-hidden rounded-[22px] sm:rounded-[28px] lg:grid-cols-[1.02fr_0.98fr]">
-        <section className="relative bg-[var(--color-card-soft)] px-4 py-4 sm:px-6 sm:py-5 lg:px-9 lg:py-6">
-          <div className="space-y-5">
-            <div className="flex items-center justify-between gap-4">
-              <Link href="/" className="flex items-center gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-2xl bg-[var(--color-primary)]/18 text-[var(--color-primary-deep)]">
-                  <CircleDashed size={18} />
-                </div>
-                <div>
-                  <p className="text-base font-semibold tracking-[-0.04em] text-[var(--color-dark)]">
-                    Maui
-                  </p>
-                  <p className="text-[13px] text-[var(--color-text-secondary)]">
-                    Helping you start, gently.
-                  </p>
-                </div>
-              </Link>
-
-              <div className="hidden rounded-full border border-[var(--color-border)] bg-[var(--color-card-muted)] px-3 py-1.5 text-[13px] text-[var(--color-text-secondary)] sm:block">
-                One calm step at a time
-              </div>
-            </div>
-
-            <div className="max-w-xl space-y-4 pt-1 sm:space-y-5 sm:pt-2 lg:pt-4">
-              <div className="space-y-4">
-                <div className="inline-flex w-fit items-center gap-2 rounded-full border border-[var(--color-primary)]/22 bg-[var(--color-accent)]/50 px-3 py-1.5 text-[12px] font-medium text-[var(--color-primary-deep)]">
-                  <Sparkles size={13} />
-                  Gentle support for rough days
-                </div>
-
-                <h1 className="text-[clamp(2rem,12vw,3.7rem)] font-bold leading-[0.94] text-[var(--color-dark)]">
-                  <span className="block">Start even when</span>
-                  <span className="block">your brain says no.</span>
-                </h1>
-              </div>
-            </div>
-
-            <div className="pt-2">
-              <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--color-text-secondary)]/80">
-                What you get
-              </p>
-              <div className="mt-3 space-y-3">
-                {features.map(({ icon: Icon, title, description }) => (
-                  <div
-                    key={title}
-                    className="app-subcard flex items-start gap-4 rounded-[22px] px-4 py-3"
-                  >
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[var(--color-primary)]/14 text-[var(--color-primary-deep)]">
-                      <Icon size={17} />
-                    </div>
-                    <div className="space-y-1">
-                      <p className="text-[15px] font-semibold text-[var(--color-dark)]">
-                        {title}
-                      </p>
-                      <p className="text-[13px] leading-5 text-[var(--color-text-secondary)]">
-                        {description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+          <div className={styles.storyCopy}>
+            <p className={styles.eyebrow}>Maui</p>
+            <h1>Welcome to Maui.</h1>
+            <p>
+              Create your account to personalise Maui around the way you work.
+            </p>
           </div>
+
+          <div className={styles.illustration} aria-hidden="true">
+            <svg viewBox="0 0 520 300" role="presentation">
+              <defs>
+                <radialGradient id="signup-orb" cx="50%" cy="45%" r="58%">
+                  <stop offset="0%" stopColor="var(--color-accent)" />
+                  <stop
+                    offset="70%"
+                    stopColor="var(--color-primary)"
+                    stopOpacity="0.36"
+                  />
+                  <stop
+                    offset="100%"
+                    stopColor="var(--color-primary)"
+                    stopOpacity="0"
+                  />
+                </radialGradient>
+              </defs>
+              <circle cx="260" cy="150" r="112" fill="url(#signup-orb)" />
+              <circle
+                cx="260"
+                cy="150"
+                r="86"
+                fill="none"
+                stroke="var(--color-primary)"
+                strokeOpacity="0.28"
+              />
+              <circle
+                cx="260"
+                cy="150"
+                r="54"
+                fill="var(--color-card)"
+                stroke="var(--color-border-strong)"
+              />
+              <path
+                d="M90 184C145 124 194 124 260 164C326 204 378 205 430 138"
+                fill="none"
+                stroke="var(--color-primary)"
+                strokeLinecap="round"
+                strokeOpacity="0.48"
+                strokeWidth="3"
+              />
+              <circle cx="91" cy="184" r="7" fill="var(--color-primary)" />
+              <circle cx="430" cy="138" r="7" fill="var(--color-accent)" />
+              <path
+                d="m245 151 11 11 22-26"
+                fill="none"
+                stroke="var(--color-primary-deep)"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="5"
+              />
+            </svg>
+          </div>
+
+          <p className={styles.trust}>
+            <span aria-hidden="true" />
+            Free to start. Set up in under a minute.
+          </p>
         </section>
 
-        <section className="relative overflow-hidden border-t border-[var(--color-border)] bg-[var(--color-card-muted)] px-4 py-4 sm:px-5 sm:py-4 lg:border-l lg:border-t-0 lg:px-7 lg:pb-10 lg:pt-30">
-          <div className="pointer-events-none absolute inset-0">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,var(--color-card-hover),transparent_28%),radial-gradient(circle_at_20%_30%,rgba(143,191,159,0.18),transparent_30%)] opacity-60" />
-            <div className="absolute right-[-4rem] top-8 h-64 w-64 rounded-full bg-[var(--color-accent)]/55 blur-3xl" />
-            <div className="absolute left-[-4rem] top-28 h-64 w-64 rounded-full bg-[var(--color-primary)]/22 blur-3xl" />
-            <div className="absolute bottom-10 right-[-3rem] h-48 w-80 rounded-[100%] bg-[var(--color-accent)]/42 blur-2xl" />
-            <div className="absolute bottom-4 left-2 h-28 w-64 rounded-[999px] border border-[var(--color-border)] bg-[var(--color-card-soft)] opacity-70 blur-[1px]" />
-            <div className="absolute bottom-14 left-14 h-20 w-52 rounded-[999px] border border-[var(--color-border)] bg-[var(--color-accent)]/24 opacity-75 blur-[1px]" />
-            <div className="absolute top-1/2 right-10 h-24 w-40 rounded-[999px] bg-[var(--color-primary)]/16 blur-2xl" />
+        <section className={styles.formPanel}>
+          <div className={styles.mobileBrandRow}>
+            <Link href="/" className={styles.brand} aria-label="Maui home">
+              <span className={styles.brandMark}>
+                <CircleDashed size={18} strokeWidth={1.8} />
+              </span>
+              <span>Maui</span>
+            </Link>
+            <Link href="/login" className={styles.signInLink}>
+              Sign in
+            </Link>
           </div>
 
-          <div className="app-card-strong relative ml-auto w-full max-w-lg rounded-[22px] p-4 sm:rounded-[24px] sm:p-4.5">
-            <div className="flex flex-col gap-2 border-b border-[var(--color-border)] pb-3.5 sm:flex-row sm:items-start sm:justify-between">
-              <div className="space-y-1.5">
-                <div className="inline-flex w-fit items-center gap-2 rounded-full bg-[var(--color-accent)]/55 px-3 py-1 text-[12px] font-medium text-[var(--color-primary-deep)]">
-                  Your first step starts here
-                </div>
-                <div className="space-y-1.5">
-                  <h2 className="text-[1.45rem] font-semibold leading-none text-[var(--color-dark)] sm:text-[1.7rem]">
-                    Create your calm setup.
-                  </h2>
-                  <p className="max-w-sm text-[12px] leading-5 text-[var(--color-text-secondary)] sm:text-[13px]">
-                    One account. One decision. Then you can begin.
-                  </p>
-                </div>
+          <div className={styles.formCard}>
+            <header className={styles.formHeader}>
+              <div>
+                <p className={styles.eyebrow}>Maui account</p>
+                <h2>Create your account.</h2>
+                <p>It only takes a minute to get started.</p>
               </div>
-
-              <p className="pt-0.5 text-[12px] text-[var(--color-text-secondary)] sm:text-[13px]">
-                Already with us?{" "}
-                <Link
-                  href="/login"
-                  className="font-semibold text-[var(--color-primary-deep)] transition-opacity hover:opacity-75"
-                >
+              <p className={styles.desktopSignIn}>
+                Already a member?{" "}
+                <Link href="/login" className={styles.signInLink}>
                   Sign in
                 </Link>
               </p>
+            </header>
+
+            <button
+              type="button"
+              onClick={() => {
+                window.location.href = "/api/auth/google";
+              }}
+              disabled={isPending}
+              className={styles.googleButton}
+            >
+              <span aria-hidden="true">G</span>
+              Continue with Google
+            </button>
+
+            <div className={styles.divider}>
+              <span />
+              <small>or use email</small>
+              <span />
             </div>
 
             <form
-              className="mt-3.5 space-y-2.5"
-              action={(formData) => startTransition(() => void handleSignup(formData))}
+              className={styles.form}
+              action={(formData) =>
+                startTransition(() => void handleSignup(formData))
+              }
             >
-              <div className="grid gap-2.5 sm:grid-cols-2">
-                <label className="space-y-1">
-                  <span className="text-[12px] font-medium text-[var(--color-dark)]">
-                    First name
-                  </span>
-                  <input
-                    name="firstName"
-                    type="text"
-                    placeholder="Anchal"
-                    className="input"
-                    disabled={isPending}
-                    autoComplete="given-name"
-                  />
-                </label>
-
-                <label className="space-y-1">
-                  <span className="text-[12px] font-medium text-[var(--color-dark)]">
-                    Last name
-                  </span>
-                  <input
-                    name="lastName"
-                    type="text"
-                    placeholder="Sharma"
-                    className="input"
-                    disabled={isPending}
-                    autoComplete="family-name"
-                  />
-                </label>
+              <div className={styles.nameGrid}>
+                <Field
+                  label="First name"
+                  name="firstName"
+                  autoComplete="given-name"
+                  placeholder="John"
+                  disabled={isPending}
+                />
+                <Field
+                  label="Last name"
+                  name="lastName"
+                  autoComplete="family-name"
+                  placeholder="Doe"
+                  disabled={isPending}
+                />
               </div>
 
-              <label className="space-y-1">
-                <span className="text-[12px] font-medium text-[var(--color-dark)]">
-                  Email
-                </span>
-                <input
-                  name="email"
-                  type="email"
-                  placeholder="you@example.com"
-                  className="input"
-                  disabled={isPending}
-                  autoComplete="email"
-                />
-              </label>
+              <Field
+                label="Email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                placeholder="you@example.com"
+                disabled={isPending}
+              />
 
-              <label className="space-y-1">
-                <span className="text-[12px] font-medium text-[var(--color-dark)]">
-                  Password
-                </span>
-                <input
-                  name="password"
-                  type="password"
-                  placeholder="At least 8 characters"
-                  className="input"
-                  disabled={isPending}
-                  autoComplete="new-password"
-                />
-              </label>
-
-              <label className="flex items-start gap-2.5 rounded-[16px] border border-[var(--color-border)] bg-[var(--color-card-soft)] p-2.5">
-                <input
-                  type="checkbox"
-                  className="mt-0.5 h-3.5 w-3.5 rounded border-[var(--color-border-strong)] text-[var(--color-primary-deep)] accent-[var(--color-primary-deep)]"
-                  disabled={isPending}
-                />
-                <span className="text-[11px] leading-4.5 text-[var(--color-text-secondary)] sm:text-[12px]">
-                  Send me occasional focus tips and product updates. Keep it useful,
-                  never noisy.
-                </span>
-              </label>
+              <Field
+                label="Password"
+                name="password"
+                type="password"
+                autoComplete="new-password"
+                placeholder="At least 8 characters"
+                minLength={8}
+                disabled={isPending}
+                hint="Use 8 or more characters."
+              />
 
               {error || googleAuthError ? (
-                <p className="rounded-2xl border border-[var(--color-error)]/25 bg-[var(--color-error)]/8 px-4 py-3 text-sm text-[var(--color-error)]">
+                <p className={styles.error} role="alert">
                   {error ||
                     (googleAuthError === "google_unavailable"
                       ? "Google sign up is not configured yet."
@@ -273,48 +229,29 @@ function SignupContent() {
               ) : null}
 
               {success ? (
-                <p className="rounded-2xl border border-[var(--color-primary)]/25 bg-[var(--color-accent)]/45 px-4 py-3 text-sm text-[var(--color-primary-deep)]">
+                <p className={styles.success} role="status" aria-live="polite">
                   {success}
                 </p>
               ) : null}
 
-              <div className="grid gap-2 pt-0.5 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] sm:items-center">
-                <button
-                  type="submit"
-                  disabled={isPending}
-                  className="maui-button-primary group flex h-10 min-w-0 items-center justify-center gap-2 rounded-full px-3.5 text-[12px] font-semibold transition-all duration-200 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70"
-                >
-                  <span className="truncate">
-                    {isPending ? "Creating..." : "Create account"}
-                  </span>
-                  <ArrowRight
-                    size={14}
-                    className="shrink-0 transition-transform duration-200 group-hover:translate-x-1"
-                  />
-                </button>
-
-                <span className="text-center text-[10px] font-medium uppercase tracking-[0.18em] text-[var(--color-text-secondary)]">
-                  or
-                </span>
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    window.location.href = "/api/auth/google";
-                  }}
-                  disabled={isPending}
-                  className="maui-button-secondary flex h-10 min-w-0 items-center justify-center gap-2 rounded-full px-3.5 text-[12px] font-medium transition-all hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70"
-                >
-                  <span className="flex h-6.5 w-6.5 shrink-0 items-center justify-center rounded-full bg-[var(--color-card-hover)] text-[14px] font-semibold text-[#4285F4]">
-                    G
-                  </span>
-                  <span className="truncate">Sign up with Google</span>
-                </button>
-              </div>
+              <button
+                type="submit"
+                disabled={isPending}
+                className={styles.submitButton}
+              >
+                <span>{isPending ? "Creating account..." : "Create account"}</span>
+                <ArrowRight size={17} aria-hidden="true" />
+              </button>
             </form>
 
-            <p className="mt-3 text-center text-[10px] leading-4.5 text-[var(--color-text-secondary)] sm:text-[11px]">
-              By signing up, you agree to our Terms and Privacy Policy.
+            <div className={styles.assurance}>
+              <ShieldCheck size={15} aria-hidden="true" />
+              <span>No credit card required.</span>
+            </div>
+
+            <p className={styles.terms}>
+              By creating an account, you agree to Maui&apos;s Terms and Privacy
+              Policy.
             </p>
           </div>
         </section>
@@ -323,12 +260,50 @@ function SignupContent() {
   );
 }
 
+type FieldProps = {
+  label: string;
+  name: string;
+  type?: "text" | "email" | "password";
+  placeholder: string;
+  autoComplete: string;
+  disabled: boolean;
+  minLength?: number;
+  hint?: string;
+};
+
+function Field({
+  label,
+  name,
+  type = "text",
+  placeholder,
+  autoComplete,
+  disabled,
+  minLength,
+  hint,
+}: FieldProps) {
+  return (
+    <label className={styles.field}>
+      <span>{label}</span>
+      <input
+        name={name}
+        type={type}
+        placeholder={placeholder}
+        autoComplete={autoComplete}
+        disabled={disabled}
+        minLength={minLength}
+        required
+      />
+      {hint ? <small>{hint}</small> : null}
+    </label>
+  );
+}
+
 export default function SignupPage() {
   return (
     <Suspense
       fallback={
-        <main className="flex min-h-screen items-center justify-center bg-[var(--color-bg)] px-4">
-          <div className="h-12 w-12 animate-spin rounded-full border-2 border-[var(--color-accent)] border-t-[var(--color-primary-deep)]" />
+        <main className={styles.loading}>
+          <div aria-label="Loading sign up" />
         </main>
       }
     >
