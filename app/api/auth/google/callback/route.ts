@@ -39,6 +39,13 @@ export async function GET(request: Request) {
     ?.split("=")[1];
 
   if (oauthError || !code || !state || !stateCookie || state !== stateCookie) {
+    console.error("Google OAuth callback validation failed", {
+      hasOAuthError: Boolean(oauthError),
+      hasCode: Boolean(code),
+      hasState: Boolean(state),
+      hasStateCookie: Boolean(stateCookie),
+      stateMatchesCookie: Boolean(state && stateCookie && state === stateCookie),
+    });
     signupUrl.searchParams.set("authError", "google_failed");
     const response = NextResponse.redirect(signupUrl);
     response.cookies.set({
@@ -105,7 +112,10 @@ export async function GET(request: Request) {
     setSessionCookie(response, publicUser);
 
     return response;
-  } catch {
+  } catch (error) {
+    console.error("Google OAuth callback failed after validation", {
+      message: error instanceof Error ? error.message : "Unknown error",
+    });
     signupUrl.searchParams.set("authError", "google_failed");
     const response = NextResponse.redirect(signupUrl);
     response.cookies.set({
