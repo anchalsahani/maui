@@ -21,6 +21,15 @@ export function deriveNextAction({
   context: PlanningContext;
 }) {
   const schedule = planning?.activePlan?.schedule ?? [];
+  const activeSession = planning?.activeSession ?? null;
+  const activeBlock = activeSession
+    ? schedule.find((block) => block.id === activeSession.blockId) ?? null
+    : null;
+  const activeTask = activeSession
+    ? tasks.find((task) => task.id === activeSession.taskId) ??
+      taskChecklist.find((task) => task.id === activeSession.taskId) ??
+      null
+    : null;
   const nextBlock = schedule.find((block) => {
     const status = planning?.blockStatus[block.id];
     return block.taskId && status !== "completed" && status !== "skipped";
@@ -29,6 +38,7 @@ export function deriveNextAction({
     ? tasks.find((task) => task.id === nextBlock.taskId) ?? null
     : null;
   const task =
+    activeTask ??
     plannedTask ??
     [...tasks].sort(
       (a, b) => getAdaptiveTaskScore(b, context) - getAdaptiveTaskScore(a, context)
@@ -42,14 +52,16 @@ export function deriveNextAction({
   const progress = totalWeight
     ? Math.round(((totalWeight - remainingWeight) / totalWeight) * 100)
     : 0;
-  const reason = nextBlock?.reason ??
+  const reason = activeSession
+    ? `${activeSession.status === "paused" ? "Paused" : "In progress"}: stay with this block until you choose to finish, pause, or reschedule it.`
+    : nextBlock?.reason ??
     (context.burnoutRisk === "high"
       ? "This is the smallest useful next move for your current capacity."
       : planning?.activePlan?.strategy ?? "This is the highest-value task that is still realistic today.");
 
   return {
     task,
-    block: nextBlock ?? null,
+    block: activeBlock ?? nextBlock ?? null,
     progress,
     reason,
     remainingMinutes: tasks.reduce((total, item) => total + item.focusMinutes, 0),

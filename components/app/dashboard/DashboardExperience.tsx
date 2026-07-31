@@ -21,6 +21,7 @@ type DashboardExperienceProps = {
   userName: string;
   planning: PlanningSystemState | null;
   nextTask: TaskItem | null;
+  activeBlockId: string | null;
   nextReason: string;
   progress: number;
   reward: RewardState;
@@ -54,6 +55,7 @@ export default function DashboardExperience({
   userName,
   planning,
   nextTask,
+  activeBlockId,
   nextReason,
   progress,
   reward,
@@ -130,8 +132,8 @@ export default function DashboardExperience({
           <motion.section {...cardMotion} transition={{ duration: 0.4, delay: 0.15 }} className="app-card rounded-[30px] p-5 sm:p-7">
             <div className="flex items-end justify-between gap-4"><div><p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-text-secondary)]">A gentle route through today</p><h2 className="mt-2 text-xl font-semibold tracking-[-0.045em]">Your plan, in sequence</h2></div><Link href="/planner" className="text-sm font-medium text-[var(--color-primary-deep)]">View all</Link></div>
             <div className="relative mt-6 space-y-2 before:absolute before:bottom-7 before:left-[1.15rem] before:top-7 before:w-px before:bg-[var(--color-border)]">
-              {visibleSchedule.length ? visibleSchedule.map((block, index) => {
-                const isCurrent = block.id === activeSession?.blockId || (!activeSession && block.taskId === nextTask?.id) || (!activeSession && index === 0);
+              {visibleSchedule.length ? visibleSchedule.map((block) => {
+                const isCurrent = block.id === activeBlockId;
                 const rest = isRecovery(block.type);
                 return <div key={block.id} className={`relative flex gap-4 rounded-2xl p-3 transition-all duration-200 hover:-translate-y-0.5 ${isCurrent ? "bg-[var(--color-accent)]/45 shadow-[0_14px_35px_rgba(53,85,63,0.08)]" : "hover:bg-[var(--color-card-soft)]"}`}><span className={`relative z-10 mt-1.5 flex h-3 w-3 shrink-0 rounded-full ring-4 ring-[var(--color-card)] ${rest ? "bg-[var(--color-primary)]/60" : isCurrent ? "bg-[var(--color-primary-deep)]" : "bg-[var(--color-border-strong)]"}`} /><div className="min-w-0 flex-1"><div className="flex items-center justify-between gap-3"><p className="truncate text-sm font-semibold text-[var(--color-dark)]">{block.title}</p><span className="shrink-0 text-xs text-[var(--color-text-secondary)]">{formatTime(block.startTime)}</span></div><p className="mt-1 text-xs leading-5 text-[var(--color-text-secondary)]">{rest ? "Recovery time — protected by your plan" : `${block.durationMinutes} min focus block`} {block.reason ? `· ${block.reason}` : ""}</p></div></div>;
               }) : <div className="rounded-2xl bg-[var(--color-card-soft)] p-4 text-sm leading-6 text-[var(--color-text-secondary)]">Your plan will appear here as soon as Maui has enough context.</div>}

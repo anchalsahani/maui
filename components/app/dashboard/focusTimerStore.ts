@@ -237,7 +237,12 @@ export function restoreFocusTimerFromPlan(session: {
 
   // The persisted plan owns the timer identity. Only replace a local timer when
   // it belongs to a different plan session, such as after a browser refresh.
-  if (snapshot.runId === session.runId && snapshot.title === session.title) {
+  if (
+    snapshot.runId === session.runId &&
+    snapshot.title === session.title &&
+    snapshot.status === session.status &&
+    snapshot.endsAt === endsAt
+  ) {
     return;
   }
 

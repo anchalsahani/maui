@@ -1164,16 +1164,17 @@ export default function MauiDashboard({
     let cancelled = false;
 
     async function restoreDashboardState() {
+      let localSnapshot: Partial<PersistedDashboardState> | null = null;
+      let restoredFromServer = false;
+
       try {
         const raw = window.localStorage.getItem(STORAGE_KEY);
 
         if (raw) {
-          if (!cancelled) {
-            applyPersistedState(JSON.parse(raw) as Partial<PersistedDashboardState>);
-          }
+          localSnapshot = JSON.parse(raw) as Partial<PersistedDashboardState>;
         }
       } catch {
-        // Ignore invalid stored state and keep the fresh snapshot.
+        // Ignore invalid local state. The server snapshot remains authoritative.
       }
 
       try {
@@ -1182,25 +1183,28 @@ export default function MauiDashboard({
           headers: { Accept: "application/json" },
         });
 
-        if (!response.ok) {
-          return;
-        }
+        if (response.ok) {
+          const data = (await response.json()) as {
+            state?: Partial<PersistedDashboardState> | null;
+          };
 
-        const data = (await response.json()) as {
-          state?: Partial<PersistedDashboardState> | null;
-        };
-
-        if (data.state) {
-          if (!cancelled) {
-            applyPersistedState(data.state);
+          if (data.state) {
+            if (!cancelled) {
+              applyPersistedState(data.state);
+            }
+            restoredFromServer = true;
           }
         }
       } catch {
-        // Local storage remains the fallback when server persistence is unavailable.
-      } finally {
-        if (!cancelled) {
-          setIsRestoring(false);
-        }
+        // Local storage is only an offline fallback, never the first source.
+      }
+
+      if (!cancelled && !restoredFromServer && localSnapshot) {
+        applyPersistedState(localSnapshot);
+      }
+
+      if (!cancelled) {
+        setIsRestoring(false);
       }
     }
 
@@ -2042,6 +2046,7 @@ export default function MauiDashboard({
         userName={userName}
         planning={planning}
         nextTask={nextTask}
+        activeBlockId={nextDecision.block?.id ?? null}
         nextReason={nextDecision.reason}
         progress={nextDecision.progress}
         reward={reward}
