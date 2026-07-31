@@ -18,7 +18,9 @@ export class AIProviderUnavailableError extends Error {
 export async function createStructuredResponse<T>(
   options: StructuredResponseOptions
 ): Promise<T> {
-  if (process.env.AI_PROVIDER === "gemini") {
+  const provider = process.env.AI_PROVIDER?.trim().toLowerCase();
+
+  if (provider === "gemini" || (!process.env.OPENAI_API_KEY && process.env.GEMINI_API_KEY)) {
     return createGeminiStructuredResponse<T>(options);
   }
 
@@ -37,7 +39,7 @@ async function createOpenAIStructuredResponse<T>({
 
   if (!apiKey) {
     throw new AIProviderUnavailableError(
-      "OpenAI API key is not configured."
+      "No AI provider is configured. Add OPENAI_API_KEY or set AI_PROVIDER=gemini with GEMINI_API_KEY."
     );
   }
 
