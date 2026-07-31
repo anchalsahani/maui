@@ -269,6 +269,7 @@ export default function PlannerWorkspace({
                           key={block.id}
                           block={block}
                           index={index}
+                          task={tasks.find((task) => task.id === block.taskId)}
                         />
                       ))}
                     </div>
@@ -578,9 +579,11 @@ export default function PlannerWorkspace({
 function TimelineBlock({
   block,
   index,
+  task,
 }: {
   block: PlannerScheduleBlock;
   index: number;
+  task?: TaskItem;
 }) {
   const visual = getBlockVisual(block.type);
   const Icon = visual.icon;
@@ -633,6 +636,17 @@ function TimelineBlock({
             </p>
           </div>
         </div>
+
+        {block.taskId ? (
+          <div className="mt-3 rounded-[16px] border border-[var(--color-border)] bg-[var(--color-card-soft)] p-3">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[var(--color-primary-deep)]">
+              Start here
+            </p>
+            <p className="mt-1.5 text-sm font-medium leading-5 text-[var(--color-dark)]">
+              {block.firstStep ?? task?.steps[0] ?? getPlannerStartStep(block.title, task?.subject, task?.category)}
+            </p>
+          </div>
+        ) : null}
 
         {block.conditional ? (
           <p className="mt-3 flex items-start gap-2 text-xs leading-5 text-[var(--color-text-secondary)]">
@@ -869,6 +883,20 @@ function buildTaskItems(studyProfile: StudyProfile | null): TaskItem[] {
         steps: [],
       })) ?? []
   );
+}
+
+function getPlannerStartStep(title: string, subject?: string, category?: string) {
+  if (category === "chore") {
+    return `Put only the first thing you need for “${title}” in front of you.`;
+  }
+
+  if (category === "commitment") {
+    return `Open the details for “${title}” and confirm the one thing you need next.`;
+  }
+
+  return subject
+    ? `Open your ${subject} material and find the first heading for “${title}”.`
+    : `Open what you need for “${title}” and do one visible two-minute action.`;
 }
 
 function mergeTaskItems(...groups: TaskItem[][]) {

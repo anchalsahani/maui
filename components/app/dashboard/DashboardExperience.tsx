@@ -27,6 +27,12 @@ type DashboardExperienceProps = {
   reward: RewardState;
   emotion: string;
   recentMoments: string[];
+  firstStep: string | null;
+  adaptation: {
+    status: "protecting" | "adjusting" | "on_track";
+    label: string;
+    detail: string;
+  };
   onStart: () => void;
   onStuck: () => void;
   onCheckIn: () => void;
@@ -61,6 +67,8 @@ export default function DashboardExperience({
   reward,
   emotion,
   recentMoments,
+  firstStep,
+  adaptation,
   onStart,
   onStuck,
   onCheckIn,
@@ -118,6 +126,13 @@ export default function DashboardExperience({
                 <button type="button" onClick={onStuck} className="maui-button-secondary inline-flex h-12 items-center gap-2 rounded-full px-5 text-sm font-medium"><TimerReset size={16} /> Make it smaller</button>
                 <button type="button" onClick={onSkip} className="inline-flex h-12 items-center gap-2 rounded-full px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-card-soft)] hover:text-[var(--color-dark)]">Skip for now <ArrowRight size={15} /></button>
               </div>
+
+              {firstStep ? (
+                <div className="mt-5 rounded-2xl border border-[var(--color-border)] bg-[var(--color-card-soft)] p-4">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--color-primary-deep)]">Start here — no planning required</p>
+                  <p className="mt-1.5 text-sm font-medium leading-6 text-[var(--color-dark)]">{firstStep}</p>
+                </div>
+              ) : null}
             </div>
           </motion.section>
 
@@ -127,6 +142,16 @@ export default function DashboardExperience({
             <div className="mt-5 flex gap-2">{timer.status === "active" || timer.status === "paused" ? <button type="button" onClick={onComplete} className="maui-button-primary flex-1 rounded-full px-4 py-2.5 text-sm font-semibold">Mark complete</button> : <button type="button" onClick={onStart} className="maui-button-primary flex-1 rounded-full px-4 py-2.5 text-sm font-semibold">Begin session</button>}<button type="button" onClick={onReset} className="maui-button-secondary flex h-10 w-10 items-center justify-center rounded-full" aria-label="Reset session"><RotateCcw size={15} /></button></div>
           </motion.aside>
         </div>
+
+        <motion.section {...cardMotion} transition={{ duration: 0.4, delay: 0.12 }} className="app-card mt-5 rounded-[26px] p-4 sm:px-5">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="text-sm font-semibold text-[var(--color-dark)]">{adaptation.label}</p>
+              <p className="mt-1 text-sm leading-6 text-[var(--color-text-secondary)]">{adaptation.detail}</p>
+            </div>
+            <span className="w-fit rounded-full bg-[var(--color-accent)]/45 px-3 py-1.5 text-xs font-semibold capitalize text-[var(--color-primary-deep)]">{adaptation.status.replace("_", " ")}</span>
+          </div>
+        </motion.section>
 
         <div className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,1.6fr)_minmax(17rem,0.8fr)]">
           <motion.section {...cardMotion} transition={{ duration: 0.4, delay: 0.15 }} className="app-card rounded-[30px] p-5 sm:p-7">

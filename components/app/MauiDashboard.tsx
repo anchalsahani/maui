@@ -1867,8 +1867,9 @@ export default function MauiDashboard({
       return;
     }
 
-    const remainingTasks = tasks.filter((task) => task.id !== nextTask.id);
-    setTasks(remainingTasks);
+    // Skipping is a signal to adapt, never an instruction to erase the task.
+    // Maui keeps it in context so the new plan can shrink or defer it deliberately.
+    const remainingTasks = tasks;
     if (getFocusTimerSnapshot().title === nextTask.title) {
       const runId = session.runId + 1;
       resetFocusTimer(nextTask.focusMinutes, runId);
@@ -2052,6 +2053,8 @@ export default function MauiDashboard({
         reward={reward}
         emotion={emotionState}
         recentMoments={recentMoments}
+        firstStep={nextDecision.firstStep}
+        adaptation={nextDecision.adaptation}
         onStart={startPomodoro}
         onStuck={openStuckFlow}
         onCheckIn={() => setActiveModal("tired")}
@@ -2091,7 +2094,7 @@ export default function MauiDashboard({
             </div>
 
             <div className="grid grid-cols-3 gap-2 sm:gap-3 xl:max-w-[360px] xl:flex-1">
-              <StatsCard label="Focus" value={nextTask ? `${nextTask.focusMinutes}m` : "—"} icon={Play} />
+              <StatsCard label="Focus" value={nextTask?.focusMinutes ? `${nextTask?.focusMinutes}m` : "-"} icon={Play} />
               <StatsCard label="Streak" value={reward.streak} icon={Sparkles} />
               <StatsCard
                 label="Session"
@@ -2164,7 +2167,7 @@ export default function MauiDashboard({
                     Today&apos;s AI plan
                   </p>
                   <h2 className="mt-3 break-words text-[clamp(1.55rem,3vw,2rem)] font-semibold leading-tight tracking-[-0.04em] text-[var(--color-dark)]">
-                    {nextTask ? nextTask.title : "No active task right now"}
+                    {nextTask?.title ?? "No active task right now"}
                   </h2>
                   <p className="mt-3 text-sm leading-6 text-[var(--color-text-secondary)]">
                     {planning?.activePlan?.strategy ?? (nextTask
@@ -2183,7 +2186,7 @@ export default function MauiDashboard({
 
                 <div className="grid w-full grid-cols-2 gap-2 sm:gap-3 lg:w-[420px]">
                   {[
-                    { label: "Focus block", value: nextTask ? `${nextTask.focusMinutes}m` : "-" },
+                    { label: "Focus block", value: nextTask?.focusMinutes ? `${nextTask?.focusMinutes}m` : "-" },
                     {
                       label: "Study time",
                       value: planning ? `${planning?.study.plannedMinutes}m` : "-",

@@ -9,6 +9,20 @@ type PlanningContext = {
   burnoutRisk: "low" | "medium" | "high";
 };
 
+export interface AdaptiveNextAction {
+  task: TaskItem | null;
+  block: ReturnType<typeof getNextBlock>;
+  progress: number;
+  reason: string;
+  remainingMinutes: number;
+  firstStep: string | null;
+  adaptation: {
+    status: "protecting" | "adjusting" | "on_track";
+    label: string;
+    detail: string;
+  };
+}
+
 export function deriveNextAction({
   tasks,
   taskChecklist,
@@ -19,7 +33,7 @@ export function deriveNextAction({
   taskChecklist: TaskItem[];
   planning: PlanningSystemState | null;
   context: PlanningContext;
-}) {
+}): AdaptiveNextAction {
   const schedule = planning?.activePlan?.schedule ?? [];
   const activeSession = planning?.activeSession ?? null;
   const activeBlock = activeSession
@@ -30,10 +44,7 @@ export function deriveNextAction({
       taskChecklist.find((task) => task.id === activeSession.taskId) ??
       null
     : null;
-  const nextBlock = schedule.find((block) => {
-    const status = planning?.blockStatus[block.id];
-    return block.taskId && status !== "completed" && status !== "skipped";
-  });
+  const nextBlock = getNextBlock(schedule, planning);
   const plannedTask = nextBlock?.taskId
     ? tasks.find((task) => task.id === nextBlock.taskId) ?? null
     : null;
@@ -59,11 +70,48 @@ export function deriveNextAction({
       ? "This is the smallest useful next move for your current capacity."
       : planning?.activePlan?.strategy ?? "This is the highest-value task that is still realistic today.");
 
+  const skippedRecently = planning?.memory.some(
+    (entry) => entry.type === "task_skipped"
+  );
+  const protecting = context.burnoutRisk === "high" || context.emotionState === "overwhelmed";
+  const adapting = protecting || context.emotionState === "tired" || Boolean(skippedRecently);
+
   return {
     task,
     block: activeBlock ?? nextBlock ?? null,
     progress,
     reason,
     remainingMinutes: tasks.reduce((total, item) => total + item.focusMinutes, 0),
+    firstStep:
+      (activeBlock ?? nextBlock)?.firstStep ??
+      task?.steps.find((step) => step.trim().length > 0) ??
+      null,
+    adaptation: protecting
+      ? {
+          status: "protecting",
+          label: "Maui is protecting your capacity",
+          detail: "Today is narrowed to the smallest useful next move. Lower-value work can wait.",
+        }
+      : adapting
+        ? {
+            status: "adjusting",
+            label: "Maui has adjusted the route",
+            detail: "Your latest energy and progress signals changed the order or size of what comes next.",
+          }
+        : {
+            status: "on_track",
+            label: "Maui is monitoring the plan",
+            detail: "Finish or skip a block, check in, or add a task and Maui will reassess from there.",
+          },
   };
+}
+
+function getNextBlock(
+  schedule: NonNullable<PlanningSystemState["activePlan"]>["schedule"],
+  planning: PlanningSystemState | null
+) {
+  return schedule.find((block) => {
+    const status = planning?.blockStatus[block.id];
+    return block.taskId && status !== "completed" && status !== "skipped";
+  }) ?? null;
 }

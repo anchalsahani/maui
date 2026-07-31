@@ -111,6 +111,7 @@ const planSchema = {
           "priority",
           "reason",
           "expectedOutcome",
+          "firstStep",
           "conditional",
         ],
         properties: {
@@ -128,6 +129,7 @@ const planSchema = {
           priority: { type: "string", enum: ["low", "medium", "high"] },
           reason: { type: "string", maxLength: 300 },
           expectedOutcome: { type: "string", maxLength: 220 },
+          firstStep: { type: "string", maxLength: 180 },
           conditional: { type: "string", maxLength: 220 },
         },
       },
@@ -303,7 +305,8 @@ function buildPlannerInstructions() {
     "Use planningMemory as continuity, not as a script. If it shows a task was postponed and is now scheduled, explain that return plainly. Never invent past decisions.",
     "Create a chronological schedule using the exact ISO planning window in the input. Every block must have real ISO start and end times, must not overlap, and must fit inside the window.",
     "Use the user's real task titles. Schedule focus, commitments, recovery, admin, or rest only when justified by the input.",
-    "Do not decompose tasks into microsteps. Task Breakdown owns subtasks. The Planner decides what happens when, for how long, and why.",
+    "For every task block, provide one concrete firstStep that takes under two minutes and reduces the friction to starting. It must be specific to the task, not generic preparation advice. Use progressively smaller first steps for high difficulty, avoidance, tiredness, overwhelm, or high burnout risk.",
+    "When a task is broad, make this planning window a small milestone with a clear stopping point; detailed microsteps remain available in Task Breakdown.",
     "Do not diagnose burnout. Burnout Check-In owns diagnosis. Use burnout risk only to reduce load, shorten blocks, add recovery, or postpone work.",
     "Explain each trade-off naturally: why this task comes first, why its duration fits current capacity, what is deliberately postponed, and when to reassess.",
     "Avoid generic filler such as drink water, stand up, open the task, clear your desk, work badly, or pick one chore unless the user explicitly asked for it.",
@@ -423,6 +426,7 @@ function buildContextualSchedule(
       priority: task.priority ?? (task.urgency >= 8 ? "high" : "medium"),
       reason: buildTaskReason(task, deadlineReason, context.energyLevel, index),
       expectedOutcome: buildExpectedOutcome(task, focusMinutes),
+      firstStep: buildFirstStep(task, emotionalState, context.energyLevel),
       conditional:
         index > 0
           ? "Continue only if your energy still matches the level shown; otherwise move this block to the next planning window."
@@ -548,6 +552,7 @@ function createScheduleBlock({
   priority,
   reason,
   expectedOutcome,
+  firstStep,
   conditional = "",
 }: {
   index: number;
@@ -560,6 +565,7 @@ function createScheduleBlock({
   priority: PlannerScheduleBlock["priority"];
   reason: string;
   expectedOutcome: string;
+  firstStep?: string;
   conditional?: string;
 }): PlannerScheduleBlock {
   const end = new Date(cursor.getTime() + minutes * 60_000);
@@ -576,6 +582,7 @@ function createScheduleBlock({
     priority,
     reason,
     expectedOutcome,
+    firstStep,
     conditional,
   };
 }
@@ -770,14 +777,36 @@ function buildTaskReason(
   index: number
 ) {
   if (task.deadline || task.priority === "high") {
-    return `${deadlineReason} This block is placed ${index === 0 ? "first" : "before lower-pressure work"} because delaying it would create more pressure, while the duration still respects ${energy} energy.`;
+    return `${deadlineReason} Maui is giving it ${index === 0 ? "the first" : "an early"} decision slot because delay raises its cost; the block is capped to fit ${energy} energy rather than asking for full completion.`;
   }
 
   if ((task.progress ?? 0) > 0) {
     return `You already have momentum on this task. Returning to it costs less attention than starting a completely new track, so it fits this ${energy}-energy window.`;
   }
 
-  return `This task has the strongest balance of urgency, effort, and current energy among the work that remains. The block is intentionally bounded so it does not consume capacity reserved for the rest of the day.`;
+  return `Maui chose this over the remaining work because its urgency, difficulty, and energy fit create the best return for this window. The bounded block protects capacity for the rest of the day.`;
+}
+
+function buildFirstStep(
+  task: TaskItem,
+  emotion: string,
+  energy: "low" | "medium" | "high"
+) {
+  const existing = task.steps.find((step) => step.trim().length > 0);
+  if (existing) return existing;
+
+  const title = task.title.replace(/^(study|complete|finish|work on)\s+/i, "").trim();
+  const gentle = emotion === "overwhelmed" || emotion === "tired" || energy === "low";
+  if (/statistics|math|exam|assignment|essay|report|project|study/i.test(title)) {
+    return gentle
+      ? `Open the material for ${title} and read only the first heading.`
+      : `Open the material for ${title} and choose the first section to work on.`;
+  }
+  if (/email|reply|message/i.test(title)) return `Open the thread for ${title} and write a one-sentence draft.`;
+  if (/clean|laundry|grocery|errand|chore/i.test(title)) return `Set out the one item you need to begin ${title}.`;
+  return gentle
+    ? `Open ${title} and identify one visible next action.`
+    : `Open ${title} and make the first visible move.`;
 }
 
 function buildExpectedOutcome(task: TaskItem, minutes: number) {

@@ -42,6 +42,7 @@ export interface PlannerScheduleBlock {
   priority: "low" | "medium" | "high";
   reason: string;
   expectedOutcome: string;
+  firstStep?: string;
   conditional: string;
 }
 
