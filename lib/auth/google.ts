@@ -5,6 +5,7 @@ const GOOGLE_TOKEN_URL = "https://oauth2.googleapis.com/token";
 const GOOGLE_USERINFO_URL = "https://openidconnect.googleapis.com/v1/userinfo";
 
 export const GOOGLE_OAUTH_STATE_COOKIE = "maui_google_oauth_state";
+export const GOOGLE_OAUTH_STATE_MAX_AGE = 60 * 10;
 
 function normalizeBaseUrl(value: string) {
   return value.replace(/\/+$/, "");
@@ -20,13 +21,20 @@ function isLocalhostUrl(value: string) {
 }
 
 export function getAppBaseUrl(request?: Request) {
-  const configuredUrl = process.env.NEXT_PUBLIC_APP_URL ?? process.env.APP_URL;
+  const configuredUrl = process.env.APP_URL ?? process.env.NEXT_PUBLIC_APP_URL;
   const requestOrigin = request ? new URL(request.url).origin : "";
 
-  if (
-    configuredUrl &&
-    !(requestOrigin && isLocalhostUrl(configuredUrl) && !isLocalhostUrl(requestOrigin))
-  ) {
+  // Local development must never be redirected to a deployed APP_URL. This
+  // also lets localhost work when production variables are present in .env.local.
+  if (requestOrigin && isLocalhostUrl(requestOrigin)) {
+    return normalizeBaseUrl(requestOrigin);
+  }
+
+  if (process.env.NODE_ENV === "production" && !configuredUrl) {
+    throw new Error("APP_URL is required in production.");
+  }
+
+  if (configuredUrl) {
     return normalizeBaseUrl(configuredUrl);
   }
 
@@ -43,6 +51,16 @@ export function getGoogleOAuthConfig(baseUrl = getAppBaseUrl()) {
     clientSecret,
     redirectUri,
     configured: Boolean(clientId && clientSecret),
+  };
+}
+
+export function getGoogleOAuthStateCookieOptions() {
+  return {
+    httpOnly: true,
+    sameSite: "lax" as const,
+    secure: process.env.NODE_ENV === "production",
+    maxAge: GOOGLE_OAUTH_STATE_MAX_AGE,
+    path: "/",
   };
 }
 
@@ -94,7 +112,11 @@ export async function exchangeGoogleCodeForTokens(code: string, baseUrl?: string
   });
 
   if (!response.ok) {
-    throw new Error("Failed to exchange Google authorization code.");
+    const responseBody = (await response.text()).slice(0, 1_000);
+    throw new GoogleOAuthError("token_exchange", "Google rejected the authorization code.", {
+      status: response.status,
+      responseBody,
+    });
   }
 
   return (await response.json()) as {
@@ -111,7 +133,11 @@ export async function fetchGoogleUser(accessToken: string) {
   });
 
   if (!response.ok) {
-    throw new Error("Failed to fetch Google user profile.");
+    const responseBody = (await response.text()).slice(0, 1_000);
+    throw new GoogleOAuthError("profile_fetch", "Google rejected the profile request.", {
+      status: response.status,
+      responseBody,
+    });
   }
 
   return (await response.json()) as {
@@ -120,5 +146,17 @@ export async function fetchGoogleUser(accessToken: string) {
     name?: string;
     given_name?: string;
     family_name?: string;
+    email_verified?: boolean;
   };
+}
+
+export class GoogleOAuthError extends Error {
+  constructor(
+    public readonly step: "token_exchange" | "profile_fetch" | "profile_validation",
+    message: string,
+    public readonly details: { status?: number; responseBody?: string } = {}
+  ) {
+    super(message);
+    this.name = "GoogleOAuthError";
+  }
 }

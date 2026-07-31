@@ -222,8 +222,12 @@ function SignupContent() {
               {error || googleAuthError ? (
                 <p className={styles.error} role="alert">
                   {error ||
-                    (googleAuthError === "google_unavailable"
+                    (googleAuthError === "google_configuration"
                       ? "Google sign up is not configured yet."
+                      : googleAuthError === "google_cancelled"
+                        ? "Google sign in was cancelled. Please try again when you are ready."
+                        : googleAuthError === "google_state_invalid"
+                          ? "Your Google sign-in session expired or was opened from another domain. Please start again from this page."
                       : "Google sign up could not be completed. Please try again.")}
                 </p>
               ) : null}

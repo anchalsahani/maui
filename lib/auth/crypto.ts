@@ -6,12 +6,16 @@ const HASH_ITERATIONS = 120_000;
 const HASH_KEY_LENGTH = 64;
 const HASH_DIGEST = "sha512";
 
+export function hasAuthSecret() {
+  return Boolean(process.env.AUTH_SECRET) || process.env.NODE_ENV !== "production";
+}
+
 function resolveAuthSecret() {
   if (process.env.AUTH_SECRET) {
     return process.env.AUTH_SECRET;
   }
 
-  if (process.env.NODE_ENV === "production") {
+  if (!hasAuthSecret()) {
     throw new Error("AUTH_SECRET is required in production.");
   }
 
@@ -75,7 +79,13 @@ export function createSessionToken(payload: SessionPayload) {
 }
 
 export function verifySessionToken(token: string) {
-  const [encodedPayload, signature] = token.split(".");
+  const parts = token.split(".");
+
+  if (parts.length !== 2) {
+    return null;
+  }
+
+  const [encodedPayload, signature] = parts;
 
   if (!encodedPayload || !signature) {
     return null;
@@ -94,7 +104,14 @@ export function verifySessionToken(token: string) {
       decodeBase64Url(encodedPayload)
     ) as SessionPayload;
 
-    if (!payload.exp || payload.exp < Date.now()) {
+    if (
+      typeof payload.sub !== "string" ||
+      typeof payload.email !== "string" ||
+      typeof payload.name !== "string" ||
+      typeof payload.exp !== "number" ||
+      !Number.isFinite(payload.exp) ||
+      payload.exp < Date.now()
+    ) {
       return null;
     }
 

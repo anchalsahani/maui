@@ -24,6 +24,10 @@ async function readUsers(): Promise<StoredUser[]> {
     return Array.isArray(users) ? users.map(normalizeStoredUser) : [];
   }
 
+  if (process.env.NODE_ENV === "production") {
+    throw new Error("Persistent KV storage is required in production.");
+  }
+
   await ensureStore();
   const raw = await readFile(USERS_FILE, "utf8");
 
@@ -39,6 +43,10 @@ async function writeUsers(users: StoredUser[]) {
   if (hasKvStore()) {
     await kvSetJson(USERS_KEY, users);
     return;
+  }
+
+  if (process.env.NODE_ENV === "production") {
+    throw new Error("Persistent KV storage is required in production.");
   }
 
   await ensureStore();
