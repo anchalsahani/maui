@@ -2054,6 +2054,11 @@ export default function MauiDashboard({
         emotion={emotionState}
         recentMoments={recentMoments}
         firstStep={nextDecision.firstStep}
+        mission={nextDecision.mission}
+        smallerVersion={nextDecision.smallerVersion}
+        recoveryVersion={nextDecision.recoveryVersion}
+        cognitiveLoad={nextDecision.cognitiveLoad}
+        confidence={nextDecision.confidence}
         adaptation={nextDecision.adaptation}
         onStart={startPomodoro}
         onStuck={openStuckFlow}

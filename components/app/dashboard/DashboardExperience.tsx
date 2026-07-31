@@ -28,6 +28,11 @@ type DashboardExperienceProps = {
   emotion: string;
   recentMoments: string[];
   firstStep: string | null;
+  mission: string | null;
+  smallerVersion: string | null;
+  recoveryVersion: string | null;
+  cognitiveLoad: "light" | "moderate" | "heavy" | null;
+  confidence: "low" | "medium" | "high" | null;
   adaptation: {
     status: "protecting" | "adjusting" | "on_track";
     label: string;
@@ -68,6 +73,11 @@ export default function DashboardExperience({
   emotion,
   recentMoments,
   firstStep,
+  mission,
+  smallerVersion,
+  recoveryVersion,
+  cognitiveLoad,
+  confidence,
   adaptation,
   onStart,
   onStuck,
@@ -110,8 +120,8 @@ export default function DashboardExperience({
 
               <div className="mt-7 grid gap-7 lg:grid-cols-[minmax(0,1fr)_13rem] lg:items-end">
                 <div>
-                  <p className="text-sm font-medium text-[var(--color-primary-deep)]">Up now</p>
-                  <h2 className="mt-2 max-w-xl text-[clamp(1.9rem,4vw,3.1rem)] font-semibold leading-[1.02] tracking-[-0.065em] text-[var(--color-dark)]">{nextTask?.title ?? "Make space for one small win."}</h2>
+                  <p className="text-sm font-medium text-[var(--color-primary-deep)]">Current mission</p>
+                  <h2 className="mt-2 max-w-xl text-[clamp(1.9rem,4vw,3.1rem)] font-semibold leading-[1.02] tracking-[-0.065em] text-[var(--color-dark)]">{mission ?? "Make space for one small win."}</h2>
                   <p className="mt-4 max-w-xl text-sm leading-6 text-[var(--color-text-secondary)]">{nextReason}</p>
                 </div>
                 <div className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-card-soft)] p-4 lg:p-5">
@@ -133,6 +143,12 @@ export default function DashboardExperience({
                   <p className="mt-1.5 text-sm font-medium leading-6 text-[var(--color-dark)]">{firstStep}</p>
                 </div>
               ) : null}
+              <div className="mt-3 grid gap-3 sm:grid-cols-3">
+                <DecisionDetail label="Mental effort" value={cognitiveLoad ? `${cognitiveLoad} focus` : "Maui is assessing"} />
+                <DecisionDetail label="Confidence" value={confidence ?? "building"} />
+                <DecisionDetail label="If it feels too big" value={smallerVersion ?? "Choose a five-minute version and let Maui reassess."} />
+              </div>
+              {recoveryVersion ? <p className="mt-3 text-xs leading-5 text-[var(--color-text-secondary)]"><span className="font-semibold text-[var(--color-dark)]">Recovery option:</span> {recoveryVersion}</p> : null}
             </div>
           </motion.section>
 
@@ -179,4 +195,8 @@ export default function DashboardExperience({
       </div>
     </main>
   );
+}
+
+function DecisionDetail({ label, value }: { label: string; value: string }) {
+  return <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-card-soft)] px-3 py-3"><p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">{label}</p><p className="mt-1 text-xs leading-5 text-[var(--color-dark)] capitalize">{value}</p></div>;
 }

@@ -247,13 +247,13 @@ export default function PlannerWorkspace({
                   <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <div>
                       <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-primary-deep)]">
-                        Timeline
+                        Adaptive workflow
                       </p>
                       <h2
                         id="today-plan-heading"
                         className="mt-2 text-2xl font-semibold"
                       >
-                        Today&apos;s plan
+                        Maui&apos;s decisions for today
                       </h2>
                     </div>
                     <p className="text-sm text-[var(--color-text-secondary)]">
@@ -612,7 +612,7 @@ function TimelineBlock({
               </span>
             </div>
             <h3 className="mt-3 text-lg font-semibold leading-tight">
-              {block.title}
+              {block.mission ?? block.title}
             </h3>
           </div>
           <EnergyBadge level={block.energy} />
@@ -645,6 +645,13 @@ function TimelineBlock({
             <p className="mt-1.5 text-sm font-medium leading-5 text-[var(--color-dark)]">
               {block.firstStep ?? task?.steps[0] ?? getPlannerStartStep(block.title, task?.subject, task?.category)}
             </p>
+          </div>
+        ) : null}
+
+        {block.smallerVersion || block.recoveryVersion ? (
+          <div className="mt-3 grid gap-2 sm:grid-cols-2">
+            {block.smallerVersion ? <p className="rounded-[14px] bg-[var(--color-card-muted)] px-3 py-2 text-xs leading-5 text-[var(--color-text-secondary)]"><span className="font-semibold text-[var(--color-dark)]">Smaller version:</span> {block.smallerVersion}</p> : null}
+            {block.recoveryVersion ? <p className="rounded-[14px] bg-[var(--color-card-muted)] px-3 py-2 text-xs leading-5 text-[var(--color-text-secondary)]"><span className="font-semibold text-[var(--color-dark)]">If capacity drops:</span> {block.recoveryVersion}</p> : null}
           </div>
         ) : null}
 

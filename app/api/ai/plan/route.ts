@@ -15,6 +15,7 @@ import type {
 import { getAuthenticatedUser } from "@/lib/auth/session";
 import { getDashboardState } from "@/lib/dashboard/state-store";
 import { synchronizePlanWithWorkspace } from "@/lib/planning/synchronization";
+import { understandTask } from "@/lib/planning/task-intelligence";
 import { getRewardSummary, listRewardEvents } from "@/lib/rewards/store";
 
 export const runtime = "nodejs";
@@ -112,6 +113,11 @@ const planSchema = {
           "reason",
           "expectedOutcome",
           "firstStep",
+          "mission",
+          "cognitiveLoad",
+          "confidence",
+          "smallerVersion",
+          "recoveryVersion",
           "conditional",
         ],
         properties: {
@@ -130,6 +136,11 @@ const planSchema = {
           reason: { type: "string", maxLength: 300 },
           expectedOutcome: { type: "string", maxLength: 220 },
           firstStep: { type: "string", maxLength: 180 },
+          mission: { type: "string", maxLength: 180 },
+          cognitiveLoad: { type: "string", enum: ["light", "moderate", "heavy"] },
+          confidence: { type: "string", enum: ["low", "medium", "high"] },
+          smallerVersion: { type: "string", maxLength: 200 },
+          recoveryVersion: { type: "string", maxLength: 220 },
           conditional: { type: "string", maxLength: 220 },
         },
       },
@@ -243,7 +254,7 @@ export async function POST(request: Request) {
           planningNotes: user.studyProfile.planningNotes,
         }
       : null,
-    tasks: tasks.slice(0, 24).map(enrichTaskForPlanning),
+    tasks: tasks.slice(0, 24).map((task) => enrichTaskForPlanning(task, getSkippedCount(task, dashboardState?.planning?.memory ?? []))),
     historicalSignals,
   };
   const fallback = buildContextualSchedule(tasks, context);
@@ -304,8 +315,8 @@ function buildPlannerInstructions() {
     "Think through deadline proximity, fixed commitments, current time, energy, emotional state, burnout risk, task progress, recent completion behavior, interruption risk, and the user's preferred focus style.",
     "Use planningMemory as continuity, not as a script. If it shows a task was postponed and is now scheduled, explain that return plainly. Never invent past decisions.",
     "Create a chronological schedule using the exact ISO planning window in the input. Every block must have real ISO start and end times, must not overlap, and must fit inside the window.",
-    "Use the user's real task titles. Schedule focus, commitments, recovery, admin, or rest only when justified by the input.",
-    "For every task block, provide one concrete firstStep that takes under two minutes and reduces the friction to starting. It must be specific to the task, not generic preparation advice. Use progressively smaller first steps for high difficulty, avoidance, tiredness, overwhelm, or high burnout risk.",
+    "Treat user task titles as raw inputs, never as the final user-facing plan. For every task block create a mission that describes the meaningful outcome in plain language, rather than repeating the task title.",
+    "For every task block return mission, cognitiveLoad, confidence, firstStep, smallerVersion, and recoveryVersion. These are decisions Maui makes, not generic encouragement. Use progressively smaller first steps for high difficulty, avoidance, tiredness, overwhelm, or high burnout risk.",
     "When a task is broad, make this planning window a small milestone with a clear stopping point; detailed microsteps remain available in Task Breakdown.",
     "Do not diagnose burnout. Burnout Check-In owns diagnosis. Use burnout risk only to reduce load, shorten blocks, add recovery, or postpone work.",
     "Explain each trade-off naturally: why this task comes first, why its duration fits current capacity, what is deliberately postponed, and when to reassess.",
@@ -339,6 +350,8 @@ function buildContextualSchedule(
         completedAt: string;
       }>;
       planningMemory: Array<{
+        type?: string;
+        taskId?: string;
         summary: string;
         createdAt: string;
       }>;
@@ -403,6 +416,7 @@ function buildContextualSchedule(
 
     const focusMinutes = Math.min(blockMinutes, task.focusMinutes, remaining);
     const deadlineReason = describeDeadline(task.deadline, start);
+    const intelligence = understandTask(task, getSkippedCount(task, context.historicalSignals.planningMemory));
     const block = createScheduleBlock({
       index: schedule.length,
       cursor,
@@ -426,7 +440,12 @@ function buildContextualSchedule(
       priority: task.priority ?? (task.urgency >= 8 ? "high" : "medium"),
       reason: buildTaskReason(task, deadlineReason, context.energyLevel, index),
       expectedOutcome: buildExpectedOutcome(task, focusMinutes),
-      firstStep: buildFirstStep(task, emotionalState, context.energyLevel),
+      firstStep: intelligence.firstStep,
+      mission: intelligence.mission,
+      cognitiveLoad: intelligence.cognitiveLoad,
+      confidence: intelligence.avoidanceRisk === "high" ? "medium" : "high",
+      smallerVersion: intelligence.smallerVersion,
+      recoveryVersion: intelligence.recoveryVersion,
       conditional:
         index > 0
           ? "Continue only if your energy still matches the level shown; otherwise move this block to the next planning window."
@@ -553,6 +572,11 @@ function createScheduleBlock({
   reason,
   expectedOutcome,
   firstStep,
+  mission,
+  cognitiveLoad,
+  confidence,
+  smallerVersion,
+  recoveryVersion,
   conditional = "",
 }: {
   index: number;
@@ -566,6 +590,11 @@ function createScheduleBlock({
   reason: string;
   expectedOutcome: string;
   firstStep?: string;
+  mission?: string;
+  cognitiveLoad?: PlannerScheduleBlock["cognitiveLoad"];
+  confidence?: PlannerScheduleBlock["confidence"];
+  smallerVersion?: string;
+  recoveryVersion?: string;
   conditional?: string;
 }): PlannerScheduleBlock {
   const end = new Date(cursor.getTime() + minutes * 60_000);
@@ -583,6 +612,11 @@ function createScheduleBlock({
     reason,
     expectedOutcome,
     firstStep,
+    mission,
+    cognitiveLoad,
+    confidence,
+    smallerVersion,
+    recoveryVersion,
     conditional,
   };
 }
@@ -697,7 +731,7 @@ function mapGeneratedTasks(
   }));
 }
 
-function enrichTaskForPlanning(task: TaskItem) {
+function enrichTaskForPlanning(task: TaskItem, skippedCount: number) {
   return {
     ...task,
     deadlineProximity: describeDeadline(task.deadline, new Date()),
@@ -705,7 +739,19 @@ function enrichTaskForPlanning(task: TaskItem) {
       5,
       Math.round(task.focusMinutes * (1 - (task.progress ?? 0) / 100))
     ),
+    intelligence: understandTask(task, skippedCount),
   };
+}
+
+function getSkippedCount(
+  task: TaskItem,
+  memory: Array<{ type?: string; taskId?: string; summary?: string }>
+) {
+  return memory.filter(
+    (entry) =>
+      entry.type === "task_skipped" &&
+      (entry.taskId === task.id || entry.summary?.includes(task.title))
+  ).length;
 }
 
 function getDailyTaskScore(
@@ -785,28 +831,6 @@ function buildTaskReason(
   }
 
   return `Maui chose this over the remaining work because its urgency, difficulty, and energy fit create the best return for this window. The bounded block protects capacity for the rest of the day.`;
-}
-
-function buildFirstStep(
-  task: TaskItem,
-  emotion: string,
-  energy: "low" | "medium" | "high"
-) {
-  const existing = task.steps.find((step) => step.trim().length > 0);
-  if (existing) return existing;
-
-  const title = task.title.replace(/^(study|complete|finish|work on)\s+/i, "").trim();
-  const gentle = emotion === "overwhelmed" || emotion === "tired" || energy === "low";
-  if (/statistics|math|exam|assignment|essay|report|project|study/i.test(title)) {
-    return gentle
-      ? `Open the material for ${title} and read only the first heading.`
-      : `Open the material for ${title} and choose the first section to work on.`;
-  }
-  if (/email|reply|message/i.test(title)) return `Open the thread for ${title} and write a one-sentence draft.`;
-  if (/clean|laundry|grocery|errand|chore/i.test(title)) return `Set out the one item you need to begin ${title}.`;
-  return gentle
-    ? `Open ${title} and identify one visible next action.`
-    : `Open ${title} and make the first visible move.`;
 }
 
 function buildExpectedOutcome(task: TaskItem, minutes: number) {

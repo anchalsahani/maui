@@ -16,6 +16,11 @@ export interface AdaptiveNextAction {
   reason: string;
   remainingMinutes: number;
   firstStep: string | null;
+  mission: string | null;
+  smallerVersion: string | null;
+  recoveryVersion: string | null;
+  cognitiveLoad: "light" | "moderate" | "heavy" | null;
+  confidence: "low" | "medium" | "high" | null;
   adaptation: {
     status: "protecting" | "adjusting" | "on_track";
     label: string;
@@ -86,6 +91,11 @@ export function deriveNextAction({
       (activeBlock ?? nextBlock)?.firstStep ??
       task?.steps.find((step) => step.trim().length > 0) ??
       null,
+    mission: (activeBlock ?? nextBlock)?.mission ?? null,
+    smallerVersion: (activeBlock ?? nextBlock)?.smallerVersion ?? null,
+    recoveryVersion: (activeBlock ?? nextBlock)?.recoveryVersion ?? null,
+    cognitiveLoad: (activeBlock ?? nextBlock)?.cognitiveLoad ?? null,
+    confidence: (activeBlock ?? nextBlock)?.confidence ?? null,
     adaptation: protecting
       ? {
           status: "protecting",

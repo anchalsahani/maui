@@ -43,6 +43,11 @@ export interface PlannerScheduleBlock {
   reason: string;
   expectedOutcome: string;
   firstStep?: string;
+  mission?: string;
+  cognitiveLoad?: "light" | "moderate" | "heavy";
+  confidence?: "low" | "medium" | "high";
+  smallerVersion?: string;
+  recoveryVersion?: string;
   conditional: string;
 }
 
