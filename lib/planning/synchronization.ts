@@ -13,6 +13,7 @@ import {
   saveDashboardState,
 } from "@/lib/dashboard/state-store";
 import { applyPlannerAllocations } from "@/lib/tasks/adaptation";
+import { getConsistencyMetrics, recordProductiveDay } from "@/lib/dashboard/consistency";
 
 export type PlanningEventType =
   | "focus_started"
@@ -56,6 +57,8 @@ const defaultReward = {
   streak: 0,
   sessionsCompleted: 0,
   microTasksCompleted: 0,
+  activityDays: [],
+  longestStreak: 0,
 };
 
 const defaultSession = {
@@ -120,7 +123,7 @@ export async function synchronizePlanWithWorkspace({
     revision: (previousPlanning?.revision ?? 0) + 1,
     activePlan: plan,
     blockStatus: Object.fromEntries(
-      plan.schedule.map((block) => [block.id, "planned"])
+      plan.schedule.map((block) => [block.id, "upcoming"])
     ),
     context: planningContext,
     memory,
@@ -211,16 +214,20 @@ export async function recordPlanningEvent(
       : existing.completedTaskIds ?? [];
   const duration = clampDuration(input.durationMinutes);
   const rewardPoints = clampRewardPoints(input.rewardPoints);
-  const reward = rewardPoints
-    ? {
-        ...existing.reward,
-        points: existing.reward.points + rewardPoints,
-        streak:
-          existing.reward.streak + (input.incrementStreak ? 1 : 0),
-        sessionsCompleted:
-          existing.reward.sessionsCompleted + (input.incrementSessions ? 1 : 0),
-      }
-    : existing.reward;
+  const isProductiveEvent = input.type === "task_completed" || input.type === "focus_completed";
+  const activityDays = isProductiveEvent
+    ? recordProductiveDay(existing.reward.activityDays ?? [])
+    : existing.reward.activityDays ?? [];
+  const consistency = getConsistencyMetrics(activityDays);
+  const reward = {
+    ...existing.reward,
+    points: existing.reward.points + rewardPoints,
+    streak: consistency.currentStreak,
+    longestStreak: Math.max(existing.reward.longestStreak ?? 0, consistency.longestStreak),
+    activityDays,
+    sessionsCompleted:
+      existing.reward.sessionsCompleted + (input.incrementSessions ? 1 : 0),
+  };
   const existingStudy = previousPlanning?.study;
   const memorySummary =
     input.summary?.trim() ||

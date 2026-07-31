@@ -15,11 +15,14 @@ import {
 import FocusTimer from "@/components/app/dashboard/FocusTimer";
 import { useFocusTimer } from "@/components/app/dashboard/useFocusTimer";
 import type { PlanningSystemState, RewardState, TaskItem } from "@/components/app/dashboard/types";
+import { getConsistencyMetrics } from "@/lib/dashboard/consistency";
 
 type DashboardExperienceProps = {
   userName: string;
   planning: PlanningSystemState | null;
   nextTask: TaskItem | null;
+  nextReason: string;
+  progress: number;
   reward: RewardState;
   emotion: string;
   recentMoments: string[];
@@ -51,6 +54,8 @@ export default function DashboardExperience({
   userName,
   planning,
   nextTask,
+  nextReason,
+  progress,
   reward,
   emotion,
   recentMoments,
@@ -66,10 +71,8 @@ export default function DashboardExperience({
   const timer = useFocusTimer();
   const activeSession = planning?.activeSession;
   const visibleSchedule = schedule.slice(0, 5);
-  const progress = schedule.length
-    ? Math.round((Object.values(planning?.blockStatus ?? {}).filter((status) => status === "completed" || status === "skipped").length / schedule.length) * 100)
-    : 0;
   const recovery = schedule.find((block) => isRecovery(block.type));
+  const consistency = getConsistencyMetrics(reward.activityDays ?? []);
 
   return (
     <main className="relative min-h-dvh overflow-hidden bg-[var(--color-bg)] pb-16 pt-20 sm:pt-24">
@@ -99,7 +102,7 @@ export default function DashboardExperience({
                 <div>
                   <p className="text-sm font-medium text-[var(--color-primary-deep)]">Up now</p>
                   <h2 className="mt-2 max-w-xl text-[clamp(1.9rem,4vw,3.1rem)] font-semibold leading-[1.02] tracking-[-0.065em] text-[var(--color-dark)]">{nextTask?.title ?? "Make space for one small win."}</h2>
-                  <p className="mt-4 max-w-xl text-sm leading-6 text-[var(--color-text-secondary)]">{planning?.activePlan?.strategy ?? "Maui has selected the most startable thing, so you do not have to decide alone."}</p>
+                  <p className="mt-4 max-w-xl text-sm leading-6 text-[var(--color-text-secondary)]">{nextReason}</p>
                 </div>
                 <div className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-card-soft)] p-4 lg:p-5">
                   <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-text-secondary)]">Focus block</p>
@@ -142,7 +145,7 @@ export default function DashboardExperience({
         </div>
 
         <motion.section {...cardMotion} transition={{ duration: 0.4, delay: 0.3 }} className="mt-5 grid gap-3 sm:grid-cols-[1.2fr_1fr_1fr]">
-          <div className="app-muted-card rounded-2xl px-4 py-4"><div className="flex items-center justify-between"><div><p className="text-lg font-semibold tracking-[-0.04em]">{reward.streak} day streak</p><p className="mt-1 text-xs text-[var(--color-text-secondary)]">Small actions, consistently.</p></div><div className="grid grid-cols-7 gap-1">{Array.from({ length: 14 }, (_, index) => <span key={index} className={`h-2 w-2 rounded-sm ${index < Math.min(reward.streak, 14) ? "bg-[var(--color-primary-deep)]" : "bg-[var(--color-border)]"}`} />)}</div></div></div>
+          <div className="app-muted-card rounded-2xl px-4 py-4"><div className="flex items-center justify-between gap-4"><div><p className="text-lg font-semibold tracking-[-0.04em]">{consistency.currentStreak} day streak</p><p className="mt-1 text-xs text-[var(--color-text-secondary)]">{consistency.activeDaysThisWeek}/7 active days this week · Best: {Math.max(reward.longestStreak ?? 0, consistency.longestStreak)} days</p></div><div className="grid grid-cols-7 gap-1">{Object.entries(consistency.monthlyActivity).slice(-14).map(([day, active]) => <span key={day} title={day} className={`h-2 w-2 rounded-sm ${active ? "bg-[var(--color-primary-deep)]" : "bg-[var(--color-border)]"}`} />)}</div></div></div>
           <Link href="/rewards" className="app-muted-card rounded-2xl px-4 py-4 transition-all hover:-translate-y-0.5 hover:bg-[var(--color-card-hover)]"><p className="text-lg font-semibold tracking-[-0.04em]">{reward.points} points</p><p className="mt-1 text-xs text-[var(--color-text-secondary)]">Your progress</p></Link>
           <div className="app-muted-card rounded-2xl px-4 py-4"><p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-text-secondary)]">Latest moment</p><p className="mt-2 line-clamp-2 text-sm leading-5 text-[var(--color-dark)]">{recentMoments[0] ?? "Your next win will land here."}</p></div>
         </motion.section>

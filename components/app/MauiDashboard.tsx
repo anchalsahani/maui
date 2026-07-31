@@ -46,12 +46,13 @@ import type { StudyProfile } from "@/lib/auth/types";
 import type { BurnoutAnalysis, BurnoutRisk, TaskBreakdownResult } from "@/lib/ai/types";
 import {
   adaptTasksToCapacity,
-  getAdaptiveTaskScore,
 } from "@/lib/tasks/adaptation";
 import {
   announcePlanningUpdate,
   subscribeToPlanningUpdates,
 } from "@/lib/planning/client-sync";
+import { deriveNextAction } from "@/lib/planning/decision-engine";
+import { getConsistencyMetrics, recordProductiveDay } from "@/lib/dashboard/consistency";
 import FloatingModal from "@/components/ui/FloatingModal";
 
 const ReadyFlowModal = dynamic(
@@ -76,11 +77,15 @@ interface RewardEvent {
   createdAt: string;
 }
 
-interface RewardSummary {
-  totalPoints: number;
-  sessionsCompleted: number;
-  microTasksCompleted: number;
-  streak: number;
+function markProductiveReward(current: RewardState) {
+  const activityDays = recordProductiveDay(current.activityDays ?? []);
+  const metrics = getConsistencyMetrics(activityDays);
+  return {
+    ...current,
+    streak: metrics.currentStreak,
+    longestStreak: Math.max(current.longestStreak ?? 0, metrics.longestStreak),
+    activityDays,
+  };
 }
 
 interface MentorSnapshot {
@@ -422,35 +427,6 @@ function getActivityTone(count: number) {
   return "bg-[#d7ded7]";
 }
 
-function getRewardSummaryFromEvents(events: RewardEvent[]): RewardSummary {
-  const activeDays = new Set(
-    events.map((event) => getLocalDayKey(new Date(event.createdAt)))
-  );
-  let streak = 0;
-  const cursor = new Date();
-
-  while (activeDays.has(getLocalDayKey(cursor))) {
-    streak += 1;
-    cursor.setDate(cursor.getDate() - 1);
-  }
-
-  return {
-    totalPoints: events.reduce((total, event) => total + event.points, 0),
-    sessionsCompleted: events.filter((event) => event.type === "focus_session").length,
-    microTasksCompleted: events.filter((event) => event.type === "micro_step").length,
-    streak,
-  };
-}
-
-function getRewardStateFromSummary(summary: RewardSummary): RewardState {
-  return {
-    points: summary.totalPoints,
-    streak: summary.streak,
-    sessionsCompleted: summary.sessionsCompleted,
-    microTasksCompleted: summary.microTasksCompleted,
-  };
-}
-
 function getTodaysEvents(events: RewardEvent[]) {
   const todayKey = getLocalDayKey(new Date());
 
@@ -769,8 +745,10 @@ function getInitialDashboardState(
     taskChecklist: syllabusTasks.length > 0 ? syllabusTasks : buildStarterTasks(survey),
     completedTaskIds: [],
     reward: {
-      points: 12,
-      streak: 3,
+      points: 0,
+      streak: 0,
+      longestStreak: 0,
+      activityDays: [],
       sessionsCompleted: 0,
       microTasksCompleted: 0,
     },
@@ -1289,7 +1267,6 @@ export default function MauiDashboard({
 
         const data = (await response.json()) as {
           events?: RewardEvent[];
-          summary?: RewardSummary;
         };
 
         if (cancelled) {
@@ -1299,9 +1276,8 @@ export default function MauiDashboard({
         const events = data.events ?? [];
         setRewardEvents(events);
 
-        if (data.summary && events.length > 0) {
-          setReward(getRewardStateFromSummary(data.summary));
-        }
+        // Reward events are an activity feed. The persisted planning state is
+        // the sole owner of points, streaks, and completion counters.
       } catch {
         // The dashboard still works locally when reward history is unavailable.
       } finally {
@@ -1377,27 +1353,17 @@ export default function MauiDashboard({
     planning,
   ]);
 
-  const nextTask = useMemo(() => {
-    const plannedTaskId = planning?.activePlan?.schedule.find(
-      (block) =>
-        block.taskId &&
-        planning.blockStatus[block.id] !== "completed" &&
-        planning.blockStatus[block.id] !== "skipped"
-    )?.taskId;
-    const plannedTask = plannedTaskId
-      ? tasks.find((task) => task.id === plannedTaskId)
-      : null;
-
-    return (
-      plannedTask ??
-      [...tasks].sort(
-        (a, b) =>
-          getAdaptiveTaskScore(b, currentContext) -
-          getAdaptiveTaskScore(a, currentContext)
-      )[0] ??
-      null
-    );
-  }, [currentContext, planning, tasks]);
+  const nextDecision = useMemo(
+    () =>
+      deriveNextAction({
+        tasks,
+        taskChecklist,
+        planning,
+        context: currentContext,
+      }),
+    [currentContext, planning, taskChecklist, tasks]
+  );
+  const nextTask = nextDecision.task;
 
   const upcomingBlocks = useMemo(
     () =>
@@ -1521,16 +1487,12 @@ export default function MauiDashboard({
 
         const data = (await response.json()) as {
           event?: RewardEvent;
-          summary?: RewardSummary;
         };
 
         if (data.event) {
           setRewardEvents((current) => [data.event as RewardEvent, ...current]);
         }
 
-        if (data.summary) {
-          setReward(getRewardStateFromSummary(data.summary));
-        }
       })
       .catch(() => {
         const fallbackEvent: RewardEvent = {
@@ -1541,12 +1503,7 @@ export default function MauiDashboard({
           createdAt: new Date().toISOString(),
         };
 
-        setRewardEvents((current) => {
-          const nextEvents = [fallbackEvent, ...current];
-          setReward(getRewardStateFromSummary(getRewardSummaryFromEvents(nextEvents)));
-
-          return nextEvents;
-        });
+        setRewardEvents((current) => [fallbackEvent, ...current]);
       });
   }
 
@@ -1783,6 +1740,10 @@ export default function MauiDashboard({
         current?.activeSession
           ? {
               ...current,
+              blockStatus: {
+                ...current.blockStatus,
+                [current.activeSession.blockId]: "paused",
+              },
               activeSession: {
                 ...current.activeSession,
                 status: "paused",
@@ -1804,6 +1765,10 @@ export default function MauiDashboard({
         current?.activeSession
           ? {
               ...current,
+              blockStatus: {
+                ...current.blockStatus,
+                [current.activeSession.blockId]: "in_progress",
+              },
               activeSession: {
                 ...current.activeSession,
                 status: "active",
@@ -1825,9 +1790,8 @@ export default function MauiDashboard({
 
     completeFocusTimer();
     setReward((current) => ({
-      ...current,
+      ...markProductiveReward(current),
       points: current.points + 8,
-      streak: current.streak + 1,
       sessionsCompleted: current.sessionsCompleted + 1,
     }));
     const completedTask = nextTask;
@@ -1968,9 +1932,8 @@ export default function MauiDashboard({
     }
 
     setReward((current) => ({
-      ...current,
+      ...markProductiveReward(current),
       points: current.points + 4,
-      streak: current.streak + 1,
     }));
     const completedTask = nextTask;
     const remainingTasks = tasks.filter((task) => task.id !== completedTask.id);
@@ -2079,6 +2042,8 @@ export default function MauiDashboard({
         userName={userName}
         planning={planning}
         nextTask={nextTask}
+        nextReason={nextDecision.reason}
+        progress={nextDecision.progress}
         reward={reward}
         emotion={emotionState}
         recentMoments={recentMoments}

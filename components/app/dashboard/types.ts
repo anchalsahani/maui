@@ -25,6 +25,8 @@ export interface TaskItem {
 export interface RewardState {
   points: number;
   streak: number;
+  longestStreak?: number;
+  activityDays?: string[];
   sessionsCompleted: number;
   microTasksCompleted: number;
 }
@@ -37,7 +39,17 @@ export interface SessionState {
   runId: number;
 }
 
-export type PlanningBlockStatus = "planned" | "in_progress" | "completed" | "skipped";
+export type PlanningBlockStatus =
+  | "upcoming"
+  | "ready"
+  | "in_progress"
+  | "paused"
+  | "completed"
+  | "skipped"
+  | "rescheduled"
+  | "adapted"
+  // Retained to read existing persisted plans.
+  | "planned";
 
 export interface ActivePlanningSession {
   blockId: string;
