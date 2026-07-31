@@ -92,6 +92,8 @@ export interface PlanningSystemState {
   };
   memory: PlanningMemoryEntry[];
   lastTrigger: string;
+  aiAvailable?: boolean;
+  aiProvider?: "gemini" | "openai" | "local";
   study: {
     plannedMinutes: number;
     completedMinutes: number;

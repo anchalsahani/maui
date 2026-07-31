@@ -2059,6 +2059,7 @@ export default function MauiDashboard({
         recoveryVersion={nextDecision.recoveryVersion}
         cognitiveLoad={nextDecision.cognitiveLoad}
         confidence={nextDecision.confidence}
+        aiAvailable={planning?.aiAvailable ?? null}
         adaptation={nextDecision.adaptation}
         onStart={startPomodoro}
         onStuck={openStuckFlow}

@@ -33,6 +33,7 @@ type DashboardExperienceProps = {
   recoveryVersion: string | null;
   cognitiveLoad: "light" | "moderate" | "heavy" | null;
   confidence: "low" | "medium" | "high" | null;
+  aiAvailable: boolean | null;
   adaptation: {
     status: "protecting" | "adjusting" | "on_track";
     label: string;
@@ -78,6 +79,7 @@ export default function DashboardExperience({
   recoveryVersion,
   cognitiveLoad,
   confidence,
+  aiAvailable,
   adaptation,
   onStart,
   onStuck,
@@ -167,6 +169,7 @@ export default function DashboardExperience({
             </div>
             <span className="w-fit rounded-full bg-[var(--color-accent)]/45 px-3 py-1.5 text-xs font-semibold capitalize text-[var(--color-primary-deep)]">{adaptation.status.replace("_", " ")}</span>
           </div>
+          {aiAvailable === false ? <p className="mt-3 rounded-xl border border-amber-500/25 bg-amber-100/45 px-3 py-2 text-xs leading-5 text-amber-900">Maui is showing a local safety plan because the AI provider was unavailable. This plan will not learn or reason from live context until the connection is restored.</p> : null}
         </motion.section>
 
         <div className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,1.6fr)_minmax(17rem,0.8fr)]">

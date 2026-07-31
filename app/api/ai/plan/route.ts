@@ -262,12 +262,20 @@ export async function POST(request: Request) {
     typeof body.replanTrigger === "string" && body.replanTrigger.trim()
       ? body.replanTrigger.trim().slice(0, 80)
       : "planner";
-  const synchronize = async (plan: PlannerResult) => {
+  const synchronize = async (
+    plan: PlannerResult,
+    aiAvailable = true,
+    warning?: string
+  ) => {
     const state = await synchronizePlanWithWorkspace({
       userId: user.id,
       plan,
       tasks,
       trigger,
+      aiAvailable,
+      aiProvider: aiAvailable
+        ? process.env.AI_PROVIDER === "gemini" ? "gemini" : "openai"
+        : "local",
       context: {
         emotionState: context.emotionState,
         burnoutRisk: context.burnoutRisk,
@@ -279,11 +287,13 @@ export async function POST(request: Request) {
       plan,
       revision: state.planning?.revision ?? 0,
       state,
+      aiAvailable,
+      ...(warning ? { warning } : {}),
     });
   };
 
   if (tasks.length === 0) {
-    return synchronize(fallback);
+    return synchronize(fallback, true, "No active tasks were available for an AI decision.");
   }
 
   try {
@@ -304,7 +314,10 @@ export async function POST(request: Request) {
       console.error("Daily schedule generation failed", error);
     }
 
-    return synchronize(fallback);
+    const warning = error instanceof AIProviderUnavailableError
+      ? error.message
+      : "Maui could not reach its AI provider, so this is a local safety plan.";
+    return synchronize(fallback, false, warning);
   }
 }
 

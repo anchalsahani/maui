@@ -45,6 +45,8 @@ interface SynchronizePlanInput {
   plan: PlannerResult;
   tasks: TaskItem[];
   trigger: string;
+  aiAvailable?: boolean;
+  aiProvider?: "gemini" | "openai" | "local";
   context?: {
     emotionState: EmotionState;
     burnoutRisk: BurnoutRisk;
@@ -74,6 +76,8 @@ export async function synchronizePlanWithWorkspace({
   plan,
   tasks,
   trigger,
+  aiAvailable = true,
+  aiProvider = "local",
   context,
 }: SynchronizePlanInput) {
   const existing = await getDashboardState(userId);
@@ -128,6 +132,8 @@ export async function synchronizePlanWithWorkspace({
     context: planningContext,
     memory,
     lastTrigger: trigger,
+    aiAvailable,
+    aiProvider,
     study: {
       plannedMinutes: studyBlocks.reduce(
         (total, block) => total + block.durationMinutes,
